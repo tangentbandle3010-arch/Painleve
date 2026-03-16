@@ -36,10 +36,28 @@
 日々の学習を「AC（Accepted）」として記録し、GitHubでの進捗可視化を目的とする。
 
 \section{パンルヴェ方程式の基礎}
-ここに、今日学んだ数式を一つだけ書いてみる。
-\begin{equation}
-    \frac{d^2 w}{dz^2} = 2w^3 + zw + \alpha \quad (P_{II})
-\end{equation}
+ここに、今日思い出した定義を一つだけ書いてみる。
+\begin{definition}[リーマン図式]
+    % --- ここに数式 ---
+    \[
+    \left\{
+    \begin{matrix}
+        x = \xi_1 & x = \xi_2 & \cdots & x = \xi_m & x = \infty \\
+        s_1^{(1)} & s_1^{(2)} & \cdots & s_1^{(m)} & s_1^{(\infty)} \\
+        s_2^{(1)} & s_2^{(2)} & \cdots & s_2^{(m)} & s_2^{(\infty)} \\
+        \vdots    & \vdots    &        & \vdots    & \vdots \\
+        s_n^{(1)} & s_n^{(2)} & \cdots & s_n^{(m)} & s_n^{(\infty)}
+    \end{matrix}
+    \right\}
+    \]
+    \begin{itemize}
+        \item[\textbf{Type:}] 確定特異点$\xi_{i}$と各確定特異点の特性指数$s_j^{(i)}$を書き並べたもの。
+        \item[\textbf{Insight:}] この表の数値（局所的な性質）を\textbf{一切変えずに}、特異点の位置 $\xi_i$ だけを時間発展させた時に、裏で満たされるべき非線形の方程式が「ガルニエ系」。つまり、モノドロミー保存変形において\textbf{「絶対に定数として保存したいターゲット」}がこれ。
+        \item[\textbf{Link:}] P81/2.4/(2.81)を参照。
+    \end{itemize}
+\end{definition}
+
+
 
 % --- 今後の課題（TODOリスト） ---
 \section{Next Step / To-Do}
