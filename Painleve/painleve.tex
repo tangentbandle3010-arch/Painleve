@@ -22,7 +22,7 @@
 \newcommand{\Virexp}[2]{[L_{#1}, L_{#2}]} % ヴィラソロの交換関係
 \newcommand{\taufunc}{\tau(z)} % タウ関数
 
-\title{共形場理論とパンルヴェ方程式に関する研究ノート}
+\title{パンルヴェ方程式に関する勉強ノート}
 \author{松浦光佑}
 \date{\today}
 
@@ -36,7 +36,7 @@
 日々の学習を「AC（Accepted）」として記録し、GitHubでの進捗可視化を目的とする。
 
 \section{パンルヴェ方程式の基礎}
-ここに、今日思い出した定義を一つだけ書いてみる。
+ここに、3/16に思い出した定義を一つだけ書いてみる。
 \begin{definition}[リーマン図式]
     % --- ここに数式 ---
     \[
@@ -57,13 +57,39 @@
     \end{itemize}
 \end{definition}
 
+\begin{definition}[モノドロミー保存変形]
+  % --- ここに数式 ---
+    \begin{equation}\label{eq:before}
+    \frac{d^{n}y}{dx^{n}}+\sum_{j=1}^{n} p_{j}(x)\frac{d^{n-1}y}{dx^{n-1}} = 0   
+    \end{equation}
+    という以下の(P1)-(P3)を満たすフックス型微分方程式を考える。
+    \begin{itemize}
+        \item[(P1)] $x=\xi_{1},...,\xi_{n},\xi_{n+1}=\infty$を確定特異点、$x=\lambda_{1},...,\lambda_{g}$をみかけの特異点としてもつ。
+        \item[(P2)] 各$x=\xi_{i}$における特性指数のどの2つも、差が整数ではない。
+        \item[(P3)] モノドロミー$\hat{\rho}$は既約である。
+    \end{itemize}
+    $p_{j}(x)$が$t$に解析的に依存しているとする。
+    \begin{equation}\label{eq:after}
+    \frac{d^{n}y}{dx^{n}}+\sum_{j=1}^{n} p_{j}(x,t)\frac{d^{n-1}y}{dx^{n-1}} = 0   
+    \end{equation}
+    が以下の条件(H)を満たす時、\eqref{eq:after}を\eqref{eq:before}の\textbf{モノドロミー保存変形}または\textbf{ホロノミック変形}という。
+    \begin{itemize}
+        \item[\textbf{Type:}] \eqref{eq:before}は$\mathbb{P}^{1}(\mathbb{C})$上定義されている。$U\subset\mathbb{C}^{L}$は領域。$t=(t_{1},...,t_{L})\in U$
+        \item[\textbf{Insight:}] 方程式のパラメータ $t$ を動かしても、基本群の表現（モノドロミー）が変化しないような変形。Schlesinger系やPainlevé方程式の導出における出発点となる。
+        \item[\textbf{Link:}] 岡本2.8節の定義2.14/p.105を参照。
+    \end{itemize}
+\end{definition}
+
 
 
 % --- 今後の課題（TODOリスト） ---
 \section{Next Step / To-Do}
 \begin{itemize}
-    \item [ ] ヴィラソロ代数の中心電荷 $c$ の物理的意味の解釈。
-    \item [ ] パンルヴェIIのタウ関数を具体的にTeXで書き出す。
+    \item [-] 確定特異点とは？
+    \item [-] 特性指数とは？
+    \item [-] みかけの特異点とは?
+    \item [-] モノドロミーが既約とはどういうこと？
+    \item [-] モノドロミーとは?
 \end{itemize}
 
 \end{document}
