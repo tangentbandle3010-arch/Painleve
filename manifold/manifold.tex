@@ -150,6 +150,17 @@
     \end{itemize}
 \end{example}
 
+\begin{remark}[ハウスドルフ性の部分空間への遺伝]
+    位相空間 $X$ がハウスドルフ空間であるとき、その部分空間 $Y \subset X$ もハウスドルフ空間となる。
+    
+    \textbf{証明のスケッチ:}
+    $Y$ の任意の相異なる2点 $p, q$ をとる。$p, q \in X$ でもあり、$X$ はハウスドルフなので、交わらない開集合 $U, V \subset X$ が存在して $p \in U, q \in V$ とできる。
+    相対位相の定義から、$U' = U \cap Y$ および $V' = V \cap Y$ は $Y$ における開集合である。
+    $p \in U', q \in V'$ であり、かつ $U' \cap V' = (U \cap V) \cap Y = \emptyset \cap Y = \emptyset$ となるため、$Y$ においても分離できる。（証明終）
+    
+    \textbf{Insight:} 多様体の定義(1)でハウスドルフ性が要求されるが、この事実のおかげで「$\mathbb{R}^n$ の部分空間として定義される図形（球面 $S^m$ やトーラスなど）」は、ハウスドルフ性を自動的にクリアできる。
+\end{remark}
+
 
 % --- 今後の課題（TODOリスト） ---
 \section{Next Step / To-Do}
