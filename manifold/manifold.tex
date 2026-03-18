@@ -111,6 +111,22 @@
     \end{itemize}
 \end{definition}
 
+\begin{example}[多様体の例$(\mathbb{R}^{m})$]
+    $\mathbb{R}^{m}$は$m$次元多様体である。
+    $(U, \phi) = (\mathbb{R}^{m}, id)$とすればよい。
+    これが定義を満たすことは以下のように確認できる：
+    \begin{itemize}
+        \item[(1)] $\mathbb{R}^m$はユークリッド空間の位相によりハウスドルフ空間である。
+        \item[(2)] $\mathbb{R}^m$自身が開集合であり、$\mathrm{id}: \mathbb{R}^m \to \mathbb{R}^m$ は同相写像。座標近傍系 $\{(U, \phi)\}$ は明らかに $M=\mathbb{R}^m$ 全体を被覆する。
+        \item[(3)] 座標近傍が1つしかないため、座標変換は $\mathrm{id} \circ \mathrm{id}^{-1} = \mathrm{id}$ となる。これはすべての成分が1次式なので、明らかに $C^\infty$ 級（したがって $C^r$ 級）である。
+    \end{itemize}   
+    \begin{itemize}
+        \item[\textbf{Insight:}] 多様体論が手本としている「基準となる空間」そのものであり、最も自明な例。空間全体をたった1枚の「地図（恒等写像 $id$）」で歪みなく覆いつくせるため、つなぎ目（座標変換）を考える必要すらない。多様体の複雑な定義が、我々のよく知る平坦なユークリッド空間を矛盾なく包摂している（自然な拡張になっている）ことを保証する、いわば理論のベースケースである。
+        \item[\textbf{Link:}] 松本6節の例1/p.43を参照。
+    \end{itemize}
+\end{example}
+
+
 
 
 % --- 今後の課題（TODOリスト） ---
