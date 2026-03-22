@@ -161,11 +161,23 @@
     \textbf{Insight:} 多様体の定義(1)でハウスドルフ性が要求されるが、この事実のおかげで「$\mathbb{R}^n$ の部分空間として定義される図形（球面 $S^m$ やトーラスなど）」は、ハウスドルフ性を自動的にクリアできる。
 \end{remark}
 
+\begin{example}[積多様体]
+    $M$を$m$次元$C^{r}$級多様体とし、$N$を$n$次元$C^{r}$級多様体とする。この時、積空間$M\times N$は$m+n$次元$C^{r}$級多様体になる。これを$M$と$N$の\textbf{積多様体}と呼ぶ
+    実際、$M$の座標近傍系を$\{(U_{\alpha},\varphi_{\alpha})\}$,$N$の座標近傍系を$\{(V_{\beta},\psi_{\beta})\}$とすれば、$\{(U_{\alpha}\times V_{\beta},\varphi_{\alpha}\times\psi_{\beta})\}$が$M\times N$の$C^{r}$級座標近傍系になる。(証明は一旦略)
+    また、$k$個の$C^{r}$級多様体$M_{1},...,M_{k}$の積空間$M_{1}\times\cdots\times M_{k}$も$C^{r}$級多様体になる。これも\textbf{積多様体}と呼ぶ
+    特に$M_{i} = S^{1}$のとき$S^{1}\times\cdots\times S^{1}$を\textbf{$m$次元トーラス}とよび、$T^{m}$で表す、
+    \begin{itemize}
+        \item[\textbf{Insight:}] 積多様体の本質は「独立した自由度の合成」である。既存の多様体（部品）を掛け合わせることで、座標近傍系の厄介な条件判定を一からやり直すことなく、より高次元の複雑な空間をシステマティックに生産できる。特にトーラス $T^m$ は「$m$ 個の独立した周期運動」を記述する自然な舞台となり、ハミルトン力学や可積分系（パンルヴェ方程式の背後にある構造）の相空間として極めて重要な役割を果たす。
+        \item[\textbf{Link:}] 松本6節の例3/p.46を参照。
+    \end{itemize}
+\end{example}
+
 
 % --- 今後の課題（TODOリスト） ---
 \section{Next Step / To-Do}
 \begin{itemize}
-    \item [ ] 多様体の例を見ていく(積多様体...)
+    \item [ ] 多様体の例を見ていく(立体射影)
+    \item [ ] 積多様体の座標近傍系のcheck
 \end{itemize}
 
 \end{document}
