@@ -10,14 +10,30 @@
 \usepackage{hyperref} % リンク・目次用
 \usepackage{cite} % 引用用
 
-% --- 定理環境の設定 (OMCの問題風に整理できる) ---
-\theoremstyle{definition}
+\newtheoremstyle{break}% スタイル名
+  {}% 上部のスペース（デフォルト）
+  {}% 下部のスペース（デフォルト）
+  {\normalfont}% 本文のフォント（日本語なので斜体にしない）
+  {}% インデント量
+  {\bfseries}% 見出しのフォント（太字）
+  {}% 見出し後の句読点（不要なら空に）
+  {\newline}% ★ここで改行を指定！★
+  {}% 見出しのカスタム指定（デフォルト）
+
+% --- 定理環境の設定 ---
+\theoremstyle{break}
 \newtheorem{theorem}{定理}[section]
 \newtheorem{definition}[theorem]{定義}
 \newtheorem{proposition}[theorem]{命題}
 \newtheorem{example}[theorem]{例}
-\newtheorem{remark}[theorem]{注釈}
 \newtheorem{problem}[theorem]{問題} % 自作問題用
+\newtheorem*{fact}{事実}
+\newtheorem*{setup}{設定}
+\newtheorem*{connect}{$\mho\mho$}
+
+% --- 番号なしの環境（地の文の代わり） ---
+\theoremstyle{remark} % 見た目を少し控えめにするスタイル
+\newtheorem*{remark}{※}
 
 % --- 独自のショートカット (CFT/パンルヴェ用) ---
 \newcommand{\Virexp}[2]{[L_{#1}, L_{#2}]} % ヴィラソロの交換関係
@@ -36,7 +52,62 @@
 本ノートは、岡本『パンルヴェ方程式』に関する学習記録である。
 日々の学習を「AC（Accepted）」として記録し、GitHubでの進捗可視化を目的とする。
 
-\section{パンルヴェ方程式の基礎}
+\section{フックス型微分方程式}
+
+\subsection{2階線型常微分方程式}
+
+\begin{setup}
+    \begin{equation}\label{eq:2-ode}
+    \frac{d^{2}y}{dx^{2}} + p_{1}(x)\frac{dy}{dx} + p_{2}(x)y = 0   
+    \end{equation}
+    を考える。$x\in\mathbb{C}$とする。よって解$y$は解析的である。
+    また、$p_{1}(x),p_{2}(x)$は$x$の有理関数とする。よって\eqref{eq:2-ode}は広くても$\mathbb{P}^{1}(\mathbb{C})$上の微分方程式である。
+\end{setup}
+
+\begin{definition}[$x=\infty$における微分方程式]
+    \eqref{eq:2-ode}で$x=\frac{1}{u}$とする。u=0の近傍で考えたものを\textbf{$x=\infty$における微分方程式}という。ある有理関数$q_{1},q_{2}$を用いて
+    \[
+    \frac{d^{2}y}{du^{2}} + q_{1}(u)\frac{dy}{du} + q_{2}(u)y = 0
+    \]
+    のように書いたとき、\eqref{eq:2-ode}に連鎖律 $\frac{d}{dx} = -u^2 \frac{d}{du}$ を用いたものとの係数比較により、
+    \[
+    q_{1}(u) = \frac{2}{u}-\frac{1}{u^{2}}p_{1}\left(\frac{1}{u}\right),\, q_2(u)=\frac{1}{u^{4}}p_{2}\left(\frac{1}{u}\right)
+    \]
+    という関係がわかる。
+    \begin{itemize}
+        \item[\textbf{Insight:}] 複素幾何学（リーマン球面 $\mathbb{P}^1(\mathbb{C})$）の観点では、無限遠点 $\infty$ は有限の点と全く対等な「ただの1点」である。$u=1/x$ はその点を見るための「レンズ（局所座標）」に過ぎない。$q_1(u)$ に現れる $2/u$ という余分な項は、座標変換の非線形性から生じる見かけ上のズレであり、$x=\infty$ での特異性の度合い（確定特異点かどうか）を判定する上で極めて重要な役割を果たす。
+        \item[\textbf{Link:}] 岡本2.1節のp.49を参照。
+    \end{itemize}
+\end{definition}
+
+\begin{connect}
+    $p_{1},p_{2}$を$x=x_{0}$で正則とする。このとき、コーシーの存在定理から、任意の$(y_{0},y'_{0})\in\mathbb{C}^{2}$に対して、
+    \[
+    y(x_{0}) = y_{0},\,\frac{dy}{dx}(x_{0})=y_{0}'
+    \]
+    を満たす解$y=\varphi(x;x_{0},y_{0},y_{0}')$がただ一つ存在する。ここで、$u=x-x_{0}$とする。テイラー展開は
+    \[
+    \varphi(x;x_{0},y_{0},y_{0}') = \sum_{j=0}^{\infty}c_{j}u^{j},\,c_{0}=y_{0},\,c_{1}=y_{0}'
+    \]
+    と表せる。また、
+    \[
+    p_{1}(x) = \sum_{j=0}^{\infty}a_{j}u^{j},\,p_{2}(x) = \sum_{j=0}^{\infty}b_{j}u^{j}
+    \]
+    と表すことにする。
+\end{connect}
+
+\begin{proposition}
+    $x=\xi$を$y=\varphi(x;x_{0};y_{0},y_{0}')$の特異点とすれば、$\xi$は$p_{1}(x)$または、$p_{2}(x)$の特異点である。\\
+    \textbf{証明のスケッチ}:
+    証明は一旦略
+    \begin{itemize}
+        \item[\textbf{Insight:}] 線形微分方程式の最大の特長は、「解の特異点が初期条件 $(x_{0}, y_{0}, y_{0}')$ に一切依存しない」ことである。特異点はあらかじめ係数の特異点として空間上に「固定」されており、どこから出発しようと障害物の位置は変わらない。これは、非線形方程式における「動く特異点」の異常さを際立たせるための、最も重要な比較基準（ベースライン）となる。
+        \item[\textbf{Link:}] 岡本2.1節の命題2.1/p.50を参照。
+    \end{itemize}
+\end{proposition}
+
+
+\subsection{確定特異点}
 
     $x=\xi$をフックス型微分方程式
     \begin{equation}\label{eq:Fuchs}
@@ -64,7 +135,7 @@
     \end{itemize}
 \end{proposition}
 
-\begin{definition}[確定特異点]
+\begin{definition}[微分方程式の確定特異点]
     % --- ここに数式 ---
     \eqref{eq:power_series_z}において、ある整数$j_{0}$があって、$j\leq j_{0}$となるすべてのjに対し、
     \[
@@ -73,9 +144,39 @@
     となる時$\xi$は\textbf{確定特異点}という。確定特異点でない時\textbf{不確定特異点}という。
     \begin{itemize}
         \item[\textbf{Insight:}] 特異点周りの級数展開において、「負のべき乗の項が無限に続かず、どこかで打ち止めになる（有限個しかない）」状態を表している。複素関数論における「極（pole）」に相当する、解析的に扱いやすい「おとなしい特異点」の定義である。パンルヴェ方程式の根幹である「動く特異点が極のみである（パンルヴェ性）」という性質を語る上で、この「確定（極）か、不確定（真性特異点など）か」の厳密な線引きがすべての土台となる。
-        \item[\textbf{Link:}] 岡本2.2節の定義2.5/p.59を参照。
+        \item[\textbf{Link:}] 岡本2.2節の定義2.4/p.59を参照。
     \end{itemize}
 \end{definition}
+
+    $\theta_{1},\theta_{2}\in\mathbb{R}$と$r>0$に対して、
+    \[
+    S(\theta_{1},\theta_{2}) = \{u\,|\, 0<|x|<r, \theta_{1} < \arg u < \theta_{2} \}
+    \]
+    とおく。ここで$u=x-\xi$である。
+
+\begin{definition}[解析的な解の確定特異点]
+    % --- ここに数式 ---
+    $x=\xi$で特異点をもつ解析関数の分枝$\varphi(x)$に対して、$S(\theta_{1},\theta_{2})$で$\varphi(x)$が定義されるように$r$を十分小さくとる。
+    ある$A>0$がとれて$\theta_{1}<\theta_{2}$に対し、
+    \[
+    \lim_{u\to 0, u\in S(\theta_{1},\theta_{2})}|u|^{A}|\varphi(x)| = 0
+    \]
+    となるとき、$\varphi(x)$は$x=\xi$に\textbf{確定特異点}を持つという。
+    \begin{itemize}
+        \item[\textbf{Insight:}] 方程式の解が対数関数などの多価性を持つため、特異点への近づき方を「特定の扇形領域（セクター）内」に制限して評価しているのがポイント。条件式は「特異点に近づく際の発散スピードが、せいぜい多項式オーダー（$|u|^{-A}$ 以下）に収まり、指数関数的（$e^{1/|u|}$ など）には爆発しない」ことを意味する。代数的な「おとなしさ（高々極）」を、解析的な「増大度のバウンド」として厳密に定式化したものである。
+        \item[\textbf{Link:}] 岡本2.2節の定義2.5/p.60を参照。
+    \end{itemize}
+\end{definition}
+
+\begin{remark}[特異点 $\omega$ とベース空間の座標 $x=\xi$ の区別について]
+    原著において、解析関数 $\varphi(x)$ の特異点を表す際、ベースとなる複素平面上の座標 $x=\xi$ とは別に $\omega$ という記号が用いられることがある。
+    これは、$\varphi(x)$ が対数関数や累乗根のような多価関数（特異点の周りを一周すると値が変わる関数）の分枝（branch）であることを考慮した厳密な表記である。
+    
+    複素幾何学（リーマン面の理論）の立場では、ベース空間の $x=\xi$ という1点の上にも、分枝の選び方によってリーマン面上の異なる複数の点 $\omega_1, \omega_2, \dots$ が重なって存在し得るため、これらを区別している。
+    \begin{itemize}
+        \item[\textbf{Insight:}] 確定特異点の定義における極限評価 $\lim |u|^A|\varphi(x)|=0$ では、ベース空間での距離 $|u| = |x-\xi|$ のみが計算に関与する。したがって、「特定の分枝を選び、扇形領域内で近づく」という前提さえあれば、リーマン面上の点 $\omega$ を明示しなくても解析的な論理は完結する。無駄を省き本質にフォーカスするため、本ノートの数式展開においては原則として $x=\xi$ のみに表記を統一する。
+    \end{itemize}
+\end{remark}
 
 \begin{definition}[非対数的特異点]
     % --- ここに数式 ---
@@ -85,6 +186,10 @@
         \item[\textbf{Link:}] 岡本2.2節の(2.20)/p.64を参照。
     \end{itemize}
 \end{definition}
+
+\subsection{不確定特異点}
+
+\subsection{高階フックス型線型常微分方程式}
 
 \begin{definition}[リーマン図式]
     % --- ここに数式 ---
@@ -106,6 +211,8 @@
     \end{itemize}
 \end{definition}
 
+\subsection{みかけの特異点}
+
 \begin{definition}[みかけの特異点]
   % --- ここに数式 ---
     $\Xi$の元を確定特異点としてもつ微分方程式を考える。
@@ -121,7 +228,11 @@
     \end{itemize}
 \end{definition}
 
+\subsection{連立微分方程式系と単独高階微分方程式}
 
+\subsection{リーマンの問題}
+
+\subsection{フックスの問題}
 
 \begin{definition}[モノドロミー保存変形]
   % --- ここに数式 ---
@@ -146,6 +257,27 @@
     \end{itemize}
 \end{definition}
 
+\appendix
+\section{補遺：定理・命題の厳密な証明}
+
+\subsection{命題2.2（線形方程式の固定特異点）の証明}
+% ここに、後日時間があるときに「解析接続と収束半径の下限」を用いた
+% 厳密な証明をUpsolveとして記述する。
+% （※すでに完成している証明コードを貼り付けてもよい）
+
+$x = \xi$ が解 $y = \varphi(x; x_0, y_0, y'_0)$ の特異点であるとする。
+    このとき、複素解析的な解の特異点の定義より、初期値 $x_0$ から $\xi$ に向かうある経路 $\gamma$ が存在し、「$\gamma$ 上の $\xi$ を除くすべての点（$\gamma \setminus \{\xi\}$）において解は正則に解析接続可能である」ことが保証されている。
+    解が正則である経路上では、係数 $p_1(x), p_2(x)$ の特異点を避けている（あるいは迂回できる）ため、$\gamma \setminus \{\xi\}$ 上で $p_1, p_2$ は正則であるとしてよい。
+
+    ここで、終点 $\xi$ も $p_1(x)$ および $p_2(x)$ の正則点であると仮定する（背理法の仮定）。
+    すると、端点を含む経路 $\gamma$ 全体（有界閉集合）において、$p_1, p_2$ はすべて正則となる。
+    したがって、$\gamma$ 上の各点から $p_1, p_2$ の最も近い特異点（存在すれば）までの距離の下限は、ある正の定数 $\delta > 0$ 以上となる。
+
+    線形常微分方程式の性質により、$\gamma$ 上の任意の点を中心とする解のテイラー展開の収束半径は、少なくとも $\delta$ 以上であることが保証される。
+    ゆえに、$x_0$ を起点として半径 $\delta$ の収束円を有限回繋ぎ合わせる解析接続を行うことで、解は $\gamma$ に沿って特異性にぶつかることなく、確実に $\xi$ の近傍まで延長される。
+
+    結果として、解 $y = \varphi(x)$ は $\xi$ の近傍において正則（テイラー展開可能）となる。これは「$\xi$ が解の特異点である」という前提に矛盾する。
+    したがって、最初の仮定は誤りであり、$x = \xi$ は必ず $p_1(x)$ または $p_2(x)$ の特異点でなければならない。\hfill $\blacksquare$
 
 
 
