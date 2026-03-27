@@ -30,6 +30,19 @@
 \newtheorem*{fact}{事実}
 \newtheorem*{setup}{設定}
 \newtheorem*{connect}{$\mho\mho$}
+% --- Q&A（自問自答）用の専用スタイル ---
+\newtheoremstyle{qa}% スタイル名
+  {1ex}% 上部のスペース
+  {1ex}% 下部のスペース
+  {\normalfont}% 本文のフォント（日本語が崩れないようnormalfontを指定）
+  {}% インデント量
+  {\bfseries}% 見出しのフォント（太字）
+  {}% 見出し後の句読点
+  {\newline}% 見出しの後に改行を入れる
+  {\thmname{#1}\thmnote{：#3}}% カスタム指定（例：「Q&A：なぜ〜？」と出力）
+
+\theoremstyle{qa}
+\newtheorem*{Q}{Q}
 
 % --- 番号なしの環境（地の文の代わり） ---
 \theoremstyle{remark} % 見た目を少し控えめにするスタイル
@@ -213,6 +226,44 @@
 
 \subsection{みかけの特異点}
 
+\begin{equation}\label{eq:fuchs_n_order}
+    \frac{d^{n}y}{dx^{n}}+\sum_{j=1}^{n} p_{j}(x)\frac{d^{n-j}y}{dx^{n-j}} = 0   
+\end{equation}
+の解の基本系 $\vec{\varphi}(x)$ をとる。確定特異点の集合 $\Xi$ を通らない閉曲線 $\gamma$ について解析接続を考えると、回路行列 $\Gamma(\gamma)$ を用いて
+\[
+\vec{\varphi}^{\gamma}(x) = \vec{\varphi}(x)\Gamma(\gamma)
+\]
+とかける。ここでもう一つの解の基本系 $\vec{\psi}(x)$ をとっておくと、可逆行列 $C$ を用いて
+\[
+\vec{\varphi}(x) = \vec{\psi}(x)C
+\]
+となる。また、解析接続と線型操作は交換できるので、
+\[
+\vec{\varphi}^{\gamma}(x) = \vec{\psi}^{\gamma}(x)C
+\]
+よって、$\vec{\psi}(x)$ の回路行列は、
+\[
+\vec{\psi}^{\gamma}(x) = \vec{\varphi}^{\gamma}(x)C^{-1} = \vec{\varphi}(x)\Gamma(\gamma)C^{-1} = \vec{\psi}(x)C\Gamma(\gamma)C^{-1}
+\]
+より、$C\Gamma(\gamma)C^{-1}$ となる。
+
+\begin{definition}[モノドロミー]\label{def:monodromy}
+    以上の議論から、$[\gamma] \in \pi_{1}(X)$ に対して回路行列の共役による同値類 $[\Gamma(\gamma)]$ を対応させることができる。この対応 $\hat{\rho} \colon [\gamma] \mapsto [\Gamma(\gamma)]$ を\textbf{モノドロミー}という。
+\end{definition}
+
+\begin{definition}[リーマンデータ]\label{def:riemann_data}
+    フックス型微分方程式 \eqref{eq:fuchs_n_order} に対して、定義域 $\mathbb{P}^{1}(\mathbb{C})$、確定特異点の集合 $\Xi$、およびモノドロミー $\hat{\rho}$ の3つ組
+    \[
+    (\mathbb{P}^{1}(\mathbb{C}), \Xi, \hat{\rho})
+    \]
+    のことを\textbf{リーマンデータ}という。
+\end{definition}
+
+\begin{Q}[モノドロミーって何？]
+\textbf{A.} $\cdot$ 閉曲線に対して回路行列を対応させる写像のようなもの。\\
+\phantom{\textbf{A.}} $\cdot$ これは基本群 $\pi_1(X)$ から行列群への表現とみなすことができ、微分方程式の解の「多価性」を調べるための中心的な道具となる。(定義\ref{def:monodromy}を参照)\\
+\end{Q}
+
 \begin{definition}[みかけの特異点]
   % --- ここに数式 ---
     $\Xi$の元を確定特異点としてもつ微分方程式を考える。
@@ -234,7 +285,7 @@
 
 \subsection{フックスの問題}
 
-\begin{definition}[モノドロミー保存変形]
+\begin{definition}[モノドロミー保存変形]\label{mono_deform}
   % --- ここに数式 ---
     \begin{equation}\label{eq:before}
     \frac{d^{n}y}{dx^{n}}+\sum_{j=1}^{n} p_{j}(x)\frac{d^{n-1}y}{dx^{n-1}} = 0   
@@ -257,7 +308,101 @@
     \end{itemize}
 \end{definition}
 
+\section{パンルヴェ方程式の基礎}
+
+\subsection{変形微分方程式系}
+
+\subsection{2階フックス型微分方程式のラックス方程式}
+
+\subsection{変形微分方程式の解}
+
+p.128
+\begin{Q}[なぜ$n$階の変形微分方程式系を考えるのか？]
+\textbf{A.} $\cdot$ $n=2$だけでやるよりも見通しがいいから。\\
+\phantom{\textbf{A.} }$\cdot$ 線型微分方程式のモノドロミー保存変形によって非線形な関係が浮かび上がるから。
+\end{Q}
+
+p.129
+\begin{Q}[(3.42)に解はあるの？]
+\textbf{A.} $\cdot$ $p_1(x,t)$が正則な$x$の周りではコーシーの存在定理（定理\ref{thm:cauchy}を参照）より必ず存在し、特異点の周りでも (複素べき)$\times$(正則関数とlogの多項式) の形で解を展開できる。(定理\ref{thm:fuchs}を参照)\\
+\phantom{\textbf{A.} }$\cdot$ 【目的】この解 $\phi$ を使って元の変数を変換し、方程式から邪魔な $n-1$ 階微分の項を消し去る（正規化する）ため。
+\end{Q}
+
+\begin{Q}[リーマンデータって何？]
+\textbf{A.} $\cdot$ 微分方程式の定義域、確定特異点の位置の集合、モノドロミーの組のこと。(定義\ref{def:riemann_data}を参照)\\
+\end{Q}
+
+
+
+
 \appendix
+
+\section{用いた定理}
+
+\begin{theorem}[正則な解の存在と一意性]\label{thm:cauchy}
+    各$f^{j}(z,w),0\leq j\leq n-1$が$\mathbb{C}^{n-1}$内の領域$D$で正則ならば、任意の点$(a,b)\in D$に対して、$(a,b)$を通る
+    \[
+    \frac{dw}{dz}=f(z,w)
+    \]
+    の正則な解$w=w(z)$が局所的にただ一つ存在する。
+    % \cite[オプション]{ラベル} で特定のページをスマートに引用できる
+    （\cite[p.50 定理8.1]{book:takano} を参照）
+\end{theorem}
+
+\begin{theorem}[確定特異点まわりの解の基本系（フックスの定理）]\label{thm:fuchs}
+    $z=c$を微分方程式
+    \[
+    \frac{d^{n}w}{dz^{n}}+a_{1}(z)\frac{d^{n-1}w}{dz^{n-1}}+\cdots+a_{n-1}(z)\frac{dw}{dz}+a_{n}(z)w=0
+    \]
+    の確定特異点とする。このとき$z=c$の周りの解の基底として
+    \[
+    (z-c)^{\rho}P(z,\log(z-c))
+    \]
+    という形のものが$n$個とれる。ここで$\rho\in \mathbb{C}$、$P(z,t)$は次数が$n-1$以下の$t$の多項式であり、その係数は$z=c$の周りで正則な関数である。特に、少なくとも1つの解として$\log(z-c)$を含まないものが存在する。
+    （\cite[p.119 定理13.1]{book:takano} を参照）
+\end{theorem}
+
+\begin{definition}[直接接続]
+    点 $a \in \mathbb{C}$ を中心とする収束冪級数を $f_a(z)$ とし、その収束半径を $r_a > 0$、収束円（定義域）を $D_a = \{z \in \mathbb{C} \mid |z - a| < r_a\}$ とする。
+    $D_a$ 内の点 $b \in D_a$ を任意にとる。$f_a(z)$ は $D_a$ 上で正則であるため、これを点 $b$ の周りでテイラー展開し直すことで、新しい収束冪級数 $f_b(z)$ を作ることができる。この $f_b(z)$ の収束円を $D_b$ とすると、共通の領域 $D_a \cap D_b$ において
+    \[
+    f_a(z) = f_b(z)
+    \]
+    が恒等的に成り立つ。
+    このようにして得られた新しい収束冪級数 $f_b(z)$ のことを、$f_a(z)$ の $b$ を中心とする\textbf{直接接続}という。
+    （\cite[p.101]{book:kimura} を参照）
+\end{definition}
+
+\begin{definition}[曲線に沿っての解析接続]
+    $a,b\in\mathbb{C}$とその間の連続曲線$\varphi:[0,1]\to\mathbb{C};t\mapsto \varphi(t)$をとる。$a$を中心とする収束冪級数$f_{a}(z)$が与えられたとする。$f_{a}(z)$が$\varphi$に沿って解析接続可能であるとは、各$t\in[0,1]$に対して、$\varphi(t)$を中心とする収束冪級数が定まって次の条件が満たされることをいう。\\
+    \textbf{条件} : 任意の$t_{0}\in[0,1]$に対して$\epsilon(t_{0})>0$が存在し、任意の$t\in[t_{0}-\epsilon,t_{0}+\epsilon]\bigcap[0,1]$に対して、$f(z;t)$は$f(z;t_{0})$の直接接続である。\\
+    この時、$f_{b}(z)=f(z;1)$を$f_{a}(z)$の\textbf{$\varphi$に沿っての解析接続}という。
+    （\cite[p.119 定義21.1]{book:kimura} を参照）
+\end{definition}
+
+\begin{proposition}[解析接続の線型性]\label{prop:analytic_linear}
+    関数 $f(z), g(z)$ が曲線 $\varphi$ に沿って解析接続可能であるとする。このとき、任意の複素定数 $c_1, c_2$ に対して、その線型結合 $h(z) = c_1f(z) + c_2g(z)$ も $\varphi$ に沿って解析接続可能であり、終端 $t=1$ での解析接続の結果をそれぞれ $f(z;1), g(z;1), h(z;1)$ とすると、
+    $$ h(z;1) = c_1f(z;1) + c_2g(z;1) $$
+    が成り立つ。
+\end{proposition}
+
+\begin{proof}[証明の概略]
+    曲線上の点 $\varphi(t)$ を中心とする $f, g$ の収束冪級数をそれぞれ
+    $$ f(z; t) = \sum a_n (z - \varphi(t))^n, \quad g(z; t) = \sum b_n (z - \varphi(t))^n $$
+    とする。このとき、定数倍の和（線型結合）である
+    $$ h(z; t) = c_1f(z; t) + c_2g(z; t) = \sum (c_1a_n + c_2b_n)(z - \varphi(t))^n $$
+    も、同じく $\varphi(t)$ を中心とする収束冪級数となる。
+    
+    解析接続の各ステップである「直接接続」とは、収束円内の新しい中心でテイラー展開を計算し直す操作に他ならない。新しい中心でのテイラー係数はその点での微分係数によって定まるが、微分の線型性より任意の階数 $k$ について
+    $$ h^{(k)}(z) = c_1f^{(k)}(z) + c_2g^{(k)}(z) $$
+    が成り立つ。すなわち、「足し合わせてから展開し直す」結果と「展開し直してから足し合わせる」結果は恒等的に一致する。
+    
+    この直接接続の連鎖を曲線 $\varphi$ に沿って $t=0$ から $t=1$ まで繰り返すことで、終着点 $t=1$ においても
+    $$ h(z; 1) = c_1f(z; 1) + c_2g(z; 1) $$
+    が成立する。したがって、解析接続の操作は定数係数の線型結合（および定数行列の掛け算）と交換可能である。
+\end{proof}
+
+
 \section{補遺：定理・命題の厳密な証明}
 
 \subsection{命題2.2（線形方程式の固定特異点）の証明}
@@ -290,5 +435,13 @@ $x = \xi$ が解 $y = \varphi(x; x_0, y_0, y'_0)$ の特異点であるとする
     \item [-] モノドロミーが既約とはどういうこと？
     \item [-] モノドロミーとは?
 \end{itemize}
+
+% --- 参考文献 ---
+\begin{thebibliography}{99}
+    % \bibitem{参照用ラベル} 本に表示される書誌情報
+    \bibitem{book:okamoto} 岡本和夫, 『パンルヴェ方程式』, 岩波書店, 1999.
+    \bibitem{book:takano} 高野恭一, 『常微分方程式』, 朝倉出版, 1994.
+    \bibitem{book:kimura} 木村俊房・高野恭一, 『関数論』, 朝倉出版, 1991.
+\end{thebibliography}
 
 \end{document}
