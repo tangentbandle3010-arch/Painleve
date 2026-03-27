@@ -172,20 +172,28 @@
     \end{itemize}
 \end{example}
 
-\begin{example}[立体射影]
+\begin{example}[立体射影]\label{stereo_proj}
     $S^{m}$にただ2つの座標近傍からなる$C^{\infty}$級座標近傍系を考えたい。
     $p_{1}=(0,,...,0,1),\,p_{-1}=(0,...,0,-1)$として、$U_{1}=S^{m}\setminus\{p_{1}\},\,U_{-1}=S^{m}\setminus\{p_{-1}\}$として、
     \begin{gather*}
     \varphi_{1}:U_{1}\to\mathbb{R}^{m};(x_{1},\cdots,x_{m+1})\mapsto(\frac{x_{1}}{1-x_{m+1}},\cdots,\frac{x_{m}}{1-x_{m+1}})\\
     \varphi_{-1}:U_{-1}\to\mathbb{R}^{m};(x_{1},\cdots,x_{m+1})\mapsto(\frac{x_{1}}{1+x_{m+1}},\cdots,\frac{x_{m}}{1+x_{m+1}})
     \end{gather*}
-    とすることで、$\{(U_{1},\varphi_{1}),(U_{-1},\varphi_{-1})\}$は$S^{m}$の$C^{\infty}$級座標近傍系になっている。(証明は一旦略)$\varphi_{i}$を\textbf{$p_{i}$を中心とする立体射影}という。
+    とすることで、$\{(U_{1},\varphi_{1}),(U_{-1},\varphi_{-1})\}$は$S^{m}$の$C^{\infty}$級座標近傍系になっている。(証明は一旦略)$\varphi_{i}$を\textbf{$p_{i}$を中心とする立体射影}(stereoscopic projection)という。
     \begin{itemize}
         \item[\textbf{Insight:}] 立体射影の本質は、「コンパクトな空間（球面）を、理論上最小である『たった2枚』の地図で覆い尽くす」という無駄を省いた座標導入である。解析的には「平坦な空間に無限遠点を1つ追加して閉じる（1点コンパクト化）」操作に相当する。特に $m=2$ の場合はリーマン球面 $\hat{\mathbb{C}}$ の構成そのものであり、パンルヴェ方程式において「無限遠点での解の挙動」を局所座標（例: $z \mapsto 1/z$）の枠組みでスマートに解析するための不可欠な基盤となる。
         \item[\textbf{Link:}] 松本6節の例4/p.47を参照。
     \end{itemize}
 \end{example}
 
+\begin{example}[リーマン球面]
+    ここで、例\ref{stereo_proj}を$m=2$の時でさらに考えてみたい。
+    $S^{2}$を$\mathbb{R}^{3}$内の単位球面とみなし、$U_{1},U_{-1},\varphi,\psi$を例\ref{stereo_proj}と同じものとする。ここで$\varphi,\psi$の終域の$\mathbb{R}^{2}$を$\mathbb{C}$と同一視して考えたい。このとき$\psi\circ\varphi^{-1}(z)=\frac{1}{\bar{z}}$である。また、$\psi$を$\bar{\psi}(p)=\overline{\psi(p)}$という同相写像に置き換えると、$\bar{\psi}\circ\varphi^{-1}=\frac{1}{z}$となる。
+    \begin{itemize}
+        \item[\textbf{Insight:}] 実2次元多様体 $S^2$ に「複素構造」が入り、複素1次元多様体（リーマン球面）へと昇華される決定的なステップ。元の変換 $1/\bar{z}$（円に関する反転）は向きを反転させる「反正則」な写像だが、局所座標の片方に複素共役を噛ませることで、変換が「正則関数 $1/z$」に修正される。これにより、$S^2$ 上に正則なアトラス（座標近傍系）を構成できる。
+        \item[\textbf{Link:}] 松本6節の例5/p.49を参照。
+    \end{itemize}
+\end{example}
 
 % --- 今後の課題（TODOリスト） ---
 \section{Next Step / To-Do}
