@@ -119,6 +119,70 @@
     \end{itemize}
 \end{proposition}
 
+$\Xi$を\eqref{eq:2-ode}の特異点の集合とし、$\mathbb{X}=\mathbb{P}^{1}(\mathbb{C})\setminus\Xi$とする。
+
+\begin{proposition}
+$\mathbb{X}$内の$x_{0}$を始点とする2つの閉じた道が互いにホモトープならば、
+\[
+\Gamma(\gamma)=\Gamma(\gamma ')
+\]
+が成り立つ
+証明は定理\ref{thm:monodromy}を参照
+\end{proposition}
+
+\begin{Q}[一価性定理の仮定は満たしてるの？]
+\textbf{A.} 係数が正則なら定理\ref{thm:linear_ode_existence_and_continuation}からすべての曲線にそって解析接続可能である。\\
+\end{Q}
+
+\begin{Q}[ホモトープって何？]
+\textbf{A.} 曲線が連続変形できること。(定義\ref{def:homotope}を参照)\\
+\end{Q}
+
+\begin{Q}[解を解析接続したものも解になるの？]
+\textbf{A.} なる。(定理\ref{thm:ode_solution_continuation}を参照)\\
+\end{Q}
+
+\begin{definition}[モノドロミー行列]
+    $\Gamma(\gamma)$を\textbf{$\gamma$に対する$\vec{\varphi}(x)$の回路行列}、あるいは、\textbf{$\gamma$に関する$\vec{\varphi}(x)$のモノドロミー行列}という。
+\end{definition}
+
+$\Gamma(\gamma_{2}\cdot\gamma_{1})=\Gamma(\gamma_{2})\Gamma(\gamma_{1})$や、$\Gamma(\gamma^{-1})=\Gamma(\gamma)^{-1}$がわかるので、モノドロミー行列は通常の積に関して群構造をもち、その群を$\mathcal{G}(\vec{\varphi}(x))$とかく。\\
+また基本群$\pi_1(x_{0};\mathbb{X})$から$\mathcal{G}(\vec{\varphi}(x))$への準同型
+\[
+\rho([\gamma])=\Gamma(\gamma)
+\]
+があり、これは$\pi_1(x_{0};\mathbb{X})$の$\mathbb{C}^{2}$上の表現となっている。
+
+\begin{Q}[$\pi_1(x_{0};\mathbb{X})$の$\mathbb{C}^{2}$上の表現って？]
+\textbf{A.} 定義\ref{dfn:representation}を参照。\\
+\end{Q}
+
+\begin{definition}
+    $\mathcal{G}(\vec{\varphi}(x))$を、\eqref{eq:2-ode}の解の基本形$\vec{\varphi}(x)$の\textbf{モノドロミー群}という。
+\end{definition}
+
+ここでもう一つの解の基本系 $\vec{\psi}(x)$ をとっておくと、可逆行列 $C$ を用いて
+\[
+\vec{\psi}(x) = \vec{\varphi}(x)C
+\]
+となる。また、解析接続と線型操作は交換できるので、
+\[
+\vec{\psi}^{\gamma}(x) = \vec{\varphi}^{\gamma}(x)C
+\]
+よって、$\vec{\psi}(x)$ のモノドロミー行列は、
+\[
+\vec{\psi}^{\gamma}(x) = \vec{\varphi}^{\gamma}(x)C= \vec{\varphi}(x)\Gamma(\gamma)C = \vec{\psi}(x)C^{-1}\Gamma(\gamma)C
+\]
+より、$C^{-1}\Gamma(\gamma)C$ となる。
+よって、
+\[
+\mathcal{G}(\vec{\psi}(x))=C^{-1}\mathcal{G}(\vec{\varphi}(x))C
+\]
+より、表現の同値類、$\hat{\rho}:\pi(x_{0};\mathbb{X})\to GL(\mathbb{C})/~$を考えることができる。
+
+\begin{definition}[モノドロミー]\label{def:monodromy}
+     $\hat{\rho} : \pi_{1}(x_{0};\mathbb{X})\to GL(\mathbb{C})/\sim ; [\gamma] \mapsto [\Gamma(\gamma)]$ を\textbf{モノドロミー}という。
+\end{definition}
 
 \subsection{確定特異点}
 
@@ -247,10 +311,6 @@
 \]
 より、$C\Gamma(\gamma)C^{-1}$ となる。
 
-\begin{definition}[モノドロミー]\label{def:monodromy}
-    以上の議論から、$[\gamma] \in \pi_{1}(X)$ に対して回路行列の共役による同値類 $[\Gamma(\gamma)]$ を対応させることができる。この対応 $\hat{\rho} \colon [\gamma] \mapsto [\Gamma(\gamma)]$ を\textbf{モノドロミー}という。
-\end{definition}
-
 \begin{definition}[リーマンデータ]\label{def:riemann_data}
     フックス型微分方程式 \eqref{eq:fuchs_n_order} に対して、定義域 $\mathbb{P}^{1}(\mathbb{C})$、確定特異点の集合 $\Xi$、およびモノドロミー $\hat{\rho}$ の3つ組
     \[
@@ -341,9 +401,9 @@ p.129
 
 \begin{theorem}[正則な解の存在と一意性]\label{thm:cauchy}
     各$f^{j}(z,w),0\leq j\leq n-1$が$\mathbb{C}^{n-1}$内の領域$D$で正則ならば、任意の点$(a,b)\in D$に対して、$(a,b)$を通る
-    \[
+    \begin{equation}\label{eq:cauchy_problem}
     \frac{dw}{dz}=f(z,w)
-    \]
+    \end{equation}
     の正則な解$w=w(z)$が局所的にただ一つ存在する。
     % \cite[オプション]{ラベル} で特定のページをスマートに引用できる
     （\cite[p.50 定理8.1]{book:takano} を参照）
@@ -351,9 +411,9 @@ p.129
 
 \begin{theorem}[確定特異点まわりの解の基本系（フックスの定理）]\label{thm:fuchs}
     $z=c$を微分方程式
-    \[
+    \begin{equation}\label{eq:nth_order_linear_ode}
     \frac{d^{n}w}{dz^{n}}+a_{1}(z)\frac{d^{n-1}w}{dz^{n-1}}+\cdots+a_{n-1}(z)\frac{dw}{dz}+a_{n}(z)w=0
-    \]
+    \end{equation}
     の確定特異点とする。このとき$z=c$の周りの解の基底として
     \[
     (z-c)^{\rho}P(z,\log(z-c))
@@ -402,6 +462,46 @@ p.129
     が成立する。したがって、解析接続の操作は定数係数の線型結合（および定数行列の掛け算）と交換可能である。
 \end{proof}
 
+\begin{definition}[ホモトープ]\label{def:homotope}
+    $X$:位相空間,$l,l':[0,1]\to X$を連続曲線とする。$l(0)=l'(0)=p,l(1)=l'(1)=q$とする。$l$と$l'$が\textbf{ホモトープ}であるとは、次の性質を持つ連続写像$H:[0,1]\times[0,1]\to X$が存在することである。\\
+    \textbf{(A).}$H(t,0)=l(t),H(t,1)=l'(t)\quad (\forall t \in[0,1])$\\
+    \textbf{(B).}$H(0,s)=p,H(1,s)=q \quad  (\forall s \in[0,1])$\\
+    このような$H$を\textbf{$l$から$l'$へのホモトピー}という
+    （\cite[p.121 定義9.1]{book:matsumoto} を参照）
+\end{definition}
+
+\begin{theorem}[一価性定理]\label{thm:monodromy}
+    $D$を$\mathbb{C}$内の領域とする。$a\in D$を中心とする収束冪級数$f_{a}(z)$が$a$を始点とする$D$内の任意の連続曲線に沿って解析接続可能とする。このとき、$a$を始点とし、$b\in D$を終点とする$D$内の連続曲線$L_{0},L_{1}$が$D$において始点と終点を固定してホモトープならば、$f_{a}(z)$の$L_{0},L_{1}$に沿っての解析接続は$b$において一致する。
+    （\cite[p.110 定理22.2]{book:kimura} を参照。証明付き）
+\end{theorem}
+
+\begin{theorem}\label{thm:linear_ode_existence_and_continuation}
+    \eqref{eq:nth_order_linear_ode}の$a_{1}(z),\cdots,a_{n}(z)$を領域$D\subset\mathbb{C}$で正則とする。このとき\\
+    \textbf{(A).}任意の$p\in D,q^{0},\cdots,q^{n-1}\in\mathbb{C}$に対して初期条件
+    \[
+    w(p)=q^{0},\frac{dw(p)}{dz}=q^{1},\cdots,\frac{d^{n-1}w(p)}{dz^{n-1}}=q^{n-1}
+    \]
+    を満たす\eqref{eq:nth_order_linear_ode}の正則な解がpの近傍でただ一つ存在する。\\
+    \textbf{(B).}\eqref{eq:nth_order_linear_ode}の局所解は、$D$内のすべての曲線に沿って解析接続可能である。\\
+    （\cite[p.127 定理25.3]{book:kimura} を参照。）
+\end{theorem}
+
+\begin{theorem}[解の解析接続定理]\label{thm:ode_solution_continuation}
+   $f(z,w)$が領域$D\subset\mathbb{C}$において正則であるとする。$\varphi:[0,1]\to D$を連続とする。任意の$t\in[0,1]$に対して、$(\varphi(t),w(\varphi(t);t))\in D$であるとすると、各$t$に対して、$w(z;t)$は$z\in B_{z}(\varphi(t);r(t)), (z,w(z;t))\in D$なる限り、\eqref{eq:cauchy_problem}の解である。
+   （\cite[p.56 定理8.6]{book:takano} を参照。）
+\end{theorem}
+
+\begin{definition}[表現]\label{dfn:representation}
+    $G$を群、$V$を複素ベクトル空間とする。$G$の単位元を$e$と書くことにする。写像
+    \[
+    \pi:G\to GL_{\mathbb{C}}(V)
+    \]
+    が与えられて、\\
+    \textbf{(A).}$\pi(x)\pi(y)=\pi(xy)\quad(\forall x, \forall y\in G)$\\
+    \textbf{(B).}$\pi(e)=id_{V}$\\
+    を満たす時、$\pi$を\textbf{群$G$の$V$上の表現}といい$V$を\textbf{表現空間}という。
+    （\cite[p.10 定義1.12]{book:kobayashi} を参照。）
+\end{definition}
 
 \section{補遺：定理・命題の厳密な証明}
 
@@ -442,6 +542,8 @@ $x = \xi$ が解 $y = \varphi(x; x_0, y_0, y'_0)$ の特異点であるとする
     \bibitem{book:okamoto} 岡本和夫, 『パンルヴェ方程式』, 岩波書店, 1999.
     \bibitem{book:takano} 高野恭一, 『常微分方程式』, 朝倉出版, 1994.
     \bibitem{book:kimura} 木村俊房・高野恭一, 『関数論』, 朝倉出版, 1991.
+    \bibitem{book:matsumoto} 松本幸夫, 『トポロジー入門』, 岩波書店, 1985.
+    \bibitem{book:kobayashi} 小林俊行・大島利雄, 『リー群と表現論』, 岩波書店, 2005.
 \end{thebibliography}
 
 \end{document}
