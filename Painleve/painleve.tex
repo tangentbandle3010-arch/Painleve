@@ -119,7 +119,67 @@
     \end{itemize}
 \end{proposition}
 
-$\Xi$を\eqref{eq:2-ode}の特異点の集合とし、$\mathbb{X}=\mathbb{P}^{1}(\mathbb{C})\setminus\Xi$とする。
+$\Xi$を\eqref{eq:2-ode}の特異点の集合とし、$\mathbb{X}=\mathbb{P}^{1}(\mathbb{C})\setminus\Xi$とする。解の基本系を$\vec{\varphi}(x)$とする。
+
+\begin{definition}
+    \[
+    W(\vec{\varphi})=
+    \left[
+    \begin{matrix}
+        \varphi_{1}(x) & \varphi_{2}(x) \\
+        \varphi_{1}'(x) & \varphi_{2}'(x) \\
+    \end{matrix}
+    \right]
+    \]
+    を$\vec{\varphi}(x)$の\textbf{ロンスキー行列}といい、
+    \[
+    w(\vec{\varphi})=\text{det}(W(\vec{\varphi}))
+    \]
+    を$\vec{\varphi}(x)$の\textbf{ロンスキアン}という
+\end{definition}
+
+\begin{proposition}
+    \eqref{eq:2-ode}の解の基本系$\vec{\varphi}(x)$のロンスキアンは
+    \[
+    \frac{dw}{dx}+p_{1}(x)w=0
+    \]
+    なる$1$階微分方程式を満たす。
+    （\cite[p.51 命題2.2]{book:okamoto} を参照）
+\end{proposition}
+
+この命題は$n$階でも成り立つ。
+
+\begin{proof}
+    定理\ref{thm:derivative-of-determinant}から、
+    \[
+    \frac{d}{dx}(w(\vec{\varphi})(x))=\sum_{i=1}^{n}w_{i}(\vec{\varphi})(x)
+    \]
+    である。ここで、$w_{i}(\vec{\varphi})(x)$は$w(\vec{\varphi})(x)$の$i$行目を微分した行列の行列式である。
+    ここで$i=1,\cdots,n-1$に対して、$i$行目と$i+1$行目が一致するので、
+    \[
+    w_{i}(\vec{\varphi})(x)=0
+    \]
+    よって
+    \[
+    \frac{d}{dx}(w(\vec{\varphi})(x))=w_{n}(\vec{\varphi})(x)
+    \]
+    だが、$w_{n}(\vec{\varphi})(x)$の$n$行目について
+    \[
+    (\varphi_{1}^{(n)}(X),\cdots,\varphi_{n}^{(n)}(x))
+    \]
+    となっているが、満たす微分方程式によって
+    \[
+    (-p_{1}(x)\varphi_{1}^{(n-1)}(x)-\cdots-p_{n}(x)\varphi_{1}(x),\cdots,-p_{1}(x)\varphi_{n}^{(n-1)}(x)-\cdots-p_{n}(x)\varphi_{n}(x))
+    \]
+    とあらわせる。detの多重線形性と合わせると$n-2$階微分以下は0になるので、
+    \[
+    w_{n}(\vec{\varphi})(x)=-p_{1}(x)w(\vec{\varphi})(x)
+    \]
+    である。よって、
+    \[
+    \frac{d}{dx}(w(\vec{\varphi})(x))+p_{1}(x)w(\vec{\varphi})(x)=0
+    \]
+\end{proof}
 
 \begin{proposition}
 $\mathbb{X}$内の$x_{0}$を始点とする2つの閉じた道が互いにホモトープならば、
@@ -392,6 +452,9 @@ p.129
 \textbf{A.} $\cdot$ 微分方程式の定義域、確定特異点の位置の集合、モノドロミーの組のこと。(定義\ref{def:riemann_data}を参照)\\
 \end{Q}
 
+\begin{Q}[解析接続と微分は交換可能？]
+\textbf{A.} 可能。(定義\ref{prop:interchange-ac-diff}を参照)\\
+\end{Q}
 
 
 
@@ -503,6 +566,65 @@ p.129
     （\cite[p.10 定義1.12]{book:kobayashi} を参照。）
 \end{definition}
 
+\begin{theorem}[行列の微分]\label{thm:derivative-of-determinant}
+    $A(x)=(a_{ij}(x))$とする。$i$行目を微分した行列を$A_{i}$とおくと、
+    \[
+    \frac{d}{dx}(\det(A(x)))=\sum_{i=1}^{n}\det(A_{i}(x))
+    \]
+\end{theorem}
+
+\begin{proof}
+    \[
+    \det(A(x))=\sum_{\sigma\in S_{n}}a_{1\sigma(1)}(x)\cdots a_{n\sigma(n)}(x)
+    \]
+    と表せるが、微分すると、
+    \[
+    \frac{d}{dx}(\det(A(x)))=\sum_{\sigma\in S_{n}}\sum_{i=1}^{n}a_{1\sigma(1)}(x)\cdots a_{i\sigma_(i)}'(x)\cdots a_{n\sigma(n)}(x)
+    \]
+    \[
+    \therefore\quad
+    \frac{d}{dx}(\det(A(x)))=\sum_{i=1}^{n}\sum_{\sigma\in S_{n}}a_{1\sigma(1)}(x)\cdots a_{i\sigma(i)}'(x)\cdots a_{n\sigma(n)}(x)
+    \]
+    \[
+    \therefore\quad
+    \frac{d}{dx}(\det(A(x)))=\sum_{i=1}^{n}\det(A_{i}(x))
+    \]
+    
+\end{proof}
+
+\begin{proposition}[解析接続と微分は交換可能]\label{prop:interchange-ac-diff}
+    関数 $f(z)$ が曲線 $\varphi$ に沿って解析接続可能であるとする。このとき、任意の$n\geq 0$ に対して、その微分 $f^{(n)}(z)$ も $\varphi$ に沿って解析接続可能であり、終端 $t=1$ での解析接続の結果をそれぞれ $f(z;1), f^{(n)}(z;1)$ とすると、
+    \[
+    f^{(n)}(z;1) = \frac{d^{n}}{dz^{n}}f(z;1)
+    \]
+    が成り立つ。
+\end{proposition}
+
+\begin{proof}
+    $n=1$の時に証明すれば十分。また、直接接続の時に証明すれば十分。\\
+    $f(z)$の元の収束円盤を$D_{1}$とする。また、$f(z)$は解析接続可能なので、解析接続先の関数を$g(z)$、その収束円盤を$D_{2}$とすると、$z \in D_{1}\cap D_{2}$上で$f(z)=g(z)$である。\\
+    このとき、命題\ref{prop:convergence-radius-invariant}より、$f'(z)はD_{1}$上収束し、$g'(z)はD_{2}$上収束する。また、$z \in D_{1}\cap D_{2}$上では$f'(z)=g'(z)$より、$f'(z)$の$D_{2}$への解析接続は一致の定理から、$g'(z)$である。
+\end{proof}
+
+\begin{proposition}[解析関数を微分しても収束半径は不変]\label{prop:convergence-radius-invariant}
+    $a\in\mathbb{C}$とする。$f(z)=\sum_{n=0}^{\infty}a_{n}(z-a)^{n}$の収束半径を$R(>0)$とすると、f(z)は$B(a;r)$上の正則関数で
+    \[
+    f'(z)=\sum_{n=0}^{\infty}na_{n}(z-a)^{n-1}
+    \]
+    である。$f'(z)$の収束半径も$R$である。
+    （\cite[p.62 定理3.1.10]{book:noguchi} を参照。）
+\end{proposition}
+
+\begin{theorem}[正則関数は解析関数]\label{thm:holomorphic-is-analytic}
+    $D$上の正則関数$f$は$D$上解析的で、各点$a\in D$で、$f(z)=\sum_{n=0}^{\infty}a_{n}(z-a)^{n}, z\in B(a;d(a,\partial D))$と展開され、収束半径は$d(a;\partial D)$以上である。
+    （\cite[p.89 定理3.5.7]{book:noguchi} を参照。）
+\end{theorem}
+
+\begin{proposition}[一致の定理]
+    $f$を領域$D$上の解析関数とする。部分集合$E\subset D$は$D$内に少なくとも$1$つ集積点を持つとする。もし$f$の$E$への制限$f|_{E}$が恒等的に$0$ならば、$f$は$D$上恒等的に$0$である。
+    （\cite[p.35 定理2.4.14]{book:noguchi} を参照。）
+\end{proposition}
+
 \section{補遺：定理・命題の厳密な証明}
 
 \subsection{命題2.2（線形方程式の固定特異点）の証明}
@@ -544,6 +666,7 @@ $x = \xi$ が解 $y = \varphi(x; x_0, y_0, y'_0)$ の特異点であるとする
     \bibitem{book:kimura} 木村俊房・高野恭一, 『関数論』, 朝倉出版, 1991.
     \bibitem{book:matsumoto} 松本幸夫, 『トポロジー入門』, 岩波書店, 1985.
     \bibitem{book:kobayashi} 小林俊行・大島利雄, 『リー群と表現論』, 岩波書店, 2005.
+    \bibitem{book:noguchi} 野口潤次郎, 『複素解析概論』, 裳華房, 1993.
 \end{thebibliography}
 
 \end{document}
