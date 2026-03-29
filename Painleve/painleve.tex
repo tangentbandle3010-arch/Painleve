@@ -138,7 +138,7 @@ $\Xi$を\eqref{eq:2-ode}の特異点の集合とし、$\mathbb{X}=\mathbb{P}^{1}
     を$\vec{\varphi}(x)$の\textbf{ロンスキアン}という
 \end{definition}
 
-\begin{proposition}
+\begin{proposition}\label{prop:wronskian-ode}
     \eqref{eq:2-ode}の解の基本系$\vec{\varphi}(x)$のロンスキアンは
     \[
     \frac{dw}{dx}+p_{1}(x)w=0
@@ -442,8 +442,51 @@ p.128
 \phantom{\textbf{A.} }$\cdot$ 線型微分方程式のモノドロミー保存変形によって非線形な関係が浮かび上がるから。
 \end{Q}
 
+フックス型微分方程式
+\begin{equation}\label{eq:linear-ode-n}
+    \frac{d^{n}y}{dx^{n}}+\sum_{j=1}^{n} p_{j}(x,t)\frac{d^{n-j}y}{dx^{n-j}} = 0   
+\end{equation}
+を考える。\\
+\begin{equation}\label{eq:auxiliary-phi}
+\frac{d\phi(x)}{dx}+\frac{1}{n}p_{1}(x,t)\phi(x)=0
+\end{equation}
+で定まる解をとって、
+\[
+y=\phi(x,t)z
+\]
+とすると、\eqref{eq:fuchs_n_order}は
+\begin{equation}\label{eq:reduced-fuchsian}
+\frac{d^{n}z}{dx^{n}}+\sum_{j=2}^{n} q_{j}(x,t)\frac{d^{n-j}z}{dx^{n-j}} = 0
+\end{equation}
+となる。ここで、$q_{j}(x)$は$\phi(x,t)(i)\,(i=0,1,\cdots,j)$と$p_{i}(x,t)\,(i=1,\cdots,j)$の多項式である。\eqref{eq:reduced-fuchsian}のリーマンデータを
+\[
+(\mathbb{X}',\Xi',\rho')
+\]
+としておく。
+ここで、\eqref{eq:reduced-fuchsian}の解の基本系を$\vec{\varphi}(x)$とする。解析接続をして、
+\[
+W(\vec{\varphi}^{\gamma})=W(\vec{\varphi})\Gamma(\gamma)
+\]
+命題\ref{prop:wronskian-ode}より、$w(\vec{\varphi})$は$x$によらないので、$w(\vec{\varphi}^{\gamma})=w(\vec{\varphi})$であるからdetをとって
+\[
+\det(\Gamma(\gamma))=1
+\]
+がわかる。よって、\eqref{eq:reduced-fuchsian}のモノドロミー群は$SL(n,\mathbb{C})$の部分群であることがわかった。すなわち、
+\[
+\rho':\pi(x_{0},\mathbb{X}')\to SL(n,\mathbb{C})
+\]
+である。ここで$\mathbb{X}'=\mathbb{P}^{1}(\mathbb{C})\setminus \Xi'$である。
+
+\begin{definition}
+    上のように、モノドロミー群が$SL(n,\mathbb{C})$の部分群であるような微分方程式を\textbf{SL型}という
+\end{definition}
+
+\begin{proposition}
+    $n$階フックス型微分方程式\eqref{eq:linear-ode-n}のモノドロミー保存変形と、$n$階フックス型微分方程式\eqref{eq:reduced-fuchsian}のモノドロミー保存変形とは$1$階フックス型微分方程式\eqref{eq:auxiliary-phi}がモノドロミー保存変形を許すという条件のもとで同値である。
+\end{proposition}%TODO(証明したい,モノドロミー保存変形とは)
+
 p.129
-\begin{Q}[(3.42)に解はあるの？]
+\begin{Q}[\eqref{eq:auxiliary-phi}に解はあるの？]
 \textbf{A.} $\cdot$ $p_1(x,t)$が正則な$x$の周りではコーシーの存在定理（定理\ref{thm:cauchy}を参照）より必ず存在し、特異点の周りでも (複素べき)$\times$(正則関数とlogの多項式) の形で解を展開できる。(定理\ref{thm:fuchs}を参照)\\
 \phantom{\textbf{A.} }$\cdot$ 【目的】この解 $\phi$ を使って元の変数を変換し、方程式から邪魔な $n-1$ 階微分の項を消し去る（正規化する）ため。
 \end{Q}
