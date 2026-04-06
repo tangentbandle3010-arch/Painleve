@@ -2244,6 +2244,57 @@ B_{l} & C_{l}
 \end{Q}
 
 %#endregion
+%#region
+これまでの議論を踏まえ、リーマンデータ $(\mathbb{P}^{1}(\mathbb{C}),\Xi,\hat{\rho})$ が与えられているとき、ここに新たな特異点の集合 $\Lambda=\{\lambda_{1},\cdots,\lambda_{g}\}$ を追加した新しいリーマンデータ
+\[
+(\mathbb{P}^{1}(\mathbb{C}),\Xi\cup\Lambda,\hat{\rho'})
+\]
+について考えたい。
+ここで、新しい表現類 $\hat{\rho'}$ は以下の条件を満たす代表元 $\rho'$ を持つとする。
+元の確定特異点 $\xi_{1},\cdots,\xi_{m+1}$ を反時計回りに1周する道を $\gamma_{1},\cdots,\gamma_{m+1}$、新しく追加した特異点 $\lambda_{1},\cdots,\lambda_{g}$ を1周する道を $\gamma'_{1},\cdots,\gamma'_{g}$ とする。このとき、元の表現 $\rho \in \hat{\rho}$ が存在して、任意の $i, j$ に対して
+\begin{align*}
+\rho'(\gamma_{i}) &= \rho(\gamma_{i}) \\
+\rho'(\gamma'_{j}) &= I_{n} \quad (\text{単位行列})
+\end{align*}
+を満たすものとする。
+
+\begin{Q}[【核心】新しく追加した点に対する表現を $\rho'(\gamma'_{j}) = I_{n}$ と設定することは、代数的にどのような意味を持つか？また、これは元の表現と矛盾しないか？]
+\textbf{A.} これは、解析的な「みかけの特異点」を、代数的な「表現の核（自明な作用）」として完璧に翻訳した設定であり、数学的に一切の矛盾を生じない。
+
+解析において、みかけの特異点とは「その周りを回っても解が分岐しない（元の解にそのまま戻る）」点であった。表現論の言葉では、ベクトルに右から作用させたとき $\vec{v}^T \rho'(\gamma'_j) = \vec{v}^T$ となること、すなわち作用する行列が単位行列 $I_n$ であることと完全に同値である。
+
+また、穴の開いた球面（$\mathbb{P}^{1}(\mathbb{C})\setminus (\Xi\cup\Lambda)$）の基本群は、すべての特異点を1周するループの積が自明になるという関係式
+\[
+\gamma_{1} \cdots \gamma_{m+1} \gamma'_{1} \cdots \gamma'_{g} = 1
+\]
+を持つ。これに新しい表現 $\rho'$ を適用すると、
+\[
+\rho'(\gamma_{1}) \cdots \rho'(\gamma_{m+1}) \rho'(\gamma'_{1}) \cdots \rho'(\gamma'_{g}) = \rho(\gamma_{1}) \cdots \rho(\gamma_{m+1}) I_{n} \cdots I_{n} = I_{n}
+\]
+となり、元の表現 $\rho$ が持っていた関係式 $\prod \rho(\gamma_i) = I_n$ に完全に帰着する。したがって、$\rho'(\gamma'_j) = I_n$ と置くことは、元のモノドロミー表現の代数的な構造を一切破壊することなく、空間の穴（特異点）だけを増やす極めて自然な操作なのである。
+\end{Q}
+
+\begin{definition}[リーマンデータの拡大]
+    上記の条件を満たすような新しいデータ $(\mathbb{P}^{1}(\mathbb{C}),\Xi\cup\Lambda,\hat{\rho'})$ が存在するとき、これを元のリーマンデータ $(\mathbb{P}^{1}(\mathbb{C}),\Xi,\hat{\rho})$ の \textbf{拡大 (extension)} という。
+\end{definition}
+
+\begin{definition}[本質的なリーマンデータ]
+    与えられたリーマンデータ $(\mathbb{P}^{1}(\mathbb{C}),\Xi,\hat{\rho})$ の特異点集合 $\Xi$ が「みかけの特異点（モノドロミーが $I_n$ となる点）」を一つも含まないとき、すなわち他のいかなるデータの真の拡大（$\Lambda \neq \emptyset$ による拡大）にもなっていないとき、これを \textbf{本質的なリーマンデータ (essential Riemann data)} という。
+\end{definition}
+
+今後のリーマン・ヒルベルト問題の構成においては、まず余分な贅肉を一切持たない「本質的なリーマンデータ」を出発点として固定し、そこから次元を補うために人為的に拡大を行う、というステップを踏むことになる。
+%#endregion
+%#region
+そこで、リーマンの問題を以下のように考え直す。
+\begin{itemize}
+    \item []\textbf{問題}\\
+    $(\mathbb{P}^{1}(\mathbb{C}),\Xi,\hat{\rho})$が本質的なリーマンデータだとする。このとき、フックス型微分方程式でその拡大$(\mathbb{P}^{1}(\mathbb{C}),\Xi\cup\Lambda,\hat{\rho'})$をリーマンデータに持つものはあるだろうか?
+\end{itemize}
+また、この問題に対して以下の事実が知られている。
+\begin{proposition}
+    リーマンの問題は常に解をもつ。
+\end{proposition}
+%#endregion
 
 \subsection{フックスの問題}
 

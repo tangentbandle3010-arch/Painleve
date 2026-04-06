@@ -4,7 +4,7 @@
 ![Language: LaTeX](https://img.shields.io/badge/Language-LaTeX-orange)
 ![Tools: C%2B%2B-00599C?logo=cplusplus](https://img.shields.io/badge/Tools-C%2B%2B-blue?logo=cplusplus)
 ![AtCoder: Grey](https://img.shields.io/badge/AtCoder-Grey-grey)
-![Online Math Contest: Green](https://img.shields.io/badge/Online_Math_Contest-Green-green)
+![Online Math Contest: Light Blue](https://img.shields.io/badge/Online_Math_Contest-Lightblue-lightblue)
 
 岡本和夫先生の『パンルヴェ方程式』などを読み解きながら、日々の学習やセミナーの準備をまとめている勉強ノート（備忘録）リポジトリです。
 
