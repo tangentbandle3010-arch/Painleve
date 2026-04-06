@@ -6,10 +6,10 @@
 \contentsline {subsection}{\numberline {2.4}高階フックス型線型常微分方程式}{22}{subsection.2.4}%
 \contentsline {subsection}{\numberline {2.5}みかけの特異点}{36}{subsection.2.5}%
 \contentsline {subsection}{\numberline {2.6}連立微分方程式系と単独高階微分方程式}{43}{subsection.2.6}%
-\contentsline {subsection}{\numberline {2.7}リーマンの問題}{43}{subsection.2.7}%
-\contentsline {subsection}{\numberline {2.8}フックスの問題}{43}{subsection.2.8}%
-\contentsline {section}{\numberline {3}パンルヴェ方程式の基礎}{44}{section.3}%
-\contentsline {subsection}{\numberline {3.1}変形微分方程式系}{44}{subsection.3.1}%
-\contentsline {subsection}{\numberline {3.2}2階フックス型微分方程式のラックス方程式}{44}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}変形微分方程式の解}{44}{subsection.3.3}%
-\contentsline {section}{\numberline {A}用いた定理}{46}{appendix.A}%
+\contentsline {subsection}{\numberline {2.7}リーマンの問題}{51}{subsection.2.7}%
+\contentsline {subsection}{\numberline {2.8}フックスの問題}{55}{subsection.2.8}%
+\contentsline {section}{\numberline {3}パンルヴェ方程式の基礎}{55}{section.3}%
+\contentsline {subsection}{\numberline {3.1}変形微分方程式系}{55}{subsection.3.1}%
+\contentsline {subsection}{\numberline {3.2}2階フックス型微分方程式のラックス方程式}{55}{subsection.3.2}%
+\contentsline {subsection}{\numberline {3.3}変形微分方程式の解}{56}{subsection.3.3}%
+\contentsline {section}{\numberline {A}用いた定理}{57}{appendix.A}%
