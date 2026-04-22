@@ -1,16 +1,37 @@
-\documentclass[paper=a4, fontsize=11pt]{jlreq} % 日本語用の標準的なクラス
+\documentclass[paper=a4, fontsize=11pt]{jlreq} % LuaLaTeX または upLaTeX でのコンパイルを推奨
 
 % --- パッケージ群 ---
 \usepackage[utf8]{inputenc}
 \usepackage[T1]{fontenc}
-\usepackage[margin=20mm]{geometry} % ★ 上下左右の余白を20mmに設定
-\usepackage{amsmath, amssymb, amsthm} % 数学の基本
+\usepackage[margin=20mm]{geometry} % 上下左右の余白を20mmに設定
+\usepackage{amsmath, amssymb, amsthm, amsfonts} % 数学の基本
 \usepackage{physics} % \ket{0}, \pdv{x} などが簡単に打てる
 \usepackage{bm} % 太字ベクトル \bm{v}
 \usepackage{graphicx}
 \usepackage{hyperref} % リンク・目次用
 \usepackage{cite} % 引用用
 \usepackage{etoolbox} % 環境の終わりに自動でマークを入れるために追加
+\usepackage{ytableau} % ★追加: Young図形の描画に必須
+\usepackage{tikz}     % ★追加: TikZの読み込み
+\usepackage{mathtools}
+\usepackage[notref,notcite]{showkeys}
+\usepackage{xcolor}
+\usepackage{mdframed}
+\usetikzlibrary{arrows.meta, decorations.pathreplacing}% ★追加: TikZの波括弧や矢印のスタイルに必須
+
+% 本文用の環境（色は目に優しいDarkBlueなどを指定）
+\newenvironment{story}{%
+  \begin{mdframed}[
+    backgroundcolor=red!5, % redを5%の濃さで出力（ほんのり薄い赤）
+    linewidth=0pt,         % 枠線はなし（スッキリさせるため）
+    innertopmargin=10pt,   % 上下の余白
+    innerbottommargin=10pt,
+    innerrightmargin=10pt, % 左右の余白
+    innerleftmargin=10pt
+  ]%
+}{%
+  \end{mdframed}%
+}
 
 \newtheoremstyle{break}% スタイル名
   {1em}% 上部のスペース（約1行分空ける）
@@ -32,6 +53,7 @@
 \newtheorem{example}[theorem]{例}
 \newtheorem{problem}[theorem]{問題} % 自作問題用
 
+
 % --- 環境の終わりにマークをつける設定 ---
 \newcommand{\myendmark}{\null\hfill$\diamondsuit$} % 既存のコマンドと被らないよう \myendmark に変更
 \AtEndEnvironment{theorem}{\myendmark}
@@ -42,7 +64,6 @@
 \AtEndEnvironment{example}{\myendmark}
 \AtEndEnvironment{problem}{\myendmark}
 
-
 % --- Q&A（自問自答）用の専用スタイル ---
 \newtheoremstyle{qa}% スタイル名
   {1ex}% 上部のスペース
@@ -52,20 +73,12 @@
   {\bfseries}% 見出しのフォント（太字）
   {}% 見出し後の句読点
   {\newline}% 見出しの後に改行を入れる
-  {\thmname{#1}\thmnote{：#3}}% カスタム指定（例：「Q&A：なぜ〜？」と出力）
+  {\thmname{#1}\thmnote{：#3}}% カスタム指定（例：「Q：なぜ〜？」と出力）
 
 \theoremstyle{qa}
 \newtheorem*{Q}{Q}
 
-% --- 番号なしの環境（地の文の代わり） ---
-\theoremstyle{remark} % 見た目を少し控えめにするスタイル
-\newtheorem*{remark}{※}
-
-% --- 独自のショートカット (CFT/パンルヴェ用) ---
-\newcommand{\Virexp}[2]{[L_{#1}, L_{#2}]} % ヴィラソロの交換関係
-\newcommand{\taufunc}{\tau(z)} % タウ関数
-
-\title{パンルヴェ方程式に関する勉強ノート}
+\title{パンルヴェ方程式勉強ノート}
 \author{松浦光佑}
 \date{\today}
 

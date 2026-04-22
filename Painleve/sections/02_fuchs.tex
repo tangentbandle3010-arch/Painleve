@@ -142,7 +142,7 @@ $\Xi$を\eqref{eq:2-ode}の特異点の集合とし、$\mathbb{X}=\mathbb{P}^{1}
     を$\vec{\varphi}(x)$の\textbf{ロンスキアン}という
 \end{definition}
 
-\begin{proposition}\label{prop:wronskian-ode}
+\begin{proposition}\label{prop:2.1_wronskian-ode}
     \eqref{eq:2-ode}の解の基本系$\vec{\varphi}(x)$のロンスキアンは
     \[
     \frac{dw}{dx}+p_{1}(x)w=0
@@ -1261,9 +1261,9 @@ p_{1}(x) = \sum_{j=1}^{m} \frac{a_{j}}{x-\xi_{j}} + (x\text{の多項式})
 \end{Q}
 
 したがって、$p_{1}(x)$ は厳密に
-\[
-p_{1}(x) = \sum_{j=1}^{m} \frac{a_{j}}{x-\xi_{j}}
-\]
+\begin{equation}\label{eq:2.4_p1_coefficient_1-ord_pole}
+    p_{1}(x) = \sum_{j=1}^{m} \frac{a_{j}}{x-\xi_{j}}
+\end{equation}
 となる。
 各有限特異点 $x=\xi_{l}$ の局所座標 $u = x-\xi_{l}$ において、$q_{1}^{(l)}(0) = \lim_{x \to \xi_{l}} (x-\xi_{l})p_{1}(x) = a_{l}$ である。よって、$x=\xi_{l}$ における $n$ 個の特性指数 $s_{1}^{(l)}, \dots, s_{n}^{(l)}$ に対して、\eqref{eq:sum-of-exponents}より
 \[
@@ -2458,7 +2458,6 @@ K(n,m)=M(n,m)-E(n,m)
 \end{Q}
 %#endregion
 %#region
-%#region
 次に、\eqref{eq:linear-ode-n} がある領域 $U \subset \mathbb{C}^{L}$ でパラメータ $t=(t_{1},\cdots,t_{L})\in U$ に解析的に依存するとする。つまり、各点 $x$ で $t$ について解析的であるような係数 $p_{1}(x,t),\cdots,p_{n}(x,t)$ をもつ以下のような微分方程式の族を考える。
 \begin{equation}\label{eq:monodromy_deformation}
 \frac{d^{n}y}{dx^{n}}+\sum_{j=1}^{n} p_{j}(x,t)\frac{d^{n-j}y}{dx^{n-j}} = 0   
@@ -2493,4 +2492,28 @@ K(n,m)=M(n,m)-E(n,m)
     条件(H)を満足するような方程式の族 \eqref{eq:monodromy_deformation} が存在する時、\eqref{eq:monodromy_deformation} を元の微分方程式 \eqref{eq:linear-ode-n} の \textbf{モノドロミー保存変形 (monodromy preserving deformation)} または \textbf{ホロノミック変形 (holonomic deformation)} という。
 \end{definition}
 %#endregion
+%#region
+\begin{definition}[フックスの問題（Fuchs' Problem）]
+    連立微分方程式系 \eqref{eq:deformation_system} に関する以下の構成問題を \textbf{フックスの問題} という。
+
+    \textbf{【問題】} \\
+    連立系 \eqref{eq:deformation_system} が、元の空間方向の微分方程式 \eqref{eq:monodromy_deformation} のホロノミック変形を与えるための、係数に関する具体的な条件は何か？
+
+    この問題は、解析学的に厳密には次のように言い換えられる。
+
+    \textbf{【問題（厳密版）】} \\
+    連立系 \eqref{eq:deformation_system} の解の基本系 $\vec{\varphi}(x,t)$ であって、任意のループ $[\gamma] \in \pi_{1}(x_{0}; \mathbf{Y}(t))$ に対するモノドロミー行列 $\Gamma(\gamma)$ がパラメータ $t$ に一切依存しないようなものが存在するための、\textbf{必要十分条件}を求めること。
+    
+    （ただし、$\mathbf{Y}(t) = \mathbb{P}^{1}(\mathbb{C}) \setminus (\Xi(t) \cup \Lambda(t))$ は、時刻 $t$ における微分方程式のすべての特異点を除いた正則域である。）
+\end{definition}
+
+\begin{Q}[【核心】フックスの問題を解いて得られる「必要十分条件」とは、具体的にどのような形で我々の目の前に現れるのか？]
+\textbf{A.} 空間方向の係数 $p_j(x,t)$ と時間方向の係数 $a_j^{(l)}(x,t)$ が満たすべき\textbf{「非線形偏微分方程式系」}として現れる。
+この条件は、微分作用素の可換性 $[\partial_x, \partial_{t_l}] = 0$（フロベニウスの完全積分可能条件）を愚直に計算することで得られる。これを解きほぐすことで、$p_j(x,t)$（特にその中に含まれる「みかけの特異点」の座標）が、時間 $t$ に対してどのように時間発展（依存）しなければならないかという具体的なダイナミクスが完全に決定されるのである。
+\end{Q}
+
+\begin{Q}[【歴史・展望】なぜこの「フックスの問題」が、パンルヴェ方程式の歴史において決定的な意味を持つのか？]
+\textbf{A.} リヒャルト・フックス（R. Fuchs, ラザルス・フックスの息子）が1905年にこの問題を $n=2, m=3$（特異点が4つの2階方程式）という最も簡単な非自明ケースで解いた結果、みかけの特異点 $\lambda(t)$ が満たすべき非線形微分方程式として\textbf{「パンルヴェVI型方程式」}が突如として姿を現したからである。
+これにより、元々は全く別の文脈（動く分岐点を持たない方程式の分類）で発見されたパンルヴェ方程式が、実は「等モノドロミー変形」という極めて深い代数幾何学的な起源を持つことが証明されたのである。
+\end{Q}
 %#endregion

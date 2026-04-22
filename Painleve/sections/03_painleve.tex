@@ -4,82 +4,2476 @@
 
 \subsection{変形微分方程式系}
 
-%FIXME (証明とかを書き足す)
-\subsection{2階フックス型微分方程式のラックス方程式}
-
-\begin{equation}\label{eq1}
-\frac{d^{2}z}{dx^{2}}=r(x,t)z
+%#region
+係数 $p_{j}(x,t)$ は $x$ の有理関数であり、微分方程式 
+\begin{equation}\label{eq:3.1_n-ODE}
+\frac{d^{n}y}{dx^{n}}+\sum_{i=1}^{n}p_{j}(x,t)\frac{d^{n-j}y}{dx^{n-j}}=0
 \end{equation}
+が領域 $U$ 上のパラメータ $t$ について解析的であると仮定する。また、この章を通じて (P1)--(P3) が常に成り立つと仮定する。
 
-\begin{equation}\label{eq2}
-\frac{d\phi}{dx}+\frac{1}{2}p_{1}(x,t)\phi=0
+\begin{proposition}\label{prop:3.1_time_evolution_equation}
+解の基本系 $\vec{\varphi}(x,t)$ のモノドロミー群が $t$ に依存しない（すなわち条件(H): $\hat{\rho}(t) = \hat{\rho}$ を満たす）と仮定する。このとき、ある $x$ の有理関数
+\[
+a_{1}^{(l)}(x,t), a_{2}^{(l)}(x,t), \cdots, a_{n}^{(l)}(x,t) \quad (l=1,2,\cdots,L)
+\]
+が存在して、解の基本系 $\vec{\phi} = \vec{\varphi}(x,t)$ は元の $x$ に関する微分方程式 \eqref{eq:monodromy_deformation} の他に、次の $t_l$ に関する微分方程式系をも満たす。
+\begin{equation}\label{eq:3.1_partial_t}
+\frac{\partial \vec{\phi}}{\partial t_{l}} = \sum_{j=1}^{n}a_{j}^{(l)}(x,t)\frac{\partial^{j-1}\vec{\phi}}{\partial x^{j-1}} \quad (l=1,2,\cdots,L)
 \end{equation}
-
-\begin{proposition}
-    2階フックス型微分方程式\eqref{eq:2-ode}のモノドロミー保存変形と2階フックス型微分方程式\eqref{eq1}のモノドロミー保存変形とは、1階フックス型微分方程式\eqref{eq2}がモノドロミー保存変形を許すという条件のもとで同値である。
 \end{proposition}
 
-\subsection{変形微分方程式の解}
-
-p.128
-\begin{Q}[なぜ$n$階の変形微分方程式系を考えるのか？]
-\textbf{A.} $\cdot$ $n=2$だけでやるよりも見通しがいいから。\\
-\phantom{\textbf{A.} }$\cdot$ 線型微分方程式のモノドロミー保存変形によって非線形な関係が浮かび上がるから。
+\begin{Q}[【核心】なぜ「モノドロミーが $t$ に依存しない」というだけで、時間微分 $\partial \vec{\phi} / \partial t_{l}$ が「空間微分の線形結合」という綺麗な形で書けるのか？]
+\textbf{A.} 微分方程式の「解空間が $n$ 次元であること」と「解析接続と時間微分が交換すること」の必然的な帰結である。
+解の基本系 $\vec{\varphi}(x,t)$ を経路 $\gamma$ に沿って解析接続すると $\vec{\varphi}^\gamma = \vec{\varphi} \Gamma(\gamma)$ となる。この両辺を $t_l$ で偏微分すると、仮定より回路行列 $\Gamma(\gamma)$ は $t$ に依存しない（定数行列）ため、
+\[
+\left(\frac{\partial \vec{\varphi}}{\partial t_l}\right)^\gamma = \frac{\partial \vec{\varphi}}{\partial t_l} \Gamma(\gamma)
+\]
+となる。これは、時間微分 $\partial \vec{\varphi} / \partial t_l$ もまた、元の $\vec{\varphi}$ と\textbf{全く同じモノドロミー（分岐の規則）}を持つことを意味する。
+同じモノドロミーを持つ多価関数は互いに関係づけられ、元の微分方程式から作られる「$\vec{\varphi}$ とその $x$ に関する $(n-1)$ 階までの導関数（これらは解空間の完全な基底をなす）」の線形結合として、一意に表すことができるのである。
 \end{Q}
 
-フックス型微分方程式
-\eqref{eq:linear-ode-n}を考える。\\
-\begin{equation}\label{eq:auxiliary-phi}
-\frac{d\phi(x)}{dx}+\frac{1}{n}p_{1}(x,t)\phi(x)=0
+したがって、$\vec{\phi}=\vec{\varphi}(x,t)$ は $x$ と $t$ に関する以下の連立微分方程式系（$\vec{\phi}$ の各成分が第1式を満たす）の解となる。
+\begin{equation}\label{eq:3.1_deformation_system}
+\begin{cases}
+\displaystyle \frac{\partial^{n}\vec{\phi}}{\partial x^{n}} + \sum_{j=1}^{n} p_{j}(x,t)\frac{\partial^{n-j}\vec{\phi}}{\partial x^{n-j}} = \vec{0}  \\[1em]
+\displaystyle \frac{\partial \vec{\phi}}{\partial t_{l}} = \sum_{j=1}^{n}a_{j}^{(l)}(x,t)\frac{\partial^{j-1}\vec{\phi}}{\partial x^{j-1}} \quad (l=1,\cdots,L)
+\end{cases}
 \end{equation}
-で定まる解をとって、
-\[
-y=\phi(x,t)z
-\]
-とすると、\eqref{eq:fuchs_n_order}は
-\begin{equation}\label{eq:reduced-fuchsian}
-\frac{d^{n}z}{dx^{n}}+\sum_{j=2}^{n} q_{j}(x,t)\frac{d^{n-j}z}{dx^{n-j}} = 0
-\end{equation}
-となる。ここで、$q_{j}(x)$は$\phi(x,t)(i)\,(i=0,1,\cdots,j)$と$p_{i}(x,t)\,(i=1,\cdots,j)$の多項式である。\eqref{eq:reduced-fuchsian}のリーマンデータを
-\[
-(\mathbb{X}',\Xi',\rho')
-\]
-としておく。
-ここで、\eqref{eq:reduced-fuchsian}の解の基本系を$\vec{\varphi}(x)$とする。解析接続をして、
-\[
-W(\vec{\varphi}^{\gamma})=W(\vec{\varphi})\Gamma(\gamma)
-\]
-命題\ref{prop:wronskian-ode}より、$w(\vec{\varphi})$は$x$によらないので、$w(\vec{\varphi}^{\gamma})=w(\vec{\varphi})$であるからdetをとって
-\[
-\det(\Gamma(\gamma))=1
-\]
-がわかる。よって、\eqref{eq:reduced-fuchsian}のモノドロミー群は$SL(n,\mathbb{C})$の部分群であることがわかった。すなわち、
-\[
-\rho':\pi(x_{0},\mathbb{X}')\to SL(n,\mathbb{C})
-\]
-である。ここで$\mathbb{X}'=\mathbb{P}^{1}(\mathbb{C})\setminus \Xi'$である。
 
-\begin{definition}
-    上のように、モノドロミー群が$SL(n,\mathbb{C})$の部分群であるような微分方程式を\textbf{SL型}という
+\begin{Q}[【核心】この「空間方向の微分方程式（$x$-系）」と「時間方向の微分方程式（$t$-系）」の連立方程式 \eqref{eq:3.1_deformation_system} は、幾何学やソリトン理論などで現れる何と同等の構造か？]
+\textbf{A.} \textbf{「ラックス対（Lax pair）」}あるいは\textbf{「線形補助問題」}と呼ばれる構造そのものである。
+この2つの線形微分方程式が「同時に同じ解 $\vec{\phi}$ を持つ」ためには、微分の順序交換 $\frac{\partial}{\partial t_l} \frac{\partial^n}{\partial x^n} = \frac{\partial^n}{\partial x^n} \frac{\partial}{\partial t_l}$ が恒等的に成り立つ必要がある（両立条件／完全積分可能条件）。この両立条件を係数 $p_j(x,t)$ と $a_j^{(l)}(x,t)$ の関係式として書き下すと、それらが満たすべき「非線形偏微分方程式」が得られる。これがパンルヴェ方程式などの非線形方程式を導出する最強のメカニズム（等モノドロミー変形法）である。
+\end{Q}
+
+\begin{definition}[変形微分方程式系]
+    $a_{1}^{(l)}(x,t), a_{2}^{(l)}(x,t), \cdots, a_{n}^{(l)}(x,t) \quad (l=1,2,\cdots,L)$ が $x$ の有理関数であるとき、連立系 \eqref{eq:3.1_deformation_system} を \eqref{eq:monodromy_deformation} のモノドロミー保存変形の\textbf{変形微分方程式系（system of deformation equations）}という。
+    また、\eqref{eq:3.1_deformation_system} の解 $\vec{\phi}=\vec{\varphi}(x,t)$ で、各時刻 $t$ において \eqref{eq:monodromy_deformation} の解の基本系となっているものを、\eqref{eq:3.1_deformation_system} の\textbf{解の基本系}という。
 \end{definition}
 
-p.129
-\begin{Q}[\eqref{eq:auxiliary-phi}に解はあるの？]
-\textbf{A.} $\cdot$ $p_1(x,t)$が正則な$x$の周りではコーシーの存在定理（定理\ref{thm:cauchy}を参照）より必ず存在し、特異点の周りでも (複素べき)$\times$(正則関数とlogの多項式) の形で解を展開できる。(定理\ref{thm:fuchs}を参照)\\
-\phantom{\textbf{A.} }$\cdot$ 【目的】この解 $\phi$ を使って元の変数を変換し、方程式から邪魔な $n-1$ 階微分の項を消し去る（正規化する）ため。
+また、逆の命題も成り立つ。
+\begin{proposition}\label{prop:3.1_fundamental_system_preserves_monodromy}
+連立微分方程式系 \eqref{eq:3.1_deformation_system} に解の基本系 $\vec{\phi}=\vec{\varphi}(x,t)$ が存在すれば、その $\vec{\varphi}(x,t)$ が持つ元の微分方程式に関するモノドロミー群は、パラメータ $t$ に依存しない。
+\end{proposition}
+
+\begin{Q}[【核心】なぜ「$t$-方向の微分方程式も同時に満たす解が存在する」だけで、大域的な性質であるモノドロミーが不変になると断言できるのか？]
+\textbf{A.} $t$-方向の微分方程式の係数 $a_j^{(l)}(x,t)$ が「$x$ の有理関数（一価関数）」であることが決定的に効いているからである。
+
+解 $\vec{\varphi}$ が特異点の周りを回って $\vec{\varphi}\Gamma$ に解析接続されたとする。このとき $t$-方向の方程式 $\partial_t \vec{\varphi} = A(x,t)\vec{\varphi}$ （※右辺は空間微分の線形結合を略記）も一緒に解析接続されるが、係数 $A(x,t)$ は一価の有理関数なので特異点を回っても全く変化しない。したがって、解析接続された先でも $\partial_t (\vec{\varphi}\Gamma) = A(x,t)(\vec{\varphi}\Gamma)$ がそのまま成り立つ。
+積の微分法則を展開すると、これが成り立つためには $\Gamma$ の時間微分がゼロ、すなわち $\partial_t \Gamma = 0$ でなければならない。有理関数係数の微分方程式で時間発展を縛ること自体が、モノドロミーを固定する強力な楔（くさび）となっているのである。
 \end{Q}
 
-\begin{Q}[リーマンデータって何？]
-\textbf{A.} $\cdot$ 微分方程式の定義域、確定特異点の位置の集合、モノドロミーの組のこと。(定義\ref{def:riemann_data}を参照)\\
+\begin{definition}[ホロノミックな変形]
+一般に、$x$ の有理関数 $p_{1}(x,t), \cdots, p_{n}(x,t)$ および $a_{1}^{(l)}(x,t), \cdots, a_{n}^{(l)}(x,t) \quad (l=1,\cdots,L)$ を係数とする連立系 \eqref{eq:3.1_deformation_system} を考える。この \eqref{eq:3.1_deformation_system} に解の基本系 $\vec{\phi}=\vec{\varphi}(x,t)$ が存在するとき、この連立微分方程式系は、空間方向の微分方程式 \eqref{eq:monodromy_deformation} の\textbf{ホロノミックな変形（holonomic deformation）}を定めるという。
+\end{definition}
+
+\begin{Q}[【補足】「モノドロミー保存変形」と「ホロノミック変形」という2つの言葉は、どのように使い分けるべきか？]
+\textbf{A.} 
+\begin{itemize}
+    \item \textbf{モノドロミー保存変形:} 「大域的な解析接続の規則（モノドロミー）が変わらない」という\textbf{解析的・幾何学的な現象（目的）}を指す言葉。
+    \item \textbf{ホロノミック変形:} 「変数が複数あるのに、解空間が有限次元に定まるような過剰決定系（ラックス対）が存在する」という\textbf{代数的な構造（手段）}を指す言葉。
+\end{itemize}
+一般の微分方程式においてはこの2つは必ずしも一致しないが、今回のように元の微分方程式 \eqref{eq:monodromy_deformation} が\textbf{フックス型微分方程式}である場合に限り、特異点の確定性という強力な性質のおかげで、両者は完全に同値な概念となる。
 \end{Q}
 
-\begin{Q}[解析接続と微分は交換可能？]
-\textbf{A.} 可能。(定義\ref{prop:interchange-ac-diff}を参照)\\
+したがって、\eqref{eq:monodromy_deformation} がフックス型微分方程式の際には、ホロノミックな変形はそのままモノドロミー保存変形を意味する。
+%#endregion
+%region
+単独高階微分方程式の時と同様に連立微分方程式系
+\begin{equation}\label{eq:3.1_x_ODE_matrix}
+\frac{d \vec{\phi}}{dx} = P(x,t)\vec{\phi}
+\end{equation}
+のフックスの問題、モノドロミー保存変形を考えることができる。\eqref{eq:3.1_x_ODE_matrix}の解の基本系を$Y(x,t)$とおくと、上の命題に対する次の命題が得られる。
+\begin{proposition}\label{prop:3.1_monodromy_preservation_condition}
+基本解行列 $Y(x,t)$ のモノドロミー群が $t$ によらないための必要十分条件は、$x$ の有理関数を成分とする行列 $A^{(l)}(x,t) \quad (l=1,\cdots,L)$ が存在して、$Y(x,t)$ は元の微分方程式 $\frac{\partial Y}{\partial x} = P(x,t)Y$ に加えて、
+\begin{equation}
+\frac{\partial Y}{\partial t_l} = A^{(l)}(x,t)Y(x,t) \quad (l=1,\cdots,L)
+\label{eq:3.1_t_ODE_matrix}
+\end{equation}
+を満足することである。
+\end{proposition}
+
+命題\ref{prop:3.1_monodromy_preservation_condition}の証明は、命題\ref{prop:3.1_time_evolution_equation}、\ref{prop:3.1_fundamental_system_preserves_monodromy}の証明とほとんど同様であるから、省略する。連立微分方程式系\eqref{eq:3.1_x_ODE_matrix}に対しても
+
+\begin{equation}\label{eq:3.1_deformation_system_matrix}
+  \begin{cases}
+    \displaystyle \frac{\partial Y}{\partial x} = P(x,t)Y \\[4mm]
+    \displaystyle \frac{\partial Y}{\partial t_l} = A^{(l)}(x,t)Y \quad (l=1,2,\cdots,L)
+  \end{cases}
+\end{equation}
+
+を，\textbf{変形微分方程式系}という．また，\eqref{eq:3.1_deformation_system_matrix}が可逆行列解 $Y(x,t)$ をもつときには，\eqref{eq:3.1_deformation_system_matrix}は\eqref{eq:3.1_x_ODE_matrix}の\textbf{ホロノミックな変形}を定める，という．
+
+\begin{Q}[「\eqref{eq:3.1_deformation_system_matrix}が可逆行列解をもつ」ことが、なぜ「モノドロミー保存変形（ホロノミックな変形）」と呼ばれる性質を保証するのか？]
+\textbf{A.} 可逆な基本解行列 $Y(x,t)$ が大域的に存在するということは、変数 $x$ に関する特異点の周りを回る解析接続（モノドロミー表現）が、パラメータ $t$ の変動に対して滑らかに追従し、位相的な不変量として一定に保たれることを意味する。つまり、「方程式の係数 $P(x,t)$ は $t$ によって変形されるが、その解の大域的な多価性の構造（特異点の性質など）は変化しない」という強い制約（ホロノミック性）を満たしているからである。
 \end{Q}
 
-\begin{proposition}
-    $n$階フックス型微分方程式\eqref{eq:linear-ode-n}のモノドロミー保存変形と、$n$階フックス型微分方程式\eqref{eq:reduced-fuchsian}のモノドロミー保存変形とは$1$階フックス型微分方程式\eqref{eq:auxiliary-phi}がモノドロミー保存変形を許すという条件のもとで同値である。
-\end{proposition}%FIXME(証明したい)
-%FIXME(モノドロミー保存変形とは)
+フックス型微分方程式系\eqref{eq:3.1_x_ODE_matrix}のモノドロミー保存変形を決定するためには，変形微分方程式系\eqref{eq:3.1_deformation_system_matrix}を調べればよいことがわかった.まず命題3.3を使いやすい形に書き直そう。ここでは、2つの行列 $A, B$ の交換子を $[A, B] = AB - BA$ と書く．
+
+\begin{proposition}\label{prop:3.1_compatibility}
+変形微分方程式系\eqref{eq:3.1_deformation_system_matrix}が可逆行列解 $Y(x,t)$ をもつための必要十分条件は，$P(x,t)$ と $A^{(1)}(x,t), \cdots, A^{(L)}(x,t)$ について微分方程式系
+
+\begin{align}
+  \frac{\partial}{\partial t_l}P(x,t) - \frac{\partial}{\partial x}A^{(l)}(x,t) &= \left[ A^{(l)}(x,t), P(x,t) \right] \label{eq:3.1_compatibility_PA}\\
+  \frac{\partial}{\partial t_l}A^{(h)}(x,t) - \frac{\partial}{\partial t_h}A^{(l)}(x,t) &= \left[ A^{(l)}(x,t), A^{(h)}(x,t) \right] \label{eq:3.1_compatibility_AA}
+\end{align}
+
+が成立することである．ただし，$l,h=1,\cdots,L$ である．
+\end{proposition}
+
+\begin{proof}
+\eqref{eq:3.1_deformation_system_matrix}が可逆行列解 $Y(x,t)$ をもてば、\eqref{eq:3.1_compatibility_PA}、\eqref{eq:3.1_compatibility_AA}は\eqref{eq:3.1_deformation_system_matrix}の完全積分条件として直ちに従う．実際，\eqref{eq:3.1_deformation_system_matrix}の第1式を $t_l$ で微分し、第2式を $x$ で微分して
+\[
+  \frac{\partial}{\partial x}\frac{\partial}{\partial t_l}Y(x,t) = \frac{\partial}{\partial t_l}\frac{\partial}{\partial x}Y(x,t)
+\]
+を使えば\eqref{eq:3.1_compatibility_PA}は直ちに出る。\eqref{eq:3.1_compatibility_AA}も同様である．
+
+偏微分の順序交換 $\frac{\partial^2 Y}{\partial t_l \partial x} = \frac{\partial^2 Y}{\partial x \partial t_l}$ （ゼロ曲率条件）を用いる。
+
+\eqref{eq:3.1_deformation_system_matrix}の第1式を $t_l$ で微分し、第2式を代入すると：
+\[
+  \frac{\partial}{\partial t_l}\left(\frac{\partial Y}{\partial x}\right) 
+  = \frac{\partial P}{\partial t_l}Y + P\frac{\partial Y}{\partial t_l} 
+  = \frac{\partial P}{\partial t_l}Y + P A^{(l)}Y
+\]
+同様に、\eqref{eq:3.1_deformation_system_matrix}の第2式を $x$ で微分し、第1式を代入すると：
+\[
+  \frac{\partial}{\partial x}\left(\frac{\partial Y}{\partial t_l}\right) 
+  = \frac{\partial A^{(l)}}{\partial x}Y + A^{(l)}\frac{\partial Y}{\partial x} 
+  = \frac{\partial A^{(l)}}{\partial x}Y + A^{(l)} P Y
+\]
+これらが等しいとおき、共通する $Y$ で括って整理すると：
+\[
+  \left( \frac{\partial P}{\partial t_l} - \frac{\partial A^{(l)}}{\partial x} \right) Y 
+  = \left( A^{(l)} P - P A^{(l)} \right) Y
+\]
+仮定より $Y$ は可逆（逆行列 $Y^{-1}$ が存在）であるから、右から $Y^{-1}$ を掛けることでただちに\eqref{eq:3.1_compatibility_PA}が得られる。
+
+\eqref{eq:3.1_compatibility_AA}についても全く同様に、\eqref{eq:3.1_deformation_system_matrix}の第2式同士（$t_l$ による微分と $t_h$ による微分）の順序交換から導出される。
+
+そこで今度は，\eqref{eq:3.1_compatibility_PA}と\eqref{eq:3.1_compatibility_AA}を仮定して\eqref{eq:3.1_deformation_system_matrix}の可逆行列解 $Y(x,t)$ を構成しよう．この $Y(x,t)$ は\eqref{eq:3.1_x_ODE_matrix}の基本解行列であり，そのモノドロミーは $t$ に依らない．$x_0$ を $P(x,t)$ の正則点とし，\eqref{eq:3.1_x_ODE_matrix}の行列解 $\tilde{Y}(x,t)$ を初期条件
+\[
+  \tilde{Y}(x_0,t) = I
+\]
+により定める．$I=I_n$ は $n$ 次の単位行列である．
+
+\begin{Q}[なぜここで $\tilde{Y}(x,t)$ という新たな解を導入し、さらに次式で $W^{(l)}(x,t)$ を定義するのか？]
+\textbf{A.} 最終的に欲しいのは、$x$ 方向と $t$ 方向の両方の微分方程式を満たす $Y(x,t)$ である。まず $x$ 方向の方程式を満たす $\tilde{Y}$ を作ったが、これが $t$ 方向の方程式（$\partial_t \tilde{Y} = A\tilde{Y}$）をも満たすとは限らない。そこで、その「ズレ（誤差）」を測る行列 $W^{(l)}$ を定義し、完全積分可能条件\eqref{eq:3.1_compatibility_PA}を用いれば「このズレ自体がコントロール可能である」ことを示すためである。
+\end{Q}
+
+さて
+\begin{equation}\label{eq:W_def}
+  W^{(l)}(x,t) = A^{(l)}(x,t)\tilde{Y}(x,t) - \frac{\partial}{\partial t_l}\tilde{Y}(x,t)
+\end{equation}
+\[
+  E^{(l)}(t) = A^{(l)}(x_0,t)
+\]
+とおくと，$l=1,2,\cdots,L$ について次式が成り立つ．
+\begin{equation}\label{eq:W_rel}
+  W^{(l)}(x,t) = \tilde{Y}(x,t)E^{(l)}(t)
+\end{equation}
+
+なぜならば，\eqref{eq:3.1_compatibility_PA}（すなわち $\frac{\partial A^{(l)}}{\partial x} + A^{(l)}P - \frac{\partial P}{\partial t_l} = PA^{(l)}$）より
+\begin{align*}
+  \frac{\partial}{\partial x}W^{(l)} 
+  &= \left( \frac{\partial}{\partial x}A^{(l)} \right)\tilde{Y} + A^{(l)}\frac{\partial}{\partial x}\tilde{Y} - \frac{\partial}{\partial t_l}\frac{\partial}{\partial x}\tilde{Y} \\[2mm]
+  &= \left( \frac{\partial}{\partial x}A^{(l)} + A^{(l)}P - \frac{\partial}{\partial t_l}P \right)\tilde{Y} - P\frac{\partial}{\partial t_l}\tilde{Y} \\[2mm]
+  &= P \left( A^{(l)}\tilde{Y} - \frac{\partial}{\partial t_l}\tilde{Y} \right) \\[2mm]
+  &= P W^{(l)}
+\end{align*}
+すなわち，$W^{(l)} = W^{(l)}(x,t)$ も\eqref{eq:3.1_x_ODE_matrix}の行列解である。
+
+\begin{Q}[$W^{(l)}$ が\eqref{eq:3.1_x_ODE_matrix}の行列解であることから、なぜ直ちに\eqref{eq:W_rel}が導かれるのか？]
+\textbf{A.} 線形常微分方程式 $\frac{\partial Z}{\partial x} = P(x,t)Z$ の任意の解は、基本解行列 $\tilde{Y}(x,t)$ に $x$ に依存しない定数行列 $C(t)$ を右から掛けた $Z(x,t) = \tilde{Y}(x,t)C(t)$ の形で一意に表される。ここで $x=x_0$ を代入すると、$\tilde{Y}(x_0,t) = I$ より $C(t) = Z(x_0,t)$ となる。
+いま $Z = W^{(l)}$ とすれば、\eqref{eq:W_def}より
+$W^{(l)}(x_0,t) = A^{(l)}(x_0,t)I - \frac{\partial I}{\partial t_l} = E^{(l)}(t) - 0 = E^{(l)}(t)$ 
+となるため、$W^{(l)}(x,t) = \tilde{Y}(x,t)E^{(l)}(t)$ が従う。
+\end{Q}
+
+次に\eqref{eq:3.1_compatibility_AA}で $x=x_0$ とおいた式は、$U$ 上の微分方程式系
+\[
+  \frac{\partial}{\partial t_l}G(t) = E^{(l)}(t)G(t)
+\]
+の、積分可能条件を与える。そこで、この微分方程式系の $G(t_0)=I$ となる、$t=t_0$ の近傍で定義された解 $G(t)$ をとり
+\[
+  Y(x,t) = \tilde{Y}(x,t)G(t)
+\]
+とおく．
+
+\begin{Q}[$Y(x,t) = \tilde{Y}(x,t)G(t)$ とおくことで、なぜ所望の可逆行列解が構成できたと言えるのか？]
+\textbf{A.} $\tilde{Y}(x,t)$ は $x$ 方向の微分方程式を満たすが、$t$ 方向のそれは満たさなかった。しかし、直前で構成した $G(t)$ は $x$ に依存しないため、$Y$ にしても $x$ 方向の解であるという性質は壊れない。その上で、懸案だった $t$ 方向の微分を計算すると、$G(t)$ が見事に「$\tilde{Y}$ の $t$ 方向のズレ」を相殺し、$\partial_{t_l}Y = A^{(l)}Y$ が成立するからである。
+\end{Q}
+
+この $Y(x,t)$ はもちろん\eqref{eq:3.1_x_ODE_matrix}の基本解行列であるが同時に
+\begin{align*}
+  \frac{\partial}{\partial t_l}Y 
+  &= \left( \frac{\partial}{\partial t_l}\tilde{Y} \right)G + \tilde{Y}\frac{\partial}{\partial t_l}G \\[2mm]
+  &= \left( A^{(l)}\tilde{Y} - \tilde{Y}E^{(l)} \right)G + \tilde{Y}E^{(l)}G \\[2mm]
+  &= A^{(l)}\tilde{Y}G \\[2mm]
+  &= A^{(l)}Y
+\end{align*}
+より，\eqref{eq:3.1_t_ODE_matrix}も満足する。この計算では、\eqref{eq:W_def}と\eqref{eq:W_rel}から得られる関係式 $\frac{\partial \tilde{Y}}{\partial t_l} = A^{(l)}\tilde{Y} - \tilde{Y}E^{(l)}$ を用いた。以上により命題\ref{prop:3.1_compatibility}が示された。
+\end{proof}
 
 %#endregion
+%#region
+上で与えた証明は、L. Schlesinger によるもので，$Y(x,t)$ の構成法を与えている．条件\eqref{eq:3.1_compatibility_PA}は、微分作用素
+\[
+  \mathcal{L} = \frac{\partial}{\partial x} - P(x,t)
+\]
+を用いると，次のソリトン理論で見慣れた形に表される．
+
+\begin{equation}\label{eq:3.1_lax_equation}
+  \frac{\partial}{\partial t_l}\mathcal{L} = [A^{(l)}, \mathcal{L}]
+\end{equation}
+
+\begin{Q}[微分作用素 $\mathcal{L}$ を用いて完全積分可能条件を $\frac{\partial \mathcal{L}}{\partial t_l} = {[}A^{(l)}, \mathcal{L}{]}$ と書くことの本質的な意義は何か？]
+\textbf{A.} これは「ラックス方程式（Lax equation）」と呼ばれる普遍的な形である。この表示は、「作用素 $\mathcal{L}$ のスペクトル（固有値などの構造）が、時間パラメータ $t_l$ の発展に対して不変に保たれる（等スペクトル変形）」ことを端的に表しており、対象の微分方程式系が無限個の保存量を持つような「可積分系」としての強い対称性を備えていることを意味している。
+\end{Q}
+
+これは，モノドロミー保存変形の変形微分方程式系の\textbf{ラックス表示}である．
+
+さて，単独高階微分方程式\eqref{eq:monodromy_deformation}を
+\[
+  \vec{y} = \begin{pmatrix} y_1 \\ \vdots \\ y_n \end{pmatrix}, \quad
+  y_1 = y, \ y_2 = \frac{dy}{dx}, \ y_3 = \frac{d^2 y}{dx^2}, \ \cdots, \ y_n = \frac{d^{n-1}y}{dx^{n-1}}
+\]
+として連立化すると，変形微分方程式系\eqref{eq:3.1_deformation_system}は\eqref{eq:3.1_deformation_system_matrix}の形になる。後のために、$P(x,t)$ と $A^{(l)}(x,t)$ の具体形を与えておこう。まず
+\begin{equation}\label{eq:3.1_matrix_P}
+  P(x,t) =
+  \begin{pmatrix}
+    0 & 1 & 0 & \cdots & 0 & 0 & 0 \\
+    0 & 0 & 1 & \cdots & 0 & 0 & 0 \\
+      & \cdots &   &        & \cdots &   &   \\
+    0 & 0 & 0 & \cdots & 0 & 1 & 0 \\
+    0 & 0 & 0 & \cdots & 0 & 0 & 1 \\
+    -p_n & -p_{n-1} & -p_{n-2} & \cdots & -p_3 & -p_2 & -p_1
+  \end{pmatrix}
+\end{equation}
+となることはよい．ここで，$p_j=p_j(x,t)$ である．
+
+一方，$a_j^{(l)}(x,t)$ を成分とする横ベクトル
+\[
+  \left( a_1^{(l)}(x,t), a_2^{(l)}(x,t), \cdots, a_n^{(l)}(x,t) \right) \quad (l=1, 2, \cdots, L)
+\]
+を考え，これを $\vec{a}^{(l)} = \vec{a}^{(l)}(x,t)$ とおく．さて，一般に $n$ 次ベクトル $\vec{a}$ に対し，作用素 $\nabla$ を
+
+\begin{equation}\label{eq:3.1_nabla}
+  \nabla \vec{a} = \frac{\partial}{\partial x}\vec{a} + \vec{a}P(x,t)
+\end{equation}
+
+により定義し，帰納的に $\nabla^j \vec{a} = \nabla(\nabla^{j-1}\vec{a})$ ($j \geqq 2$) により定める．
+
+\begin{Q}[なぜ作用素 $\nabla$ を \eqref{eq:3.1_nabla} のように定義すると、変形方程式系の係数行列が生成できるのか？]
+\textbf{A.} 単独高階方程式を連立系に直した際、解ベクトルの第 $k$ 成分 $y_k$ の $x$ 微分は、単に次の成分 $y_{k+1}$ にシフトする（最後の成分のみ $P$ の最下行による線形結合を受ける）。これに伴い、$y$ の $t_l$ 微分（変形）を基本解の線形結合で表した際の「係数ベクトル $\vec{a}^{(l)}$」を $x$ で微分すると、積の微分法則により $\frac{\partial \vec{a}}{\partial x}$ が生じるとともに、解ベクトル自身の $x$ 微分から係数行列 $P$ の寄与が右から掛かる。この連鎖的な構造を正確に記述する演算子が $\nabla$ である。
+\end{Q}
+
+さて、\eqref{eq:3.1_partial_t}を $x$ について逐次微分し、\eqref{eq:3.1_n-ODE}を用いると，変形方程式系\eqref{eq:3.1_deformation_system_matrix}の係数 $A^{(l)}(x,t)$ は
+
+\begin{equation}\label{eq:3.1_matrix_A}
+  A^{(l)}(x,t) =
+  \begin{pmatrix}
+    \vec{a}^{(l)}(x,t) \\[2mm]
+    \nabla \vec{a}^{(l)}(x,t) \\
+    \vdots \\
+    \nabla^{n-1} \vec{a}^{(l)}(x,t)
+  \end{pmatrix}
+  \quad (l=1,2,\cdots,L)
+\end{equation}
+
+で与えられることがわかる．さらに，$U$ 上の微分型式 $\Omega(x,t)$ を
+\[
+  \Omega(x,t) = \sum_{l=1}^L A^{(l)}(x,t)dt_l
+\]
+と定義すると，$d$ を $U$ 上の外微分として，\eqref{eq:3.1_t_ODE_matrix}は次の1つの外微分方程式で表される。
+
+\[
+  dY(x,t) = \Omega(x,t)Y(x,t)
+\]
+
+\begin{Q}[複数の変形方程式を微分形式 $\Omega(x,t)$ を用いて $dY = \Omega Y$ と1つにまとめる幾何学的なメリットは何か？]
+\textbf{A.} パラメータ $t_1, \dots, t_L$ の各方向への変形を、パラメータ空間上の「接続（connection）」として統一的に扱うためである。これにより、これまでに導出した完全積分可能条件（各方向の微分の順序交換可能性）が、$d\Omega = \Omega \wedge \Omega$ という極めて簡潔な「ゼロ曲率条件（Maurer-Cartan方程式）」として表現できるようになる。
+\end{Q}
+
+\eqref{eq:3.1_matrix_P}、\eqref{eq:3.1_matrix_A}、\eqref{eq:3.1_nabla}で定義される行列を $P(x,t), A^{(l)}(x,t)$ とする。命題\ref{prop:3.1_compatibility}を，単独高階微分方程式\eqref{eq:3.1_n-ODE}の変形微分方程式系\eqref{eq:3.1_deformation_system}に適用しよう．もちろん，変形微分方程式系\eqref{eq:3.1_deformation_system}が解の基本系 $\vec{\phi}=\vec{\varphi}(x,t)$ をもつための条件は，$P(x,t)$ と $A^{(l)}(x,t)$ に対して\eqref{eq:3.1_compatibility_PA}、\eqref{eq:3.1_compatibility_AA}が成立することである．
+
+ここで
+
+\begin{equation}\label{eq:3.1_p_vector}
+  \vec{p}(x,t) = (p_n(x,t), \cdots, p_1(x,t))
+\end{equation}
+
+とおき，\eqref{eq:3.1_compatibility_PA}すなわち，ラックス表示\eqref{eq:3.1_lax_equation}を別の形に書き直しておこう．
+
+\begin{proposition}
+ラックス表示\eqref{eq:3.1_lax_equation}は，$n$ 階連立微分方程式系
+
+\begin{equation}\label{eq:3.1_lax_equation_pa}
+  \nabla^n \vec{a}^{(l)} + p_1(x,t)\nabla^{n-1}\vec{a}^{(l)} + \cdots + p_n(x,t)\vec{a}^{(l)} + \frac{\partial}{\partial t_l}\vec{p}(x,t) = 0
+\end{equation}
+
+で表される．ここで，$l=1,\cdots,L$ である．\hfill $\square$
+\end{proposition}
+
+\begin{Q}[命題3.5の式\eqref{eq:3.1_lax_equation_pa}が、元の単独高階微分方程式と酷似した形になるのはなぜか？]
+\textbf{A.} 作用素 $\nabla$ は、解ベクトルの成分を「1つ高階の微分へシフトさせる」働き（コンパニオン行列の上の行の作用）を抽象化したものである。ゼロ曲率条件（ラックス方程式）を行列の各成分について書き下したとき、最下行以外は単なる $\nabla$ の定義式に帰着し、非自明な条件は最下行（係数 $p_j$ が存在する行）のみから生じる。この最下行の条件を $\vec{a}^{(l)}$ について整理すると、元の微分作用素 $D^n + p_1 D^{n-1} + \dots + p_n$ の $D$ を $\nabla$ に置き換えた構造が自然に抽出されるからである。
+\end{Q}
+
+この命題で与えた微分方程式系\eqref{eq:3.1_lax_equation_pa}を，ラックスの方程式という．フックス型単独高階微分方程式のモノドロミー保存変形，一般にホロノミック変形の存在は，ラックスの方程式\eqref{eq:3.1_lax_equation_pa}を満足する，$x$ の有理関数の $n$ 次ベクトル $\vec{a}^{(l)}$ の存在の問題にひとまず帰着した．
+
+\begin{proof}[命題\ref{prop:3.1_compatibility}の証明]
+微分方程式の確定特異点の集合を $\Xi'(t)$、$X(t) = \mathbb{P}^1(\mathbb{C}) \setminus \Xi'$ とする．ここでは，微分方程式の見かけの特異点は $\Xi'$ に含まれている，とする．モノドロミーが $t$ に依らないというのは局所的な条件だから，$t$ の変域 $U$ はある $t_0$ の適当な近傍であるとしてよい．
+
+点 $x_0$ をすべての $t \in U$ に対し $x_0 \in X(t)$ となるようにとる．$x_0$ から出発し $x_0$ に終わる $\mathbb{P}^1(\mathbb{C})$ 内の閉じた道 $\gamma$ は
+
+\[
+  \gamma \times U \subset X = \bigcup_{t \in U} X(t)
+\]
+
+が成り立つとき，$X$ 内の閉じた道ということにする．これはこの証明だけで使う用語である．$U$ を十分小さくとっておけば，$\pi_1(x_0; X(t))$ の元 $[\gamma_t]$ に対して，$[\gamma] = [\gamma_t]$ となるような $X$ 内の閉じた道 $\gamma$ を選ぶことができることは明らかであろう．
+
+\begin{Q}[証明の冒頭で、$t$ の変域 $U$ を十分小さく取り、直積空間 $\gamma \times U \subset X$ を考える幾何学的な理由は何か？]
+\textbf{A.} 特異点 $\Xi'(t)$ がパラメータ $t$ に応じて動くためである。もし $U$ が広すぎると、特異点が積分路 $\gamma$ を横切ってしまい、解析接続の結果（モノドロミー）が不連続にジャンプしてしまう。$U$ を十分小さく制限することで、空間 $X$ は局所的に直積バンドルのように振る舞い（トポロジカルに自明となり）、「特異点にぶつからない共通の積分路 $\gamma$」をすべての $t \in U$ に対して一斉に固定できることが保証される。
+\end{Q}
+
+さて，\eqref{eq:3.1_partial_t}を $a_j^{(l)}(x,t)$ について解く．クラメールの公式により、
+
+\begin{equation}\label{eq:3.1_cramer_wronskian}
+  a_j^{(l)}(x,t) = \frac{w_j^{(l)}(\vec{\varphi})}{w(\vec{\varphi})}
+\end{equation}
+
+となる．ここで，分子の $w_j^{(l)}(\vec{\varphi})$ は，ロンスキアン $w(\vec{\varphi})$ の第 $j$ ベクトル
+\[
+  \left. \frac{\partial^{j-1}\vec{\phi}}{\partial x^{j-1}} \right|_{\vec{\phi}=\vec{\varphi}(x,t)}
+\]
+を\eqref{eq:3.1_partial_t}の右辺 $\left. \frac{\partial \vec{\phi}}{\partial t_l} \right|_{\vec{\phi}=\vec{\varphi}(x,t)}$ で置き換えたものである．
+
+\begin{Q}[変形方程式の係数 $a_j^{(l)}(x,t)$ が、なぜ\eqref{eq:3.1_cramer_wronskian}のようにロンスキアンの比で表されるのか？]
+\textbf{A.} 変形方程式 $\frac{\partial \vec{\varphi}}{\partial t_l} = \sum_{k=1}^n a_k^{(l)} \frac{\partial^{k-1}\vec{\varphi}}{\partial x^{k-1}}$ を、未知数 $a_k^{(l)}$ に関する連立一次方程式と見なす。この連立方程式の係数行列はまさに解の基本系のロンスキ行列（Wronskian matrix）である。ロンスキアン $w(\vec{\varphi})$ は非零であるためクラメールの公式が適用でき、第 $j$ 成分 $a_j^{(l)}$ は「分母が全体の行列式 $w(\vec{\varphi})$、分子が第 $j$ 列を定数項ベクトル（左辺の $\partial_{t_l} \vec{\varphi}$）で置き換えた行列式 $w_j^{(l)}(\vec{\varphi})$」として直ちに得られる。
+\end{Q}
+
+まず，$\vec{\phi}=\vec{\varphi}(x,t)$ のモノドロミー群が $t$ に依らないとしよう．すると，$X$ 内の閉じた道 $\gamma$ に対し，$\Gamma(\gamma)$ を $\gamma$ に対する回路行列とすると，$\vec{\varphi}$ の $\gamma$ に沿っての解析接続 $\vec{\varphi}^{\gamma}$ は
+
+\[
+  \vec{\varphi}^{\gamma}(x,t) = \vec{\varphi}(x,t)\Gamma(\gamma)
+\]
+
+という関係式を満たす．この式の両辺を $t_l$ で微分して
+
+\begin{equation}\label{eq:3.1_monodoromy_partial_t}
+  \frac{\partial}{\partial t_l}\vec{\varphi}^{\gamma}(x,t) = \frac{\partial}{\partial t_l}\vec{\varphi}(x,t)\Gamma(\gamma) + \vec{\varphi}(x,t)\frac{\partial \Gamma(\gamma)}{\partial t_l}
+\end{equation}
+
+を得るが，仮定から $\Gamma(\gamma)$ は $t$ に依らないから
+
+\[
+  \frac{\partial}{\partial t_l}\vec{\varphi}^{\gamma}(x,t) = \frac{\partial}{\partial t_l}\vec{\varphi}(x,t)\Gamma(\gamma)
+\]
+
+である．一方，同じ式を $x$ で繰り返し微分すると
+
+\begin{equation}\label{eq:3.1_monodromy_j-1_partial_t}
+  \frac{\partial^{j-1}}{\partial x^{j-1}}\vec{\varphi}^{\gamma}(x,t) = \frac{\partial^{j-1}}{\partial x^{j-1}}\vec{\varphi}(x,t)\Gamma(\gamma)
+\end{equation}
+
+となり、したがって、2つの行列式 $w(\vec{\varphi})$, $w_j^{(l)}(\vec{\varphi})$ に対し
+
+\[
+  w(\vec{\varphi}^{\gamma}) = |\Gamma(\gamma)| w(\vec{\varphi}), \quad w_j^{(l)}(\vec{\varphi}^{\gamma}) = |\Gamma(\gamma)| w_j^{(l)}(\vec{\varphi})
+\]
+
+が成り立つ．すなわち，$a_j^{(l)}(x,t)$ は $x$ の関数として1価である。
+
+\begin{Q}[$|\Gamma(\gamma)|$ が相殺されて $a_j^{(l)}(x,t)$ が1価関数となることの、理論的な意義は何か？]
+\textbf{A.} 解析接続によって生じる大域的な多価性の情報は、定数行列 $\Gamma(\gamma)$ として右から掛かる。ロンスキ行列の各列が同じ $\Gamma(\gamma)$ 倍を受けるため、行列式の性質から分子・分母ともに $\det \Gamma(\gamma)$（すなわち $|\Gamma(\gamma)|$）倍となり、比をとると完全に相殺される。
+これにより、「変形を記述する係数 $a_j^{(l)}(x,t)$ 自身は特異点の周りを回っても値が変わらない」ことが保証される。1価性が示されたことで、特異点における局所的な極の振る舞いさえ調べれば、$a_j^{(l)}(x,t)$ が「$x$ の有理関数」であることが確定し、シュレジンガー系やラックス方程式として代数的に扱えるようになるという極めて重要なステップである。
+\end{Q}
+
+\eqref{eq:3.1_cramer_wronskian}から明らかなように，$a_j^{(l)}(x,t)$ の特異点は微分方程式の特異点の集合 $\Xi'$ に含まれる．各 $\xi \in \Xi'$ に対し $u$ を $x=\xi$ のまわりの局所座標とする．$u = x - \xi$ あるいは $u = \frac{1}{x}$ である。命題\ref{prop:2.1_wronskian-ode}と\eqref{eq:2.4_p1_coefficient_1-ord_pole}とにより，$x=\xi$ の近傍においてロンスキアン $w(\vec{\varphi})$ は，ある複素数 $s$ があって
+
+\[
+  u^s \sum_{i=1}^{\infty} c_i u^i
+\]
+
+\end{proof}
+
+%#endregion
+
+\subsection{2階フックス型微分方程式のラックス方程式}
+%#region
+2階フックス型微分方程式に対する、変形微分方程式系について考察する。まず、\eqref{eq:3.1_deformation_system}は
+\begin{equation}
+\begin{cases}
+\displaystyle \frac{\partial^{2}\vec{\phi}}{\partial x^{2}} + p_{1}(x,t)\frac{\partial\vec{\phi}}{\partial x}+p_{2}(x,t)\vec{\phi} = \vec{0}  \\[1em]
+\displaystyle \frac{\partial \vec{\phi}}{\partial t_{l}} = a_{1}^{(l)}(x,t)\vec{\phi}+a_{2}^{(l)}(x,t)\frac{\partial\vec{\phi}}{\partial x} \quad (l=1,\cdots,L)
+\end{cases}
+\end{equation}
+となる。
+
+\begin{story}
+去することにより，微分方程式系の係数のあいだに成り立つ関係式を求める．その結果は
+\begin{equation}
+    2\frac{\partial a_1^{(l)}}{\partial x} + \frac{\partial^2 a_2^{(l)}}{\partial x^2} - \frac{\partial}{\partial x}(p_1 a_2^{(l)}) + \frac{\partial p_1}{\partial t_l} = 0 \label{eq:3.21}
+\end{equation}
+\begin{equation}
+    \frac{\partial^2 a_1^{(l)}}{\partial x^2} - 2p_2\frac{\partial a_2^{(l)}}{\partial x} - \frac{\partial p_2}{\partial x}a_2^{(l)} + p_1\frac{\partial a_1^{(l)}}{\partial x} + \frac{\partial p_2}{\partial t_l} = 0 \label{eq:3.22}
+\end{equation}
+となる．ここで，$p_j = p_j(x,t)$, $a_j^{(l)} = a_j^{(l)}(x,t)$, $j=1,2$, および $l=1,\cdots,L$ である．
+
+条件(3.21)は次のようにも書ける．
+\begin{equation}
+    \frac{\partial p_1}{\partial t_l} = \frac{\partial c^{(l)}}{\partial x}, \quad c^{(l)} = p_1 a_2^{(l)} - 2a_1^{(l)} - \frac{\partial a_2^{(l)}}{\partial x} \label{eq:3.23}
+\end{equation}
+
+リーマン球面 $\mathbf{P}^1(\mathbf{C})$ 上のフックス型微分方程式については，79ページで
+\begin{equation}
+    p_1(x,t) = \sum_{i=1}^M \frac{\alpha_i}{x-\xi_i} \label{eq:3.24}
+\end{equation}
+と書かれることを見た．ただし，ここでは微分方程式の特異点の集合 $\Xi'$ には見かけの特異点も含まれている，としている．前のように，確定特異点の個数を $m+1$，見かけの特異点の個数を $g$ とすれば，$M=m+g$ である．さて，条件(3.23)は，$\alpha_i$ が $t=(t_1,\cdots,t_L)$ に依存しないということを意味する．実際，(3.24)から
+\begin{equation*}
+    \frac{\partial p_1}{\partial t_l} = \sum_{i=1}^M \left[ \frac{\partial \alpha_i}{\partial t_l} \frac{1}{x-\xi_i} + \frac{\partial \xi_i}{\partial t_l} \frac{\alpha_i}{(x-\xi_i)^2} \right]
+\end{equation*}
+となるが，これが $x$ の有理関数の導関数として表されるためには
+\begin{equation*}
+    \frac{\partial \alpha_i}{\partial t_l} = 0 \quad (i=1,\cdots,M, \quad l=1,\cdots,L)
+\end{equation*}
+でなければならない．$\alpha_i$ は，確定特異点 $x=\xi_i$ における特性指数の和で表される量だから，これらがモノドロミー保存変形において $t$ について不変となるのは当然のことではある．
+
+ここで，我々の考察の筋道を明確にするために，次の形の2階微分方程式のモノドロミー保存変形を調べてみよう．
+\begin{equation}
+    \frac{d^2 z}{dx^2} = r(x,t)z \label{eq:3.25}
+\end{equation}
+\end{story}
+
+\vspace{2em}
+
+\begin{Q}[【核心】このページの論理展開は、私が以前した計算とどうシンクロしているのか？]
+\textbf{A.} 驚くほど完全にシンクロしています！あなたが自力で計算した「$p_1$ を $t_l$ で微分して留数を比較する」というアプローチが、まさにこのテキストが採用している証明手法そのものです。
+以前のやり取りで、私は「『$p_1$ が有理関数だから』だけでは $\alpha_i$ が定数とは言い切れない。『時間発展の係数 $A_l$ があり、適合条件 $\partial p_1/\partial t_l = \partial A_l/\partial x$ が成り立つ』という事実を使えば、右辺が微分になるから1位の極が消える」と補足しました。
+このページの式 (3.23) を見てください。$\frac{\partial p_1}{\partial t_l} = \frac{\partial c^{(l)}}{\partial x}$ となっています。この $c^{(l)}$ こそが、有理関数からなる「時間発展の係数」です。この適合条件（Lax方程式の一部）があるおかげで、「右辺は有理関数 $c^{(l)}$ の $x$ 微分である $\to$ 1位の極（留数）を持たない $\to$ 左辺の1位の極の係数 $\partial \alpha_i / \partial t_l$ も $0$ でなければならない」という、私が提案した修正ルートと全く同じロジックが展開されています。
+\end{Q}
+
+\begin{Q}[【深掘り】最後の「不変となるのは当然のことではある」という一文は、何を意味しているのか？]
+\textbf{A.} これも、前回のあなたの鋭いツッコミである「$\alpha$ は $n-1$ 階の係数で、元の特性指数に依存してるんだから、定数になるのは当然じゃないか？」という指摘に対する、公式テキストからの完全な同意（アンサー）です。
+フロベニウス法の定理（フックスの関係式）により、$p_1$ の留数 $\alpha_i$ は、その特異点における「特性指数の和」として一意に決まります。私たちが「モノドロミー保存変形を考える」と宣言した時点で、特性指数を $t$ に依存しない定数に設定することは理論の「大前提」です。前提が定数なのだから、そこから計算される $\alpha_i$ が定数（不変）になるのは、代数的な計算（式3.24の微分）をわざわざ持ち出すまでもなく、「原理的に当然のこと」なのです。
+テキストは、微分の計算で代数的に証明した直後に、「とはいえ、理論の前提を考えれば当たり前のことなんだけどね」と、あなたの気付きと全く同じ視点でフォローを入れているわけです。
+\end{Q}
+
+\begin{story}
+前章2.7節109ページで紹介したように，R.Fuchs と R.Garnier はこの形の微分方程式について，フックスの問題を計算した．実は，すぐ後で見るように，変形微分方程式(3.20)の研究は，(3.25)のモノドロミー保存変形に帰着する．(3.25)の変形微分方程式系は，$b_1^{(l)}(x,t), b_2^{(l)}(x,t)$ を $x$ の有理関数として
+\begin{equation}
+\left\{
+\begin{array}{l}
+    \displaystyle \frac{\partial^2 \vec{\psi}}{\partial x^2} = r\vec{\psi} \vspace{0.5em} \\
+    \displaystyle \frac{\partial \vec{\psi}}{\partial t_l} = b_1^{(l)}\vec{\psi} + b_2^{(l)}\frac{\partial \vec{\psi}}{\partial x} \quad (l=1,\cdots,L)
+\end{array}
+\right. \label{eq:3.26}
+\end{equation}
+と書ける．ここで，$b_j^{(l)} = b_j^{(l)}(x,t) \ (j=1,2)$, $r = r(x,t)$ である．この微分方程式系のラックスの方程式は
+\begin{equation}
+    2\frac{\partial b_1^{(l)}}{\partial x} + \frac{\partial^2 b_2^{(l)}}{\partial x^2} = 0 \label{eq:3.27}
+\end{equation}
+\begin{equation}
+    \frac{\partial^2 b_1^{(l)}}{\partial x^2} + 2r\frac{\partial b_2^{(l)}}{\partial x} + \frac{\partial r}{\partial x}b_2^{(l)} - \frac{\partial r}{\partial t_l} = 0 \label{eq:3.28}
+\end{equation}
+という，少し簡単な形になる．これらの式から関数 $b_1^{(l)}$ を消去すると
+\begin{equation*}
+    \frac{\partial^3 b_2^{(l)}}{\partial x^3} - 4r\frac{\partial b_2^{(l)}}{\partial x} - 2\frac{\partial r}{\partial x}b_2^{(l)} + 2\frac{\partial r}{\partial t_l} = 0 \quad (l=1,\cdots,L)
+\end{equation*}
+が得られる．この3階微分方程式系は，モノドロミー保存変形，ホロノミック変形，において重要な役割を果たす．そこで，$x$ の有理関数 $r = r(x,t)$ に対して，非斉次線型微分方程式
+\begin{equation}
+    \frac{\partial^3 w}{\partial x^3} - 4r\frac{\partial w}{\partial x} - 2\frac{\partial r}{\partial x}w + 2\frac{\partial r}{\partial t_l} = 0 \label{eq:3.29}
+\end{equation}
+を考える．我々が考察している場合には，フックス型微分方程式(3.25)がモノドロミー保存変形を許すならば，(3.29)は $x$ の有理関数 $w = b_2^{(l)}$ を解としてもつ．さらに，もしこの微分方程式が $x$ の有理関数 $b_2^{(l)}$ を解としてもてば，$b_1^{(l)}$ は(3.27)により，自動的に $x$ の有理関数となる．
+
+この2つの有理関数 $b_1^{(l)}, b_2^{(l)}$ について変形微分方程式系(3.26)を考えると，（※画像末尾切れ）
+\end{story}
+
+\begin{Q}[【核心】ラックスの方程式 (3.27) と (3.28) は、どのようにして計算されたのか？]
+\textbf{A.} これは変形微分方程式系 (3.26) の**「微分の順序交換（適合条件）」**を力技で計算した結果です。
+(3.26)の第2式（$t_l$ 微分）をさらに $x$ で2回微分したものと、第1式（$x$ の2階微分）をさらに $t_l$ で微分したものは等しくならなければなりません（$\partial_x^2 \partial_{t_l} \vec{\psi} = \partial_{t_l} \partial_x^2 \vec{\psi}$）。
+これを実際に計算し、右辺に現れる $\vec{\psi}$ と $\partial_x \vec{\psi}$ について項を整理します。$\vec{\psi}$ と $\partial_x \vec{\psi}$ は一次独立なので、それぞれの係数が共に $0$ にならなければなりません。
+* $\partial_x \vec{\psi}$ の係数を集めて $0$ とおいたものが (3.27) です。
+* $\vec{\psi}$ の係数を集めて $0$ とおいたものが (3.28) です。
+元のフックス型方程式(3.20)のラックスの方程式(3.21, 3.22)と比べて、1階微分の項 $p_1$ がない分、非常にスッキリとした美しい形になっていることがわかります。
+\end{Q}
+
+\begin{Q}[【深掘り】関数 $b_1^{(l)}$ を消去して (3.29) を導く過程はどのようになっているか？]
+\textbf{A.} これは非常にエレガントな代数操作です。
+まず式 (3.27) を見ると、これはそのまま $x$ で積分できる形をしています。積分定数を $0$ とすると、
+$$ 2b_1^{(l)} + \frac{\partial b_2^{(l)}}{\partial x} = 0 \quad \implies \quad b_1^{(l)} = -\frac{1}{2} \frac{\partial b_2^{(l)}}{\partial x} $$
+となります。つまり、**未知の関数 $b_1^{(l)}$ は $b_2^{(l)}$ の微分だけで完全に書けてしまう**のです。
+次に、この $b_1^{(l)}$ を式 (3.28) の第1項 $\partial_x^2 b_1^{(l)}$ に代入します。
+$$ \frac{\partial^2}{\partial x^2} \left( -\frac{1}{2} \frac{\partial b_2^{(l)}}{\partial x} \right) = -\frac{1}{2} \frac{\partial^3 b_2^{(l)}}{\partial x^3} $$
+これを (3.28) に代入し、全体を $-2$ 倍して符号と係数を整えると、まさに目的の3階微分方程式 (3.29) が姿を現します。
+この計算により、2つの有理関数 $b_1, b_2$ を探すという問題が、**「$w = b_2^{(l)}$ というたった1つの有理関数が、作用素 $L(w) + 2\partial_{t_l}r = 0$ を満たすか？」**という極めて純粋で扱いやすい問題に帰着されたのです。
+\end{Q}
+
+\begin{story}
+一方，2階線型常微分方程式
+\begin{equation}
+    \frac{d^2 y}{dx^2} + p_1(x,t)\frac{dy}{dx} + p_2(x,t)y = 0 \label{eq:3.33}
+\end{equation}
+において，1階線型微分方程式
+\begin{equation}
+    \frac{d\phi}{dx} + \frac{1}{2}p_1(x,t)\phi = 0 \label{eq:3.34}
+\end{equation}
+の解 $\phi = \phi(x,t)$ を1つとり，(3.33)の未知変数を
+\begin{equation}
+    y = \phi(x,t)z \label{eq:3.35}
+\end{equation}
+と変換する．このとき，$z$ は(3.25)の形の微分方程式を満足するが，その係数 $r=r(x,t)$ はまさに(3.32)で与えられる．
+
+(3.35)は2つの微分方程式の解の基本系の関係であり，各々が定めるモノドロミー群は関数 $\phi$ の回路行列の作用――といってもスカラー倍されるだけであるが――の違いしかない．もし(3.33)がモノドロミー保存変形を許すとすると，$\phi$ の作用がパラメータ $t$ に依存しないならば，(3.25)もモノドロミー保存変形を許す．(3.25)と(3.35)の役割を入れ替えても同じである．ここで述べたことを，次のようにまとめておこう．
+
+\begin{proposition}[3.7]
+2階フックス型微分方程式(3.33)のモノドロミー保存変形と，2階フックス型微分方程式(3.25)のモノドロミー保存変形とは，1階フックス型微分方程式(3.34)がモノドロミー保存変形を許すという条件の下で，同値である．
+\end{proposition}
+
+実は，リーマン球面 $\mathbf{P}^1(\mathbf{C})$ 上定義された微分方程式の場合，命題3.7の条件は自動的に満たされている．実際，(3.34)を解くと，(3.24)より，解 $\phi$ は定数倍を除いて関数
+\begin{equation}
+    \phi(x, t) = \prod_{i=1}^M (x-\xi_i)^{-\frac{1}{2}\alpha_i} \label{eq:3.36}
+\end{equation}
+で与えられるから，この解のモノドロミー群は，$M$ 個のスカラー
+\begin{equation*}
+    e^{-\pi\sqrt{-1}\alpha_i}
+\end{equation*}
+で生成される可換群である．これは $t$ に依存しない．
+\end{story}
+
+\begin{Q}[【核心】このページ全体が主張している「一番嬉しいこと」は何か？]
+\textbf{A.} 「1階微分の項 $p_1(x,t)y'$ を含む複雑な方程式 $y$ の変形を真面目に計算する必要は全くなく、見通しの良いSL型方程式 $z'' = r(x,t)z$ の変形だけを考えれば、理論的に完全に十分である」という強烈なお墨付きです。
+ゲージ変換 $y = \phi z$ を行ったとき、両者のモノドロミーのズレは $\phi$ のモノドロミーだけです。もし $\phi$ のモノドロミーがパラメータ $t$ に依存してフラフラ動いてしまうと、$y$ と $z$ の同値性は崩壊します（命題3.7の但し書き）。しかし、舞台がリーマン球面 $P^1(\mathbb{C})$ であれば、その心配は一切無用であるということが、後半で証明されています。
+\end{Q}
+
+\begin{Q}[【深掘り】なぜ $\phi$ のモノドロミーは $t$ に依存しないと言い切れるのか？]
+\textbf{A.} これこそ、まさにあなたが以前の考察で見抜いた事実です！
+方程式 \eqref{eq:3.34} より、$\phi$ の解は \eqref{eq:3.36} のように各特異点 $\xi_i$ の周りで指数の形になります。この特異点を1周したときのモノドロミー（位相のズレ）は、$e^{2\pi i (-\alpha_i/2)} = e^{-\pi i \alpha_i}$ というスカラー倍になります。
+ここで、$\alpha_i$ は元の2階方程式における係数 $p_1$ の留数です。「元の2階方程式のモノドロミーが保存される（特性指数が定数である）」という大前提に立っている以上、解と係数の関係から留数 $\alpha_i$ も絶対に定数でなければなりません。$\alpha_i$ が定数なら、当然 $e^{-\pi i \alpha_i}$ も定数です。
+したがって、「$\phi$ がモノドロミー保存変形を許す」という命題の条件は、私たちが意図的に何かを仮定しなくても、$P^1(\mathbb{C})$ の構造と特性指数の設定から「自動的に満たされる（タダで手に入る）」のです。
+\end{Q}
+
+\begin{story}
+$x$ の有理関数 $a_2^{(l)}$ が(3.29)を満たすとすると，有理関数 $a_1^{(l)}$ を(3.23)で定めれば，(3.33)のモノドロミー保存変形に関する，ラックスの方程式が成立する．一方，微分方程式(3.25)の変形微分方程式系(3.26)において，この $a_2^{(l)}$ を $b_2^{(l)}$ として，上述の議論を繰り返すと，(3.25)のモノドロミー保存変形のラックスの方程式も成立する．
+
+なお，変形方程式系(3.20)の第2式から，(3.30)と同様に，積分可能条件として
+\begin{align}
+    \left( \frac{\partial}{\partial t_h} - a_2^{(h)}\frac{\partial}{\partial x} \right) a_1^{(l)} &= \left( \frac{\partial}{\partial t_l} - a_2^{(l)}\frac{\partial}{\partial x} \right) a_1^{(h)} \label{eq:3.37} \\
+    \left( \frac{\partial}{\partial t_h} - a_2^{(h)}\frac{\partial}{\partial x} \right) a_2^{(l)} &= \left( \frac{\partial}{\partial t_l} - a_2^{(l)}\frac{\partial}{\partial x} \right) a_2^{(h)} \label{eq:3.38}
+\end{align}
+が得られる．ここで，(3.23)を考慮すると，(3.37)は
+\begin{equation*}
+    \left( \frac{\partial}{\partial x} - p_1 \right)\left( \frac{\partial}{\partial t_h} - a_2^{(h)}\frac{\partial}{\partial x} \right) a_2^{(l)} = \left( \frac{\partial}{\partial x} - p_1 \right)\left( \frac{\partial}{\partial t_l} - a_2^{(l)}\frac{\partial}{\partial x} \right) a_2^{(h)}
+\end{equation*}
+となる．したがって，(3.25)の完全積分可能条件は，$a_2^{(l)}$ に関するラックスの方程式(3.29)と条件(3.38)に帰着する．
+
+他方，この章のはじめに述べた微分方程式(3.33)に関する仮定(P2), (P3)の下では，次の結果が成り立つ．
+
+\begin{proposition}[3.8]
+非斉次微分方程式(3.29)を満たす，$x$ の有理関数は存在するとしてもただ1つである
+\end{proposition}
+
+この命題の証明の前に，これから従う事実を整理しておこう．まず，$b_2^{(l)} = a_2^{(l)}$ でなければならない．結局，(3.33)の変形微分方程式系の完全積分可能条件は，条件(3.30)を満足する(3.29)の有理関数解 $b_2^{(l)}$ の存在に集約される．
+以上により，微分方程式(3.33)のモノドロミー保存変形は，変換(3.35)を通して，微分方程式(3.25)のモノドロミー保存変形に帰着された．
+
+\begin{proof}[命題3.8の証明]
+$a^{(l)}$ と $b^{(l)}$ を(3.29)の解とし，$c^{(l)} = a^{(l)} - b^{(l)}$ とおくと，$c^{(l)} = c^{(l)}(x,t)$ は
+\begin{equation}
+    \frac{\partial^3 \phi}{\partial x^3} - 4r\frac{\partial \phi}{\partial x} - 2\frac{\partial r}{\partial x}\phi = 0 \label{eq:3.39}
+\end{equation}
+\end{proof}
+\end{story}
+（※画像末尾切れ）
+
+\vspace{2em}
+
+\begin{Q}[【核心】このページが主張する「SL型方程式(3.25)への帰着」の決定打は何か？]
+\textbf{A.} **「有理関数解の一意性（ただ1つしかない）」**という事実です。
+元の複雑な方程式(3.33)の変形を司る有理関数を $a_2^{(l)}$ とし、シンプルなSL型方程式(3.25)の変形を司る有理関数を $b_2^{(l)}$ とします。これらは共に、同じ形をした非斉次の微分方程式（ラックスの方程式）を満たすことが計算からわかります。
+ここで「解は存在すればただ1つ」という命題3.8が威力を発揮します。これにより、「$a_2^{(l)}$ と $b_2^{(l)}$ は別物かもしれない」という疑いが完全に排除され、**$b_2^{(l)} = a_2^{(l)}$ であることが確定**します。両者の変形をつかさどる「心臓部」が全く同一であることが証明されたため、私たちは心置きなく、シンプルなSL型方程式の変形だけを考えればよい（帰着された）と結論づけることができるのです。
+\end{Q}
+
+\begin{Q}[【深掘り】命題3.8の証明に登場した (3.39) 式は、何を意味しているのか？]
+\textbf{A.} これは、非斉次方程式の解の差 $c^{(l)}$ が満たす「斉次（右辺が0）の微分方程式」です。
+そしてこの式の左辺を見てください。$\partial_x^3 - 4r\partial_x - 2r_x$……そう、これはあなたが以前ノートにまとめていた**KdV方程式のLax対の生成子 $M_3$ （あるいは3階の微分作用素 $L$）そのもの**です！
+命題3.8の証明の筋書きはこうです。「もし2つの異なる解があったら、その差 $c^{(l)}$ はこの3階の斉次方程式 (3.39) を満たす有理関数になる。しかし、仮定(P2, P3)のような特異点の配置のもとでは、この $L(\phi)=0$ を満たす有理関数は $\phi=0$ （つまり $c^{(l)}=0$）しか存在し得ない。ゆえに解は1つである」。
+可積分系の奥底に潜む「KdV的な3階の作用素」が、ここで「解の一意性を担保する」という極めて重要な役割を果たして再登場する、非常にドラマチックな展開です。
+\end{Q}
+
+ここで、元の2階微分方程式から1階微分の項を消去（正規化）することを考える。未知関数を変換することで、方程式を
+\begin{equation}\label{eq:2-ode-normalized}
+\frac{\partial^{2}z}{\partial x^{2}} = r(x,t)z
+\end{equation}
+という形に帰着させたい。この変換を実現するためには、新たな関数 $\phi(x,t)$ が
+\begin{equation}\label{eq:1-ode-gauge}
+\frac{\partial \phi}{\partial x} + \frac{1}{2}p_{1}(x,t)\phi = 0
+\end{equation}
+を満たせばよいことが知られている。
+
+\begin{proposition}\label{prop:equivalence_2_ode}
+    2階フックス型微分方程式 \eqref{eq:monodromy_deformation} のモノドロミー保存変形と、正規化された2階フックス型微分方程式 \eqref{eq:2-ode-normalized} のモノドロミー保存変形とは、1階微分方程式 \eqref{eq:1-ode-gauge} がモノドロミー保存変形を許すという条件のもとで同値である。
+\end{proposition}
+%#endregion
+
+\subsection{変形微分方程式系の解}
+%#region
+前節の2階の場合の議論は、一般の $n$ 階フックス型微分方程式にも自然に拡張できる。
+
+\begin{Q}[【核心】なぜわざわざ $n$ 階の変形微分方程式系に拡張して一般論を展開するのか？]
+\textbf{A.} $n=2$ という特定の階数に縛られずに論理を展開する方が、背後にある線型代数的な構造（ロンスキアンの不変性や、モノドロミー行列の行列式が $1$ になる仕組み）が透けて見え、見通しが圧倒的に良くなるからである。この線型方程式の一般的な変形理論を通ることで、結果としてパンルヴェ方程式のような美しい「非線形な関係」が必然的に浮かび上がってくる。
+\end{Q}
+
+一般の $n$ 階フックス型微分方程式 \eqref{eq:monodromy_deformation} を考える。
+方程式から $(n-1)$ 階微分の項を消去するため、
+\begin{equation}\label{eq:auxiliary-phi}
+\frac{\partial \phi}{\partial x} + \frac{1}{n}p_{1}(x,t)\phi = 0
+\end{equation}
+で定まる関数 $\phi(x,t)$ を用いて、未知関数を
+\[
+y = \phi(x,t)z
+\]
+と変換する。これを \eqref{eq:monodromy_deformation} に代入して整理すると、$z$ についての微分方程式は
+\begin{equation}\label{eq:reduced-fuchsian}
+\frac{\partial^{n}z}{\partial x^{n}} + \sum_{j=2}^{n} q_{j}(x,t)\frac{\partial^{n-j}z}{\partial x^{n-j}} = 0
+\end{equation}
+となる。ここで、$q_{j}(x,t)$ は $\phi$ の各階微分 $\frac{\partial^i \phi}{\partial x^i} \ (i=0,1,\cdots,j)$ と $p_{i}(x,t) \ (i=1,\cdots,j)$ の多項式として表される。この \eqref{eq:reduced-fuchsian} のリーマンデータを $(\mathbb{P}^{1}(\mathbb{C}), \Xi'(t), \hat{\rho}')$ とする。
+
+\begin{Q}[【基礎】\eqref{eq:auxiliary-phi} を満たす関数 $\phi(x,t)$ は常に存在するのか？また、その解が多価関数になったり発散したりして元の問題を壊す心配はないか？]
+\textbf{A.} 常に存在し、元の問題を壊すことはない。
+\eqref{eq:auxiliary-phi} は変数分離形の1階線形微分方程式であるため、単に積分を実行するだけで
+\[
+\phi(x,t) = \exp\left( -\frac{1}{n} \int p_1(x,t) dx \right)
+\]
+と具体的に求まる。$p_1(x,t)$ は有理関数であるから、その積分は有理関数と対数関数の線形結合となる。したがって、$\phi(x,t)$ は特異点以外の全域で解析的であり、（多価にはなり得るが）その分岐の規則（モノドロミー）は完全にコントロール可能である。
+\end{Q}
+
+ここで、方程式 \eqref{eq:reduced-fuchsian} の解の基本系を $\vec{\varphi}_z(x,t)$ とする。この基本系に沿って閉曲線 $\gamma$ に沿って解析接続を行うと、モノドロミー行列 $\Gamma_z(\gamma)$ が右から掛かり、
+\[
+W(\vec{\varphi}_z^{\gamma}) = W(\vec{\varphi}_z) \det(\Gamma_z(\gamma))
+\]
+となる（$W$ はロンスキアン）。
+一方で、\eqref{eq:reduced-fuchsian} は $(n-1)$ 階微分の項を持たない（係数が $0$ である）ため、命題\ref{prop:2.1_wronskian-ode}のアーベルの公式より、ロンスキアンの微分は
+\[
+\frac{\partial W}{\partial x} = -0 \cdot W = 0
+\]
+となる。すなわちロンスキアン $W(\vec{\varphi}_z)$ は $x$ に依存しないゼロでない定数である。
+定数は解析接続しても変化しないため $W(\vec{\varphi}_z^{\gamma}) = W(\vec{\varphi}_z)$ となり、これを先ほどの式と比較して
+\[
+\det(\Gamma_z(\gamma)) = 1
+\]
+が得られる。
+よって、\eqref{eq:reduced-fuchsian} のモノドロミー群は一般線形群 $GL(n, \mathbb{C})$ ではなく、特殊線形群 $SL(n, \mathbb{C})$ の部分群となることがわかった。すなわち、表現は
+\[
+\rho' : \pi_1(x_{0}, \mathbb{X}') \to SL(n, \mathbb{C})
+\]
+となる（ただし $\mathbb{X}' = \mathbb{P}^{1}(\mathbb{C}) \setminus (\Xi'(t) \cup \Lambda'(t))$）。
+
+\begin{definition}[SL型の微分方程式]
+    上記のように、$(n-1)$ 階微分の項が存在せず、モノドロミー群が $SL(n, \mathbb{C})$ の部分群となるような微分方程式を \textbf{SL型} という。
+\end{definition}
+
+\begin{proposition}\label{prop:equivalence_n_ode}
+    $n$ 階フックス型微分方程式 \eqref{eq:monodromy_deformation} のモノドロミー保存変形と、SL型に還元された $n$ 階フックス型微分方程式 \eqref{eq:reduced-fuchsian} のモノドロミー保存変形とは、1階フックス型微分方程式 \eqref{eq:auxiliary-phi} がモノドロミー保存変形を許すという条件のもとで同値である。
+\end{proposition}
+
+\begin{proof}
+パラメータ $t$ に依存する任意の閉じた道 $\gamma(t)$ に沿う解析接続を考える（解析接続と $t$ 微分は交換可能であることに注意する）。
+元の方程式 \eqref{eq:monodromy_deformation} の解の基本系を $\vec{\varphi}_y(x,t)$、SL型方程式 \eqref{eq:reduced-fuchsian} の解の基本系を $\vec{\varphi}_z(x,t)$ とし、それぞれのモノドロミー行列を $\Gamma_{y}(\gamma(t))$, $\Gamma_{z}(\gamma(t))$ とする。また、1階方程式 \eqref{eq:auxiliary-phi} の解 $\phi(x,t)$ が $\gamma(t)$ に沿って解析接続されたときにかかるスカラー倍（1次元モノドロミー）を $m(\gamma(t))$ とする。
+
+変換の定義より
+\[
+\vec{\varphi}_y(x,t) = \phi(x,t) \vec{\varphi}_z(x,t)
+\]
+であるから、これを $\gamma(t)$ に沿って解析接続すると、
+\begin{align*}
+\vec{\varphi}_y^{\gamma(t)}(x,t) &= \phi^{\gamma(t)}(x,t) \vec{\varphi}_z^{\gamma(t)}(x,t) \\
+&= \left( \phi(x,t) m(\gamma(t)) \right) \left( \vec{\varphi}_z(x,t) \Gamma_{z}(\gamma(t)) \right) \\
+&= \phi(x,t) \vec{\varphi}_z(x,t) \, m(\gamma(t)) \Gamma_{z}(\gamma(t)) \\
+&= \vec{\varphi}_y(x,t) \, m(\gamma(t)) \Gamma_{z}(\gamma(t))
+\end{align*}
+となる（スカラー $m(\gamma(t))$ は行列と可換であるため前に出せる）。
+一方で、定義より $\vec{\varphi}_y^{\gamma(t)} = \vec{\varphi}_y \Gamma_{y}(\gamma(t))$ であるから、両者を比較して
+\[
+\Gamma_{y}(\gamma(t)) = m(\gamma(t)) \Gamma_{z}(\gamma(t))
+\]
+という関係式が得られる。
+ここで、仮定より1階方程式 \eqref{eq:auxiliary-phi} はモノドロミー保存変形を許すため、スカラー $m(\gamma(t))$ はパラメータ $t$ に依存しない一定値 $m(\gamma)$ である。
+したがって、$\Gamma_{y}$ が $t$ に依存しないことと、$\Gamma_{z}$ が $t$ に依存しないことは完全に同値となる。
+ゆえに、元の方程式のモノドロミー保存変形と、SL型方程式のモノドロミー保存変形は同値である。
+\end{proof}
+%#endregion
+%#region
+\eqref{eq:monodromy_deformation}の変形微分方程式系は\eqref{eq:3.1_deformation_system}で与えられた。これを、\eqref{eq:3.1_matrix_P}、\eqref{eq:3.1_matrix_A}の表示を用いて、連立変形微分方程式系に書き直す。この微分方程式系は、基本解行列 $Y=Y(x,t)$ を用いて
+
+\begin{equation}
+  \begin{cases}
+    \displaystyle \frac{\partial Y}{\partial x} = P(x,t)Y \\
+    \displaystyle \frac{\partial Y}{\partial t_l} = A^{(l)}(x,t)Y \quad (l=1,2,\cdots,L)
+  \end{cases}
+\end{equation}
+
+と表されるのであった。いまの場合、基本解行列としては、\eqref{eq:monodromy_deformation}の解の基本系 $\vec{\varphi}(x,t)$ のロンスキー行列 $Y=W(\vec{\varphi})$ をとればよい。
+
+\begin{Q}[なぜ基本解行列 $Y(x,t)$ の微分方程式系\eqref{eq:3.1_deformation_system_matrix}から、交換子を含む完全積分可能条件が導かれるのか？]
+\textbf{A.} $\frac{\partial^2 Y}{\partial t_l \partial x} = \frac{\partial^2 Y}{\partial x \partial t_l}$ という偏微分の順序交換可能性（系の適合条件）を要求するためである。(3.6)の各々を他方の変数で微分して等置し、$Y$ が可逆（ロンスキアンが非零）であることを用いて右から $Y^{-1}$ を掛けることで、行列 $P, A^{(l)}$ に対する非線形な微分方程式であるゼロ曲率条件（ラックス方程式）が得られる。
+\end{Q}
+
+さて、微分方程式系\eqref{eq:3.1_deformation_system_matrix}の完全積分可能条件は、命題\ref{prop:3.1_compatibility}で与えた。すなわち
+
+\begin{align}
+  \frac{\partial}{\partial t_l}P(x,t) - \frac{\partial}{\partial x}A^{(l)}(x,t) &= [A^{(l)}(x,t), P(x,t)]\\
+  \frac{\partial}{\partial t_l}A^{(h)}(x,t) - \frac{\partial}{\partial t_h}A^{(l)}(x,t) &= [A^{(l)}(x,t), A^{(h)}(x,t)]
+\end{align}
+
+である。
+
+\begin{Q}[完全積分可能条件\eqref{eq:3.1_compatibility_PA}の両辺の行列について、そのトレース（跡）をとる操作は本質的に何を意味しているか？]
+\textbf{A.} 行列の交換子のトレースは常に $0$ であるため（$\mathrm{Trace}[A, P] = 0$）、右辺の複雑な非線形項が消去される。これにより、行列方程式から系全体の「行列式の対数微分」の挙動を支配する簡潔なスカラー方程式を抽出することができる。
+\end{Q}
+
+ここで、\eqref{eq:3.1_compatibility_PA}の両辺の行列についてそのトレースをとり、\eqref{eq:3.1_matrix_P}を用いると
+
+\begin{equation}\label{eq:3.3_trace_compatibility}
+  \frac{\partial}{\partial t_l}p_1(x,t) + n\frac{\partial}{\partial x}c^{(l)}(x,t) = 0
+\end{equation}
+\[
+  c^{(l)}(x,t) = \frac{1}{n}\mathrm{Trace}A^{(l)}(x,t) \quad (l=1,2,\cdots,L)
+\]
+
+を得る。この式は、1階微分方程式系
+
+\begin{equation}\label{eq:3.3_1-deformation_system}
+  \begin{cases}
+    \displaystyle \frac{\partial \phi}{\partial x} + \frac{1}{n}p_1(x,t)\phi = 0 \\[4mm]
+    \displaystyle \frac{\partial \phi}{\partial t_l} - c^{(l)}(x,t)\phi = 0
+  \end{cases}
+\end{equation}
+
+の積分可能条件であり，\eqref{eq:3.3_trace_compatibility}は方程式系\eqref{eq:3.3_1-deformation_system}のラックスの方程式に他ならない．
+
+さて，$\vec{\varphi}=\vec{\varphi}(x,t)$ を\eqref{eq:3.1_n-ODE}の解の基本系で，モノドロミー群が $t$ に依存しないもの，としよう．$\vec{\varphi}(x,t)$ は，変形微分方程式系\eqref{eq:3.1_deformation_system}の解の基本系である．このとき，微分方程式\eqref{eq:3.1_partial_t}の係数 $a_j^{(l)}(x,t)$ は公式\eqref{eq:3.1_cramer_wronskian}で与えられる．
+
+$\vec{\psi}(x,t)$ を，\eqref{eq:3.1_n-ODE}の別の解の基本系であるとすると，$n$ 次可逆行列 $G(t)$ がとれて
+
+\begin{equation}\label{eq:3.3_linear_transform_G}
+  \vec{\psi}(x,t) = \vec{\varphi}(x,t)G(t)
+\end{equation}
+
+となる．我々は $t$ について解析的な解の基本系のみを考えているから，$G(t)$ の各成分は $t$ の解析関数である．さて，$\vec{\varphi}(x,t)$ の，ある閉じた道 $\gamma$ に対する回路行列を $\Gamma(\gamma)$ とすると，$\vec{\psi}(x,t)$ の対応する回路行列は $G(t)^{-1}\Gamma(\gamma)G(t)$ である．
+
+\begin{Q}[なぜ $\vec{\psi}$ の回路行列は $G(t)^{-1}\Gamma(\gamma)G(t)$ となり、$G(t)=g(t)G$ の形であればモノドロミー群は $t$ に依存しなくなるのか？]
+\textbf{A.} $\vec{\varphi}$ を $\gamma$ に沿って解析接続すると $\vec{\varphi}\Gamma(\gamma)$ となる。したがって $\vec{\psi} = \vec{\varphi}G(t)$ を解析接続すると $(\vec{\varphi}\Gamma(\gamma))G(t)$ となるが、これを $\vec{\psi}$ 自身を基底として表し直すために $\vec{\varphi} = \vec{\psi}G(t)^{-1}$ を代入すると、$\vec{\psi} (G(t)^{-1}\Gamma(\gamma)G(t))$ となるからである。
+ここで $G(t) = g(t)G$（$g(t)$ はスカラー関数、$G$ は定数行列）と仮定すると、スカラー $g(t)$ は行列と可換であるため逆行列の $g(t)^{-1}$ とキャンセルし合い、回路行列は $G^{-1}\Gamma(\gamma)G$ となる。これは $t$ を含まない定数行列であるため、モノドロミー群は $t$ に依存しないことが保証される。
+\end{Q}
+
+特に，$g(t)$ を $t$ のスカラー関数，$G$ を $t$ に依存しない定数行列として
+
+\begin{equation}\label{eq:3.3_scalar_matrix_gG}
+  G(t) = g(t)G
+\end{equation}
+
+となっているとしよう．もちろん，考えている領域で $g(t) \neq 0$ である．このとき，\eqref{eq:3.3_linear_transform_G}で定義される解の基本系 $\vec{\psi}(x,t)$ のモノドロミー群も $t$ に依存しない．さらに，$\vec{\psi}(x,t)$ に対して
+
+\[
+  b_j^{(l)}(x,t) = \frac{w_j^{(l)}(\vec{\psi})}{w(\vec{\psi})}
+\]
+
+により，$x$ の有理関数 $b_j^{(l)}(x,t)$ を定めると，$\vec{\psi}(x,t)$ は，$b_j^{(l)}(x,t)$ を係数とする，変形微分方程式系の解である．ここで，$w_j^{(l)}(\vec{\psi})$ は，ロンスキアン $w(\vec{\psi})$ の第 $j$ 列ベクトル $\frac{\partial^{j-1}\vec{\psi}}{\partial x^{j-1}}$ を $\frac{\partial\vec{\psi}}{\partial t_l}$ で置き換えたものであった．上式の右辺に\eqref{eq:3.3_linear_transform_G}と\eqref{eq:3.3_scalar_matrix_gG}を代入すると，$j=2,\cdots,n$ については
+
+\begin{align*}
+  w_j^{(l)}(\vec{\psi}) &= g(t)^n (\det G) \cdot w_j^{(l)}(\vec{\varphi}) \quad (l=1,\cdots,L) \\
+  w(\vec{\psi}) &= g(t)^n (\det G) \cdot w(\vec{\varphi})
+\end{align*}
+
+が成り立ち，$j \geqq 2$ のとき $a_j^{(l)}(x,t) = b_j^{(l)}(x,t)$ である．
+
+\begin{Q}[$w_j^{(l)}(\vec{\psi})$ の計算において、なぜ $j \geqq 2$ のときのみ綺麗な比例関係が成り立ち、係数が不変（$a_j^{(l)} = b_j^{(l)}$）となるのか？]
+\textbf{A.} 行列式（ロンスキアン）の多重線形性と交代性による。
+$\vec{\psi} = g(t)\vec{\varphi}G$ を $t_l$ で偏微分すると、積の微分法により
+$\frac{\partial \vec{\psi}}{\partial t_l} = \frac{\partial g(t)}{\partial t_l}\vec{\varphi}G + g(t)\frac{\partial \vec{\varphi}}{\partial t_l}G$
+となる。これをロンスキアンの第 $j$ 列に代入して展開すると、第1項（$\partial_{t_l}g$ を含む項）は、「第1列（$\vec{\varphi}G$）」に比例するベクトルとなる。
+$j \geqq 2$ の場合、行列式の中には既に第1列として $\vec{\varphi}G$ が存在するため、この比例するベクトルの寄与は行列式の交代性により完全に $0$ になる。結果として第2項のみが残り、$g(t)^n (\det G)$ が綺麗に括り出され、比をとると約分されて元の係数と一致する。
+（逆に言えば、$j=1$ のときは第1列そのものを置き換えるため、この項が消えずに残り、係数が変化することを予見させる）。
+\end{Q}
+
+一方，$j=1$ のときは
+
+\[
+  w_1^{(l)}(\vec{\psi}) = g(t)^{n-1} \frac{\partial g}{\partial t_l}(t)(\det G) \cdot w(\vec{\varphi}) + g(t)^n (\det G) \cdot w_1^{(l)}(\vec{\varphi}) \quad (l=1,\cdots,L)
+\]
+となる．すなわち
+\[
+  b_1^{(l)}(x,t) = \frac{\partial}{\partial t_l} \log g(t) + a_1^{(l)}(x,t)
+\]
+である．
+
+\begin{Q}[$j=1$ のときだけ係数が不変にならず、「対数微分 $\frac{\partial}{\partial t_l} \log g(t)$」のズレが生じることの理論的意義は何か？]
+\textbf{A.} $j \geqq 2$ の係数 $a_j^{(l)}$ がゲージ変換に依存しない「真の不変量」であるのに対し、$a_1^{(l)}$ はゲージ（基本解のスケール因子 $g(t)$）の取り方に依存して変動する量であることを示している。このズレの項 $\partial_{t_l} \log g(t)$ こそが、方程式系の変形に伴う全体のスケール変化を司っており、後にパンルヴェ方程式等において「$\tau$ 関数の対数微分」として見かけの特異点のダイナミクスを記述する極めて重要な役割を果たす。
+\end{Q}
+
+実は，ここで述べたことの逆が成り立つ．
+
+\begin{proposition}\label{prop:3.3_transform_G_implies_scalar_gG}
+関係\eqref{eq:3.3_linear_transform_G}で結ばれている2つの解の基本系 $\vec{\varphi}(x,t), \vec{\psi}(x,t)$ のモノドロミー群がともに $t$ に依存しないならば，\eqref{eq:3.3_scalar_matrix_gG}（すなわち $G(t)=g(t)G$）が成立する．
+\end{proposition}
+
+この命題により，変形微分方程式系の係数
+\[
+  a_j^{(l)}(x,t) \quad (j=2,\cdots,n, \quad l=1,\cdots,L)
+\]
+は，微分方程式\eqref{eq:3.1_n-ODE}だけで決まり、モノドロミー群が $t$ に依存しない解の基本系の選び方には依らない．我々は $n=2$ の場合にこの事実を，ラックスの方程式を用いて確かめたのであった．
+
+この節の残りを使って、命題\ref{prop:3.3_transform_G_implies_scalar_gG}を証明しよう。そのために3つの命題を準備する。まず、単独高階微分方程式\eqref{eq:3.1_n-ODE}を，\eqref{eq:3.1_matrix_P}、\eqref{eq:3.1_matrix_A}により連立微分方程式系に書き直し，変形微分方程式系\eqref{eq:3.1_deformation_system_matrix}を考えよう．$\vec{\varphi}(x,t)$ と $\vec{\psi}(x,t)$ を、命題\ref{prop:3.3_transform_G_implies_scalar_gG}の条件を満たす，\eqref{eq:3.1_n-ODE}の解の基本系とする．このとき，$\vec{\varphi}(x,t)$ に対し，$Y=W(\vec{\varphi})$ の満足する変形微分方程式系の係数を $A_1^{(l)}(x,t)$，同様に $\vec{\psi}(x,t)$ から決まる変形微分方程式系の係数を $A_2^{(l)}(x,t)$ とする。この2種類の行列 $A_1^{(l)}, A_2^{(l)}$ について，\eqref{eq:3.1_compatibility_PA}と\eqref{eq:3.1_compatibility_AA}が成立する．
+
+\[
+  B^{(l)}(x,t) = A_1^{(l)}(x,t) - A_2^{(l)}(x,t)
+\]
+とおくと，\eqref{eq:3.1_compatibility_PA}よりこれは行列微分方程式
+
+\begin{equation}\label{eq:3.3_ODE_matrix_B}
+  \frac{\partial}{\partial x} B^{(l)}(x,t) + \left[ B^{(l)}(x,t), P(x,t) \right] = 0
+\end{equation}
+を満たす．
+
+\begin{Q}[なぜ2つの係数行列の差 $B^{(l)} = A_1^{(l)} - A_2^{(l)}$ を考え、方程式(3.49)を導出したのか？]
+\textbf{A.} 非線形な完全積分可能条件（ラックス方程式）から、解析しやすい「線形な同次方程式」を抽出するためである。
+$A_1^{(l)}, A_2^{(l)}$ は共に $\partial_{t_l} P - \partial_x A = [A, P]$ を満たす。これらを辺々引くと、左辺の $\partial_{t_l} P$ が完全に相殺されて消去され、$- \partial_x (A_1^{(l)} - A_2^{(l)}) = [A_1^{(l)} - A_2^{(l)}, P]$ となる。これにより、$B^{(l)}$ は $t$ 微分を含まない、$x$ 方向の線形な交換子方程式(3.49)を満たすことがわかり、その代数的な構造（ランクや成分の性質）を決定しやすくなる。
+\end{Q}
+
+ここで一般に，$Z$ を未知行列とし，行列微分方程式
+\begin{equation}\label{eq:3.3_ODE_matrix_Z}
+  \frac{dZ}{dx} + [Z, P(x)] = 0
+\end{equation}
+
+を考えよう．いま，$Y(x)$ を微分方程式
+\begin{equation}\label{eq:3.3_ODE_matrix_Y}
+  \frac{dY}{dx} = P(x)Y
+\end{equation}
+の基本解行列，$B_0$ を $x$ には依存しない可逆行列としたとき，\eqref{eq:3.3_ODE_matrix_Z}の一般解は
+\[
+  Z(x) = Y(x)B_0 Y(x)^{-1}
+\]
+で与えられる．これは計算で簡単に確かめることができるから，詳細は省略する．
+
+\begin{Q}[「詳細は省略する」とあるが、一般解 $Z(x) = Y(x)B_0 Y(x)^{-1}$ が行列微分方程式 $\frac{dZ}{dx} + {[}Z, P{]} = 0$ を満たすことは、具体的にどう計算すれば確かめられるか？]
+\textbf{A.} 基本解行列 $Y$ が $\frac{dY}{dx} = PY$ を満たすことと、逆行列の微分の公式 $\frac{d}{dx}(Y^{-1}) = -Y^{-1}\frac{dY}{dx}Y^{-1} = -Y^{-1}P$ を用いる。積の微分法則より、
+\begin{align*}
+  \frac{dZ}{dx} &= \frac{dY}{dx}B_0 Y^{-1} + Y B_0 \frac{d(Y^{-1})}{dx} \\[2mm]
+  &= (PY)B_0 Y^{-1} + Y B_0 (-Y^{-1}P) \\[2mm]
+  &= P(Y B_0 Y^{-1}) - (Y B_0 Y^{-1})P \\[2mm]
+  &= PZ - ZP = -[Z, P]
+\end{align*}
+となり、移項すれば $\frac{dZ}{dx} + [Z, P] = 0$ を満たすことがわかる。
+\end{Q}
+
+この結果をいま考えている場合に適用すると，次のことがわかる．
+
+\begin{lemma}\label{lem:3.3_solution_ODE}
+行列微分方程式\eqref{eq:3.3_ODE_matrix_B}の一般解は，\eqref{eq:3.3_ODE_matrix_Y}の基本解行列 $Y=Y(x,t)$ により
+\[
+  B^{(l)}(x,t) = Y(x,t)B_0^{(l)}(t)Y(x,t)^{-1}
+\]
+で与えられる．ここで $B_0^{(l)}(t)$ は，成分が $t$ の解析関数である可逆行列である．
+\end{lemma}
+
+さらに，微分方程式\eqref{eq:3.1_n-ODE}に対する仮定(P3)の下で，次のことが成り立つ．
+
+\begin{lemma}\label{lem:3.3_scalar_matrix_B}
+$B_0^{(l)}(t)$ ($l=1,\cdots,L$) はスカラー行列である．
+\end{lemma}
+
+\begin{Q}[補題3.2において、なぜ仮定(P3)を置くだけで $B_0^{(l)}(t)$ が「スカラー行列」であると強力に結論づけられるのか？]
+\textbf{A.} 表現論における「シューアの補題（Schur's lemma）」が本質的な役割を果たしている。
+$B^{(l)}(x,t)$ は $x$ の有理関数行列（1価）であるため、特異点の周りを回る解析接続（モノドロミー変換 $Y \mapsto Y\Gamma$）に対して不変でなければならない。これを $B^{(l)} = Y B_0^{(l)} Y^{-1}$ に代入すると、$(Y\Gamma) B_0^{(l)} (Y\Gamma)^{-1} = Y B_0^{(l)} Y^{-1}$ となり、整理すると $\Gamma B_0^{(l)} = B_0^{(l)} \Gamma$ を得る。つまり $B_0^{(l)}$ はすべてのモノドロミー行列 $\Gamma$ と可換である。
+ここで仮定(P3)によりモノドロミー表現が既約であるとすれば、シューアの補題より、「すべての表現行列と可換な行列はスカラー行列に限られる」ため、$B_0^{(l)}(t)$ はスカラー行列となる。
+\end{Q}
+
+したがって，スカラー関数 $f_0^{(l)}(t)$ により，$B_0^{(l)}(t) = f_0^{(l)}(t)I_n$ と表すことができる．$I_n$ は $n$ 次単位行列である．このとき，\eqref{eq:3.3_linear_transform_G}の行列 $G(t)$ について次のことが成り立つ．
+
+\begin{lemma}\label{lem:3.3_t_PDE_matrix_G}
+行列 $G(t)$ は微分方程式系
+\begin{equation}\label{eq:3.3_t_PDE_matrix_G}
+  \frac{\partial}{\partial t_l}G(t) = -f_0^{(l)}(t)G(t) \quad (l=1,\cdots,L)
+\end{equation}
+を満たす．この方程式系は完全積分可能である．
+\end{lemma}
+
+補題\ref{lem:3.3_scalar_matrix_B}、補題\ref{lem:3.3_t_PDE_matrix_G}を仮定すれば、命題\ref{prop:3.3_transform_G_implies_scalar_gG}の証明は簡単である．
+
+\begin{proof}[命題\ref{prop:3.3_transform_G_implies_scalar_gG}の証明]
+微分方程式\eqref{eq:3.3_t_PDE_matrix_G}の完全積分可能条件から
+\begin{equation}\label{eq:3.3_t-ODE_scalar_g}
+  \frac{\partial}{\partial t_l}g(t) = -f_0^{(l)}(t)g(t) \quad (l=1,\cdots,L)
+\end{equation}
+というスカラー関数 $g(t)$ が存在する．この関数を用いて，\eqref{eq:3.3_t_PDE_matrix_G}の一般解は……
+
+\end{proof}
+%#endregion
+
+\subsection{シュレージンガー系}
+
+%#region
+まず、$n$次連立微分方程式系\eqref{eq:3.1_x_ODE_matrix}のモノドロミー保存変形についてこれまでわかったことをまとめよう。微分方程式系\eqref{eq:3.1_x_ODE_matrix}のリーマンデータを
+\[
+  (\mathbb{P}^1(\mathbb{C}), \Xi', \hat{\rho}')
+\]
+とし、条件(P2), (P3)を仮定する。
+
+微分方程式系\eqref{eq:3.1_x_ODE_matrix}の基本解行列 $Y=Y(x,t)$ で、そのモノドロミー群がパラメータ$t=(t_1, \cdots, t_L)$ に依存しないものが存在するならば，$x$ の有理関数を成分とする行列 $A^{(l)}(x,t)$ ($l=1,\cdots,L$) が存在して，$Y(x,t)$ は変形微分方程式系\eqref{eq:3.1_deformation_system_matrix}の解となる．この微分方程式系の完全積分可能条件は，\eqref{eq:3.1_compatibility_PA}と\eqref{eq:3.1_compatibility_AA}である。\eqref{eq:3.1_x_ODE_matrix}のモノドロミー保存変形はこの条件の研究に帰着する。前節最後に述べた命題\ref{prop:3.3_transform_G_implies_scalar_gG}、補題\ref{lem:3.3_scalar_matrix_B}、補題\ref{lem:3.3_t_PDE_matrix_G}によれば，\eqref{eq:3.1_compatibility_PA}、\eqref{eq:3.1_compatibility_AA}を満足する $x$ の有理関数を成分とする行列が2種類、$A_1^{(l)}$ と $A_2^{(l)}$、存在するときには，スカラー関数 $g(t)$ が存在して
+\[
+  A_2^{(l)}(x,t) = A_1^{(l)}(x,t) + \left( \frac{\partial}{\partial t_l} \log g(t) \right) I_n \quad (l=1,\cdots,L)
+\]
+となる．
+
+\begin{Q}[【補足と確認】補題\ref{lem:3.3_scalar_matrix_B}、補題\ref{lem:3.3_t_PDE_matrix_G}、および命題\ref{prop:3.3_transform_G_implies_scalar_gG}の証明は、$P(x,t)$ が単独高階方程式から作られる特殊な行列（コンパニオン行列）でなくとも、本当に一般の $n \times n$ 行列で成り立つのか？ その厳密な証明は？]
+\textbf{A.} \textbf{完全に一般の行列 $P(x,t)$ に対して成り立つ。}
+証明のどの段階においても $P(x,t)$ の成分の具体的な形は要求されず、「既約なモノドロミー表現（シューアの補題）」と「行列の積の微分法則」という普遍的な性質のみで完結する。以下に、一般の行列に対する完全な証明プロセスを示す。
+
+\textbf{1. 準備と線形化（補題3.1の領域）}
+一般の $\frac{\partial Y}{\partial x} = P(x,t)Y$ に対して、モノドロミーが $t$ に依存しない2つの基本解行列 $Y_1, Y_2$ があるとする。これらはある可逆行列 $G(t)$ を用いて $Y_2(x,t) = Y_1(x,t)G(t)$ と結ばれる。
+それぞれの変形行列 $A_k^{(l)} = \frac{\partial Y_k}{\partial t_l}Y_k^{-1} \ (k=1,2)$ は、ともにゼロ曲率条件 $\partial_{t_l} P - \partial_x A_k^{(l)} = [A_k^{(l)}, P]$ を満たす。辺々引くことで、$P$ の形に依らず
+\[
+  \frac{\partial}{\partial x}(A_1^{(l)} - A_2^{(l)}) + [A_1^{(l)} - A_2^{(l)}, P] = 0
+\]
+となる。差を $B^{(l)} = A_1^{(l)} - A_2^{(l)}$ とおくと、この微分方程式の一般解は $x$ に依存しない行列 $B_0^{(l)}(t)$ を用いて $B^{(l)}(x,t) = Y_1 B_0^{(l)}(t) Y_1^{-1}$ と書ける。
+
+\textbf{2. 補題3.2（シューアの補題の適用）}%TODO あとでみる
+$A_1^{(l)}, A_2^{(l)}$ は有理関数行列（1価）なので、その差 $B^{(l)}$ も1価である。特異点の周りの任意の閉路に対する解析接続（モノドロミー行列を $\Gamma$ とする）を考えると、$Y_1 \mapsto Y_1 \Gamma$ となる。$B^{(l)}$ は不変であるから、
+\[
+  Y_1 B_0^{(l)}(t) Y_1^{-1} = (Y_1 \Gamma) B_0^{(l)}(t) (Y_1 \Gamma)^{-1} = Y_1 (\Gamma B_0^{(l)}(t) \Gamma^{-1}) Y_1^{-1}
+\]
+両端から $Y_1^{-1}$ と $Y_1$ を掛けて $\Gamma B_0^{(l)}(t) = B_0^{(l)}(t) \Gamma$ を得る。すなわち $B_0^{(l)}(t)$ はすべてのモノドロミー行列と可換である。
+ここで\textbf{仮定(P3)（モノドロミー表現が既約である）}を適用すれば、シューアの補題より直ちに $B_0^{(l)}(t) = f_0^{(l)}(t)I_n$ （スカラー行列）であることが結論づけられる。ここにも $P$ の形は一切登場しない。したがって $B^{(l)}(x,t) = f_0^{(l)}(t)I_n$ である。
+
+\textbf{3. 補題3.3の証明（ゲージ変換の直接計算）}
+一方で、$Y_2 = Y_1 G(t)$ を用いて $A_2^{(l)}$ を直接計算する。
+\begin{align*}
+  A_2^{(l)} &= \frac{\partial (Y_1 G)}{\partial t_l} (Y_1 G)^{-1} 
+  = \left( \frac{\partial Y_1}{\partial t_l} G + Y_1 \frac{\partial G}{\partial t_l} \right) G^{-1} Y_1^{-1} \\
+  &= \frac{\partial Y_1}{\partial t_l} Y_1^{-1} + Y_1 \frac{\partial G}{\partial t_l} G^{-1} Y_1^{-1} 
+  = A_1^{(l)} + Y_1 \left( \frac{\partial G}{\partial t_l} G^{-1} \right) Y_1^{-1}
+\end{align*}
+定義より $B^{(l)} = A_1^{(l)} - A_2^{(l)}$ であるから、上式より $B^{(l)} = - Y_1 \left( \frac{\partial G}{\partial t_l} G^{-1} \right) Y_1^{-1}$ となる。
+
+\textbf{4. 命題3.10の結論}
+補題3.2の結果 $B^{(l)} = f_0^{(l)}(t)I_n$ と、ステップ3の計算結果を等置する。
+\[
+  - Y_1 \left( \frac{\partial G}{\partial t_l} G^{-1} \right) Y_1^{-1} = f_0^{(l)}(t)I_n
+\]
+両辺に左から $Y_1^{-1}$、右から $Y_1$ を掛けると（右辺はスカラー行列なので不変）、
+\[
+  - \frac{\partial G}{\partial t_l} G^{-1} = f_0^{(l)}(t)I_n \implies \frac{\partial G}{\partial t_l} = -f_0^{(l)}(t)G
+\]
+これが補題3.3である。この微分方程式系を積分すれば、$G(t) = g(t)G$ （$g(t)$ はスカラー関数、$G$ は定数行列）が得られ、命題3.10が完全に証明される。
+\end{Q}
+
+\begin{Q}[$A_1^{(l)}$ と $A_2^{(l)}$ の差が対数微分 $\left( \frac{\partial}{\partial t_l} \log g(t) \right) I_n$ となるこの美しい関係は、$P(x,t)$ が単独高階方程式から作られるコンパニオン行列である場合に限定されるのか？一般の行列 $P(x,t)$ でも成り立つか？]
+\textbf{A.} \textbf{一般の行列 $P(x,t)$ でも完全に成り立つ。}
+この性質は $P$ の具体的な形ではなく、「モノドロミー表現が既約である（仮定P3）」という条件からシューアの補題を経由して得られる、極めて普遍的な帰結である。
+
+実際、一般の $\frac{\partial Y}{\partial x} = P(x,t) Y$ に対する2つの基本解行列を $Y_1, Y_2$ とすると、$Y_2 = Y_1 G(t)$ と書ける。両者が $t$ に依存しない既約なモノドロミー群を持つとき、命題\ref{prop:3.3_transform_G_implies_scalar_gG}により $G(t) = g(t)G$（$g(t)$ はスカラー関数、$G$ は定数可逆行列）となる。
+これを変形行列の定義 $A_2^{(l)} = \frac{\partial Y_2}{\partial t_l}Y_2^{-1}$ に直接代入すると、積の微分法則より
+\begin{align*}
+  A_2^{(l)} &= \frac{\partial}{\partial t_l}\left(Y_1 g(t)G\right) \cdot \left(Y_1 g(t)G\right)^{-1} \\
+  &= \left( \frac{\partial Y_1}{\partial t_l} g(t)G + Y_1 \frac{\partial g(t)}{\partial t_l} G \right) G^{-1} g(t)^{-1} Y_1^{-1} \\
+  &= \frac{\partial Y_1}{\partial t_l} Y_1^{-1} + Y_1 \left( \frac{\frac{\partial g(t)}{\partial t_l}}{g(t)} I_n \right) Y_1^{-1} \\
+  &= A_1^{(l)} + \left( \frac{\partial}{\partial t_l} \log g(t) \right) I_n
+\end{align*}
+となり、計算過程で $P(x,t)$ に関する情報は一切使用されない。したがって、一般のフックス型連立系においてもこのゲージ変換の公式は成立する。
+\end{Q}
+
+この節では，具体的な例について，\eqref{eq:3.1_x_ODE_matrix}のモノドロミー保存変形を調べよう．
+
+まず，有理関数を成分とする行列 $A^{(l)}(x,t)$ の形を決めることを考えてみよう．$x=\xi$ を確定特異点とすると，基本解行列 $Y(x,t)$ は，条件(P2)により
+\begin{equation}\label{eq:3.4_matrix_solution_representation_Phi_G}
+  Y(x,t) = \Phi(x,t)(x-\xi)^A G(t)
+\end{equation}
+と表される．ここで，$A$ は対角行列で，$t$ に依存しない．また，$\Phi=\Phi(x,t)$ の各成分は $x=\xi$ の近傍において，$x$ と $t$ について正則，$G(t)$ は各成分が $U$ 上正則である可逆行列である．$Y=Y(x,t)$ の表示\eqref{eq:3.4_matrix_solution_representation_Phi_G}については，単独高階微分方程式の場合と同様に求めることができるから，ここでは既知として話を進める．
+
+\begin{Q}[係数行列 $P(x,t)$ が特異点 $x=\xi$ において高々1位の極（フックス型特異点）を持つと仮定したとき、基本解行列が局所表示 $Y(x,t) = \Phi(x,t)(x-\xi)^A G(t)$ を持つことは、具体的にどのように証明（構成）されるか？]
+\textbf{A.} 行列に対する「フロベニウスの方法」と「解の基底の取り換え」を用いて、以下の4つのステップで構成される。
+
+\textbf{ステップ1：係数行列のローラン展開}
+$x=\xi$ において $P(x,t)$ は1位の極を持つため、その近傍で次のように展開できる。
+\[
+  P(x,t) = \frac{P_{-1}(t)}{x-\xi} + \sum_{k=0}^{\infty} P_k(t) (x-\xi)^k
+\]
+ここで、$P_{-1}(t)$ は $x=\xi$ における留数行列である。
+
+\textbf{ステップ2：局所的な基本解行列 $\tilde{Y}$ の仮定（Ansatz）}
+$x=\xi$ の近傍におけるある1つの局所的な解行列を、特異性を持つ部分 $(x-\xi)^A$ と、正則な部分 $\Phi(x,t)$ に分離して探す。
+\[
+  \tilde{Y}(x,t) = \Phi(x,t)(x-\xi)^A, \quad \Phi(x,t) = \sum_{k=0}^{\infty} \Phi_k(t) (x-\xi)^k
+\]
+ここで、正則性を保証するために $\Phi_0(t)$ は可逆行列（簡単のため $\Phi_0(t) = I$ と選んでよい）とし、$A$ はこれから決定する定数行列とする。
+
+\textbf{ステップ3：代入と行列 $A$ の決定}
+仮定した $\tilde{Y}(x,t)$ を微分方程式 $\frac{\partial \tilde{Y}}{\partial x} = P(x,t)\tilde{Y}$ に代入する。
+
+\begin{Q}[行列のべき乗 $(x-\xi)^A$ の $x$ による微分は、スカラーの場合と同様に $A(x-\xi)^{A-I}$ となるか？ また、指数関数をマクローリン展開して項別微分する際、この無限級数の収束性（収束半径）に問題はないのか？]
+\textbf{A.} スカラーの場合と全く同じ結果となる。収束性についても問題ない。
+行列の指数関数 $\exp(X) = \sum_{m=0}^{\infty} \frac{1}{m!} X^m$ は、全空間で絶対収束する（収束半径は $\infty$ である）。いま $X = A \log(x-\xi)$ とおくと、$x \neq \xi$ であり対数関数の分枝を一つ固定する限り、展開された級数は常に収束するため項別微分は完全に正当化される。
+
+具体的な計算は以下の通りである。行列 $A$ と単位行列 $I$ が可換である（$e^X e^Y = e^{X+Y}$ が使える）ことに注意して整理する。
+
+\begin{align*}
+  (x-\xi)^A &= \exp(A \log(x-\xi)) = \sum_{m=0}^{\infty} \frac{1}{m!} A^m (\log(x-\xi))^m \\[3mm]
+  \frac{d}{dx} (x-\xi)^A &= \sum_{m=1}^{\infty} \frac{1}{(m-1)!} A^m (\log(x-\xi))^{m-1} \cdot \frac{1}{x-\xi} \\[2mm]
+  &= A e^{A \log(x-\xi)} \cdot \frac{1}{x-\xi} \\[2mm]
+  &= A e^{A \log(x-\xi)} \cdot e^{-\log(x-\xi)} \\[2mm]
+  &= A e^{(A-I) \log(x-\xi)}
+\end{align*}
+すなわち、$\frac{d}{dx}(x-\xi)^A = A(x-\xi)^{A-I}$ が厳密に成立する。
+\end{Q}
+
+左辺は積の微分法則より、
+\begin{align*}
+  \frac{\partial \tilde{Y}}{\partial x} &= \frac{\partial \Phi}{\partial x}(x-\xi)^A + \Phi(x,t) A (x-\xi)^{A-I} \\
+  &= \left( \frac{\partial \Phi}{\partial x}(x-\xi) + \Phi(x,t)A \right) (x-\xi)^{A-I}
+\end{align*}
+右辺は、
+\[
+  P(x,t)\tilde{Y} = \left( P_{-1}(t) + P_0(t)(x-\xi) + \cdots \right) \Phi(x,t) (x-\xi)^{A-I}
+\]
+となる。両辺から $(x-\xi)^{A-I}$ を括り出し、定数項（$(x-\xi)^0$ の係数）を比較すると、
+\[
+  \Phi_0(t) A = P_{-1}(t) \Phi_0(t)
+\]
+という行列の決定方程式が得られる。$\Phi_0(t) = I$ と選んでいるため、$A = P_{-1}(t)$ となる。
+さらに、テキストの条件(P2)（留数行列の固有値の差が整数でない）により、高次の係数 $\Phi_k(t)$ を決定する漸化式が常に解ける（共鳴が起きない）ことが保証され、対数項を含まない正則な $\Phi(x,t)$ が一意に構成できる。また、モノドロミー保存の仮定から $P_{-1}(t)$ の固有値は $t$ に依存しないため、$A$ は $t$ に依存しない対角行列として取ることができる。
+
+\begin{Q}[高次の係数 $\Phi_k(t)$ を決定する漸化式とは具体的にどのような形か？また、条件(P2)が「共鳴（対数項の混入）を防ぐ」ことの厳密な数学的証明は、何を用いれば示せるか？]%TODO 詳細は後で見る
+\textbf{A.} 行列のべき級数展開から得られる「シルベスター方程式（Sylvester equation）」の可解条件を用いることで厳密に証明される。
+
+\textbf{ステップ1：漸化式の導出}
+$P(x,t) = \sum_{m=-1}^\infty P_m (x-\xi)^m$ と $\Phi(x,t) = \sum_{k=0}^\infty \Phi_k (x-\xi)^k$ を $\frac{\partial \tilde{Y}}{\partial x} = P\tilde{Y}$ に代入し、両辺の $(x-\xi)^{k-1} (x-\xi)^A$ の係数を比較する。
+左辺の微分からの寄与は $k\Phi_k + \Phi_k A$ であり、右辺の積からの寄与は $\sum_{j=0}^k P_{j-1}\Phi_{k-j}$ となる。$j=0$ の項（$P_{-1}\Phi_k$）を分離し整理すると、次の方程式を得る。
+\[
+  P_{-1}\Phi_k - \Phi_k A - k\Phi_k = -\sum_{j=1}^k P_{j-1}\Phi_{k-j}
+\]
+
+\textbf{ステップ2：シルベスター方程式としての解釈}
+右辺を $R_k$ とおく（$R_k$ は $\Phi_0, \dots, \Phi_{k-1}$ までで既に決定されている既知の行列である）。この方程式は、未知行列 $X = \Phi_k$ に対する線形代数方程式
+\[
+  M X - X N = -R_k \quad (\text{ただし } M = P_{-1} - k I, \ N = A)
+\]
+と見なせる。このような形の方程式をシルベスター方程式と呼ぶ。一般論として、この方程式が一意な解を持つ必要十分条件は「行列 $M$ と行列 $N$ が共通の固有値を持たないこと」である。
+
+\textbf{ステップ3：条件(P2)による可逆性の保証}
+$\Phi_0 = I$ のとき、定数項の比較から $A = P_{-1}$ である。
+$P_{-1}$ の固有値（特性指数）を $\lambda_1, \dots, \lambda_n$ とすると、行列 $M = P_{-1} - k I$ の固有値は $\lambda_i - k$ であり、行列 $N = A$ の固有値は $\lambda_j$ である。
+これらが共通の固有値を持たないための条件は、任意の $i, j$ に対して
+\[
+  \lambda_i - k \neq \lambda_j \iff \lambda_i - \lambda_j \neq k
+\]
+となることである。ここで $k \geq 1$ は整数であるため、「特性指数の差が整数でない」という\textbf{条件(P2)}が満たされていれば、この条件はすべての $k \geq 1$ に対して自動的にクリアされる。
+すなわち、線形作用素 $X \mapsto MX - XN$ は常に可逆（正則）となり、各ステップで $\Phi_k$ が一意に定まる。これにより、特異点において対数項 $\log(x-\xi)$ の補正を一切必要とせずに、純粋な級数解が構成できることが厳密に示された。
+
+\textbf{ステップ4：$A$ の対角化}
+(P2)により特性指数はすべて異なるため、留数行列 $P_{-1}(t)$ は常に対角化可能である。基本解の取り替え（適当な定数可逆行列によるゲージ変換）を行えば、初めから $A = P_{-1}(t)$ を対角行列として選んでおくことができる。さらにモノドロミー保存の仮定により固有値は $t$ に依存しないため、$A$ は $t$ に依存しない定数対角行列となる。
+\end{Q}
+
+\begin{Q}[行列 $A$ が対角行列でない一般の行列である場合、解の局所表示に現れる行列のべき乗 $(x-\xi)^A$ は数学的にどのように定義されるのか？]
+\textbf{A.} 行列の指数関数（テイラー展開）と自然対数を用いて、次のように厳密に定義される。
+\[
+  (x-\xi)^A := \exp(A \log(x-\xi)) = \sum_{m=0}^{\infty} \frac{1}{m!} A^m (\log(x-\xi))^m
+\]
+もし $A$ が対角行列 $\mathrm{diag}(\lambda_1, \dots, \lambda_n)$ であれば、この行列のべき乗は各成分を計算するだけで済み、直感通り $\mathrm{diag}((x-\xi)^{\lambda_1}, \dots, (x-\xi)^{\lambda_n})$ に一致する。
+
+しかし、特性指数の差が整数になるなどして $A$ が対角化不可能となり、ジョルダン標準形に非対角成分を含む場合、この定義から必然的に「対数特異性」が生じる。
+例えば、2次のジョルダン細胞 $A = \begin{pmatrix} \lambda & 1 \\ 0 & \lambda \end{pmatrix}$ の場合、行列の指数関数の性質（可換な行列の和の指数法則）を用いると、
+\begin{align*}
+  (x-\xi)^A &= \exp\left( \begin{pmatrix} \lambda & 1 \\ 0 & \lambda \end{pmatrix} \log(x-\xi) \right) \\
+  &= \exp\left( \begin{pmatrix} \lambda \log(x-\xi) & 0 \\ 0 & \lambda \log(x-\xi) \end{pmatrix} + \begin{pmatrix} 0 & \log(x-\xi) \\ 0 & 0 \end{pmatrix} \right) \\
+  &= (x-\xi)^\lambda I \cdot \exp\left( \begin{pmatrix} 0 & \log(x-\xi) \\ 0 & 0 \end{pmatrix} \right)
+\end{align*}
+ここで、右側の行列は2乗すると零行列になる（べき零行列である）ため、指数関数の級数展開は $m=1$ の項で打ち切られ、
+\begin{align*}
+  (x-\xi)^A &= (x-\xi)^\lambda \left( I + \begin{pmatrix} 0 & \log(x-\xi) \\ 0 & 0 \end{pmatrix} \right) \\
+  &= (x-\xi)^\lambda \begin{pmatrix} 1 & \log(x-\xi) \\ 0 & 1 \end{pmatrix}
+\end{align*}
+となる。このように、一般の行列に対するべき乗の定義そのものが、解に $\log(x-\xi)$ という対数項を発生させる代数的なからくりとなっている。
+\end{Q}
+
+\textbf{ステップ4：一般の基本解行列 $Y(x,t)$ への移行}
+ステップ3までで、微分方程式を満たすある特定の基本解行列 $\tilde{Y}(x,t) = \Phi(x,t)(x-\xi)^A$ が得られた。
+線形常微分方程式の理論より、任意の基本解行列 $Y(x,t)$ は、$\tilde{Y}(x,t)$ に $x$ に依存しない可逆な定数行列 $G(t)$ を右から掛けたものとして一意に表される。
+したがって、
+\[
+  Y(x,t) = \tilde{Y}(x,t)G(t) = \Phi(x,t)(x-\xi)^A G(t)
+\]
+となり、求める局所表示\eqref{eq:3.4_matrix_solution_representation_Phi_G}が完全に導出された。
+\end{Q}
+
+\eqref{eq:3.4_matrix_solution_representation_Phi_G}を\eqref{eq:3.1_deformation_system_matrix}の第2式（$\partial_{t_l} Y = A^{(l)}Y$）に代入すると
+
+\begin{align}\label{eq:3.4_matrix_representation_A_Phi_G}
+  A^{(l)}(x,t) &= \frac{\partial Y}{\partial t_l}Y^{-1}\\
+  &= \frac{\partial \Phi}{\partial t_l}\Phi^{-1} - \frac{1}{x-\xi}\frac{\partial \xi}{\partial t_l}\Phi A \Phi^{-1} + \Phi(x-\xi)^A \frac{\partial G}{\partial t_l}G^{-1}(x-\xi)^{-A}\Phi^{-1}\nonumber
+\end{align}
+となる．
+
+\begin{Q}[なぜ特異点 $x=\xi$ の周りで局所表示\eqref{eq:3.4_matrix_solution_representation_Phi_G}を考え、複雑な\eqref{eq:3.4_matrix_representation_A_Phi_G}の計算を行う必要があるのか？ また、\eqref{eq:3.4_matrix_representation_A_Phi_G}は具体的にどのように導出されるか？]
+\textbf{A.} \textbf{【目的】} $A^{(l)}(x,t)$ が $x$ の有理関数行列であることを利用し、各特異点での「極の位数」と「主要部（留数）」を決定するため。これらを足し合わせることで $A^{(l)}$ の全体像（大域的な形）を決定でき、それがシュレジンガー系の具体的な方程式となる。
+
+\textbf{【導出】} 積の微分法則を用いる。$Y = \Phi (x-\xi)^A G$ と $Y^{-1} = G^{-1} (x-\xi)^{-A} \Phi^{-1}$ を $\frac{\partial Y}{\partial t_l}Y^{-1}$ に代入する。
+$\frac{\partial Y}{\partial t_l}$ は3つの項の和になる。\\
+1. $\Phi$ の微分: $\frac{\partial \Phi}{\partial t_l} (x-\xi)^A G$\\
+2. $(x-\xi)^A$ の微分: チェインルールより $\Phi \left( - \frac{\partial \xi}{\partial t_l} A (x-\xi)^{A-I} \right) G = - \frac{1}{x-\xi} \frac{\partial \xi}{\partial t_l} \Phi A (x-\xi)^A G$\\
+3. $G$ の微分: $\Phi (x-\xi)^A \frac{\partial G}{\partial t_l}$
+これら各項の右から $Y^{-1}$ を掛けると、右側の $(x-\xi)^A G$ 等が相殺・変形され、それぞれ\eqref{eq:3.4_matrix_representation_A_Phi_G}の第1項、第2項（極を持つ主要部）、第3項に一致する。
+\end{Q}
+
+この表示から，次の結果が得られる．詳しい説明は省略する．
+
+\begin{proposition}\label{prop:3.4_matrix_ODE_monodoromy_deformation_property}
+(1) 行列 $A^{(l)}(x,t)$ は，微分方程式\eqref{eq:3.1_x_ODE_matrix}の正則点，すなわち $P(x,t)$ の正則点，では正則となる．\\
+(2) \eqref{eq:3.1_x_ODE_matrix}の確定特異点 $x=\xi$ においては，もし $\xi$ が $t_l$ に依存しなければ，$x=\xi$ で $A^{(l)}(x,t)$ は正則となる．\\
+(3) 確定特異点の位置 $\xi$ が $t_l$ に依存すれば，$x=\xi$ は $A^{(l)}(x,t)$ の1位の極である。
+\end{proposition}
+
+\begin{Q}[命題\ref{prop:3.4_matrix_ODE_monodoromy_deformation_property}の証明について：(1)正則点での振る舞いは式\eqref{eq:3.4_matrix_representation_A_Phi_G}に $P(x,t)$ が出てこないのにどう証明するのか？ また、(2)(3)において、式\eqref{eq:3.4_matrix_representation_A_Phi_G}の第1項や第3項が極を持ったり、第2項と打ち消し合ったりしないとどうして言い切れるのか？]
+\textbf{A.} (1)は式\eqref{eq:3.4_matrix_representation_A_Phi_G}を使わず「常微分方程式の基本定理」から直接導かれ、(2)(3)は「行列の可換性」によって第3項の特異性が完全に消滅することで証明される。
+
+\textbf{【(1) 正則点での正則性の証明】}
+式\eqref{eq:3.4_matrix_representation_A_Phi_G}は特異点 $x=\xi$ の近傍でのみ作られた局所表示であるため、正則点では使えない。正則点 $x=x_0$ においては、定義 $A^{(l)} = \frac{\partial Y}{\partial t_l}Y^{-1}$ に立ち返る。
+$x_0$ が $P(x,t)$ の正則点であれば、常微分方程式の基本定理（初期値問題の解の解析性）により、基本解行列 $Y(x,t)$ は $x=x_0$ の近傍で $x$ および $t$ について正則（解析的）であり、かつ可逆である。
+したがって、その $t_l$ 微分 $\frac{\partial Y}{\partial t_l}$ も正則であり、正則な行列と正則な逆行列の積である $A^{(l)}$ もまた $x=x_0$ において正則となる。
+
+\textbf{【(2)(3) 確定特異点での極の評価】}
+確定特異点 $x=\xi$ の近傍では式\eqref{eq:3.4_matrix_representation_A_Phi_G}を用いる。各項の特異性（極の有無）を個別に評価する。
+\[
+  A^{(l)} = \underbrace{\frac{\partial \Phi}{\partial t_l}\Phi^{-1}}_{\text{第1項}} - \underbrace{\frac{1}{x-\xi}\frac{\partial \xi}{\partial t_l}\Phi A \Phi^{-1}}_{\text{第2項}} + \underbrace{\Phi(x-\xi)^A \frac{\partial G}{\partial t_l}G^{-1}(x-\xi)^{-A}\Phi^{-1}}_{\text{第3項}}
+\]
+
+\begin{itemize}
+    \item \textbf{第1項の評価：} $\Phi(x,t)$ は $x=\xi$ で正則かつ可逆であるため、その微分も正則。よって第1項は完全に正則である。
+    
+    \item \textbf{第3項の評価（最大のポイント）：} 
+    一見すると $(x-\xi)^{\pm A}$ があるため極や分岐を持ちそうに見えるが、実は相殺される。
+    ゲージ行列 $G(t)$ はモノドロミーを不変に保つため、特異点におけるモノドロミー行列 $\exp(2\pi i A)$ と可換でなければならない。特性指数の差が整数でない（条件P2）ため、これは $G(t)$ が $A$ 自身と可換であることを意味する。
+    $G(t)$ が $A$ と可換なら、$\frac{\partial G}{\partial t_l}G^{-1}$ も $A$ と可換になる。行列の指数関数の性質から、可換な行列は $(x-\xi)^A$ と順序を交換できる。
+    
+    \begin{Q}[前項の証明において、「モノドロミーを不変に保つこと」からなぜ可換性が生じるのか？ また、「特性指数の差が整数でない（条件P2）」ことが、なぜ $\exp(2\pi i A)$ との可換性を $A$ 自身との可換性にすり替えることを正当化するのか？]
+\textbf{A.} 厳密には、$G(t)$ 自身ではなくその対数微分 $U = \frac{\partial G}{\partial t_l}G^{-1}$ が可換になる。これは「モノドロミー行列の $t$ 微分がゼロであること」と「行列成分の比較」から以下のように鮮やかに証明される。
+
+\textbf{1. モノドロミー不変性から生じる可換性} \\
+基本解行列 $Y = \Phi (x-\xi)^A G(t)$ が特異点 $x=\xi$ の周りを1周したとき、$(x-\xi)^A$ は $(x-\xi)^A \exp(2\pi i A)$ となる。したがって解析接続後の解は
+\[
+  Y^\gamma = \Phi (x-\xi)^A \exp(2\pi i A) G(t) = Y \cdot G(t)^{-1} \exp(2\pi i A) G(t)
+\]
+となる。すなわち、大域的なモノドロミー行列は $\Gamma = G(t)^{-1} \exp(2\pi i A) G(t)$ である。
+仮定よりモノドロミーは $t$ に依存しない（不変である）ため、$\frac{\partial \Gamma}{\partial t_l} = 0$ である。
+$\Gamma$ を $t_l$ で微分すると（$\frac{\partial G^{-1}}{\partial t_l} = -G^{-1}\frac{\partial G}{\partial t_l}G^{-1}$ に注意して）、
+\[
+  0 = -G^{-1}\frac{\partial G}{\partial t_l}G^{-1} \exp(2\pi i A) G + G^{-1} \exp(2\pi i A) \frac{\partial G}{\partial t_l}
+\]
+両辺の左から $G$、右から $G^{-1}$ を掛け、$U = \frac{\partial G}{\partial t_l}G^{-1}$ とおくと、
+\[
+  0 = -U \exp(2\pi i A) + \exp(2\pi i A) U \quad \implies \quad [U, \exp(2\pi i A)] = 0
+\]
+となり、「$U = \frac{\partial G}{\partial t_l}G^{-1}$ は局所モノドロミー $\exp(2\pi i A)$ と可換である」ことが厳密に導かれる。
+
+\textbf{2. 条件(P2)が引き起こす奇跡（$A$ との可換性）} \\
+次に、$\exp(2\pi i A)$ と可換な行列 $U$ が、なぜ $A$ 自身とも可換になるのかを示す。
+$A$ は対角行列 $A = \mathrm{diag}(\lambda_1, \dots, \lambda_n)$ としてよい。すると $\exp(2\pi i A)$ も対角行列 $\mathrm{diag}(e^{2\pi i \lambda_1}, \dots, e^{2\pi i \lambda_n})$ となる。
+可換性の式 $\exp(2\pi i A) U = U \exp(2\pi i A)$ の $(j, k)$ 成分を比較すると、
+\[
+  e^{2\pi i \lambda_j} U_{jk} = U_{jk} e^{2\pi i \lambda_k} \quad \implies \quad U_{jk} \left( e^{2\pi i \lambda_j} - e^{2\pi i \lambda_k} \right) = 0
+\]
+ここで\textbf{条件(P2)}が火を噴く。(P2)は「任意の $j \neq k$ に対して $\lambda_j - \lambda_k$ が整数ではない」という条件である。オイラーの公式から、差が整数でなければ $e^{2\pi i \lambda_j} \neq e^{2\pi i \lambda_k}$ である。
+したがって、$j \neq k$ のときは括弧の中身が絶対に $0$ にならないため、\textbf{$U_{jk} = 0$ でなければならない}。
+これは「行列 $U$ が対角行列である」ことを意味する。
+$A$ も対角行列、$U$ も対角行列であるため、対角行列同士は必ず可換である。よって
+\[
+  [U, A] = 0 \quad \implies \quad \left[ \frac{\partial G}{\partial t_l}G^{-1}, A \right] = 0
+\]
+が結論づけられる。この可換性のおかげで、前項の第3項における $\frac{\partial G}{\partial t_l}G^{-1}$ と $(x-\xi)^A$ の順序交換が完全に正当化され、特異性の見事な相殺が起こるのである。
+\end{Q}
+
+    したがって、
+    \begin{align*}
+      \text{第3項} &= \Phi \cdot (x-\xi)^A \left( \frac{\partial G}{\partial t_l}G^{-1} \right) (x-\xi)^{-A} \cdot \Phi^{-1} \\
+      &= \Phi \cdot \left( \frac{\partial G}{\partial t_l}G^{-1} \right) (x-\xi)^A (x-\xi)^{-A} \cdot \Phi^{-1} \\
+      &= \Phi \left( \frac{\partial G}{\partial t_l}G^{-1} \right) \Phi^{-1}
+    \end{align*}
+    となり、なんと $x-\xi$ の依存性が完全に消滅する！ $\Phi$ も $G$ も正則であるため、第3項も完全に正則であることが厳密に保証される。
+    
+    \item \textbf{第2項の評価と結論：}
+    以上より、極を生み出す可能性のある項は第2項のみに絞られた。
+    もし $\xi$ が $t_l$ に依存しなければ $\frac{\partial \xi}{\partial t_l} = 0$ となり、第2項は消滅する。すべて正則な項のみとなるため、$A^{(l)}$ は正則である（(2)の証明）。
+    もし $\xi$ が $t_l$ に依存すれば $\frac{\partial \xi}{\partial t_l} \neq 0$ であり、第2項は $\frac{1}{x-\xi}$ を持つ。$\Phi A \Phi^{-1}$ は正則かつ非零であるため、他の項と打ち消し合うことはなく、$A^{(l)}$ は $x=\xi$ に「ちょうど1位の極」を持つことが結論づけられる（(3)の証明）。
+\end{itemize}
+\end{Q}
+
+以下、第2章第5節の結果を使って、行列型のシュレジンガー型微分方程式
+\begin{equation}\label{eq:3.4_Schleginger}
+  \frac{dY}{dx} = \left( \sum_{l=1}^L \frac{A_l}{x-t_l} \right) Y
+\end{equation}
+のモノドロミー保存変形について調べてみよう．計算の細部に立ち入ることはせず，筋道を紹介する．
+
+変形のパラメータ $t_l$ としては，確定特異点の位置をとる．すなわち
+\[
+  t = (t_1, t_2, \cdots, t_L)
+\]
+とする．$t=(t_1, \cdots, t_L)$ の変域 $U \subset \mathbb{C}^L$ は必要に応じて小さくとっておく．また
+\[
+  A_\infty = - \sum_{l=1}^L A_l
+\]
+は，対角化可能であるとし，あらかじめ対角行列にとっておく．$Y=Y(x,t)$ を\eqref{eq:3.4_Schleginger}の基本解行列で，そのモノドロミー群は $t$ に依存しないとする．
+
+\eqref{eq:3.4_matrix_representation_A_Phi_G}により $A^{(l)}(x,t)$ を定めれば、命題\ref{prop:3.4_matrix_ODE_monodoromy_deformation_property}により，$A^{(l)}(x,t)$ は $x=t_l$ のみで1位の極をもち、それ以外の $\mathbb{P}^1(\mathbb{C})$ 上の各点で正則である．我々は，ここで L. Schlesinger にならって，$x=\infty$ の近傍において
+\[
+  Y(x,t) = \left( \sum_{j=0}^\infty \Phi_j(t) x^{-j} \right) x^{-A_\infty}, \quad \Phi_0 = I_n
+\]
+と表されている，と仮定する．すると，\eqref{eq:3.4_matrix_representation_A_Phi_G}から
+\[
+  A^{(l)}(\infty, t) = 0
+\]
+である．
+
+\begin{Q}[無限遠 $x=\infty$ における展開の仮定から、なぜ $A_\infty$ の固有値に依存することなく、直ちに $A^{(l)}(\infty,t) = 0$ が導かれるのか？]
+\textbf{A.} 変形行列の定義 $A^{(l)} = \frac{\partial Y}{\partial t_l}Y^{-1}$ を計算する際、$Y$ と $Y^{-1}$ に含まれる $x^{\pm A_\infty}$ が「微分されることなく完璧に相殺される」からである。
+
+具体的には以下の通りである。
+前提として、無限遠における留数行列 $A_\infty = -\sum A_l$ は、モノドロミー保存の仮定によりその固有値（特性指数）が $t$ に依存しない。テキストの仮定によりあらかじめ定数対角行列として取ってあるため、$\frac{\partial A_\infty}{\partial t_l} = 0$ である。
+
+$Y(x,t) = \Phi(x,t)x^{-A_\infty}$ とおく。ここで $\Phi(x,t) = I_n + \Phi_1(t)x^{-1} + \Phi_2(t)x^{-2} + \dots$ である。
+これを $t_l$ で偏微分すると、$A_\infty$ が定数であるため、微分作用素は $\Phi$ にしかかからない。
+\[
+  \frac{\partial Y}{\partial t_l} = \frac{\partial \Phi}{\partial t_l} x^{-A_\infty} + \Phi \frac{\partial}{\partial t_l}(x^{-A_\infty}) = \frac{\partial \Phi}{\partial t_l} x^{-A_\infty}
+\]
+一方、基本解行列の逆行列は
+\[
+  Y^{-1} = (x^{-A_\infty})^{-1} \Phi^{-1} = x^{A_\infty} \Phi^{-1}
+\]
+である。これらを $A^{(l)}$ の定義式に代入すると、中央で $x^{-A_\infty}$ と $x^{A_\infty}$ が隣り合い、完全に単位行列となって消滅する。
+\begin{align*}
+  A^{(l)} &= \left( \frac{\partial \Phi}{\partial t_l} x^{-A_\infty} \right) \left( x^{A_\infty} \Phi^{-1} \right) \\
+  &= \frac{\partial \Phi}{\partial t_l} \Phi^{-1}
+\end{align*}
+ここで、$\Phi_0 = I_n$ は定数であるため $\frac{\partial \Phi}{\partial t_l}$ は $O(x^{-1})$ の項から始まる。また $\Phi^{-1} = I_n + O(x^{-1})$ である。
+したがって、
+\[
+  A^{(l)} = O(x^{-1}) \cdot (I_n + O(x^{-1})) = O(x^{-1})
+\]
+となり、$A_\infty$ の固有値のいかんにかかわらず全体のオーダーは厳密に $O(x^{-1})$ となる。よって $x \to \infty$ で $A^{(l)}(\infty, t) = 0$ となる。
+\end{Q}
+
+一方，$x=t_l$ における解の表示\eqref{eq:3.4_matrix_solution_representation_Phi_G}を\eqref{eq:3.4_Schleginger}に代入すると
+\[
+  \Phi(t_l, t) A \Phi(t_l, t)^{-1} = A_l
+\]
+が得られる。
+
+\begin{Q}[$x=t_l$ における局所表示 $Y(x,t) = \Phi(x,t)(x-t_l)^A G(t)$ をシュレジンガー系に代入すると、なぜ $\Phi(t_l, t) A \Phi(t_l, t)^{-1} = A_l$ が得られるのか？]
+\textbf{A.} 代入後、右から $G(t)^{-1}$ および $(x-t_l)^{-A}$ を掛けて整理し、$x=t_l$ における留数（$(x-t_l)^{-1}$ の係数）を比較することで直ちに導かれる。
+
+具体的な計算プロセスは以下の通りである。
+基本解行列 $Y = \Phi (x-t_l)^A G(t)$ を微分方程式 $\frac{\partial Y}{\partial x} = \left( \sum_{h=1}^L \frac{A_h}{x-t_h} \right) Y$ に代入する。
+左辺は積の微分法則と行列のべき乗の微分 $\frac{\partial}{\partial x}(x-t_l)^A = A(x-t_l)^{A-I} = A(x-t_l)^{-1}(x-t_l)^A$ より、
+\[
+  \text{左辺} = \frac{\partial \Phi}{\partial x}(x-t_l)^A G(t) + \Phi A \frac{1}{x-t_l} (x-t_l)^A G(t)
+\]
+となる。右辺は、
+\[
+  \text{右辺} = \left( \sum_{h=1}^L \frac{A_h}{x-t_h} \right) \Phi (x-t_l)^A G(t)
+\]
+である。ここで、両辺の右側から $G(t)^{-1} (x-t_l)^{-A}$ を掛けて特異性を持つ因子を相殺すると、
+\[
+  \frac{\partial \Phi}{\partial x} + \Phi A \frac{1}{x-t_l} = \left( \sum_{h=1}^L \frac{A_h}{x-t_h} \right) \Phi
+\]
+を得る。
+この等式の両辺について、$x \to t_l$ としたときの最も特異性の高い項（$(x-t_l)^{-1}$ の項、すなわち特異点における留数）を比較する。
+\begin{itemize}
+    \item 左辺：$\frac{\partial \Phi}{\partial x}$ は正則であるため、極を持つのは第2項のみであり、その留数は $\Phi(t_l, t) A$ である。
+    \item 右辺：総和のうち $h=l$ の項 $\frac{A_l}{x-t_l}\Phi$ のみが $x=t_l$ で極を持ち、その他の $h \neq l$ の項は正則である。したがって留数は $A_l \Phi(t_l, t)$ である。
+\end{itemize}
+これらを等置すると、
+\[
+  \Phi(t_l, t) A = A_l \Phi(t_l, t)
+\]
+となる。$\Phi(t_l, t)$ は可逆行列であるから、右から $\Phi(t_l, t)^{-1}$ を掛けることで
+\[
+  \Phi(t_l, t) A \Phi(t_l, t)^{-1} = A_l
+\]
+が厳密に導出される。
+\end{Q}
+
+上の2つの式から、結局
+\begin{equation*}
+  A^{(l)}(x,t) = - \frac{A_l}{x-t_l}
+\end{equation*}
+
+\begin{Q}[テキストの「上の2つの式から、結局…」の部分にはどのような論理の飛躍があり、どうやって $A^{(l)}(x,t)$ の大域的な形を決定しているのか？]
+\textbf{A.} 複素解析における強力な定理である「リウヴィルの定理（拡張版）」を暗黙に適用している。
+有理関数行列 $A^{(l)}(x,t)$ について、以下の3つの局所的な情報が揃っている。
+\begin{enumerate}
+    \item \textbf{極の位置:} 命題3.11より、$x=t_l$ にのみ1位の極を持つ。よって $A^{(l)}(x,t) = \frac{C_l}{x-t_l} + P(x)$ （$P(x)$は多項式）と書ける。
+    \item \textbf{無限遠での振る舞い:} $A^{(l)}(\infty,t) = 0$ であるため、多項式部分 $P(x)$ は恒等的に $0$ でなければならない。すなわち $A^{(l)}(x,t) = \frac{C_l}{x-t_l}$ に確定する。
+    \item \textbf{留数の値 $C_l$:} 前ページの(3.56)式において $\xi = t_l$ とすると、主要部（極を持つ項）は第2項の $- \frac{\partial t_l}{\partial t_l} \Phi A \Phi^{-1} = -\Phi A \Phi^{-1}$ となる。直前の式 $\Phi A \Phi^{-1} = A_l$ を代入すれば、留数は $C_l = -A_l$ となる。
+\end{enumerate}
+これらをつなぎ合わせることで、大域的な形が $A^{(l)}(x,t) = - \frac{A_l}{x-t_l}$ に一意に定まるのである。
+\end{Q}
+
+となることがわかる．詳しい説明は省略したが，上で述べたような考察により次の命題が得られる．
+
+\begin{proposition}\label{prop:3.4_Schleginger_deformation_system}
+シュレジンガー型微分方程式\eqref{eq:3.4_Schleginger}の変形微分方程式は以下で与えられる．
+\begin{equation*}
+  \begin{cases}
+    \displaystyle \frac{\partial Y}{\partial x} = \left( \sum_{l=1}^L \frac{A_l}{x-t_l} \right) Y \\[5mm]
+    \displaystyle \frac{\partial Y}{\partial t_l} = \left( - \frac{A_l}{x-t_l} \right) Y
+  \end{cases}
+\end{equation*}
+\end{proposition}
+
+次に、命題\ref{prop:3.4_Schleginger_deformation_system}の変形微分方程式系の完全積分可能条件\eqref{eq:3.1_compatibility_PA}を具体的に計算する．まず
+\[
+  \sum_{h=1}^L \frac{1}{x-t_h} \frac{\partial A_h}{\partial t_l} = \left[ -\frac{A_l}{x-t_l}, \sum_{h=1}^L \frac{A_h}{x-t_h} \right]
+\]
+となるが，右辺を丁寧に変形すると
+\[
+  \sum_{h=1(h \neq l)}^L \frac{[A_h, A_l]}{t_h - t_l} \left( \frac{1}{x-t_h} - \frac{1}{x-t_l} \right)
+\]
+を得る．
+
+\begin{Q}[「右辺を丁寧に変形すると」とあるが、交換子の計算と部分分数分解の具体的なプロセスはどうなっているか？]
+\textbf{A.} 右辺の交換子は双線形性により和の外に出せる。各項は
+$\left[ -\frac{A_l}{x-t_l}, \frac{A_h}{x-t_h} \right] = -\frac{1}{(x-t_l)(x-t_h)} [A_l, A_h] = \frac{1}{(x-t_l)(x-t_h)} [A_h, A_l]$ 
+となる。ここで $h=l$ の項は自己交換子 $[A_l, A_l] = 0$ となり消滅するため、和の添字は $h \neq l$ のみとなる。
+さらに、有理関数の部分を部分分数分解すると
+$\frac{1}{(x-t_l)(x-t_h)} = \frac{1}{t_h - t_l} \left( \frac{1}{x-t_h} - \frac{1}{x-t_l} \right)$ 
+となるため、これを代入することでテキストの展開式が厳密に得られる。
+\end{Q}
+
+ここで，$\frac{1}{x-t_h}$ の係数を比較すれば，$A_h$ に関する微分方程式系
+
+\begin{align}
+  \frac{\partial A_h}{\partial t_l} &= \frac{[A_h, A_l]}{t_h - t_l} \quad (h \neq l)\label{eq:3.4_compatibility_hl} \\
+  \frac{\partial A_l}{\partial t_l} &= - \sum_{h=1(h \neq l)}^L \frac{[A_h, A_l]}{t_h - t_l}\label{eq:3.4_compatibility_ll}
+\end{align}
+が成立することがわかる．
+
+\begin{Q}[左辺と右辺の係数比較から、なぜ $h \neq l$ の場合\eqref{eq:eq:3.4_compatibility_hl}と $h=l$ の場合\eqref{eq:3.4_compatibility_ll}の2つの異なる方程式が抽出されるのか？]
+\textbf{A.} 左辺は $\sum_{h=1}^L \frac{\partial A_h / \partial t_l}{x-t_h}$ であり、すべての極 $x=t_k$ $(k=1,\dots,L)$ に独立した係数を持っている。
+これを右辺の展開式と比較する。\\
+1. $h \neq l$ の極 $\frac{1}{x-t_h}$：右辺ではシグマの中の1つの項からしか寄与がない。係数をそのまま比較して $\frac{\partial A_h}{\partial t_l} = \frac{[A_h, A_l]}{t_h - t_l}$ を得る（\eqref{eq:3.4_compatibility_hl}式）。\\
+2. $h = l$ の極 $\frac{1}{x-t_l}$：右辺を見ると、$-\frac{1}{x-t_l}$ という項が「すべての $h \ (\neq l)$」に共通して存在している。つまり、右辺ではこの極に対する寄与が和全体から集中して集まってくる。これらを合算して左辺の係数 $\frac{\partial A_l}{\partial t_l}$ と等置することで、総和記号を含む\eqref{eq:3.4_compatibility_ll}式が得られる。
+\end{Q}
+
+\begin{definition}
+非線型偏微分方程式系\eqref{eq:3.4_compatibility_hl}、\eqref{eq:3.4_compatibility_ll}を\textbf{シュレジンガー系}という．
+\end{definition}
+
+他方，条件\eqref{eq:3.1_compatibility_AA}は $h=l$ のときは自明であり，$h \neq l$ のときは微分方程式系
+\[
+  -\frac{1}{x-t_h} \frac{\partial A_h}{\partial t_l} + \frac{1}{x-t_l} \frac{\partial A_l}{\partial t_h} = \frac{[A_l, A_h]}{t_l - t_h} \left( \frac{1}{x-t_l} - \frac{1}{x-t_h} \right)
+\]
+が従う．この両辺の係数を等しいとおいて得られる微分方程式系は上の(3.58)と同じものである．すなわち，条件\eqref{eq:3.1_compatibility_AA}は\eqref{eq:3.1_compatibility_PA}に含まれている．
+
+\begin{proposition}\label{prop:3.4_schleginger_compatibility}
+シュレジンガー系\eqref{eq:3.4_compatibility_hl}、\eqref{eq:3.4_compatibility_ll}は完全積分可能である．
+\end{proposition}
+
+\begin{proof}
+$df$ を，関数 $f(t)$ の $t=(t_1,\cdots,t_L)$ に関する微分とする．すなわち
+\[
+  dA_l = \sum_{h=1}^L \frac{\partial A_l}{\partial t_h} dt_h
+\]
+である。さらに微分1型式 $\Omega_l$ を
+\[
+  \Omega_l = \sum_{h=1(h \neq l)}^L \frac{[A_h, A_l]}{t_h - t_l} dt_h - \sum_{h=1(h \neq l)}^L \frac{[A_h, A_l]}{t_h - t_l} dt_l
+\]
+により定める．するとシュレジンガー系\eqref{eq:3.4_compatibility_hl}、\eqref{eq:3.4_compatibility_ll}は1種類のパッフ型式
+\[
+  dA_l = \Omega_l \quad (l=1,\cdots,L)
+\]
+で表される．
+
+\begin{Q}[シュレジンガー系の完全積分可能性を示すために、なぜ微分形式 $\Omega_l$ を導入し $d\Omega_l = 0$ を確かめるというアプローチをとるのか？]%TODO ステートメントを確認
+\textbf{A.} 多数の変数 $t_1, \dots, t_L$ に対する複雑な偏微分方程式系を、微分1形式を用いた「パッフ方程式（Pfaffian system） $dA_l = \Omega_l$」として幾何学的に統合するためである。
+フロベニウスの定理（あるいはポアンカレの補題）により、このような方程式系が矛盾なく解を持つ（完全積分可能である）ための必要十分条件は、外微分をとった $d(dA_l) = d\Omega_l$ が $0$ になること（ゼロ曲率条件）である。直接的な微分の順序交換を計算するよりも、外微分の代数的な操作（$d^2 = 0$ や $dt_h \wedge dt_l$ の反対称性）を用いることで、はるかに見通し良く証明を記述できるからである。
+\end{Q}
+
+命題3.13に主張する完全積分可能性を示すには
+\[
+  d\Omega_l = 0 \quad (l=1,\cdots,L)
+\]
+を示せばよい．このことは，それほど簡単ではないにしても，とにかく直接計算で確かめることができる．
+\end{proof}
+
+\vspace{1em}
+\noindent
+\textbf{【補足：$d\Omega_l = 0$ の直接計算による証明】}
+
+微分1型式 $\Omega_l$ を見やすくするため、次のように書き直す。
+\[
+  \Omega_l = \sum_{h=1 (h \neq l)}^L \frac{[A_h, A_l]}{t_h - t_l} (dt_h - dt_l)
+\]
+この外微分 $d\Omega_l$ を計算する。積の微分法則（ライプニッツ則）と $d(dt_h - dt_l) = 0$ より、係数の微分のみを考えればよい。
+\[
+  d\Omega_l = \sum_{h \neq l} d\left( \frac{[A_h, A_l]}{t_h - t_l} \right) \wedge (dt_h - dt_l)
+\]
+係数の微分は以下のようになる。
+\[
+  d\left( \frac{[A_h, A_l]}{t_h - t_l} \right) = \frac{[dA_h, A_l] + [A_h, dA_l]}{t_h - t_l} - \frac{[A_h, A_l]}{(t_h - t_l)^2}(dt_h - dt_l)
+\]
+これを $d\Omega_l$ の式に代入するが、第2項は $(dt_h - dt_l) \wedge (dt_h - dt_l) = 0$ となるため消滅する。したがって、調べるべき式は以下の2つの項の和に帰着する。
+\begin{align*}
+  d\Omega_l &= \underbrace{ \sum_{h \neq l} \frac{[dA_h, A_l]}{t_h - t_l} \wedge (dt_h - dt_l) }_{I_1} + \underbrace{ \sum_{h \neq l} \frac{[A_h, dA_l]}{t_h - t_l} \wedge (dt_h - dt_l) }_{I_2}
+\end{align*}
+
+\textbf{1. 第2項 $I_2$ の計算} \\
+$I_2$ に $dA_l = \sum_{k \neq l} \frac{[A_k, A_l]}{t_k - t_l}(dt_k - dt_l)$ を代入する。
+\[
+  I_2 = \sum_{h \neq l} \sum_{k \neq l} \frac{[A_h, [A_k, A_l]]}{(t_h - t_l)(t_k - t_l)} (dt_k - dt_l) \wedge (dt_h - dt_l)
+\]
+$h=k$ の項はウェッジ積がゼロになるため消える。残る $h \neq k$ の項について、添字 $h$ と $k$ を対称化してまとめる。$(dt_k - dt_l) \wedge (dt_h - dt_l)$ をくくり出すと、係数は
+\[
+  \frac{1}{2} \left( \frac{[A_h, [A_k, A_l]]}{(t_h - t_l)(t_k - t_l)} - \frac{[A_k, [A_h, A_l]]}{(t_k - t_l)(t_h - t_l)} \right) = \frac{ [A_h, [A_k, A_l]] + [A_k, [A_l, A_h]] }{2(t_h - t_l)(t_k - t_l)}
+\]
+となる（交換子の反対称性 $[A_h, A_l] = -[A_l, A_h]$ を用いた）。ここで\textbf{ヤコビの恒等式}より
+\[
+  [A_h, [A_k, A_l]] + [A_k, [A_l, A_h]] = -[A_l, [A_h, A_k]] = [[A_h, A_k], A_l]
+\]
+となるため、
+\begin{equation}
+  I_2 = \frac{1}{2} \sum_{h, k \neq l (h \neq k)} \frac{[[A_h, A_k], A_l]}{(t_h - t_l)(t_k - t_l)} (dt_k - dt_l) \wedge (dt_h - dt_l)
+  \label{eq:3.4_I2_result}
+\end{equation}
+を得る。
+
+\textbf{2. 第1項 $I_1$ の計算} \\
+次に $I_1$ に $dA_h = \sum_{k \neq h} \frac{[A_k, A_h]}{t_k - t_h}(dt_k - dt_h)$ を代入する。
+\[
+  I_1 = \sum_{h \neq l} \sum_{k \neq h} \frac{[[A_k, A_h], A_l]}{(t_h - t_l)(t_k - t_h)} (dt_k - dt_h) \wedge (dt_h - dt_l)
+\]
+関係式 $dt_k - dt_h = (dt_k - dt_l) - (dt_h - dt_l)$ を用いると、
+\[
+  (dt_k - dt_h) \wedge (dt_h - dt_l) = (dt_k - dt_l) \wedge (dt_h - dt_l)
+\]
+となる（$dt_h \wedge dt_h = 0$ のため）。また $k=l$ の項もウェッジ積がゼロになるため除外できる。
+$I_2$ と同様に $h$ と $k$ で対称化する。入れ替えにより、ウェッジ積と内側の交換子 $[A_k, A_h]$ からそれぞれ $-1$ が出て打ち消し合い、係数の分母の差から次のような構造が現れる。
+\begin{align*}
+  \frac{1}{2} & [[A_k, A_h], A_l] \left( \frac{1}{(t_h - t_l)(t_k - t_h)} - \frac{1}{(t_k - t_l)(t_h - t_k)} \right) \\
+  &= \frac{1}{2} [[A_k, A_h], A_l] \frac{1}{t_k - t_h} \left( \frac{1}{t_h - t_l} - \frac{1}{t_k - t_l} \right) \\
+  &= \frac{1}{2} [[A_k, A_h], A_l] \frac{1}{t_k - t_h} \frac{t_k - t_h}{(t_h - t_l)(t_k - t_l)} \\
+  &= \frac{1}{2} \frac{[[A_k, A_h], A_l]}{(t_h - t_l)(t_k - t_l)}
+\end{align*}
+したがって、
+\begin{equation}
+  I_1 = \frac{1}{2} \sum_{h, k \neq l (h \neq k)} \frac{[[A_k, A_h], A_l]}{(t_h - t_l)(t_k - t_l)} (dt_k - dt_l) \wedge (dt_h - dt_l)
+  \label{eq:3.4_I1_result}
+\end{equation}
+となる。
+
+\textbf{3. 結論（奇跡の相殺）} \\
+式(\eqref{eq:3.4_I2_result})と式(\eqref{eq:3.4_I1_result})を足し合わせる。
+\begin{align*}
+  d\Omega_l &= I_1 + I_2 \\
+  &= \frac{1}{2} \sum_{h, k \neq l (h \neq k)} \frac{ [[A_k, A_h], A_l] + [[A_h, A_k], A_l] }{(t_h - t_l)(t_k - t_l)} (dt_k - dt_l) \wedge (dt_h - dt_l)
+\end{align*}
+交換子の反対称性 $[A_k, A_h] = -[A_h, A_k]$ により、分子の括弧の中身は厳密にゼロとなる。
+以上より、$d\Omega_l = 0$ が示された。 \hfill $\blacksquare$
+
+与えられたモノドロミーを実現する線型フックス型微分方程式として，常にシュレジンガー型微分方程式(3.57)がとれるか，という問題の考察はまだ終わっていない．行列のサイズが $2 \times 2$ の場合にはこの問題の答えは肯定的である．必ずしもシュレジンガー型微分方程式で実現できるとは限らないモノドロミーはどのようなものであろうか．一般の場合には，モノドロミーを勝手に与えると，連立微分方程式系でも見かけの特異点が必要であり，確かにそのような例も知られている．この反例で与えたモノドロミーは可約である．
+
+では既約なモノドロミーを実現する線型フックス型微分方程式に限ったら，そのモノドロミーはシュレジンガー型微分方程式で実現できるだろうか．このことが証明されるならば，単独高階微分方程式のモノドロミー保存変形の結果得られる微分方程式はシュレジンガー系に含まれることになる．
+
+\begin{Q}[テキスト後半で語られている「与えられたモノドロミーを実現する微分方程式が常にシュレジンガー型にとれるか」という問題意識は、数学的に何を意味しているか？ また「見かけの特異点」の役割は何か？]
+\textbf{A.} これは「ヒルベルトの第21問題（リーマン・ヒルベルト問題）」の核心部分である。
+任意のモノドロミー表現を、見かけの特異点を持たないフックス型方程式（シュレジンガー系）だけで実現することは、一般には不可能であることが知られている（1989年のBolibrukhによる反例など）。
+単独高階微分方程式を連立系に直す際などに必然的に生じる「見かけの特異点」は、モノドロミー（大域的な構造）を崩さずに、微分方程式の係数の局所的な自由度を調整する不可欠な役割を担う。可積分系の理論において、この見かけの特異点のダイナミクスこそがパンルヴェ方程式の解の挙動（$\tau$ 関数の零点）を支配するという、極めて重要な事実を示唆する記述である。
+\end{Q}
+
+少なくともわかることは，モノドロミー保存変形を許すということから，シュレジンガー型微分方程式は十分広いクラスのフックス型微分方程式である，ということである．
+
+シュレジンガー系にはいくつかの第一積分が存在する．たとえば
+\[
+  \mathrm{Trace} A_l, \quad \sum_{h=1}^L A_h
+\]
+等である．これらは，モノドロミー保存変形の不変量であり，実際\eqref{eq:3.4_compatibility_hl}、\eqref{eq:3.4_compatibility_ll}の形からも直接見てとれることである．しかし，シュレジンガー系から種々の積分を用いて変数を減らしていく操作を実行することは得策とは言えない．何か見通しがない限り微分方程式の形は複雑になるばかりである．
+
+\begin{Q}[保存量（第一積分）が存在するにもかかわらず、それを用いてシュレジンガー系の変数を消去し、直接解こうとしないのはなぜか？]
+\textbf{A.} シュレジンガー系は行列を成分とする巨大な非線形偏微分方程式系であるため、見通しのないまま代数的な関係式で変数を消去すると、残された方程式の形が絶望的に複雑化・巨大化し、解析が不可能になってしまうからである。
+そのため、一般論を深追いするのではなく、「単独高階方程式への帰着」という別の指導原理（特に有理関数 $a_n^{(l)}$ のラックス方程式に着目するルート）をとる方が、パンルヴェ方程式などの具体的な可積分系を抽出する上で理論上も実際上もはるかに有効なアプローチとなる。
+\end{Q}
+
+したがって，単独高階フックス型微分方程式のモノドロミー保存変形は別の指導原理を求めて，別個に考察するのが理論上も実際上も良い方法である．
+
+単独高階フックス型微分方程式のモノドロミー保存変形において，重要な役割を果たすのは，$x$ の有理関数 $a_n^{(l)}(x,t)$ である．これらはラックスの方程式\eqref{eq:3.1_lax_equation_pa}を満たす、我々の対象である。パンルヴェ方程式は2階微分方程式のモノドロミー保存変形に関係している。第3章第2節で調べたように、$a_2^{(l)}(x,t)$ のラックスの方程式は3階の非斉次線型微分方程式(3.29)であった．また，単独高階微分方程式のモノドロミー保存変形は，変換(3.43)によりSL型の場合に帰着するのであった。また、与えられた微分方程式の2つの解の基本形 $\vec{\varphi}(x,t), \vec{\psi}(x,t)$ で，そのモノドロミー群が $t$ に依存しないものが存在すれば，それらは\eqref{eq:3.3_linear_transform_G}、\eqref{eq:3.3_scalar_matrix_gG}という簡単な変換で移りあう。したがって、変形微分方程式系は本質的に1つである。
+
+以降の節において、具体的に2階フックス型微分方程式のモノドロミー保存変形を調べる。次節では、パンルヴェVI型方程式の多変数化である、ガルニエ系を説明する。2次のシュレジンガー型微分方程式のモノドロミー保存変形との関係、$n=2$ のシュレジンガー系とガルニエ系の関係等についても述べる．
+
+パンルヴェVI型方程式と結びついたフックス型微分方程式は第2.8節で既に触れた．重複を恐れずもう一度書く．
+
+\begin{equation}\label{eq:3.4_2-PDE_x,t}
+  \frac{d^2 y}{dx^2} + p_1(x,t)\frac{dy}{dx} + p_2(x,t)y = 0
+\end{equation}
+\begin{equation}\label{eq:3.4_PVI_coefficient_p1}
+  p_1(x,t) = \frac{1-\kappa_0}{x} + \frac{1-\kappa_1}{x-1} + \frac{1-\theta}{x-t} - \frac{1}{x-\lambda}
+\end{equation}
+
+\begin{Q}[\eqref{eq:3.4_PVI_coefficient_p1}式における係数 $p_1(x,t)$ の極（特異点） $x = 0, 1, t, \lambda$ は、モノドロミー保存変形の理論においてそれぞれどのような幾何学的・解析的な役割を担っているか？]
+\textbf{A.} これらは方程式の特異点であるが、その性質は大きく3つに分類される。
+\begin{itemize}
+    \item \textbf{$x = 0, 1, \infty$（固定特異点）}: 位置が動かない確定特異点。方程式の土台となる空間（$\mathbb{P}^1 \setminus \{0, 1, \infty\}$）を定める。
+    \item \textbf{$x = t$（動く特異点／変形パラメータ）}: 時間発展に相当する独立変数であり、この特異点の位置を動かしてもモノドロミーが不変となるように系を変形させる。
+    \item \textbf{$x = \lambda$（見かけの特異点）}: 解が多価性を持たない（モノドロミーを持たない）特殊な特異点。パラメータ $t$ を動かすと、この $\lambda$ は $x$ 平面上を $t$ の関数 $\lambda(t)$ として複雑に動き回る。実は、この \textbf{$\lambda(t)$ が満たす非線形微分方程式こそが「パンルヴェVI型方程式」そのもの}である。
+\end{itemize}
+\end{Q}
+
+\begin{equation}\label{eq:3.4_PVI_coefficient_p2}
+  p_2(x,t) = \frac{\kappa}{x(x-1)} + \frac{\lambda(\lambda-1)\mu}{x(x-1)(x-\lambda)} - \frac{t(t-1)H}{x(x-1)(x-t)}
+\end{equation}
+\[
+  \kappa = \chi(\chi+\kappa_\infty) = \frac{1}{4}(\kappa_0+\kappa_1+\theta-1)^2 - \frac{1}{4}\kappa_\infty^2
+\]
+
+ここで，$H$ は $\lambda, \mu, t$ の関数として次式で与えられた．
+\begin{align}\label{eq:3.4_PVI_H_representation}
+  t(t-1)H &= \lambda(\lambda-1)(\lambda-t)\mu^2 \nonumber \\
+  &\quad - \{\kappa_0(\lambda-1)(\lambda-t) + \kappa_1\lambda(\lambda-t) + (\theta-1)\lambda(\lambda-1)\} \mu \nonumber \\
+  &\quad + \kappa(\lambda-t)
+\end{align}
+
+\begin{Q}[$p_2(x,t)$ の表示式\eqref{eq:3.4_PVI_coefficient_p2}に現れるパラメータ $\mu$ と関数 $H$ は、幾何学的・力学系的にどのような意味を持っているか？]
+\textbf{A.} $\lambda$ が「見かけの特異点の位置」という空間的な「座標（$q$）」に相当するのに対し、$\mu$ はそれに付随して決まる留数に関する「アクセサリー・パラメータ」であり、力学系における「正準運動量（$p$）」の役割を果たす。そして $H$ はまさにこの力学系の「ハミルトニアン（エネルギー関数）」である。
+すなわち\eqref{eq:3.4_PVI_coefficient_p2}は、方程式の係数という静的な対象の中に、既に背後で躍動する力学系の変数たちが完全に埋め込まれていることを示している。
+\end{Q}
+
+我々は，フックス型微分方程式\eqref{eq:3.4_2-PDE_x,t}、\eqref{eq:3.4_PVI_coefficient_p1}、\eqref{eq:3.4_PVI_coefficient_p2}に関するフックスの問題を再考察する．目標となるのは次の定理である．
+
+\begin{theorem}
+\eqref{eq:3.4_2-PDE_x,t}、\eqref{eq:3.4_PVI_coefficient_p1}、\eqref{eq:3.4_PVI_coefficient_p2}のモノドロミー保存変形は，ハミルトン系
+\begin{equation}\label{eq:3.4_PVI_Hamilton_system}
+  \frac{d\lambda}{dt} = \frac{\partial H}{\partial \mu}, \quad \frac{d\mu}{dt} = -\frac{\partial H}{\partial \lambda}
+\end{equation}
+で与えられる．ここで，$H=H(t;\lambda,\mu)$ は\eqref{eq:3.4_PVI_H_representation}で定められる。
+\end{theorem}
+
+すなわち，\eqref{eq:3.4_2-PDE_x,t}、\eqref{eq:3.4_PVI_coefficient_p1}、\eqref{eq:3.4_PVI_coefficient_p2}の解の基本形で，そのモノドロミー群が $t$ に依存しないものが存在するための必要十分条件は、2つのアクセサリー・パラメータ $\lambda, \mu$ が非線型常微分方程式系\eqref{eq:3.4_PVI_Hamilton_system}を満足すること，である．
+
+\eqref{eq:3.4_PVI_Hamilton_system}を\eqref{eq:3.4_PVI_H_representation}により表し，連立微分方程式から $\mu$ を消去すると，パンルヴェ方程式 $\mathrm{P}_{\mathrm{VI}}$ が得られる．ハミルトン系からパンルヴェ方程式を導く計算は初等的ではあるが筆算で確かめるのは簡単ではない．
+
+\begin{Q}[パンルヴェVI型方程式（2階の非線形常微分方程式）を直接導出せず、なぜ定理3.1のように $\lambda$ と $\mu$ のハミルトン系\eqref{eq:3.4_PVI_Hamilton_system}を経由して定式化するアプローチをとるのか？]
+\textbf{A.} 主に以下の3つの圧倒的な利点があるためである。
+\begin{enumerate}
+    \item \textbf{計算量の劇的な削減:} 直接 $\mu$ を消去して複雑極まりない $\mathrm{P}_{\mathrm{VI}}$ を導出・証明する古典的な手法（R. Fuchs や R. Garnier の手法）に比べ、ハミルトン系をベースにすることで証明の見通しが圧倒的に良くなる。
+    \item \textbf{力学系理論の応用:} 微分方程式を「ハミルトン系」の枠組みに乗せることで、シンプレクティック幾何学や正準変換といった、古典力学で培われた強力な数学的ツールをそのまま可積分系の解析に流用できる。
+    \item \textbf{対称性の可視化:} $\mathrm{P}_{\mathrm{VI}}$ が持つベックルント変換などの隠れた対称性（アフィン・ワイル群の作用など）は、$\lambda$ だけの式よりも、$\lambda$ と $\mu$ が対等に現れるハミルトニアン $H$ の多項式の形を見る方が遥かに発見・証明しやすい。
+\end{enumerate}
+\end{Q}
+
+一方，この定理の主張するハミルトン系を導入することで，古典的な R. Fuchs や R. Garnier の結果は，その見通しがよくなり計算量も少なくなる．さらに非線型微分方程式自体を扱うときにも，ハミルトン系に書かれるということは，力学系の考え方が使えるなど，なかなか便利である．上の定理に述べた事実を指導原理として，ガルニエ系の計算を実行する．
+
+\subsection{ガルニエ系}
+
+%#region
+\begin{story}
+\begin{definition}[ガルニエ系を導くフックス型常微分方程式とリーマン図式]
+この節以下で考察する2階フックス型線型常微分方程式の形を以下のように定める。
+\begin{equation}
+\frac{d^2 y}{dx^2} + p_1(x, t) \frac{dy}{dx} + p_2(x, t) y = 0 \label{eq:3.33}
+\end{equation}
+ここで対象となる微分方程式 \eqref{eq:3.33} のリーマン図式は、次のように与えられる。
+\begin{equation}
+\left\{
+\begin{array}{ccccc}
+x=0 & x=1 & x=t_l & x=\lambda_k & x=\infty \\
+0 & 0 & 0 & 0 & \varepsilon \\
+\kappa_0 & \kappa_1 & \theta_l & 2 & \varepsilon+\kappa_\infty
+\end{array}
+\right\} \label{eq:3.65}
+\end{equation}
+ただし、$k, l = 1, 2, \cdots, g$ とする。
+\end{definition}
+
+前節では、モノドロミー保存変形（ホロノミック変形）のパラメータを $t = (t_1, t_2, \cdots, t_L)$ としていた。ここでは、$L=g$ の場合を考察する。すなわち、変形のパラメータとしては確定特異点の位置 $x=t_l$ をとり、さらに、変形パラメータの次元 $g$ は、見かけの特異点の個数と一致している場合を考えるのである。当面 $t=(t_1, \cdots, t_g)$ の変域 $U \subset \mathbb{C}^g$ は必要に応じて小さくとっておく。
+
+リーマン図式からわかるように、微分方程式 \eqref{eq:3.33}-\eqref{eq:3.65} は $\mathbf{P}^1(\mathbb{C})$ 上に $2g+3$ 個の確定特異点をもつ。
+特異点の集合は
+\begin{equation*}
+\Xi(t) = \{0, 1, \infty, t_1, \cdots, t_g\}, \quad \Lambda(t) = \{\lambda_1(t), \cdots, \lambda_g(t)\}
+\end{equation*}
+の和集合 $\Xi(t) \cup \Lambda(t)$ である。我々は、確定特異点の位置
+\begin{equation*}
+t = (t_1, t_2, \cdots, t_g)
+\end{equation*}
+をパラメータとして、\eqref{eq:3.33} のモノドロミー保存変形を考察する。結局これからの考察は、見かけの特異点の位置 $\lambda_k$ が変形パラメータにどのように依存するか、ということに帰着するので、先走って $\Lambda(t)$ と書いている。
+\end{story}
+
+\begin{Q}[【核心】リーマン図式 \eqref{eq:3.65} において、$x=\lambda_k$ の特性指数が $(0, 2)$ となっているのは、解析的にどのような要請によるものか？]
+\textbf{A.} $x=\lambda_k$ が「見かけの特異点（apparent singularity）」であることを保証するためである。
+
+\begin{proof}
+一般に、特性指数の差が整数（この場合は $2 - 0 = 2$）となる確定特異点では、フロベニウスの定理により局所解の片方に「対数項（$\log(x-\lambda_k)$）」が現れることが知られている。対数項が存在すると、その点の周りを一周した際に解が元の値に戻らず、非自明なモノドロミー（分岐）が生じてしまう。
+
+しかし、係数関数 $p_1(x,t), p_2(x,t)$ に対して極の留数などに特定の条件（後に現れるハミルトニアンの制約式）を課すことで、この対数項の係数を意図的に $0$ にすることができる。
+対数項が消滅すると、解はその点の近傍で単なる有理型関数（分岐を持たない解）として振る舞い、モノドロミーは完全に自明な単位行列となる。
+方程式の係数としては特異点（極）を持つように見えるが、解の空間のトポロジー（モノドロミー）には何の影響も与えないため、これを「見かけの特異点」と呼ぶ。図式の特性指数 $(0, 2)$ は、まさにこの条件を準備するためのセットアップなのである。
+\end{proof}
+\end{Q}
+
+\begin{Q}[【大局観】なぜ「見かけの特異点の個数」と「変形パラメータの次元」を同じ $g$ に揃える（$L=g$ とする）必然性があるのか？]
+\textbf{A.} ガルニエ系が「パンルヴェ第VI方程式（$\mathrm{P_{VI}}$）の多変数化」であることを強く反映しているからである。
+
+\begin{proof}
+パラメータの数 $g=1$ の場合を考えてみる。
+このとき、真の特異点は $\{0, 1, \infty, t_1\}$ の4つであり、変形パラメータは $t_1$ の1つだけである。そして見かけの特異点は $\lambda_1$ の1つとなる。
+この「4つの確定特異点と1つの見かけの特異点」を持つ2階フックス型方程式のモノドロミー保存変形から導出される非線形常微分方程式こそが、パンルヴェ第VI方程式（$\mathrm{P_{VI}}$）に他ならない。
+
+これを一般の $g$ 変数に拡張しようとしたとき、確定特異点の数 $t_1, \dots, t_g$ を増やす（変形の自由度を $g$ にする）ならば、モノドロミーを一定に保つための「調整弁（ダイナミクスの従属変数）」として、同数の見かけの特異点 $\lambda_1, \dots, \lambda_g$ を動的な変数として用意しなければならない。これが次元を一致させる物理的・幾何学的な理由であり、この多変数化された力学系全体を指して「ガルニエ系」と呼ぶのである。
+\end{proof}
+\end{Q}
+
+\begin{story}
+
+各確定特異点における特性指数 $\kappa_0, \kappa_1, \theta_l, \varepsilon, \varepsilon+\kappa_\infty$ の間には，フックスの関係式
+\begin{equation}
+\kappa_0 + \kappa_1 + \sum_{l=1}^g \theta_l + \kappa_\infty + 2\varepsilon = 1 \label{eq:3.66}
+\end{equation}
+が成り立っている．
+
+微分方程式 \eqref{eq:3.33} に対する条件 (P1), (P2), (P3) は常に仮定する．念のために繰り返しておく．
+\begin{itemize}
+    \item[(P1)] $\Xi$ の各点を確定特異点，$\Lambda$ の各点を見かけの特異点としてもつ．
+    \item[(P2)] 各 $x = \xi_l \in \Xi(t)$ における特性指数のどの2つも，差が整数ではない．
+    \item[(P3)] モノドロミー $\hat{\rho}(t)$ は既約である．
+\end{itemize}
+
+(P2) により，どの $\kappa_0, \kappa_1, \theta_l, \kappa_\infty$ も整数ではない．また，(P3) は，微分方程式 \eqref{eq:3.33} が既約である，すなわち
+\begin{equation*}
+\left( \frac{d}{dx} + r_1(x,t) \right) \left( \frac{d}{dx} + r_2(x,t) \right) y = 0
+\end{equation*}
+という形には表せない，という仮定と同等である．ここで，$r_1(x,t), r_2(x,t)$ は $x$ の有理関数である．
+
+以上の仮定の下で，\eqref{eq:3.33} の係数は次のように書かれる．
+\begin{align}
+p_1(x,t) &= \frac{1-\kappa_0}{x} + \frac{1-\kappa_1}{x-1} + \sum_{l=1}^g \frac{1-\theta_l}{x-t_l} - \sum_{k=1}^g \frac{1}{x-\lambda_k} \label{eq:3.67} \\
+p_2(x,t) &= \frac{\kappa}{x(x-1)} + \sum_{k=1}^g \frac{\lambda_k(\lambda_k-1)\mu_k}{x(x-1)(x-\lambda_k)} - \sum_{l=1}^g \frac{t_l(t_l-1)H_l}{x(x-1)(x-t_l)} \label{eq:3.68}
+\end{align}
+\begin{equation*}
+\kappa = \varepsilon(\varepsilon+\kappa_\infty) = \frac{1}{4} \left( \kappa_0 + \kappa_1 + \sum_{l=1}^g \theta_l - 1 \right)^2 - \frac{1}{4}\kappa_\infty^2
+\end{equation*}
+
+$g=1$ とすると，\eqref{eq:3.33}, \eqref{eq:3.67}, \eqref{eq:3.68} は前出の (3.60), (3.61), (3.62) になる．これは R.Fuchs の考察した，パンルヴェ方程式 $\mathrm{P_{VI}}$ に対応する場合である．
+
+$\mathrm{P_{VI}}$ の拡張である，$t=(t_1, \cdots, t_g)$ の関数 $\lambda=(\lambda_1, \cdots, \lambda_g)$ が満たす2階非線型偏微分方程式系は，R.Garnier により1912年に求められた．これを書くために，少し記号を準備する．
+
+\end{story}
+
+\begin{Q}[【確認】フックスの関係式 \eqref{eq:3.66} の右辺は「2」ではなく、テキスト通り「1」で正しいのか？]
+\textbf{A.} テキストの通り「1」で厳密に正しい。方程式の階数と特異点の個数を正確にカウントすると一致する。
+
+\begin{proof}
+2階のフックス型微分方程式において、$n$ 個の特異点 $x_i$ を持つ場合、すべての特性指数 $\rho_{i, 1}, \rho_{i, 2}$ の総和は「$n-2$」になるという定理がある。
+今回のリーマン図式における特異点の総数 $n$ は、$0, 1, \infty$ の3個に加えて、$t_l$ が $g$ 個、$\lambda_k$ が $g$ 個の、計 $n = 2g + 3$ 個である。したがって、特性指数の総和は $(2g+3) - 2 = 2g+1$ とならなければならない。
+
+有限の特異点での指数の和を計算する。
+\begin{itemize}
+    \item $x=0, 1, t_l$ の和： $\kappa_0 + \kappa_1 + \sum_{l=1}^g \theta_l$
+    \item $x=\lambda_k$ の和（見かけの特異点）： $g$ 個の点それぞれで指数が $0+2=2$ なので、和は $2g$
+\end{itemize}
+無限遠点 $x=\infty$ での指数の和は $\varepsilon + (\varepsilon+\kappa_\infty) = 2\varepsilon + \kappa_\infty$ である。
+
+これらをすべて足し合わせて $2g+1$ と等号で結ぶと、
+\begin{equation*}
+\left( \kappa_0 + \kappa_1 + \sum_{l=1}^g \theta_l \right) + 2g + \left( 2\varepsilon + \kappa_\infty \right) = 2g + 1
+\end{equation*}
+両辺の $2g$ が見事に相殺され、
+\begin{equation*}
+\kappa_0 + \kappa_1 + \sum_{l=1}^g \theta_l + \kappa_\infty + 2\varepsilon = 1
+\end{equation*}
+となり、テキストの式 \eqref{eq:3.66} が正しく導出される。
+\end{proof}
+\end{Q}
+
+\begin{Q}[【導出】係数 $p_1(x,t)$ の形 \eqref{eq:3.67} はどのように決定されるのか？]
+\textbf{A.} 確定特異点における特性方程式（決定方程式）の「解の和」から直接逆算される。
+
+\begin{proof}
+フックス型方程式の一般論として、点 $x=x_i$ が確定特異点であるとき、係数 $p_1(x)$ は $x_i$ において1位の極を持ち、その留数は $1 - (\rho_{i,1} + \rho_{i,2})$ になることが知られている（ここで $\rho$ は特性指数）。
+これを用いて各特異点での項を書き下す。
+\begin{itemize}
+    \item $x=0$: 指数の和は $\kappa_0$。よって $\frac{1-\kappa_0}{x}$。
+    \item $x=1$: 指数の和は $\kappa_1$。よって $\frac{1-\kappa_1}{x-1}$。
+    \item $x=t_l$: 指数の和は $\theta_l$。よって $\frac{1-\theta_l}{x-t_l}$。
+    \item $x=\lambda_k$: 指数の和は $0+2=2$。よって $\frac{1-2}{x-\lambda_k} = -\frac{1}{x-\lambda_k}$。
+\end{itemize}
+これらをすべて足し合わせた部分分数分解こそが、式 \eqref{eq:3.67} に他ならない。無限遠点で正しく振る舞うこと（$x \to \infty$ で $p_1(x) \sim 2/x$ となること）は、前述のフックスの関係式によって自動的に保証される。
+\end{proof}
+\end{Q}
+
+\begin{Q}[【導出と意味】係数 $p_2(x,t)$ の形 \eqref{eq:3.68} はどのように導出されるか？また $\mu_k$ や $H_l$ という未知の関数はどこから来たのか？]
+\textbf{A.} 特性指数の「積」の性質と、方程式が持つ未定の自由度（アクセサリー・パラメータ）を表現論的に整理した結果である。
+
+\begin{proof}
+係数 $p_2(x)$ は各特異点 $x_i$ において高々2位の極を持ち、その係数は特性指数の積 $\rho_{i,1}\rho_{i,2}$ で与えられる。
+ここで最大のポイントは、見かけの特異点 $x=\lambda_k$ における指数の積が $0 \times 2 = \mathbf{0}$ になるという事実である。これにより、$p_2(x)$ は $x=\lambda_k$ において $1/(x-\lambda_k)^2$ という2位の極を持たず、1位の極しか持たないことが確定する。
+
+方程式全体が無限遠点 $\infty$ で正しくフックス型として振る舞うため（$p_2(x) \sim O(1/x^2)$）、全体を $\frac{1}{x(x-1)}$ という共通因子でくくり、残りの部分を各特異点での部分分数に分解するのが定石である。このとき、各1位の極の留数として「未定の関数」が現れる。
+\begin{itemize}
+    \item 見かけの特異点 $\lambda_k$ での留数を（係数込みで） $\mu_k$ と名付ける。これは力学系における「運動量（正準共役量）」となる。
+    \item 真の特異点 $t_l$ での留数を（係数込みで） $-H_l$ と名付ける。これが「ハミルトニアン」となる。
+\end{itemize}
+定数項の $\kappa$ は無限遠点での指数の積 $\varepsilon(\varepsilon+\kappa_\infty)$ から定まる。
+このように、$\mu_k$ や $H_l$ は勝手に湧いてきたのではなく、$p_1(x)$ だけでは決めきれない $p_2(x)$ の「自由度（アクセサリー・パラメータ）」に対して、モノドロミー保存変形をハミルトン系として美しく記述できるように意図的に割り振られた記号なのである。
+\end{proof}
+\end{Q}
+
+\begin{Q}[【鋭い疑問】式 \eqref{eq:3.68} の $p_2(x,t)$ において、たとえば $x=0$ で「2位の極（$1/x^2$）」が出てくるべきではないのか？なぜ分母は1乗の $x$ なのか？]
+\textbf{A.} 結論から言うと、2位の極は出てこない（1位の極しか持たない）。そして、「2位の極が消滅すること」こそが、提示されたリーマン図式から導かれる必然的な帰結なのである。
+
+\begin{proof}
+フックス型微分方程式 $\frac{d^2y}{dx^2} + p_1(x)\frac{dy}{dx} + p_2(x)y = 0$ において、確定特異点 $x=x_i$ まわりの特性指数（決定方程式の解）を $\rho_1, \rho_2$ とする。
+このとき、係数関数が特異点まわりでどう振る舞うべきかは、以下の関係式で完全に決まっている。
+\begin{align*}
+\lim_{x \to x_i} (x-x_i) p_1(x) &= 1 - (\rho_1 + \rho_2) \\
+\lim_{x \to x_i} (x-x_i)^2 p_2(x) &= \rho_1 \rho_2
+\end{align*}
+
+ここで、問題の $x=0$ におけるリーマン図式 \eqref{eq:3.65} を見てみる。特性指数は $0$ と $\kappa_0$ である。
+これを上の関係式に当てはめると、以下のようになる。
+\begin{itemize}
+    \item 指数の和： $0 + \kappa_0 = \kappa_0 \implies p_1(x)$ は $x=0$ で $\frac{1-\kappa_0}{x}$ という1位の極を持つ。（式 \eqref{eq:3.67} の第1項と完全に一致！）
+    \item 指数の積： $0 \times \kappa_0 = \mathbf{0} \implies p_2(x)$ の $1/x^2$ の係数は $0$ になる。
+\end{itemize}
+つまり、「片方の特性指数が $0$ である」という図式の要請により、$p_2(x)$ は $x=0$ において2位の極を持てず、高々1位の極しか持たないことが数学的に確定するのである。
+
+式 \eqref{eq:3.68} の $p_2(x,t)$ の分母をよく見ると、$x, (x-1), (x-t_l), (x-\lambda_k)$ はすべて「1乗」でしか現れていない。
+これはリーマン図式 \eqref{eq:3.65} の「上段の指数がすべて $0$ である」という美しい設定のおかげで、すべての有限の特異点において2位の極が見事に消滅していることを表している。
+
+（※逆に、無限遠点 $x=\infty$ では指数の積が $\varepsilon(\varepsilon+\kappa_\infty) = \kappa \neq 0$ となるため、$x \to \infty$ の極限をとると $p_2(x,t) \sim \frac{\kappa}{x^2}$ となり、無限遠点では正しく2位の極の振る舞いを示すことが確認できる。）
+\end{proof}
+\end{Q}
+
+\begin{Q}[【最大の核心】リーマン図式や特性指数の情報を使って $p_1(x)$ を完全に決定できたように、$p_2(x)$ の1位の極の留数（$\mu_k$ や $H_l$）も代数的な計算で一意に求めることはできないのか？]
+\textbf{A.} 絶対にできない。これらは方程式の「アクセサリー・パラメータ（未定の自由度）」であり、ある固定されたパラメータ $t$ における微分方程式をいくら睨んでも値は決まらない。これらを決定するためには「モノドロミー保存変形」という大域的な要請（ダイナミクス）を考える必要がある。
+
+\begin{proof}
+フックス型微分方程式において、特異点の数が増えると、リーマン図式（特異点の位置と特性指数という「局所的なデータ」）だけでは方程式の係数を一意に決定できなくなる。この決定できない余分なパラメータのことを「アクセサリー・パラメータ」と呼ぶ。
+具体的には、
+\begin{itemize}
+    \item 確定特異点が3個（超幾何微分方程式）のときは、アクセサリー・パラメータは0個であり、係数は完全に一意に決まる。
+    \item 特異点が4個以上（ホイン方程式やパンルヴェ、ガルニエ系の設定）になると、アクセサリー・パラメータが出現する。今回の式 \eqref{eq:3.68} における $\mu_k$ や $H_l$ がまさにそれである。
+\end{itemize}
+では、これらをどうやって決めるのか？
+ここで登場するのが**「モノドロミー保存変形（ホロノミック変形）」**の概念である。
+「確定特異点の位置 $t = (t_1, \dots, t_g)$ を動かしたとしても、微分方程式の大域的な解の接続関係（モノドロミー表現）が一切変化しないようにせよ」という極めて強い条件を課す。
+すると、この条件を満たすために、見かけの特異点の位置 $\lambda_k(t)$ と、そこでの留数 $\mu_k(t)$ が、パラメータ $t_l$ の変化に合わせて「どのように動かなければならないか」を記述する非線形な微分方程式系が導出される。
+これこそが「ガルニエ系」であり、1位の留数 $\mu_k$ や $H_l$ は、単なる代数計算ではなく、このガルニエ系という「微分方程式を解く」ことによって初めて決定される（関数として求まる）のである。
+\end{proof}
+\end{Q}
+
+\begin{Q}[【大局観】モノドロミー保存変形から導かれる「ガルニエ系」において、留数 $\mu_k$ と $H_l$ はそれぞれ物理的（解析力学的）にどのような役割を果たすか？]
+\textbf{A.} 解析力学における「正準変数（運動量）」と「ハミルトニアン」の役割を完璧に果たす。
+
+\begin{proof}
+先述の通り、モノドロミーを保存するように $t_l$ を動かすと、$\lambda_k$ と $\mu_k$ は $t$ の関数として変動する。驚くべきことに、この変動は次のような多変数ハミルトン系（Hamiltonian system）として極めて美しく記述されることが知られている（R. Garnier, 1912）。
+\begin{equation}
+\frac{\partial \lambda_k}{\partial t_l} = \frac{\partial H_l}{\partial \mu_k}, \quad \frac{\partial \mu_k}{\partial t_l} = -\frac{\partial H_l}{\partial \lambda_k} \quad (k, l = 1, \dots, g)
+\end{equation}
+ここで、
+\begin{itemize}
+    \item 見かけの特異点の位置 $\lambda_k$ は、力学系における「一般化座標（位置）」に相当する。
+    \item $\lambda_k$ での留数 $\mu_k$ は、それに正準共役な「運動量」に相当する。
+    \item 確定特異点 $t_l$ は「多次元的な時間」に相当する。
+    \item $t_l$ での留数 $H_l$ は、その時間発展を支配する「ハミルトニアン（エネルギー）」に相当する。
+\end{itemize}
+つまり、式 \eqref{eq:3.68} で $p_2(x,t)$ を部分分数分解した際に現れた未知の留数たちは、単なる未定係数ではなく、「微分方程式の変形理論」を「解析力学（シンプレクティック幾何学）」の言葉で記述するための最も自然で必然的なパーツだったというわけである。
+\end{proof}
+\end{Q}
+\begin{Q}[【核心】前節の議論から $p_2(x)$ が1位の極しか持たないことは分かった。では、未知の留数 $\mu_k, H_l$ 以外の「式の形（骨組み）」や、「$\frac{\kappa}{x(x-1)}$ という項とその係数」は、代数的に完全に導出できるということか？]
+\textbf{A.} 完全に導出できる。あなたの直感通り、$p_2(x)$ の極の条件と「無限遠点での振る舞い」を組み合わせることで、この特定の表示形式が数学的に一意に強制される。
+
+\begin{proof}
+前節で確認した通り、$p_2(x)$ は $x=0, 1, t_l, \lambda_k$ において「1位の極」しか持たない有理関数である。
+一方で、無限遠点 $x=\infty$ では、特性指数の積が $\kappa = \varepsilon(\varepsilon+\kappa_\infty)$ であるため、$x \to \infty$ の極限において
+\begin{equation}
+p_2(x) \sim \frac{\kappa}{x^2} + \mathcal{O}\left(\frac{1}{x^3}\right)
+\end{equation}
+という振る舞いをしなければならない（$1/x$ の項は存在してはならない）。
+
+有理関数を部分分数分解して表現する際、この「無限遠での減衰条件」を最初から満たすような、都合の良い「基底関数」を用意するエレガントな手法がある。それが分母に $x(x-1)$ を持たせる方法である。
+以下の3種類の関数を考える。
+\begin{align*}
+f_0(x) &= \frac{1}{x(x-1)} \quad &\sim \frac{1}{x^2} \quad &(x \to \infty) \\
+f_{\lambda_k}(x) &= \frac{1}{x(x-1)(x-\lambda_k)} \quad &\sim \frac{1}{x^3} \quad &(x \to \infty) \\
+f_{t_l}(x) &= \frac{1}{x(x-1)(x-t_l)} \quad &\sim \frac{1}{x^3} \quad &(x \to \infty)
+\end{align*}
+これらはすべて $x=0, 1$ で1位の極を持ち、下2つはそれぞれ $\lambda_k, t_l$ でも1位の極を持つため、$p_2(x)$ の極の条件をすべて表現できる完全な基底となる。
+
+したがって、$p_2(x)$ は未定係数 $C_0, C_{\lambda_k}, C_{t_l}$ を用いて次のように必ず展開できる。
+\begin{equation*}
+p_2(x) = C_0 f_0(x) + \sum C_{\lambda_k} f_{\lambda_k}(x) + \sum C_{t_l} f_{t_l}(x)
+\end{equation*}
+
+ここで、両辺の $x \to \infty$ の極限をとる。
+$f_{\lambda_k}(x)$ と $f_{t_l}(x)$ は $1/x^3$ のオーダーで急速に減衰するため、無限遠での $1/x^2$ の振る舞いに寄与できるのは **$f_0(x)$ だけ**である。
+すなわち、$x \to \infty$ において
+\begin{equation*}
+p_2(x) \sim C_0 \frac{1}{x^2}
+\end{equation*}
+となる。これが $\frac{\kappa}{x^2}$ に一致しなければならないのだから、未知であった係数 $C_0$ は
+\begin{equation*}
+C_0 = \kappa
+\end{equation*}
+でなければならないことが、逃げ道なく確定する。これで第1項 $\frac{\kappa}{x(x-1)}$ が完全に導出された。
+
+残りの項の係数 $C_{\lambda_k}, C_{t_l}$ は、各特異点での「留数」がシンプルな文字になるように調整されただけのものである。
+例えば $x=\lambda_k$ での留数を計算すると、
+\begin{equation*}
+\lim_{x \to \lambda_k} (x-\lambda_k) p_2(x) = \frac{C_{\lambda_k}}{\lambda_k(\lambda_k-1)}
+\end{equation*}
+となる。この留数自体を「$\mu_k$」と定義したいのであれば、$C_{\lambda_k} = \lambda_k(\lambda_k-1)\mu_k$ と置けばよい。$t_l$ での留数を「$-H_l$」と定義したいのであれば、$C_{t_l} = -t_l(t_l-1)H_l$ と置けばよい。
+
+結論として、式 \eqref{eq:3.68} の形は決して天下り的なものではなく、「局所的な極の条件」と「無限遠での漸近挙動」を繋ぎ合わせた、解析関数論における最も自然で必然的な帰結なのである。
+\end{proof}
+\end{Q}
+
+\begin{Q}[【計算の検証】$x \to \infty$ における $p_2(x) \sim \kappa/x^2$ という振る舞いは、座標変換 $x=1/u$ を経た後の $u=0$ での決定方程式を正しく満たしているか？]
+\textbf{A.} 完全に満たしている。座標変換に伴う $p_1$ のシフトと $p_2$ のスケーリングを正確に追うことで、方程式の解の指数がリーマン図式の通り $\varepsilon$ と $\varepsilon+\kappa_\infty$ になることが代数的に証明される。
+
+\begin{proof}
+$x = 1/u$ と変換すると、微分演算子は以下のように変換される。
+\begin{equation*}
+\frac{d}{dx} = -u^2 \frac{d}{du}, \quad \frac{d^2}{dx^2} = u^4 \frac{d^2}{du^2} + 2u^3 \frac{d}{du}
+\end{equation*}
+これを元の方程式 $y'' + p_1(x)y' + p_2(x)y = 0$ に代入し、全体を $u^4$ で割ると、$u=0$ まわりでの方程式を得る。
+\begin{equation}
+\frac{d^2y}{du^2} + \left( \frac{2}{u} - \frac{p_1(1/u)}{u^2} \right) \frac{dy}{du} + \frac{p_2(1/u)}{u^4} y = 0 \label{eq:u_eq}
+\end{equation}
+
+ここで、各係数の $x \to \infty$ （すなわち $u \to 0$）での漸近挙動を評価する。
+式 \eqref{eq:3.67} より、$p_1(x)$ の無限遠での振る舞いは、各項を $1/x$ で展開して、
+\begin{align*}
+p_1(x) &\sim \frac{(1-\kappa_0) + (1-\kappa_1) + \sum (1-\theta_l) - g}{x} + \mathcal{O}(x^{-2}) \\
+&= \frac{g + 2 - (\kappa_0 + \kappa_1 + \sum \theta_l) - g}{x} = \frac{2 - (\kappa_0 + \kappa_1 + \sum \theta_l)}{x}
+\end{align*}
+となる。これを $u$ の式に直すと $p_1(1/u) \sim \{2 - (\kappa_0 + \kappa_1 + \sum \theta_l)\}u$ である。
+同様に、$p_2(x) \sim \kappa/x^2$ より $p_2(1/u) \sim \kappa u^2$ である。
+
+これらを式 \eqref{eq:u_eq} に代入し、$u=0$ での決定方程式を構成する。
+式 \eqref{eq:u_eq} の $dy/du$ の係数を $P_1(u)$、$y$ の係数を $P_2(u)$ とおくと、
+\begin{itemize}
+    \item $u P_1(0) = 2 - \{2 - (\kappa_0 + \kappa_1 + \sum \theta_l)\} = \kappa_0 + \kappa_1 + \sum \theta_l$
+    \item $u^2 P_2(0) = \frac{\kappa u^2}{u^2} = \kappa$
+\end{itemize}
+となる。フックスの関係式 \eqref{eq:3.66} より、$\kappa_0 + \kappa_1 + \sum \theta_l = 1 - \kappa_\infty - 2\varepsilon$ であるから、
+$u=0$ における決定方程式 $\rho(\rho-1) + uP_1(0)\rho + u^2P_2(0) = 0$ は、
+\begin{equation*}
+\rho^2 + (1 - \kappa_\infty - 2\varepsilon - 1)\rho + \kappa = 0 \quad \Longrightarrow \quad \rho^2 - (\kappa_\infty + 2\varepsilon)\rho + \kappa = 0
+\end{equation*}
+となる。ここで $\kappa = \varepsilon(\varepsilon + \kappa_\infty)$ であったことを思い出すと、この方程式は
+\begin{equation*}
+(\rho - \varepsilon)(\rho - (\varepsilon + \kappa_\infty)) = 0
+\end{equation*}
+と見事に因数分解される。
+解は $\rho = \varepsilon, \varepsilon + \kappa_\infty$ となり、リーマン図式の設定と完全に一致する。したがって、$p_2(x) \sim \kappa/x^2$ という漸近挙動は、無限遠点での決定方程式を数学的に完璧に満たしている。
+\end{proof}
+\end{Q}
+
+\begin{story}
+\begin{align}
+\mathrm{T}(x) &= x(x-1) \prod_{l=1}^g (x-t_l) \label{eq:3.69} \\
+\mathrm{L}(x) &= \prod_{k=1}^g (x-\lambda_k) \label{eq:3.70}
+\end{align}
+とおく．$x$ の多項式 $\mathrm{T}(x), \mathrm{L}(x)$ の導関数を $\mathrm{T}'(x), \mathrm{L}'(x)$，2階導関数を $\mathrm{T}''(x), \mathrm{L}''(x)$ 等と書く．たとえば
+\begin{equation*}
+\mathrm{L}'(\lambda_k) = \prod_{p=1 \, (p \neq k)}^g (\lambda_k - \lambda_p)
+\end{equation*}
+である．次の完全積分可能非線型偏微分方程式系をガルニエ系という．
+\end{story}
+
+\begin{definition}[ガルニエ系 (Garnier system)]
+\begin{align}
+\frac{\partial^2 \lambda_k}{\partial t_l^2} &= \frac{1}{2} \left[ \frac{\mathrm{T}'(\lambda_k)}{\mathrm{T}(\lambda_k)} - \frac{1}{2} \frac{\mathrm{L}''(\lambda_k)}{\mathrm{L}'(\lambda_k)} \right] \left( \frac{\partial \lambda_k}{\partial t_l} \right)^2 - \left[ \frac{1}{2} \frac{\mathrm{T}''(t_l)}{\mathrm{T}'(t_l)} - \frac{\mathrm{L}'(t_l)}{\mathrm{L}(t_l)} \right] \frac{\partial \lambda_k}{\partial t_l} \nonumber \\
+&\quad + \frac{1}{2} \sum_{p=1 \, (p \neq k)}^g \left[ \frac{\mathrm{T}(\lambda_k)\mathrm{L}'(\lambda_p)(\lambda_p - t_l)^2}{\mathrm{T}(\lambda_p)\mathrm{L}'(\lambda_k)(\lambda_k - t_l)^2(\lambda_k - \lambda_p)} \left( \frac{\partial \lambda_p}{\partial t_l} \right)^2 \right] \nonumber \\
+&\quad - \sum_{p=1 \, (p \neq k)}^g \left[ \frac{\lambda_k - t_l}{(\lambda_p - t_l)(\lambda_p - \lambda_k)} \frac{\partial \lambda_k}{\partial t_l} \frac{\partial \lambda_p}{\partial t_l} \right] + \frac{\mathrm{L}(t_l)^2 \mathrm{T}(\lambda_k)}{2\mathrm{T}'(t_l)^2(\lambda_k - t_l)^2 \mathrm{L}'(\lambda_k)} I_{k,l} \label{eq:Garnier1}
+\end{align}
+\begin{equation}
+\frac{\mathrm{T}'(t_l)(t_l - \lambda_k)}{\mathrm{L}(t_l)} \frac{\partial \lambda_k}{\partial t_l} - \frac{\mathrm{T}'(t_h)(t_h - \lambda_k)}{\mathrm{L}(t_h)} \frac{\partial \lambda_k}{\partial t_h} = \frac{(t_l - t_h)\mathrm{T}(\lambda_k)}{(\lambda_k - t_l)(\lambda_k - t_h)\mathrm{L}'(\lambda_k)} \label{eq:Garnier2}
+\end{equation}
+ここで，$h, k, l = 1, 2, \cdots, g$ であり，第1式では
+\begin{align}
+I_{k,l} &= \kappa_\infty^2 + \frac{\mathrm{T}'(0)}{\mathrm{L}(0)}\frac{\kappa_0^2}{\lambda_k} + \frac{\mathrm{T}'(1)}{\mathrm{L}(1)}\frac{\kappa_1^2}{\lambda_k - 1} \nonumber \\
+&\quad + \sum_{h=1 \, (h \neq l)}^g \frac{\mathrm{T}'(t_h)}{\mathrm{L}(t_h)}\frac{\theta_h^2}{\lambda_k - t_h} + \frac{\mathrm{T}'(t_l)}{\mathrm{L}(t_l)}\frac{\theta_l^2}{\lambda_k - t_l} \label{eq:Garnier_I}
+\end{align}
+とおいた．
+\end{definition}
+
+\begin{story}
+これを見ただけで，R.Garnierの計算がどんなに精緻を極めたものであったかがわかるであろう．ガルニエ系はパンルヴェ $\mathrm{VI}$ 型方程式の $g$ 変数への拡張であり，確かに $g=1$ とすると $\mathrm{P_{VI}}$ になる．
+
+我々の目的は，線型常微分方程式(3.33), (3.67), (3.68)のモノドロミー保存変形を再考察し，ガルニエ系をハミルトン系に書き直すことである．これは，パンルヴェ $\mathrm{VI}$ 型方程式のハミルトン系表示を与える定理3.1の拡張である．
+
+まず，考察する微分方程式の含むアクセサリー・パラメータは，$\lambda_k$ と
+\end{story}
+
+\begin{Q}[【核心】「次の完全積分可能非線型偏微分方程式系をガルニエ系という」とあるが、この恐ろしい方程式は最初から「定義（公理）」として天から降ってきたものなのか？]
+\textbf{A.} もちろん違う。これは前節までに構成した「線型常微分方程式のモノドロミー保存変形条件（フロベニウスの積分可能条件）」を、力技で計算し尽くした結果得られる「導出された定理」である。
+
+\begin{proof}
+テキストの記述上は「これをガルニエ系という（定義する）」と書かれているが、数学の歴史的・論理的な立ち位置としては定理（帰結）である。
+どんな天才であっても、何もない空間から \eqref{eq:Garnier1} のような複雑怪奇な非線型偏微分方程式を「定義」として思いつくことは不可能である。
+
+Garnier が1912年に行ったことは以下の通りである。
+1. 前節で定義した、特性指数の積が0になるような見かけの特異点を持つフックス型微分方程式を用意する。
+2. その確定特異点 $t_l$ を動かしたときに、解のモノドロミーが変化しない（モノドロミー保存変形）という条件を課す。
+3. その条件は、線型系の「変形方程式（シュレジンガー方程式）」の積分可能条件（ゼロ曲率条件）として定式化される。
+4. その積分可能条件を、見かけの特異点 $\lambda_k$ の時間発展として愚直に偏微分方程式に書き下す。
+その泥臭く精緻な計算の果てに「結果として出てきた」のが、この巨大な方程式系なのである。
+\end{proof}
+\end{Q}
+
+\begin{Q}[【大局観】なぜ著者は、この巨大な方程式を提示した直後に「我々の目的はハミルトン系に書き直すことである」と宣言したのか？]
+\textbf{A.} この2階の非線型偏微分方程式のままでは、複雑すぎて数学的な構造（対称性や解の性質）が全く見えないためである。
+
+\begin{proof}
+式 \eqref{eq:Garnier1} は $\lambda_k$ に関する2階の微分方程式として書かれている（ニュートン力学における運動方程式 $\ddot{x} = F(x, \dot{x})$ に相当する）。
+しかし、解析力学の教えによれば、複雑な2階の微分方程式は、新たな変数「運動量（$\mu_k$）」を導入して1階の連立方程式（ハミルトン系）に書き直すことで、背後にある幾何学的な構造（シンプレクティック構造や正準変換の対称性）が劇的に見えやすくなる。
+
+著者の岡本和夫氏は、パンルヴェ方程式をハミルトン系として定式化し、その対称性（アフィン・ワイル群）を明らかにした第一人者である。このテキストの真の目的は、「Garnier が残したこの恐ろしい数式群を、ハミルトニアン $H_l$ と正準変数 $(\lambda_k, \mu_k)$ を用いた洗練された幾何学の言葉へと翻訳・浄化すること」にある。そのための壮大な「フリ」として、ここでGarnierの原論文の姿をそのまま提示しているのである。
+\end{proof}
+\end{Q}
+
+\begin{story}
+\begin{align}
+H_l &= -\operatorname{Res}_{x=t_l} p_2(x,t) \quad (l = 1, \cdots, g) \label{eq:3.71} \\
+\mu_k &= \operatorname{Res}_{x=\lambda_k} p_2(x,t) \quad (k = 1, \cdots, g) \label{eq:3.72}
+\end{align}
+の，$3g$ 個である．一方，仮定(P1)により $x=\lambda_k$ は微分方程式の見かけの特異点であり，したがって $3g$ 個のアクセサリー・パラメータの間には $g$ 個の関係式が成り立つ．このことから，\eqref{eq:3.71} の $H_l$ は，$t=(t_1,\cdots,t_g)$, $\lambda=(\lambda_1,\cdots,\lambda_g)$, $\mu=(\mu_1,\cdots,\mu_g)$ の有理関数となることがわかる．以上のことはフロベニウスの方法により確かめることができる．実際，$H_l$ の具体形が次のようになることを次節において示す．
+\begin{equation}
+H_l = M_l \left[ \sum_{k=1}^g M^{k,l} \left\{ \mu_k^2 - A_{k,l}\mu_k + \frac{\kappa}{\lambda_k(\lambda_k-1)} \right\} \right] \label{eq:3.73}
+\end{equation}
+\begin{equation*}
+A_{k,l} = \frac{\kappa_0}{\lambda_k} + \frac{\kappa_1}{\lambda_k-1} + \sum_{h=1}^g \frac{\theta_h - \delta_{hl}}{\lambda_k - t_h}
+\end{equation*}
+ここで，$\delta_{hl}$ はクロネッカーのデルタであり，また
+\begin{align}
+M_l &= - \frac{\mathrm{L}(t_l)}{\mathrm{T}'(t_l)} \label{eq:3.74} \\
+M^{k,l} &= \frac{\mathrm{T}(\lambda_k)}{\mathrm{L}'(\lambda_k)(\lambda_k - t_l)} \label{eq:3.75}
+\end{align}
+とおいた．上の有理式 $M_l, M^{k,l}$ は我々の計算において重要な役割を果たす．
+
+以上の準備のもとで定理を書く．この定理は，2階線型常微分方程式のホロノミックな変形を考察するときの指導原理となる．
+\end{story}
+
+\begin{theorem}[ガルニエ系のハミルトン系表示]
+線型常微分方程式(3.33), (3.67), (3.68)に関するフックスの問題は，完全積分可能な多時間ハミルトン系
+\begin{equation*}
+G_g \quad \frac{\partial \lambda_k}{\partial t_l} = \frac{\partial H_l}{\partial \mu_k}, \quad \frac{\partial \mu_k}{\partial t_l} = - \frac{\partial H_l}{\partial \lambda_k}
+\end{equation*}
+によって解かれる．ここで，$H_l$ は(3.73)の有理式で与えられる．
+\end{theorem}
+
+\begin{definition}[$g$-次ガルニエ系]
+ハミルトニアン(3.73)に関する多時間ハミルトン系 $G_g$ を $g$-次ガルニエ系という．
+\end{definition}
+
+\begin{story}
+定理3.1は，定理3.2で $g=1$ の場合である．とくに $G_g$ は(3.64)に帰着する．
+\end{story}
+
+\begin{story}
+る．多時間ハミルトン系 $G_g$ から $\mu_k$ を消去すれば，ガルニエ系，すなわち上に書いた長い2階偏微分方程式系，が得られることになる．
+
+定理3.2 は，微分方程式(3.33)を同値な SL 型微分方程式
+\begin{equation}
+\frac{d^2 y}{dx^2} = r(x,t)y \label{eq:3.76}
+\end{equation}
+に変換し，方程式(3.76)のモノドロミー保存変形を計算することによって証明される．この微分方程式のリーマン図式は次のようになっている．
+\begin{equation*}
+\left\{
+\begin{array}{ccccc}
+x=0 & x=1 & x=t_l & x=\lambda_k & x=\infty \\
+\frac{1+\kappa_0}{2} & \frac{1+\kappa_1}{2} & \frac{1+\theta_l}{2} & \frac{3}{2} & \frac{1+\kappa_\infty}{2} \\
+\frac{1-\kappa_0}{2} & \frac{1-\kappa_1}{2} & \frac{1-\theta_l}{2} & -\frac{1}{2} & \frac{1-\kappa_\infty}{2}
+\end{array}
+\right\}
+\end{equation*}
+
+節を改めて，変数 $t=(t_1, \cdots, t_g) \in U$ についてのモノドロミー保存変形の考察を続ける．$U$ は $\mathbb{C}^g$ の適当な領域である．
+
+この節の残りの部分では，125ページに引き続いて，トーラス $T$ 上定義された，SL 型2階線型常微分方程式
+\begin{equation}
+\frac{d^2 y}{dx^2} = r(x,t)y \tag{3.76}
+\end{equation}
+のモノドロミー保存変形について簡単に触れておこう．$T$ 上，この微分方程式が $g+1$ 個の確定特異点をもつとする．確定特異点の集合を前のように $\Xi$ と書き，$X = T \setminus \Xi$ とおく．SL 型微分方程式のモノドロミーは，基本群 $\pi(X)$ の $\mathbb{C}^2$ 上の表現類であるが，各回路行列の行列式は1である．このとき，モノドロミーの含む独立なパラメータの個数は
+\begin{equation*}
+\mathrm{M}^{(1)} = 3g+3
+\end{equation*}
+であることがわかる．一方，SL 型微分方程式(3.76)は
+\begin{equation*}
+\mathrm{E}^{(1)} = 2g+2
+\end{equation*}
+個のパラメータに依存する．したがって，微分方程式(3.76)は，$\Xi$ に加えて
+\begin{equation*}
+g+1 = \mathrm{M}^{(1)} - \mathrm{E}^{(1)}
+\end{equation*}
+\end{story}
+
+\begin{Q}[【核心】行列式の制約がなければパラメータは $4g+5$ 個になるという計算と、テキストの $M^{(1)} = 3g+3$ の間にある「次元のギャップ」の正体は何か？]
+\textbf{A.} あなたの $4g+5$ という計算は $GL(2, \mathbb{C})$ の表現空間として「完全に正解」である。ギャップが生じた理由は、ここから $SL(2, \mathbb{C})$（行列式=1）に制限する際に失われる自由度が、$g+1$ 個ではなく「$g+2$ 個」だからである。
+
+\begin{proof}
+まず、このページから考察の舞台が「球面（$\mathbb{P}^1$）」から\textbf{「トーラス（$T$）」}へと移行していることに注意する。
+$g+1$ 個の特異点（穴）を持つトーラスの基本群 $\pi(X)$ は、穴の周りのループ $\gamma_1, \dots, \gamma_{g+1}$ に加えて、トーラス特有の縦横のループ $\alpha, \beta$ の、合計 \textbf{$g+3$ 個の生成元}を持つ。
+これらが満たすべき基本関係式は $[\alpha, \beta]\gamma_1 \cdots \gamma_{g+1} = I$ である。
+
+\textbf{① あなたの計算の検証（$GL(2, \mathbb{C})$ の場合）}
+各生成元を $GL(2, \mathbb{C})$ （自由度4）の行列に対応させると、初期の自由度は $4(g+3) = 4g+12$ である。
+関係式が1つの行列方程式（自由度4の拘束）を与え、さらに全体の基底の取り替え（共役変換）として $PGL(2, \mathbb{C})$ （自由度3）で割るため、独立なパラメータ数は
+\begin{equation*}
+4g+12 - 4 - 3 = \mathbf{4g+5}
+\end{equation*}
+となり、あなたの導き出した数字は幾何学的に完璧である。
+
+\textbf{② $SL(2, \mathbb{C})$ への制限（行列式 $= 1$ の条件）}
+ここから「すべての生成元の行列式を 1 にする」という条件を課す。生成元は $g+3$ 個あるため、$g+3$ 個の制約がつくように思える。
+しかし、基本関係式 $[\alpha, \beta]\gamma_1 \cdots \gamma_{g+1} = I$ の両辺の行列式をとると、交換子 $[\alpha, \beta]$ の行列式は必ず 1 になるため、自動的に $\det(\gamma_1) \cdots \det(\gamma_{g+1}) = 1$ が成り立つ。
+つまり、$g+3$ 個の行列式のうち1つは他の結果から自動的に決まるため、独立な制約（減る自由度）は $(g+3) - 1 = \mathbf{g+2 \textbf{ 個}}$ となる。
+
+したがって、モノドロミーのパラメータ数は
+\begin{equation*}
+(4g+5) - (g+2) = \mathbf{3g+3}
+\end{equation*}
+となり、テキストの $\mathrm{M}^{(1)}$ と見事に一致する。想定した「$g+1$ 個の制限」は、トーラス特有のループ $\alpha, \beta$ に対する行列式の制限を見落としていたために生じたズレであった。
+\end{proof}
+\end{Q}
+
+\begin{Q}[【核心】パラメータのカウント $\mathrm{E}^{(1)} = 2g+2$ を計算した時点では、方程式 (3.76) には「見かけの特異点」が存在していないと仮定しているのか？]
+\textbf{A.} その通りである。そして、モノドロミーの次元 $\mathrm{M}^{(1)}$ との「ギャップ」を埋めるために、まさにこれから見かけの特異点を追加しようとしているのがテキストの切れた直後の文章である。
+
+\begin{proof}
+方程式 (3.76) のパラメータ数 $\mathrm{E}^{(1)} = 2g+2$ は、純粋に「$g+1$ 個の確定特異点 $\Xi$ しか持たない SL 型方程式（見かけの特異点ゼロ）」の自由度を計算したものである。
+しかし前節で確認した通り、任意のモノドロミー表現（自由度 $\mathrm{M}^{(1)} = 3g+3$）を網羅するためには、方程式側の自由度が足りない。
+したがって、テキストの切れた直後の文章は以下のように続く。
+\begin{quote}
+「したがって、微分方程式(3.76)は、$\Xi$ に加えて \textbf{$g+1 = \mathrm{M}^{(1)} - \mathrm{E}^{(1)}$ 個の見かけの特異点をもつ} と仮定しなければならない。」
+\end{quote}
+まさにあなたの読み通り、この次元のギャップ「$g+1$」こそが、トーラス上の SL 型方程式において導入すべき見かけの特異点の個数を数学的に要請しているのである。
+\end{proof}
+\end{Q}
+
+\begin{Q}[【核心】GL型からSL型に変換した際に減る $g+1$ 個のパラメータは、「$g+1$ 個の各特異点における特性指数の和が、すべて一定（1）に固定されるから」と解釈してよいか？]
+\textbf{A.} 完璧な幾何学的解釈である。あなたの直感通り、SL型（$p_1=0$）という条件は、すべての特異点での「指数の和」の自由度を奪い去る操作に他ならない。
+
+\begin{proof}
+一般の GL 型微分方程式 $y'' + p_1(x)y' + p_2(x)y = 0$ において、特異点 $x_i$ での決定方程式を考えると、2つの特性指数 $\rho_1, \rho_2$ の和は以下のようになる。
+\begin{equation*}
+\rho_1 + \rho_2 = 1 - \operatorname{Res}_{x=x_i} p_1(x)
+\end{equation*}
+ここから SL 型の方程式（$p_1(x) = 0$）に変換するということは、特異点における $p_1(x)$ の留数がすべて厳密に $0$ になることを意味する。したがって、あなたの予想通り、\textbf{すべての特異点において特性指数の和は「1」に固定される。}
+
+この制約によって失われるパラメータがなぜ正確に「$g+1$ 個」になるのかは、トーラス上の1次微分形式 $p_1(x)dx$ の構造を見れば明らかになる。
+$p_1(x)dx$ は $g+1$ 個の特異点（単純極）を持つ。
+\begin{itemize}
+    \item \textbf{留数の自由度（$g$ 個）:} $g+1$ 個の極での留数を自由に選べるが、「閉曲面（トーラス）上の留数の総和は必ず $0$ になる」という留数定理の制約があるため、独立に選べる留数は $(g+1) - 1 = \mathbf{g \textbf{ 個}}$ である。これらが指数の和を変動させる自由度である。
+    \item \textbf{正則部分の自由度（1 個）:} 極を持たない正則な1次微分形式（トーラス上の $dx$）の自由度がトーラスの種数と同じ \textbf{1 個} だけ存在する。これはすべての指数の和を「大域的に定数シフト」する自由度に対応する。
+\end{itemize}
+これらを合わせた $g + 1$ 個の自由度こそが $p_1(x)$ が持っていたパラメータのすべてであり、SL 型への変換（$p_1(x) \to 0$）によってこれらが丸ごと消滅する。
+あなたの「指数の和が一定になるから $g+1$ 個減る」という考察は、リーマン面の代数幾何学的な本質を見事に言い当てているのである。
+\end{proof}
+\end{Q}
+
+\begin{story}
+（前ページからの続き）
+$g+1$ 個の見かけの特異点をもつ，と仮定し，この下でモノドロミー保存変形を考えよう．種数 $p \geqq 2$ の一般のコンパクトリーマン面 $R$ の場合と異なり，我々の考察の特徴は，$p=1$ のとき，すなわちトーラス $T$ 上の微分方程式は2重周期関数を用いてすべての量を具体的に書き下すことができる，ということである．微分方程式(3.76)の係数 $r(x, t)$ は周期 $2\omega_1, 2\omega_3$ をもつ2重周期関数とし，$\Omega$ を $2\omega_1$ と $2\omega_3$ で生成される $\mathbf{C}$ 内の周期格子であるとする．$\mathbf{C}$ における離散群 $\Omega$ の基本領域，すなわち周期平行4辺形 $F$ を1つとる．トーラス $T$ は1次元の解析的同型をもつから，$\Omega$ の各点が微分方程式(3.76)の確定特異点である，としてよい．そこで，$0 \in F$ なるように $F$ を選び，また，(3.76)のその他の確定特異点を $t_l \in F \ (l=1, \cdots, g)$ とする(図3.1)．
+
+このようにして，$t=(t_1, \cdots, t_g) \in U$ を変形のパラメータとしてモノドロミー保存変形の変数を考察する．$U$ は $\mathbf{C}^g$ の適当な領域である．また，$\lambda_k \in F \ (k=1, \cdots, g)$ を(3.76)の見かけの特異点である，とすると，モノドロミー保存変形により，$\lambda_k$ が $t$ の関数として与えられる．この関数を定める微分方程式系は楕円関数を用いることによって書き表されるであろう．
+\end{story}
+
+\begin{Q}[【基礎】「トーラス $\boldsymbol{T}$ 上の解析」とは、複素平面 $\mathbf{C}$ の言葉で言うと、結局のところ何をすることなのか？]
+\textbf{A.} 複素平面を「平行四辺形のタイル張り」とみなし、「タイル1枚分（基本領域 $\boldsymbol{F}$）の中だけで関数を考えること」に他ならない。トーラス上の関数とは、複素平面上の「2重周期関数」のことである。
+
+\begin{proof}
+幾何学的なドーナツ型（トーラス）を切り開いて平らに伸ばすと、1枚の四角形になる。逆に言えば、複素平面上に平行四辺形（基本領域 $\boldsymbol{F}$）を描き、その「上の辺と下の辺」「右の辺と左の辺」を同一視して貼り合わせるとトーラスができる。（いわゆる昔のゲームの「パックマン」のように、画面の右端に行くと左端から出てくる世界である）。
+
+この世界において、ある点 $x$ から右に $2\omega_1$ だけ進むか、上に $2\omega_3$ だけ進むと、元の場所に戻ってくる。これを式で書くと、トーラス上で定義された関数 $f(x)$ は
+\begin{equation*}
+f(x + 2\omega_1) = f(x), \quad f(x + 2\omega_3) = f(x)
+\end{equation*}
+を満たさなければならない。このような2つの複素周期を持つ関数を「2重周期関数（または楕円関数）」と呼ぶ。
+つまり、「トーラス上の微分方程式」と言われたら、幾何学的なドーナツを想像するのではなく、\textbf{「係数 $r(x,t)$ が2重周期関数であるような、普通の複素平面上の微分方程式」}と脳内変換すれば、解析学の言葉として完全に等価になるのである。テキストの図3.1は、まさにこの「タイル1枚分」の領土を描いている。
+\end{proof}
+\end{Q}
+
+\begin{Q}[【大局観】著者は「種数 $p \geqq 2$ の場合と異なり、$p=1$（トーラス）のときはすべての量を具体的に書き下すことができる」と強調しているが、なぜ $p=1$ はそんなに特別なのか？]
+\textbf{A.} $p=1$ の場合（楕円関数論）には、ワイエルシュトラスの $\wp$（ペー）関数という「万能のブロック」が存在し、すべての関数を極めて具体的な数式で組み立てることができるからである。
+
+\begin{proof}
+解析学において、特異点（極）を持たない正則な関数が2重周期を持つと、リウヴィルの定理により「単なる定数」になってしまう。したがって、トーラス上で意味のある関数は必ず「極」を持たなければならない。
+19世紀の数学者ワイエルシュトラスは、トーラスの原点 $x=0$ に2位の極を持つ最も基本的で美しい2重周期関数 $\wp(x)$ を具体的に構成した。
+
+驚くべきことに、\textbf{「トーラス上のあらゆる有理型関数（2重周期関数）は、$\wp(x)$ とその導関数 $\wp'(x)$ の有理式として完全に書き下せる」}ことが証明されている。
+種数が $p \geqq 2$ （穴が2つ以上のプレッツェルのような図形）になると、このような「1変数のシンプルな万能関数」は存在せず、テータ関数などの多変数関数を用いた非常に抽象的で計算が困難な表現にならざるを得ない。
+
+著者がここで喜んでいるのは、「舞台をトーラスに設定したことで、これから微分方程式の係数 $r(x,t)$ や、見かけの特異点 $\lambda_k(t)$ の動きを、正体不明の抽象的な関数ではなく、$\wp(x)$ という人類が隅々まで性質を知り尽くした具体的な関数（楕円関数）を使って、ゴリゴリと直接計算できるぞ！」という宣言なのである。
+\end{proof}
+\end{Q}
+%#endregion
+
+\subsection{ガルニエ系のハミルトン表示}
+
+\begin{story}
+
+以下この節において定理3.2の証明を行う。ただし、細かい計算には立ち入らず、筋道を示すことを第1の目標としよう。記号等は前節のものを踏襲して用いる。
+
+まず，ハミルトニアン $H_l$ の形(3.73)を，フロベニウスの方法により決定する
+\end{story}
+
+\begin{Q}[【核心】「ハミルトニアン $H_l$ の形を、フロベニウスの方法により決定する」とは具体的にどういうことか？]
+\textbf{A.} これは、前節までの「見かけの特異点 $x=\lambda_k$（特性指数 $0, 2$）」における局所的な解の振る舞いから、系全体を統制するエネルギー関数（ハミルトニアン）を逆算して導き出す、という驚くべきプロセスを指しています。
+「フロベニウスの方法」とは、特異点周りで微分方程式の解を冪級数展開して求める標準的な手法です。特性指数の差が整数の場合、通常は解に「対数項（$\log(x-\lambda_k)$）」が現れます。しかし、$x=\lambda_k$ は「見かけの特異点」であるため、この対数項の係数は厳密に $0$ にならなければなりません。
+この「対数項の係数が $0$ になる」という代数的な条件式を書き下すと、そこに変数 $\lambda_k$ と留数 $\mu_k$、そして変形パラメータ $t_l$ が結びついた関係式が浮かび上がります。この関係式を整理して得られる多項式（または有理関数）こそが、ハミルトニアン $H_l$ そのものになるのです。局所的な「対数項回避の条件」が、大域的な「ハミルトン力学系の生成子」を決定するというのが、岡本理論の最も美しいハイライトの一つです。
+\end{Q}
+
+\begin{Q}[【深掘り】そもそも「ガルニエ系 (Garnier system)」とは何か？]
+\textbf{A.} 一言で言えば、「パンルヴェ方程式の多変数化（高次元化）」です。
+パンルヴェ方程式は、独立変数が $t$ の1つだけ（方程式の特異点が例えば $0, 1, t, \infty$ の4つ）である場合のモノドロミー保存変形を記述する非線形常微分方程式でした。
+ガルニエ系は、動かせる特異点（変形パラメータ）を $t_1, t_2, \dots, t_g$ と複数個に増やしたときに現れる、非線形偏微分方程式系です。変数が多次元になっても、見かけの特異点 $(\lambda_k, \mu_k)$ を正準変数とみなすことで、時間発展 $\partial/\partial t_l$ がハミルトニアン $H_l$ によって完全に統制される「多変数ハミルトン系」として綺麗に書き表すことができます。この節では、そのハミルトニアンが実際にどのような数式になるかを導出していくことになります。
+\end{Q}
+
+\begin{story}
+$x=\lambda_k$ を微分方程式 (3.33) の見かけの特異点とし、局所座標 $u = x - \lambda_k$ をとる。$u=0$ の近傍で (3.33) を
+\begin{equation}
+    u^2 \frac{d^2 y}{du^2} + q_1(u,t)u \frac{dy}{du} + q_2(u,t)y = 0 \label{eq:3.77}
+\end{equation}
+と書く。確定特異点 $u=0$ における特性指数は $0, 2$ であり、これが非対数的であるための条件は、ベキ級数解
+\begin{equation}
+    y = 1 + y_1 u + y_2 u^2 + \cdots \label{eq:3.78}
+\end{equation}
+が存在することである。
+
+\begin{proposition}[対数項を持たないための適合条件]
+\eqref{eq:3.77} の係数を次のように展開する。
+\begin{equation*}
+    q_1(u,t) = -1 + a_k u + a'_k u^2 + \cdots, \quad q_2(u,t) = \mu_k u + b_k u^2 + b'_k u^3 + \cdots
+\end{equation*}
+この表示と \eqref{eq:3.78} を \eqref{eq:3.77} に代入し、未定係数法により比較すると、
+\begin{equation*}
+    y_1 = \mu_k, \quad j(j-2)y_j = R_j(y_1, \cdots, y_{j-1}) \quad (j=2, \cdots)
+\end{equation*}
+となるから、ベキ級数解 \eqref{eq:3.78} が存在するための条件は、$j=2$ の場合を考えて
+\begin{equation}
+    R_2(y_1) = \mu_k y_1 + a_k y_1 + b_k = \mu_k^2 + a_k \mu_k + b_k = 0 \label{eq:3.79}
+\end{equation}
+であることがわかる。
+\end{proposition}
+
+\end{story}
+
+\begin{Q}[【核心】なぜ $j(j-2)y_j = R_j$ において $j=2$ のとき、$R_2(y_1) = 0$ が「対数項を持たない条件」になるのか？]
+\textbf{A.} これはフロベニウス法の決定方程式の構造に由来します。特性指数が $\rho = 0, 2$ ということは、微分方程式の左辺に $u^\rho$ を代入したときの最低次数の係数（決定方程式）が $\rho(\rho-2)=0$ になるということです。
+特性指数 $\rho=0$ に対応する級数解を求めようとして係数 $y_j$ を順に決めていくと、漸化式の左辺は $j(j-2)y_j$ となります。$j=1$ のときは $1 \cdot (-1) y_1 = R_1$ なので $y_1$ は一意に決まりますが、$j=2$ のステップに到達した瞬間、左辺は $2(0)y_2 = 0 \cdot y_2 = 0$ となってしまいます。
+もしこのとき右辺の $R_2$ が $0$ でなければ、「$0 = (\text{0でない値})$」という矛盾が生じ、$y_2$ を決定することができません。この矛盾を回避して解を構成するためには、どうしても独立な解として $u^2 \log u$ のような「対数項」を付け加える必要が出てきます。
+逆に言えば、対数項が現れない（見かけの特異点である）ためには、どうしても右辺が $R_2 = 0$ になってくれて、$0 \cdot y_2 = 0$（$y_2$ は任意定数としてよい）となる必要があるのです。この $R_2=0$ こそが、特異点が見かけ上のものであるための強烈な代数的制約（適合条件）です。
+\end{Q}
+
+\begin{story}
+\begin{theorem}[ハミルトニアンを決定する連立1次方程式]
+一方、元の方程式の係数を用いて $a_k, b_k$ を具体的に計算すると、
+\begin{align*}
+    a_k &= \frac{1-\kappa_0}{\lambda_k} + \frac{1-\kappa_1}{\lambda_k-1} + \sum_{l=1}^g \frac{1-\theta_l}{\lambda_k-t_l} - \sum_{p=1(p \neq k)}^g \frac{1}{\lambda_k-\lambda_p} \\
+    b_k &= \frac{\kappa}{\lambda_k(\lambda_k-1)} + \sum_{p=1(p \neq k)}^g \frac{\lambda_p(\lambda_p-1)\mu_p}{\lambda_k(\lambda_k-1)(\lambda_k-\lambda_p)} - \frac{2\lambda_k-1}{\lambda_k(\lambda_k-1)}\mu_k - \sum_{l=1}^g \frac{t_l(t_l-1)H_l}{\lambda_k(\lambda_k-1)(\lambda_k-t_l)}
+\end{align*}
+である。これを \eqref{eq:3.79} に代入して整理した式は、
+\begin{equation}
+    \sum_{l=1}^g E_{kl} H_l = \mu_k^2 + \hat{a}_k \mu_k + \hat{b}_k \label{eq:3.80}
+\end{equation}
+\begin{equation*}
+    E_{kl} = \frac{t_l(t_l-1)}{\lambda_k(\lambda_k-1)(\lambda_k-t_l)}
+\end{equation*}
+という形をしているから、これを $H_l$ に関する連立1次方程式と思って解けばよい。
+\end{theorem}
+\end{story}
+
+\begin{Q}[【深掘り】この連立方程式 \eqref{eq:3.80} が解けることで、理論上どのような「嬉しいこと」があるのか？]
+\textbf{A.} これは「ガルニエ系のハミルトニアン $H_l$ が、正準変数 $(\lambda_k, \mu_k)$ の有理関数として具体的に構成できる」という決定的な事実を示しています。
+左辺の係数行列 $E_{kl}$ はコーシー行列の一種であり、$\lambda_k$ と $t_l$ がすべて相異なるという仮定のもとで正則（逆行列を持つ）になります。したがって、この連立1次方程式は必ず一意な解 $H_l$ を持ちます。
+局所的な「対数項を消去せよ」という解析的な条件 $R_2=0$ を解きほぐしただけで、系全体の時間発展 $\partial/\partial t_l$ を支配する力学系のエネルギー関数 $H_l$ が代数的に完全に決定されてしまうという、モノドロミー保存変形の理論構造の美しさがここに凝縮されています。
+\end{Q}
+
+\begin{story}
+\begin{lemma}[3.4]
+行列 $E = ((E_{kl}))$ の逆行列を $F = ((F_{lk}))$ とすると、
+\begin{equation}
+    F_{lk} = M_l M^{k,l} \label{eq:3.81}
+\end{equation}
+\begin{equation*}
+    M_l = - \frac{L(t_l)}{T'(t_l)}, \quad M^{k,l} = \frac{T(\lambda_k)}{L'(\lambda_k)(\lambda_k - t_l)}
+\end{equation*}
+となる。
+\end{lemma}
+
+補題に出てくる、$t, \lambda, \mu$ の有理関数 $M_l, M^{k,l}$ は、それぞれ (3.74), (3.75) で与えられたものである。(3.81) により、(3.80) を $H_l$ について解けば (3.73) が得られる。そのとき、関係式
+\begin{equation*}
+    \sum_{k=1}^g \frac{M^{k,l}}{\lambda_k(\lambda_k-1)} = 1
+\end{equation*}
+などを用いて計算することになるが、(3.73) を導く計算の詳細は省略する。
+
+\begin{proof}
+線型代数の演習問題であるから、簡単に証明しておこう。
+$x$ の有理関数
+\begin{equation}
+    Z_l(x) = \frac{T(x)}{x(x-1)(x-t_l)L(x)}
+\end{equation}
+を考える。ここで、$T(x), L(x)$ は、(3.69), (3.70) で与えられる $x$ の多項式、すなわち
+\begin{equation*}
+    T(x) = x(x-1)\prod_{m=1}^g (x-t_m), \quad L(x) = \prod_{k=1}^g (x-\lambda_k)
+\end{equation*}
+である。$Z_l(x)$ は $x=\lambda_k \ (k=1, \cdots, g)$ に、1位の極をもつ。さらに、有理関数 $Z_l(x)$ の分母は $g$ 次多項式、分子は $g-1$ 次多項式、であることに注意してこの有理関数を部分分数展開する。実際
+\begin{equation*}
+    \underset{x=\lambda_k}{\mathrm{Res}} Z_l(x) = \frac{T(\lambda_k)}{\lambda_k(\lambda_k-1)(\lambda_k-t_l)L'(\lambda_k)} = \frac{M^{k,l}}{\lambda_k(\lambda_k-1)}
+\end{equation*}
+より、次の式が得られる。
+\begin{equation}
+    Z_l(x) = \sum_{k=1}^g \frac{M^{k,l}}{\lambda_k(\lambda_k-1)} \cdot \frac{1}{x-\lambda_k}
+\end{equation}
+ここで、まず
+\begin{equation*}
+    Z_l(t_h) = \sum_{k=1}^g \frac{M^{k,l}}{\lambda_k(\lambda_k-1)} \cdot \frac{1}{t_h-\lambda_k} = - \sum_{k=1}^g \frac{M^{k,l} E_{kh}}{t_h(t_h-1)}
+\end{equation*}
+となることに気がつく．他方，定義式から
+\begin{equation*}
+    Z_l(t_l) = \frac{T'(t_l)}{t_l(t_l-1)L(t_l)} = \frac{-1}{t_l(t_l-1)M_l}
+\end{equation*}
+\begin{equation*}
+    Z_l(t_h) = 0 \quad (h \neq l)
+\end{equation*}
+であるから，結局
+\begin{align*}
+    1 &= \sum_{k=1}^g E_{kl} M_l M^{k,l} \\
+    0 &= \sum_{k=1}^g E_{kh} M_l M^{k,l} \quad (h \neq l)
+\end{align*}
+が得られる．これは(3.81)を意味している．
+
+(3.80), (3.81)から $H_l$ を求めれば(3.73)が得られる。
+\end{proof}
+\end{story}
+
+\begin{Q}[【核心】なぜ逆行列を求めるために、突然 $Z_l(x)$ という有理関数を考えるのか？]
+\textbf{A.} 行列 $E$ と $F$ が互いに逆行列であること（すなわち $\sum E_{kl}F_{lm} = \delta_{km}$）を直接計算で証明するのは、要素が複雑な分数であるため非常に困難です。
+しかし、$Z_l(x)$ の定義式に $T(x)$ を代入して約分すると、実は
+$$ Z_l(x) = \frac{\prod_{m \neq l}^g (x-t_m)}{L(x)} $$
+となり、これは分子が $g-1$ 次、分母が $g$ 次の有理関数になります。
+複素解析において「分子の次数が分母の次数より2以上小さい有理関数の、すべての極における留数の和はゼロになる」という強力な定理（留数定理）があります。この定理や、部分分数展開に $x=t_m$ などを代入して得られる「ラグランジュ補間の恒等式」を利用することで、行列の積の和 $\sum$ を「留数の和」にすり替えることができ、複雑な代数計算を一瞬でクロネッカーのデルタ $\delta_{km}$ に帰着させることができるのです。
+\end{Q}
+
+\begin{Q}[【深掘り】多項式 $T(x)$ と $L(x)$ はそれぞれ何を意味しているのか？]
+\textbf{A.} 多変数（$g$ 変数）のガルニエ系において、多数の特異点を一括して扱うための「母関数（特性多項式）」です。
+* $T(x) = x(x-1)\prod (x-t_m)$ は、微分方程式の「確定特異点（動かない特異点 $0, 1$ と、動くパラメータ $t_m$）」を根に持つ多項式です。
+* $L(x) = \prod (x-\lambda_k)$ は、「見かけの特異点」を根に持つ多項式です。
+このように特異点の位置を多項式の根としてパックすることで、ガルニエ系全体の挙動を「$T(x)$ と $L(x)$ が織りなす1変数の代数関数論」として驚くほど見通し良く記述できるようになります。これは岡本和夫先生の研究の真骨頂とも言える手法です。
+\end{Q}
+
+\begin{Q}[【核心】$Z_l(t_h)$ に $x=t_h$ を代入するだけで、なぜ逆行列の証明が終わるのか？]
+\textbf{A.} これは部分分数分解と「極（分母が0になる点）」の性質を巧みに利用したマジックです。
+有理関数 $Z_l(x)$ の定義式を見ると、分子に $T(x) \propto (x-t_1)\cdots(x-t_g)$ があります。したがって、$h \neq l$ のときは単に $T(t_h) = 0$ となり $Z_l(t_h) = 0$ になります。
+一方、$h = l$ のときは、分母にも $(x-t_l)$ があるため $0/0$ の不定形になります。ロピタルの定理のように約分して極限をとることで、分子は微分された $T'(t_l)$ となり、$0$ ではない値が残ります。
+これを、部分分数展開した側（$\sum$ の形）と比較します。すると、「行列 $E$ と、$M_l M^{k,l}$ からなる行列 $F$ の積」が、「$h=l$ のときは $1$、$h \neq l$ のときは $0$」すなわち単位行列（クロネッカーのデルタ $\delta_{hl}$）になることが、一切の泥臭い連立方程式を解くことなく、極限の評価だけで鮮やかに証明されるのです。
+\end{Q}
+
+前節までの議論により、ハミルトニアン $H_h$ は以下の連立1次方程式を満たすことがわかっている。
+\begin{equation*}
+    \sum_{h=1}^g E_{kh} H_h = \mu_k^2 + \hat{a}_k \mu_k + \hat{b}_k
+\end{equation*}
+ここで $\hat{a}_k, \hat{b}_k$ は $H_h$ を含まない項であり、具体的には次で与えられる。
+\begin{align*}
+    \hat{a}_k &= \frac{1-\kappa_0}{\lambda_k} + \frac{1-\kappa_1}{\lambda_k-1} + \sum_{h=1}^g \frac{1-\theta_h}{\lambda_k-t_h} - \sum_{p=1 (p \neq k)}^g \frac{1}{\lambda_k-\lambda_p} \\
+    \hat{b}_k &= \frac{\kappa}{\lambda_k(\lambda_k-1)} - \frac{2\lambda_k-1}{\lambda_k(\lambda_k-1)}\mu_k + \sum_{p=1 (p \neq k)}^g \frac{\lambda_p(\lambda_p-1)\mu_p}{\lambda_k(\lambda_k-1)(\lambda_k-\lambda_p)}
+\end{align*}
+行列 $E$ の逆行列 $F_{lk} = M_l M^{k,l}$ を左から掛けることで、$H_l$ は次のように表される。
+\begin{equation}
+    H_l = M_l \sum_{k=1}^g M^{k,l} \left( \mu_k^2 + \hat{a}_k \mu_k + \hat{b}_k \right) \label{eq:Hl_base}
+\end{equation}
+
+\begin{theorem}[ハミルトニアンの最終形態]
+式 \eqref{eq:Hl_base} を $\mu_k$ について整理すると、以下の式 (3.73) が得られる。
+\begin{equation}
+    H_l = M_l \left[ \sum_{k=1}^g M^{k,l} \left\{ \mu_k^2 - A_{k,l}\mu_k + \frac{\kappa}{\lambda_k(\lambda_k-1)} \right\} \right] \label{eq:3.73}
+\end{equation}
+\begin{equation*}
+    A_{k,l} = \frac{\kappa_0}{\lambda_k} + \frac{\kappa_1}{\lambda_k-1} + \sum_{h=1}^g \frac{\theta_h - \delta_{hl}}{\lambda_k - t_h}
+\end{equation*}
+\end{theorem}
+
+\begin{proof}[証明と係数比較]
+式 \eqref{eq:Hl_base} の括弧内を展開し、$\mu_k^2$ の項、$\mu_k^0$（定数）の項、$\mu_k^1$ の項に分けて比較する。
+\begin{itemize}
+    \item \textbf{2次の項}: そのまま $\mu_k^2$ となり一致する。
+    \item \textbf{定数項}: $\hat{b}_k$ の第1項 $\frac{\kappa}{\lambda_k(\lambda_k-1)}$ がそのまま現れるため一致する。
+    \item \textbf{1次の項}: ここが非自明である。$\hat{b}_k$ の二重和の部分は、添字 $k$ と $p$ を入れ替えることで次のように変形できる。
+    \begin{equation*}
+        \sum_{k=1}^g M^{k,l} \sum_{p \neq k} \frac{\lambda_p(\lambda_p-1)\mu_p}{\lambda_k(\lambda_k-1)(\lambda_k-\lambda_p)} = \sum_{k=1}^g \mu_k \sum_{p \neq k} M^{p,l} \frac{\lambda_k(\lambda_k-1)}{\lambda_p(\lambda_p-1)(\lambda_p-\lambda_k)}
+    \end{equation*}
+    したがって、式 \eqref{eq:Hl_base} における $\mu_k$ の全体の係数（$M^{k,l}$ をくくり出したもの）を $C_k$ とすると、
+    \begin{equation}
+        M^{k,l} C_k = M^{k,l} \left( \hat{a}_k - \frac{2\lambda_k-1}{\lambda_k(\lambda_k-1)} \right) + \sum_{p \neq k} M^{p,l} \frac{\lambda_k(\lambda_k-1)}{\lambda_p(\lambda_p-1)(\lambda_p-\lambda_k)}
+    \end{equation}
+    となる。この $C_k$ がちょうど $-A_{k,l}$ に等しいことを示せばよい。
+\end{itemize}
+代数的な計算により、$\hat{a}_k - \frac{2\lambda_k-1}{\lambda_k(\lambda_k-1)} = - A_{k,l} + \sum_{h \neq l} \frac{1}{\lambda_k-t_h} - \sum_{p \neq k} \frac{1}{\lambda_k-\lambda_p}$ がわかる。これを代入し、$M^{k,l}C_k = M^{k,l}(-A_{k,l})$ を示すことは、以下の等式を示すことと同値である。
+\begin{equation}
+    \sum_{h \neq l} \frac{1}{\lambda_k-t_h} - \sum_{p \neq k} \frac{1}{\lambda_k-\lambda_p} = \sum_{p \neq k} \frac{M^{p,l} \lambda_k(\lambda_k-1)}{M^{k,l} \lambda_p(\lambda_p-1)(\lambda_k-\lambda_p)} \label{eq:identity_target}
+\end{equation}
+多項式 $P(x) = \prod_{m \neq l}(x-t_m)$ および $L(x) = \prod (x-\lambda_q)$ を用いると、$\frac{M^{k,l}}{\lambda_k(\lambda_k-1)} = \frac{P(\lambda_k)}{L'(\lambda_k)}$ と書けるため、式 \eqref{eq:identity_target} の右辺は
+\begin{equation*}
+    \sum_{p \neq k} \frac{P(\lambda_p)L'(\lambda_k)}{P(\lambda_k)L'(\lambda_p)(\lambda_k-\lambda_p)}
+\end{equation*}
+となる。これは、有理関数の部分分数展開（ラグランジュ補間の微分の公式）から得られる恒等式と完全に一致する。よって $C_k = -A_{k,l}$ が証明され、式 (3.73) が導出された。
+\end{proof}
+
+\begin{Q}[【核心】なぜ二重和の計算で「添字 $k$ と $p$ の入れ替え」を行う必要があるのか？]
+\textbf{A.} 行列の積を計算して $H_l = \sum_k F_{lk} (\cdots)$ と書き下した段階では、和の主役は $k$ です。しかし、$\hat{b}_k$ の中にさらに別の和 $\sum_{p \neq k} \mu_p$ が含まれているため、このままでは $\mu_1, \mu_2, \dots$ がそれぞれの項に散らばってしまいます。
+最終目標である式 (3.73) は「各 $k$ について $\mu_k^2$ と $\mu_k^1$ を綺麗にまとめた形」をしています。したがって、散らばった $\mu$ を主役（係数）としてまとめ直すために、和の順番を $\sum_k \sum_p$ から $\sum_p \sum_k$ へと入れ替え、形式的に $p$ を $k$ に読み替えることで、全体の $\mu_k$ の係数を一つに集約させているのです。
+\end{Q}
+
+\begin{Q}[【深掘り】証明の最後に登場した「ラグランジュ補間の微分の公式」とは何か？]
+\textbf{A.} これは代数幾何や可積分系において、複雑な有理関数の和を一瞬で計算するための強力な恒等式です。
+一般に、$g-1$ 次の多項式 $P(x)$ は、ラグランジュ補間により $P(x) = \sum_{p=1}^g \frac{P(\lambda_p)}{L'(\lambda_p)} \frac{L(x)}{x-\lambda_p}$ と展開できます。この両辺を $x$ で微分し、$x = \lambda_k$ を代入して整理すると、
+\begin{equation*}
+    \frac{P'(\lambda_k)}{P(\lambda_k)} - \frac{L''(\lambda_k)}{2L'(\lambda_k)} = \sum_{p \neq k} \frac{P(\lambda_p)L'(\lambda_k)}{P(\lambda_k)L'(\lambda_p)(\lambda_k-\lambda_p)}
+\end{equation*}
+という美しい関係式が自動的に得られます。左辺の対数微分 $\frac{P'}{P}$ や $\frac{L''}{L'}$ を計算すると、まさに式 \eqref{eq:identity_target} の左辺のシグマの差そのものになります。パンルヴェ理論のハミルトニアンがこれほど綺麗にまとまる背後には、こうした代数関数論の深い恒等式が隠れているのです。
+\end{Q}
+
+\begin{story}
+
+以下，前節から考察している2階フックス型線型常微分方程式
+\begin{equation}
+    \frac{d^2 y}{dx^2} + p_1(x,t) \frac{dy}{dx} + p_2(x,t)y = 0 \label{eq:3.33}
+\end{equation}
+のモノドロミー保存変形の計算に戻ろう．係数は(3.67), (3.68)により与えられていた．我々は，$x=\lambda_k$ が見かけの特異点である，という仮定を使って，$H_l$ を他の変数の有理関数として具体的に求めたところである．
+
+ここで，第3.2節において調べたことを思いだそう．(3.33)に対して
+\begin{equation}
+    r(x,t) = -p_2(x,t) + \frac{1}{4}p_1(x,t)^2 + \frac{1}{2}\frac{\partial}{\partial x}p_1(x,t) \label{eq:3.32}
+\end{equation}
+とし，SL型方程式
+\begin{equation}
+    \frac{d^2 z}{dx^2} = r(x,t)z \label{eq:3.25}
+\end{equation}
+を併せて考える．ここで124ページの考察を補題の形にまとめておこう．
+
+\begin{lemma}[3.5]
+(3.33)がモノドロミー保存変形を定めることと，(3.25)がそうなることは同値であり，さらにこれは，以下の偏微分方程式系が $x$ の有理関数を解としてもつことと同値である．
+
+\begin{align}
+    \frac{\partial^3}{\partial x^3}w_l - 4r(x,t)\frac{\partial}{\partial x}w_l - 2\frac{\partial r}{\partial x}(x,t)w_l + 2\frac{\partial r}{\partial t_l}(x,t) = 0 \label{eq:3.82} \\
+    \left( \frac{\partial}{\partial t_h} - w_h \frac{\partial}{\partial x} \right) w_l = \left( \frac{\partial}{\partial t_l} - w_l \frac{\partial}{\partial x} \right) w_h \quad (h,l = 1,\cdots,g) \label{eq:3.83}
+\end{align}
+
+\end{lemma}
+\end{story}
+
+\begin{Q}[【深掘り】なぜわざわざ元の微分方程式 (3.33) を、1階微分の項がないSL型 (3.25) に変換して考える必要があるのか？]
+\textbf{A.} モノドロミー保存変形の条件（Lax方程式などの非線形偏微分方程式系）を導出する際、**1階微分の項 $\frac{dy}{dx}$ が存在すると計算が絶望的に複雑になるから**です。
+実は、未知関数 $y$ に対して $z = y \exp(\frac{1}{2}\int p_1 dx)$ という変換（ゲージ変換）を行うと、1階微分の項が完全に消去され、$z'' = r(x,t)z$ というシンプルな形（Sturm-Liouville型、あるいはシュレディンガー方程式型）に帰着させることができます。
+この変換は、解の「特異点周りでの回り方（モノドロミー表現）」の本質を一切変えません。そのため、「モノドロミーが保存される」という幾何学的な条件を計算するときは、見通しの良いSL型 (3.25) を使って変形方程式を書き下すのが、可積分系理論における絶対的な定石なのです。(3.32) の $r(x,t)$ の式は、まさにそのゲージ変換から生じるポテンシャル項を表しています。
+\end{Q}
+
+\begin{story}
+実際，命題3.8により(3.82), (3.83)の有理関数解 $w_l = a_2^{(l)}(x,t)$ は存在すれば唯一であり，それに対して $a_1^{(l)}(x,t)$ を(3.23)により定めると，変形方程式系
+\begin{equation}
+\left\{
+\begin{array}{l}
+    \displaystyle \frac{\partial^2 \vec{\phi}}{\partial x^2} + p_1(x,t)\frac{\partial \vec{\phi}}{\partial x} + p_2(x,t)\vec{\phi} = 0 \vspace{0.5em} \\
+    \displaystyle \frac{\partial \vec{\phi}}{\partial t_l} = a_1^{(l)}(x,t)\vec{\phi} + a_2^{(l)}(x,t)\frac{\partial \vec{\phi}}{\partial x}
+\end{array}
+\right. \label{eq:3.20}
+\end{equation}
+は完全積分可能である．さらに次の命題も成り立つ．
+
+\begin{proposition}[3.14]
+偏微分方程式系(3.82)の有理関数解 $w_l$ は，(3.83)を満たす．
+\end{proposition}
+
+この命題により，モノドロミー保存変形は(3.82)の考察に帰着される．証明のために
+\begin{equation*}
+    L = \frac{\partial^3}{\partial x^3} - 4r(x,t)\frac{\partial}{\partial x} - 2\frac{\partial r}{\partial x}(x,t)
+\end{equation*}
+とおく．計算によって次の補題の成立を確認することができる．
+
+\begin{lemma}[3.6]
+任意の解析関数 $f,g$ に対して次式が成り立つ．
+\begin{equation*}
+    2\frac{\partial f}{\partial x}L(g) - 2\frac{\partial g}{\partial x}L(f) + f\frac{\partial}{\partial x}L(g) - g\frac{\partial}{\partial x}L(f) = L\left( f\frac{\partial g}{\partial x} - g\frac{\partial f}{\partial x} \right)
+\end{equation*}
+\end{lemma}
+
+\begin{proof}[命題3.14の証明]
+(3.82)に有理関数解 $w_l$ が存在するとして
+\begin{equation*}
+    L(w_l) + 2\frac{\partial r}{\partial t_l}(x,t) = 0
+\end{equation*}
+から，積分可能条件として
+\begin{equation}
+    0 = \frac{\partial}{\partial t_h}L(w_l) - \frac{\partial}{\partial t_l}L(w_h) = L\left( \frac{\partial w_l}{\partial t_h} - \frac{\partial w_h}{\partial t_l} \right) + L_{hl} \label{eq:3.84}
+\end{equation}
+が成り立っている．ここで
+\begin{equation*}
+    L_{hl} = -4\frac{\partial r}{\partial t_h}\frac{\partial w_l}{\partial x} + 4\frac{\partial r}{\partial t_l}\frac{\partial w_h}{\partial x} - 2w_l\frac{\partial^2 r}{\partial x \partial t_h} + 2w_h\frac{\partial^2 r}{\partial x \partial t_l}
+\end{equation*}
+であるが，計算して補題3.6を使うと
+\begin{align*}
+    L_{hl} &= 2\frac{\partial w_l}{\partial x}L(w_h) - 2\frac{\partial w_h}{\partial x}L(w_l) + w_l\frac{\partial}{\partial x}L(w_h) - w_h\frac{\partial}{\partial x}L(w_l) \\
+    &= L\left( w_l\frac{\partial w_h}{\partial x} - w_h\frac{\partial w_l}{\partial x} \right)
+\end{align*}
+したがって(3.84)より
+\begin{equation*}
+    L\left( \frac{\partial w_l}{\partial t_h} - \frac{\partial w_h}{\partial t_l} + w_l\frac{\partial w_h}{\partial x} - w_h\frac{\partial w_l}{\partial x} \right) = 0
+\end{equation*}
+となる．命題3.8の証明で見たように，仮定(P2), (P3)によれば，3階線型常微分方程式 $L(w)=0$ は非自明な有理関数解をもたない．すなわち
+\begin{equation*}
+    \frac{\partial w_l}{\partial t_h} - \frac{\partial w_h}{\partial t_l} + w_l\frac{\partial w_h}{\partial x} - w_h\frac{\partial w_l}{\partial x} = 0
+\end{equation*}
+以上の議論は，(3.83)が(3.82)の積分可能条件に他ならないことを示している．
+\end{proof}
+
+\end{story}
+
+\begin{Q}[【核心】作用素 $L$ と方程式(3.82)は、どこかで見たことがある形をしているが？]
+\textbf{A.} お気付きの通り、以前のノートにあった**KdV方程式のLax対の生成子 $M_3$ と本質的に全く同じもの**です。
+ノートでは $M_3 = -4\partial_x^3 - 6u\partial_x - 3u_x$ でした。これを定数倍でスケール調整し、$u$ をポテンシャル $r(x,t)$ に読み替えると、まさに $L = \partial_x^3 - 4r\partial_x - 2r_x$ になります。
+シュレディンガー作用素 $\partial_x^2 - r(x,t)$ の固有値（あるいはモノドロミー）を保存するような変形を考えると、必ずこの3階の微分作用素 $L$ が現れます。(3.82) は $L(w_l) = -2\partial_{t_l}r$ と書けますが、これはソリトン理論における「Lenard関係式」や「KdV階層」を定義する方程式そのものです。モノドロミー保存変形（ガルニエ系）とは、本質的に「有限自由度のKdV階層」に他ならないことが、この式から明確に読み取れます。
+\end{Q}
+
+\begin{Q}[【深掘り】命題3.14は、なぜそれほどまでに重要なのか？]
+\textbf{A.} モノドロミー保存変形を成立させるためには、本来 **(3.82)（ポテンシャルの時間発展）と (3.83)（異なる時間 $t_l, t_h$ のフローの可換性）の両方を同時に満たす $w_l$** を探さなければなりません。複数の時間を扱う多変数系（ガルニエ系）において、(3.83)のような非線形の連立微分方程式を解くことは通常至難の業です。
+しかし命題3.14は、**「(3.82)の有理関数解を見つけさえすれば、面倒な(3.83)は自動的に満たされる」**という驚くべき事実を保証しています。つまり、問題を解くための労力が半分（あるいはそれ以下）に劇的に減るのです。
+この「奇跡」を代数的に証明するための鍵となるのが、補題3.6の恒等式です。作用素 $L$ が持つ美しい代数的な対称性のおかげで、個別の時間発展(3.82)が保証されれば、系全体の無矛盾性(3.83)も自動的に担保される構造になっています。
+\end{Q}
+
+\begin{Q}[【核心】作用素 $L$ で括った中身が $=0$ になるのはなぜか？積分定数のようなものは出ないのか？]
+\textbf{A.} ここがこの証明の最大の要です。一般の微分方程式 $L(W) = 0$ には当然、非自明な解（積分定数を含む関数の族）が存在します。しかしここで探しているのは「有理関数解」です。
+パンルヴェ理論の枠組みでは、特異点の配置に関する一般的な仮定（P2, P3など）を置くことで、「$L(w)=0$ を満たす有理関数は $w=0$ しか存在しない（核が自明である）」という事実が代数幾何的に保証されています。
+非線形偏微分方程式の可換性条件 (3.83) という極めて複雑な等式を、「線形作用素 $L$ の核が自明である」という代数的な性質に帰着させて証明し切ってしまう、極めて美しい論法です。
+\end{Q}
+
+\begin{story}
+そこで，(3.32)を用いて $r(x,t)$ を計算しよう．実際，$r(x,t)$ は $x=0, x=1, x=t$ で高々2位の極をもつ有理関数である．特性指数を考慮すれば，$r(x,t)$ は
+
+\begin{align}
+    r(x,t) &= \frac{\alpha_0}{x^2} + \frac{\alpha_1}{(x-1)^2} + \frac{\alpha_\infty}{x(x-1)} \nonumber \\
+    &\quad + \sum_{l=1}^g \left[ \frac{\beta_l}{(x-t_l)^2} + \frac{t_l(t_l-1)K_l}{x(x-1)(x-t_l)} \right] \label{eq:3.85} \\
+    &\quad + \sum_{k=1}^g \left[ \frac{3}{4(x-\lambda_k)^2} - \frac{\lambda_k(\lambda_k-1)\nu_k}{x(x-1)(x-\lambda_k)} \right] \nonumber
+\end{align}
+
+という形をしている．他方，(3.32)に(3.67)と(3.68)を代入して，係数の関係を調べる．すると
+\begin{equation*}
+    \alpha_0 = \frac{1}{4}(\kappa_0^2 - 1), \quad \alpha_1 = \frac{1}{4}(\kappa_1^2 - 1), \quad \beta_l = \frac{1}{4}(\theta_l^2 - 1)
+\end{equation*}
+\end{story}
+
+\begin{Q}[【深掘り】式(3.85)の見かけの特異点 $x=\lambda_k$ の項にある「$3/4$」という数字はどこから来たのか？]
+\textbf{A.} これはSL型方程式（シュレディンガー方程式型）における**見かけの特異点の絶対的な刻印**です。
+フックス型微分方程式をSL型にゲージ変換（$z = y \exp(\frac{1}{2}\int p_1 dx)$）すると、変換後のポテンシャル $r(x,t)$ の各特異点での2位の極の留数は、特性指数の差 $\Delta \rho$ を用いて $\frac{1}{4}((\Delta \rho)^2 - 1)$ という普遍的な形で書けることが知られています（シュワルツ微分の性質）。
+確定特異点 $x=0, 1, t_l$ では特性指数の差がそれぞれ $\kappa_0, \kappa_1, \theta_l$ なので、$\alpha_0, \alpha_1, \beta_l$ はまさにこの公式通りになっています。
+そして、見かけの特異点 $x=\lambda_k$ では、以前確認したように「特性指数は $0, 2$」です。したがってその差は $\Delta \rho = 2 - 0 = 2$ となります。これを公式に代入すると、
+$$ \frac{1}{4}(2^2 - 1) = \frac{3}{4} $$
+となります。つまりこの $\frac{3}{4}$ は、そこが「特性指数の差が $2$ である見かけの特異点である」という幾何学的な事実から代数的に必然として導かれる定数なのです。
+\end{Q}
+

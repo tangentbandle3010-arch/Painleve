@@ -1,11 +1,2 @@
 {
-  "todo-tree.regex.regex": "(%|//|#)[ \\t]*($TAGS)|^\\s*- \\[ \\]",
-  "todo-tree.highlights.customHighlight": {
-    "TODO": {
-      "icon": "square"
-    },
-    "FIXME": {
-      "icon": "flame"
-    }
-  }
 }

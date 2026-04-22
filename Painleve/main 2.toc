@@ -1,6 +1,6 @@
 \contentsline {section}{\numberline {1}はじめに}{1}{section.1}%
-\contentsline {section}{\numberline {2}フックス型微分方程式}{2}{section.2}%
-\contentsline {subsection}{\numberline {2.1}2階線型常微分方程式}{2}{subsection.2.1}%
+\contentsline {section}{\numberline {2}フックス型微分方程式}{1}{section.2}%
+\contentsline {subsection}{\numberline {2.1}2階線型常微分方程式}{1}{subsection.2.1}%
 \contentsline {subsection}{\numberline {2.2}確定特異点}{6}{subsection.2.2}%
 \contentsline {subsection}{\numberline {2.3}不確定特異点}{22}{subsection.2.3}%
 \contentsline {subsection}{\numberline {2.4}高階フックス型線型常微分方程式}{22}{subsection.2.4}%
@@ -11,8 +11,6 @@
 \contentsline {section}{\numberline {3}パンルヴェ方程式の基礎}{61}{section.3}%
 \contentsline {subsection}{\numberline {3.1}変形微分方程式系}{61}{subsection.3.1}%
 \contentsline {subsection}{\numberline {3.2}2階フックス型微分方程式のラックス方程式}{70}{subsection.3.2}%
-\contentsline {subsection}{\numberline {3.3}変形微分方程式系の解}{76}{subsection.3.3}%
-\contentsline {subsection}{\numberline {3.4}シュレージンガー系}{82}{subsection.3.4}%
-\contentsline {subsection}{\numberline {3.5}ガルニエ系}{99}{subsection.3.5}%
-\contentsline {subsection}{\numberline {3.6}ガルニエ系のハミルトン表示}{113}{subsection.3.6}%
-\contentsline {section}{\numberline {A}用いた定理}{122}{appendix.A}%
+\contentsline {subsection}{\numberline {3.3}変形微分方程式系の解}{71}{subsection.3.3}%
+\contentsline {subsection}{\numberline {3.4}シュレージンガー系}{76}{subsection.3.4}%
+\contentsline {section}{\numberline {A}用いた定理}{77}{appendix.A}%
