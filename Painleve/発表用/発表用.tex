@@ -205,9 +205,9 @@ M^{k,l} &= \frac{\mathrm{T}(\lambda_k)}{\mathrm{L}'(\lambda_k)(\lambda_k - t_l)}
 \begin{story}
 \begin{proof}[命題3.14の証明]
 (3.82)に有理関数解 $w_l$ が存在するとして
-\begin{equation*}
+\begin{equation}\label{eq_3.6:L_r_wl}
     L(w_l) + 2\frac{\partial r}{\partial t_l}(x,t) = 0
-\end{equation*}
+\end{equation}
 から，積分可能条件として
 \[
 \frac{\partial^{2} r}{\partial t_l\partial t_{h}}(x,t)=\frac{\partial^{2} r}{\partial t_h\partial t_{l}}(x,t)
@@ -217,27 +217,177 @@ M^{k,l} &= \frac{\mathrm{T}(\lambda_k)}{\mathrm{L}'(\lambda_k)(\lambda_k - t_l)}
     0 &= \frac{\partial}{\partial t_h}L(w_l) - \frac{\partial}{\partial t_l}L(w_h)\\
     &= \left(\frac{\partial^{4}}{\partial t_h\partial x^{3}}-4\frac{\partial r}{\partial t_{h}}\frac{\partial}{\partial x}-4r\frac{\partial^{2}}{\partial t_{h}\partial x}-2\frac{\partial^{2}r}{\partial t_{h}\partial x}-2\frac{\partial r}{\partial t_{h}}\frac{\partial}{\partial x}\right)w_{l}\\
     &-\left(\frac{\partial^{4}}{\partial t_l\partial x^{3}}-4\frac{\partial r}{\partial t_{l}}\frac{\partial}{\partial x}-4r\frac{\partial^{2}}{\partial t_{l}\partial x}-2\frac{\partial^{2}r}{\partial t_{l}\partial x}-2\frac{\partial r}{\partial t_{l}}\frac{\partial}{\partial x}\right)w_{h}\\
-    &= \left(\frac{\partial^{3}}{\partial x^{3}}-4r\frac{\partial}{\partial x}-2\frac{\partial r}{\partial x}\right)(\frac{w_{l}}{t_{h}}-\frac{w_{h}}{t_{l}})\\
+    &= \left(\frac{\partial^{3}}{\partial x^{3}}-4r\frac{\partial}{\partial x}-2\frac{\partial r}{\partial x}\right)(\frac{\partial w_{l}}{\partial t_{h}}-\frac{\partial w_{h}}{\partial t_{l}})\\
+    &+\left(-4\frac{\partial r}{\partial t_h}\frac{\partial w_l}{\partial x} + 4\frac{\partial r}{\partial t_l}\frac{\partial w_h}{\partial x} - 2w_l\frac{\partial^2 r}{\partial x \partial t_h} + 2w_h\frac{\partial^2 r}{\partial x \partial t_l}\right)\\
     &= L\left( \frac{\partial w_l}{\partial t_h} - \frac{\partial w_h}{\partial t_l} \right) + L_{hl} \label{eq:3.84}
 \end{align}
 が成り立っている．ここで
 \begin{equation*}
     L_{hl} = -4\frac{\partial r}{\partial t_h}\frac{\partial w_l}{\partial x} + 4\frac{\partial r}{\partial t_l}\frac{\partial w_h}{\partial x} - 2w_l\frac{\partial^2 r}{\partial x \partial t_h} + 2w_h\frac{\partial^2 r}{\partial x \partial t_l}
 \end{equation*}
-であるが，計算して補題3.6を使うと
+であるが、\eqref{eq_3.6:L_r_wl}より、
 \begin{align*}
-    L_{hl} &= 2\frac{\partial w_l}{\partial x}L(w_h) - 2\frac{\partial w_h}{\partial x}L(w_l) + w_l\frac{\partial}{\partial x}L(w_h) - w_h\frac{\partial}{\partial x}L(w_l) \\
-    &= L\left( w_l\frac{\partial w_h}{\partial x} - w_h\frac{\partial w_l}{\partial x} \right)
+    L_{hl} &=2\frac{\partial w_l}{\partial x}L(w_h) - 2\frac{\partial w_h}{\partial x}L(w_l)+w_{l}\frac{\partial}{\partial x}\left(-2\frac{\partial r}{\partial t_{h}}\right)-w_{h}\frac{\partial}{\partial x}\left(-2\frac{\partial r}{\partial t_{l}}\right)\\
+    &= 2\frac{\partial w_l}{\partial x}L(w_h) - 2\frac{\partial w_h}{\partial x}L(w_l) + w_l\frac{\partial}{\partial x}L(w_h) - w_h\frac{\partial}{\partial x}L(w_l) \\
 \end{align*}
+補題3.6を使うと
+\begin{equation*}
+    L_{hl} = L\left( w_l\frac{\partial w_h}{\partial x} - w_h\frac{\partial w_l}{\partial x} \right)
+\end{equation*}
 したがって(3.84)より
 \begin{equation*}
     L\left( \frac{\partial w_l}{\partial t_h} - \frac{\partial w_h}{\partial t_l} + w_l\frac{\partial w_h}{\partial x} - w_h\frac{\partial w_l}{\partial x} \right) = 0
 \end{equation*}
-となる．命題3.8の証明で見たように，仮定(P2), (P3)によれば，3階線型常微分方程式 $L(w)=0$ は非自明な有理関数解をもたない．すなわち
+となる．命題3.8の証明で見たように，仮定(P2), (P3)によれば，3階線型常微分方程式 $L(w)=0$ は非自明な有理関数解をもたない．(以下を参照)すなわち
 \begin{equation*}
     \frac{\partial w_l}{\partial t_h} - \frac{\partial w_h}{\partial t_l} + w_l\frac{\partial w_h}{\partial x} - w_h\frac{\partial w_l}{\partial x} = 0
 \end{equation*}
 以上の議論は，(3.83)が(3.82)の積分可能条件に他ならないことを示している．
 \end{proof}
+\end{story}
+\begin{equation}
+    \frac{\partial^3 \phi}{\partial x^3} - 4r\frac{\partial \phi}{\partial x} - 2\frac{\partial r}{\partial x}\phi = 0 \label{eq:3.39}
+\end{equation}
+を満たす有理関数解が0しかないことを示す。\\
+ところで，微分方程式(3.25)の1次独立解を $\varphi_1(x,t), \varphi_2(x,t)$ とすると，(3.39)の1次独立解は
+\begin{equation*}
+    \varphi_1(x,t)^2, \quad \varphi_1(x,t)\varphi_2(x,t), \quad \varphi_2(x,t)^2
+\end{equation*}
+である．実際、
+\begin{equation*}
+    \frac{\partial^3}{\partial x^3}(\varphi_1^2) - 4r\frac{\partial}{\partial x}(\varphi_1^2) - 2\frac{\partial r}{\partial x}\varphi_1^2 = 2\frac{\partial^3 \varphi_1}{\partial x^3}\varphi_1 + 6\frac{\partial^2 \varphi_1}{\partial x^2}\frac{\partial \varphi_1}{\partial x} - 8r\frac{\partial \varphi_1}{\partial x}\varphi_1 - 2\frac{\partial r}{\partial x}\varphi_1^2
+\end{equation*}
+ここで $\frac{\partial^2 \varphi_1}{\partial x^2} = r\varphi_1$ より $\frac{\partial^3 \varphi_1}{\partial x^3} = \frac{\partial r}{\partial x}\varphi_1 + r\frac{\partial \varphi_1}{\partial x}$
+\begin{align*}
+    \therefore \frac{\partial^3}{\partial x^3}(\varphi_1^2) - 4r\frac{\partial}{\partial x}(\varphi_1^2) - 2\frac{\partial r}{\partial x}\varphi_1^2 &= 6\frac{\partial^2 \varphi_1}{\partial x^2}\frac{\partial \varphi_1}{\partial x} - 6r\frac{\partial \varphi_1}{\partial x}\varphi_1 \\
+    &= 6\frac{\partial \varphi_1}{\partial x}\left(\frac{\partial^2 \varphi_1}{\partial x^2} - r\varphi_1\right) = 0
+\end{align*}
+よって、$\varphi_1^2$ は (3.39)の解. $\varphi_2^2$ も同様.
+
+また、$\varphi_1\varphi_2$ について、
+\begin{align*}
+    & \frac{\partial^3}{\partial x^3}(\varphi_1\varphi_2) - 4r\frac{\partial}{\partial x}(\varphi_1\varphi_2) - 2\frac{\partial r}{\partial x}\varphi_1\varphi_2 \\
+    &= \frac{\partial^3 \varphi_1}{\partial x^3}\varphi_2 + 3\frac{\partial^2 \varphi_1}{\partial x^2}\frac{\partial \varphi_2}{\partial x} + 3\frac{\partial \varphi_1}{\partial x}\frac{\partial^2 \varphi_2}{\partial x^2} + \varphi_1\frac{\partial^3 \varphi_2}{\partial x^3} - 4r\frac{\partial \varphi_1}{\partial x}\varphi_2 - 4r\varphi_1\frac{\partial \varphi_2}{\partial x} - 2\frac{\partial r}{\partial x}\varphi_1\varphi_2 \\
+    &= 3\left( \frac{\partial \varphi_2}{\partial x}\left(\frac{\partial^2 \varphi_1}{\partial x^2} - r\varphi_1\right) + \frac{\partial \varphi_1}{\partial x}\left(\frac{\partial^2 \varphi_2}{\partial x^2} - r\varphi_2\right) \right) = 0
+\end{align*}
+よって、$\varphi_1\varphi_2$ も (3.39) の解.
+
+ここで $C_1\varphi_1^2 + C_2\varphi_1\varphi_2 + C_3\varphi_2^2 = 0$ とし、$\varphi_1 \neq 0$ となる領域で
+\begin{equation*}
+    C_1 + C_2\left(\frac{\varphi_2}{\varphi_1}\right) + C_3\left(\frac{\varphi_2}{\varphi_1}\right)^2 = 0
+\end{equation*}
+$U = \frac{\varphi_2}{\varphi_1}$ として 
+\[
+C_1 + C_2U + C_3U^2 = 0
+\]
+ここで、$\varphi_1, \varphi_2$ は一次独立より、$U(x) \not\equiv \text{const.}$ よって、$\frac{dU}{dx} \not\equiv 0$.よって$\frac{dU}{dx} \neq 0$なる領域で微分して、
+\begin{equation*}
+    C_2\frac{dU}{dx} + 2C_3U\frac{dU}{dx} = 0 \quad \therefore C_2 + 2C_3U = 0
+\end{equation*}
+もう一度微分して、
+\begin{equation*}
+    2C_3 \frac{dU}{dx} = 0 \quad \therefore C_3 = 0
+\end{equation*}
+よって、$C_2 = 0$ そして、 $C_1 = 0$ で線形独立。
+
+したがって $\varphi_1^2, \varphi_2^2, \varphi_1\varphi_2$ は線形独立より、(3.39)の解は $\varphi_1^2, \varphi_2^2, \varphi_1\varphi_2$ で張られる。
+
+一方，仮定(P3)により，$\varphi_1(x,t), \varphi_2(x,t)$ は $x$ の有理関数にはならない．実際、$\varphi_{1}(x,t)$が$x$の有理関数とすると、任意の特異点周りでこの関数は解になり、また、1価であるから、
+\begin{equation*}
+    (\varphi_1^\gamma, \varphi_2^\gamma) = (\varphi_1, \varphi_2) 
+    \begin{pmatrix}
+        1 & * \\
+        0 & *
+    \end{pmatrix}
+\end{equation*}
+となり、$\forall c\in\mathbb{C}$に対して、
+\begin{equation*}
+    \begin{pmatrix}
+        1 & * \\
+        0 & *
+    \end{pmatrix}
+    \begin{pmatrix}
+        c \\
+        0
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        c \\
+        0
+    \end{pmatrix}
+\end{equation*}
+より、
+\begin{equation*}
+    \left\langle \begin{pmatrix} c \\ 0 \end{pmatrix} \right\rangle \text{ は不変部分空間．よって、既約性に矛盾．}
+\end{equation*}
+これによって、$\varphi_1^2, \varphi_2^2, \varphi_1\varphi_2$ が有理関数でないこともわかる。実際、任意の $0$ でない2次対称行列 $C=(c_{ij})$ に対して、二次形式 $\varphi(x,t) C \varphi^{T}(x,t)$ が有理関数でないことを示せば十分である。
+
+ある $0$ でない $C$ があって、$\varphi(x,t) C \varphi^{T}(x,t)$ が有理関数であるとすると、任意の道 $\gamma$ に対して
+\begin{equation*}
+    \varphi^{\gamma}(x,t) = \varphi(x,t)\Gamma(\gamma)
+\end{equation*}
+とし、$\gamma$ に沿って解析接続をすれば、
+\begin{equation*}
+    \varphi^{\gamma}(x,t) C (\varphi^{\gamma}(x,t))^{T} = \varphi(x,t)\Gamma(\gamma) C \Gamma(\gamma)^{T}\varphi^{T}(x,t)
+\end{equation*}
+となる。ここで $\varphi(x,t) C \varphi^{T}(x,t)$ は有理関数なので、特に一価であり、
+\begin{equation*}
+    \varphi^{\gamma}(x,t) C (\varphi^{\gamma}(x,t))^{T} = \varphi(x,t) C \varphi^{T}(x,t)
+\end{equation*}
+よって、$\varphi_1^2, \varphi_2^2, \varphi_1\varphi_2$ は線型独立であったので、係数行列が一致しなければならず、
+\begin{equation*}
+    \Gamma(\gamma) C \Gamma(\gamma)^{T} = C
+\end{equation*}
+がわかる。
+
+ここで、(3.25) をみると、一階微分の係数がないので、命題2.2から、ロンスキアンは定数となる。つまり任意の道 $\gamma$ に対して、
+\begin{equation*}
+    \det(\Gamma(\gamma)) = 1
+\end{equation*}
+ここで
+\begin{equation*}
+    J =
+    \begin{pmatrix}
+        0 & 1 \\
+        -1 & 0
+    \end{pmatrix}
+\end{equation*}
+に対して、簡単な計算により、$\det A = 1$ であれば、
+\begin{align*}
+    A^{T}JA &= J \\
+    A^{T} &= JA^{-1}J^{-1}
+\end{align*}
+となるので、
+\begin{align*}
+    \Gamma(\gamma) C \Gamma(\gamma)^{T} &= C \\
+    \Gamma(\gamma) C (J\Gamma(\gamma)^{-1}J^{-1}) &= C \\
+    \Gamma(\gamma) (CJ) &= (CJ)\Gamma(\gamma)
+\end{align*}
+
+よって、表現の任意の作用 $\Gamma(\gamma)$ と $CJ$ が可換であるので、(P3)の表現の既約性と $CJ$ をかける操作が絡作用素（intertwining operator）であることから、Schurの補題よりある $\lambda\in\mathbb{C}$ を用いて、
+\begin{align*}
+    CJ &= \lambda I \\
+    C &= \lambda J^{-1} = \lambda J^{T}
+\end{align*}
+ここで、$C$ は対称行列であり、$J$ は交代行列であることを用いると、
+\begin{equation*}
+    C = C^{T} = (\lambda J^{T})^{T} = \lambda J = -\lambda J^{T} = -C
+\end{equation*}
+つまり $C=0$ となり、仮定に矛盾する。したがって非自明な有理関数は存在しない。
+
+よって，(3.39) を満足する有理関数解 $c(x,t)$ は $c \equiv 0$ に限る．すなわち，(3.29) の有理関数解は存在しても一意である．
+\begin{story}
+そこで，(3.32)を用いて $r(x,t)$ を計算しよう．実際，$r(x,t)$ は $x=0, x=1, x=t$ で高々2位の極をもつ有理関数である．特性指数を考慮すれば，$r(x,t)$ は
+
+\begin{align}
+    r(x,t) &= \frac{\alpha_0}{x^2} + \frac{\alpha_1}{(x-1)^2} + \frac{\alpha_\infty}{x(x-1)} \nonumber \\
+    &\quad + \sum_{l=1}^g \left[ \frac{\beta_l}{(x-t_l)^2} + \frac{t_l(t_l-1)K_l}{x(x-1)(x-t_l)} \right] \label{eq:3.85} \\
+    &\quad + \sum_{k=1}^g \left[ \frac{3}{4(x-\lambda_k)^2} - \frac{\lambda_k(\lambda_k-1)\nu_k}{x(x-1)(x-\lambda_k)} \right] \nonumber
+\end{align}
+
+という形をしている．他方，(3.32)に(3.67)と(3.68)を代入して，係数の関係を調べる．すると
+\begin{equation*}
+    \alpha_0 = \frac{1}{4}(\kappa_0^2 - 1), \quad \alpha_1 = \frac{1}{4}(\kappa_1^2 - 1), \quad \beta_l = \frac{1}{4}(\theta_l^2 - 1)
+\end{equation*}
 \end{story}
 \end{document}

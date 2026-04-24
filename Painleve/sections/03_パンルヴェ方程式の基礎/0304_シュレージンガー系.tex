@@ -1,0 +1,657 @@
+% !TEX root = ../main.tex
+
+%#region
+まず、$n$次連立微分方程式系\eqref{eq:3.1_x_ODE_matrix}のモノドロミー保存変形についてこれまでわかったことをまとめよう。微分方程式系\eqref{eq:3.1_x_ODE_matrix}のリーマンデータを
+\[
+  (\mathbb{P}^1(\mathbb{C}), \Xi', \hat{\rho}')
+\]
+とし、条件(P2), (P3)を仮定する。
+
+微分方程式系\eqref{eq:3.1_x_ODE_matrix}の基本解行列 $Y=Y(x,t)$ で、そのモノドロミー群がパラメータ$t=(t_1, \cdots, t_L)$ に依存しないものが存在するならば，$x$ の有理関数を成分とする行列 $A^{(l)}(x,t)$ ($l=1,\cdots,L$) が存在して，$Y(x,t)$ は変形微分方程式系\eqref{eq:3.1_deformation_system_matrix}の解となる．この微分方程式系の完全積分可能条件は，\eqref{eq:3.1_compatibility_PA}と\eqref{eq:3.1_compatibility_AA}である。\eqref{eq:3.1_x_ODE_matrix}のモノドロミー保存変形はこの条件の研究に帰着する。前節最後に述べた命題\ref{prop:3.3_transform_G_implies_scalar_gG}、補題\ref{lem:3.3_scalar_matrix_B}、補題\ref{lem:3.3_t_PDE_matrix_G}によれば，\eqref{eq:3.1_compatibility_PA}、\eqref{eq:3.1_compatibility_AA}を満足する $x$ の有理関数を成分とする行列が2種類、$A_1^{(l)}$ と $A_2^{(l)}$、存在するときには，スカラー関数 $g(t)$ が存在して
+\[
+  A_2^{(l)}(x,t) = A_1^{(l)}(x,t) + \left( \frac{\partial}{\partial t_l} \log g(t) \right) I_n \quad (l=1,\cdots,L)
+\]
+となる．
+
+\begin{Q}[【補足と確認】補題\ref{lem:3.3_scalar_matrix_B}、補題\ref{lem:3.3_t_PDE_matrix_G}、および命題\ref{prop:3.3_transform_G_implies_scalar_gG}の証明は、$P(x,t)$ が単独高階方程式から作られる特殊な行列（コンパニオン行列）でなくとも、本当に一般の $n \times n$ 行列で成り立つのか？ その厳密な証明は？]
+\textbf{A.} \textbf{完全に一般の行列 $P(x,t)$ に対して成り立つ。}
+証明のどの段階においても $P(x,t)$ の成分の具体的な形は要求されず、「既約なモノドロミー表現（シューアの補題）」と「行列の積の微分法則」という普遍的な性質のみで完結する。以下に、一般の行列に対する完全な証明プロセスを示す。
+
+\textbf{1. 準備と線形化（補題3.1の領域）}
+一般の $\frac{\partial Y}{\partial x} = P(x,t)Y$ に対して、モノドロミーが $t$ に依存しない2つの基本解行列 $Y_1, Y_2$ があるとする。これらはある可逆行列 $G(t)$ を用いて $Y_2(x,t) = Y_1(x,t)G(t)$ と結ばれる。
+それぞれの変形行列 $A_k^{(l)} = \frac{\partial Y_k}{\partial t_l}Y_k^{-1} \ (k=1,2)$ は、ともにゼロ曲率条件 $\partial_{t_l} P - \partial_x A_k^{(l)} = [A_k^{(l)}, P]$ を満たす。辺々引くことで、$P$ の形に依らず
+\[
+  \frac{\partial}{\partial x}(A_1^{(l)} - A_2^{(l)}) + [A_1^{(l)} - A_2^{(l)}, P] = 0
+\]
+となる。差を $B^{(l)} = A_1^{(l)} - A_2^{(l)}$ とおくと、この微分方程式の一般解は $x$ に依存しない行列 $B_0^{(l)}(t)$ を用いて $B^{(l)}(x,t) = Y_1 B_0^{(l)}(t) Y_1^{-1}$ と書ける。
+
+\textbf{2. 補題3.2（シューアの補題の適用）}%TODO あとでみる
+$A_1^{(l)}, A_2^{(l)}$ は有理関数行列（1価）なので、その差 $B^{(l)}$ も1価である。特異点の周りの任意の閉路に対する解析接続（モノドロミー行列を $\Gamma$ とする）を考えると、$Y_1 \mapsto Y_1 \Gamma$ となる。$B^{(l)}$ は不変であるから、
+\[
+  Y_1 B_0^{(l)}(t) Y_1^{-1} = (Y_1 \Gamma) B_0^{(l)}(t) (Y_1 \Gamma)^{-1} = Y_1 (\Gamma B_0^{(l)}(t) \Gamma^{-1}) Y_1^{-1}
+\]
+両端から $Y_1^{-1}$ と $Y_1$ を掛けて $\Gamma B_0^{(l)}(t) = B_0^{(l)}(t) \Gamma$ を得る。すなわち $B_0^{(l)}(t)$ はすべてのモノドロミー行列と可換である。
+ここで\textbf{仮定(P3)（モノドロミー表現が既約である）}を適用すれば、シューアの補題より直ちに $B_0^{(l)}(t) = f_0^{(l)}(t)I_n$ （スカラー行列）であることが結論づけられる。ここにも $P$ の形は一切登場しない。したがって $B^{(l)}(x,t) = f_0^{(l)}(t)I_n$ である。
+
+\textbf{3. 補題3.3の証明（ゲージ変換の直接計算）}
+一方で、$Y_2 = Y_1 G(t)$ を用いて $A_2^{(l)}$ を直接計算する。
+\begin{align*}
+  A_2^{(l)} &= \frac{\partial (Y_1 G)}{\partial t_l} (Y_1 G)^{-1} 
+  = \left( \frac{\partial Y_1}{\partial t_l} G + Y_1 \frac{\partial G}{\partial t_l} \right) G^{-1} Y_1^{-1} \\
+  &= \frac{\partial Y_1}{\partial t_l} Y_1^{-1} + Y_1 \frac{\partial G}{\partial t_l} G^{-1} Y_1^{-1} 
+  = A_1^{(l)} + Y_1 \left( \frac{\partial G}{\partial t_l} G^{-1} \right) Y_1^{-1}
+\end{align*}
+定義より $B^{(l)} = A_1^{(l)} - A_2^{(l)}$ であるから、上式より $B^{(l)} = - Y_1 \left( \frac{\partial G}{\partial t_l} G^{-1} \right) Y_1^{-1}$ となる。
+
+\textbf{4. 命題3.10の結論}
+補題3.2の結果 $B^{(l)} = f_0^{(l)}(t)I_n$ と、ステップ3の計算結果を等置する。
+\[
+  - Y_1 \left( \frac{\partial G}{\partial t_l} G^{-1} \right) Y_1^{-1} = f_0^{(l)}(t)I_n
+\]
+両辺に左から $Y_1^{-1}$、右から $Y_1$ を掛けると（右辺はスカラー行列なので不変）、
+\[
+  - \frac{\partial G}{\partial t_l} G^{-1} = f_0^{(l)}(t)I_n \implies \frac{\partial G}{\partial t_l} = -f_0^{(l)}(t)G
+\]
+これが補題3.3である。この微分方程式系を積分すれば、$G(t) = g(t)G$ （$g(t)$ はスカラー関数、$G$ は定数行列）が得られ、命題3.10が完全に証明される。
+\end{Q}
+
+\begin{Q}[$A_1^{(l)}$ と $A_2^{(l)}$ の差が対数微分 $\left( \frac{\partial}{\partial t_l} \log g(t) \right) I_n$ となるこの美しい関係は、$P(x,t)$ が単独高階方程式から作られるコンパニオン行列である場合に限定されるのか？一般の行列 $P(x,t)$ でも成り立つか？]
+\textbf{A.} \textbf{一般の行列 $P(x,t)$ でも完全に成り立つ。}
+この性質は $P$ の具体的な形ではなく、「モノドロミー表現が既約である（仮定P3）」という条件からシューアの補題を経由して得られる、極めて普遍的な帰結である。
+
+実際、一般の $\frac{\partial Y}{\partial x} = P(x,t) Y$ に対する2つの基本解行列を $Y_1, Y_2$ とすると、$Y_2 = Y_1 G(t)$ と書ける。両者が $t$ に依存しない既約なモノドロミー群を持つとき、命題\ref{prop:3.3_transform_G_implies_scalar_gG}により $G(t) = g(t)G$（$g(t)$ はスカラー関数、$G$ は定数可逆行列）となる。
+これを変形行列の定義 $A_2^{(l)} = \frac{\partial Y_2}{\partial t_l}Y_2^{-1}$ に直接代入すると、積の微分法則より
+\begin{align*}
+  A_2^{(l)} &= \frac{\partial}{\partial t_l}\left(Y_1 g(t)G\right) \cdot \left(Y_1 g(t)G\right)^{-1} \\
+  &= \left( \frac{\partial Y_1}{\partial t_l} g(t)G + Y_1 \frac{\partial g(t)}{\partial t_l} G \right) G^{-1} g(t)^{-1} Y_1^{-1} \\
+  &= \frac{\partial Y_1}{\partial t_l} Y_1^{-1} + Y_1 \left( \frac{\frac{\partial g(t)}{\partial t_l}}{g(t)} I_n \right) Y_1^{-1} \\
+  &= A_1^{(l)} + \left( \frac{\partial}{\partial t_l} \log g(t) \right) I_n
+\end{align*}
+となり、計算過程で $P(x,t)$ に関する情報は一切使用されない。したがって、一般のフックス型連立系においてもこのゲージ変換の公式は成立する。
+\end{Q}
+
+この節では，具体的な例について，\eqref{eq:3.1_x_ODE_matrix}のモノドロミー保存変形を調べよう．
+
+まず，有理関数を成分とする行列 $A^{(l)}(x,t)$ の形を決めることを考えてみよう．$x=\xi$ を確定特異点とすると，基本解行列 $Y(x,t)$ は，条件(P2)により
+\begin{equation}\label{eq:3.4_matrix_solution_representation_Phi_G}
+  Y(x,t) = \Phi(x,t)(x-\xi)^A G(t)
+\end{equation}
+と表される．ここで，$A$ は対角行列で，$t$ に依存しない．また，$\Phi=\Phi(x,t)$ の各成分は $x=\xi$ の近傍において，$x$ と $t$ について正則，$G(t)$ は各成分が $U$ 上正則である可逆行列である．$Y=Y(x,t)$ の表示\eqref{eq:3.4_matrix_solution_representation_Phi_G}については，単独高階微分方程式の場合と同様に求めることができるから，ここでは既知として話を進める．
+
+\begin{Q}[係数行列 $P(x,t)$ が特異点 $x=\xi$ において高々1位の極（フックス型特異点）を持つと仮定したとき、基本解行列が局所表示 $Y(x,t) = \Phi(x,t)(x-\xi)^A G(t)$ を持つことは、具体的にどのように証明（構成）されるか？]
+\textbf{A.} 行列に対する「フロベニウスの方法」と「解の基底の取り換え」を用いて、以下の4つのステップで構成される。
+
+\textbf{ステップ1：係数行列のローラン展開}
+$x=\xi$ において $P(x,t)$ は1位の極を持つため、その近傍で次のように展開できる。
+\[
+  P(x,t) = \frac{P_{-1}(t)}{x-\xi} + \sum_{k=0}^{\infty} P_k(t) (x-\xi)^k
+\]
+ここで、$P_{-1}(t)$ は $x=\xi$ における留数行列である。
+
+\textbf{ステップ2：局所的な基本解行列 $\tilde{Y}$ の仮定（Ansatz）}
+$x=\xi$ の近傍におけるある1つの局所的な解行列を、特異性を持つ部分 $(x-\xi)^A$ と、正則な部分 $\Phi(x,t)$ に分離して探す。
+\[
+  \tilde{Y}(x,t) = \Phi(x,t)(x-\xi)^A, \quad \Phi(x,t) = \sum_{k=0}^{\infty} \Phi_k(t) (x-\xi)^k
+\]
+ここで、正則性を保証するために $\Phi_0(t)$ は可逆行列（簡単のため $\Phi_0(t) = I$ と選んでよい）とし、$A$ はこれから決定する定数行列とする。
+
+\textbf{ステップ3：代入と行列 $A$ の決定}
+仮定した $\tilde{Y}(x,t)$ を微分方程式 $\frac{\partial \tilde{Y}}{\partial x} = P(x,t)\tilde{Y}$ に代入する。
+
+\begin{Q}[行列のべき乗 $(x-\xi)^A$ の $x$ による微分は、スカラーの場合と同様に $A(x-\xi)^{A-I}$ となるか？ また、指数関数をマクローリン展開して項別微分する際、この無限級数の収束性（収束半径）に問題はないのか？]
+\textbf{A.} スカラーの場合と全く同じ結果となる。収束性についても問題ない。
+行列の指数関数 $\exp(X) = \sum_{m=0}^{\infty} \frac{1}{m!} X^m$ は、全空間で絶対収束する（収束半径は $\infty$ である）。いま $X = A \log(x-\xi)$ とおくと、$x \neq \xi$ であり対数関数の分枝を一つ固定する限り、展開された級数は常に収束するため項別微分は完全に正当化される。
+
+具体的な計算は以下の通りである。行列 $A$ と単位行列 $I$ が可換である（$e^X e^Y = e^{X+Y}$ が使える）ことに注意して整理する。
+
+\begin{align*}
+  (x-\xi)^A &= \exp(A \log(x-\xi)) = \sum_{m=0}^{\infty} \frac{1}{m!} A^m (\log(x-\xi))^m \\[3mm]
+  \frac{d}{dx} (x-\xi)^A &= \sum_{m=1}^{\infty} \frac{1}{(m-1)!} A^m (\log(x-\xi))^{m-1} \cdot \frac{1}{x-\xi} \\[2mm]
+  &= A e^{A \log(x-\xi)} \cdot \frac{1}{x-\xi} \\[2mm]
+  &= A e^{A \log(x-\xi)} \cdot e^{-\log(x-\xi)} \\[2mm]
+  &= A e^{(A-I) \log(x-\xi)}
+\end{align*}
+すなわち、$\frac{d}{dx}(x-\xi)^A = A(x-\xi)^{A-I}$ が厳密に成立する。
+\end{Q}
+
+左辺は積の微分法則より、
+\begin{align*}
+  \frac{\partial \tilde{Y}}{\partial x} &= \frac{\partial \Phi}{\partial x}(x-\xi)^A + \Phi(x,t) A (x-\xi)^{A-I} \\
+  &= \left( \frac{\partial \Phi}{\partial x}(x-\xi) + \Phi(x,t)A \right) (x-\xi)^{A-I}
+\end{align*}
+右辺は、
+\[
+  P(x,t)\tilde{Y} = \left( P_{-1}(t) + P_0(t)(x-\xi) + \cdots \right) \Phi(x,t) (x-\xi)^{A-I}
+\]
+となる。両辺から $(x-\xi)^{A-I}$ を括り出し、定数項（$(x-\xi)^0$ の係数）を比較すると、
+\[
+  \Phi_0(t) A = P_{-1}(t) \Phi_0(t)
+\]
+という行列の決定方程式が得られる。$\Phi_0(t) = I$ と選んでいるため、$A = P_{-1}(t)$ となる。
+さらに、テキストの条件(P2)（留数行列の固有値の差が整数でない）により、高次の係数 $\Phi_k(t)$ を決定する漸化式が常に解ける（共鳴が起きない）ことが保証され、対数項を含まない正則な $\Phi(x,t)$ が一意に構成できる。また、モノドロミー保存の仮定から $P_{-1}(t)$ の固有値は $t$ に依存しないため、$A$ は $t$ に依存しない対角行列として取ることができる。
+
+\begin{Q}[高次の係数 $\Phi_k(t)$ を決定する漸化式とは具体的にどのような形か？また、条件(P2)が「共鳴（対数項の混入）を防ぐ」ことの厳密な数学的証明は、何を用いれば示せるか？]%TODO 詳細は後で見る
+\textbf{A.} 行列のべき級数展開から得られる「シルベスター方程式（Sylvester equation）」の可解条件を用いることで厳密に証明される。
+
+\textbf{ステップ1：漸化式の導出}
+$P(x,t) = \sum_{m=-1}^\infty P_m (x-\xi)^m$ と $\Phi(x,t) = \sum_{k=0}^\infty \Phi_k (x-\xi)^k$ を $\frac{\partial \tilde{Y}}{\partial x} = P\tilde{Y}$ に代入し、両辺の $(x-\xi)^{k-1} (x-\xi)^A$ の係数を比較する。
+左辺の微分からの寄与は $k\Phi_k + \Phi_k A$ であり、右辺の積からの寄与は $\sum_{j=0}^k P_{j-1}\Phi_{k-j}$ となる。$j=0$ の項（$P_{-1}\Phi_k$）を分離し整理すると、次の方程式を得る。
+\[
+  P_{-1}\Phi_k - \Phi_k A - k\Phi_k = -\sum_{j=1}^k P_{j-1}\Phi_{k-j}
+\]
+
+\textbf{ステップ2：シルベスター方程式としての解釈}
+右辺を $R_k$ とおく（$R_k$ は $\Phi_0, \dots, \Phi_{k-1}$ までで既に決定されている既知の行列である）。この方程式は、未知行列 $X = \Phi_k$ に対する線形代数方程式
+\[
+  M X - X N = -R_k \quad (\text{ただし } M = P_{-1} - k I, \ N = A)
+\]
+と見なせる。このような形の方程式をシルベスター方程式と呼ぶ。一般論として、この方程式が一意な解を持つ必要十分条件は「行列 $M$ と行列 $N$ が共通の固有値を持たないこと」である。
+
+\textbf{ステップ3：条件(P2)による可逆性の保証}
+$\Phi_0 = I$ のとき、定数項の比較から $A = P_{-1}$ である。
+$P_{-1}$ の固有値（特性指数）を $\lambda_1, \dots, \lambda_n$ とすると、行列 $M = P_{-1} - k I$ の固有値は $\lambda_i - k$ であり、行列 $N = A$ の固有値は $\lambda_j$ である。
+これらが共通の固有値を持たないための条件は、任意の $i, j$ に対して
+\[
+  \lambda_i - k \neq \lambda_j \iff \lambda_i - \lambda_j \neq k
+\]
+となることである。ここで $k \geq 1$ は整数であるため、「特性指数の差が整数でない」という\textbf{条件(P2)}が満たされていれば、この条件はすべての $k \geq 1$ に対して自動的にクリアされる。
+すなわち、線形作用素 $X \mapsto MX - XN$ は常に可逆（正則）となり、各ステップで $\Phi_k$ が一意に定まる。これにより、特異点において対数項 $\log(x-\xi)$ の補正を一切必要とせずに、純粋な級数解が構成できることが厳密に示された。
+
+\textbf{ステップ4：$A$ の対角化}
+(P2)により特性指数はすべて異なるため、留数行列 $P_{-1}(t)$ は常に対角化可能である。基本解の取り替え（適当な定数可逆行列によるゲージ変換）を行えば、初めから $A = P_{-1}(t)$ を対角行列として選んでおくことができる。さらにモノドロミー保存の仮定により固有値は $t$ に依存しないため、$A$ は $t$ に依存しない定数対角行列となる。
+\end{Q}
+
+\begin{Q}[行列 $A$ が対角行列でない一般の行列である場合、解の局所表示に現れる行列のべき乗 $(x-\xi)^A$ は数学的にどのように定義されるのか？]
+\textbf{A.} 行列の指数関数（テイラー展開）と自然対数を用いて、次のように厳密に定義される。
+\[
+  (x-\xi)^A := \exp(A \log(x-\xi)) = \sum_{m=0}^{\infty} \frac{1}{m!} A^m (\log(x-\xi))^m
+\]
+もし $A$ が対角行列 $\mathrm{diag}(\lambda_1, \dots, \lambda_n)$ であれば、この行列のべき乗は各成分を計算するだけで済み、直感通り $\mathrm{diag}((x-\xi)^{\lambda_1}, \dots, (x-\xi)^{\lambda_n})$ に一致する。
+
+しかし、特性指数の差が整数になるなどして $A$ が対角化不可能となり、ジョルダン標準形に非対角成分を含む場合、この定義から必然的に「対数特異性」が生じる。
+例えば、2次のジョルダン細胞 $A = \begin{pmatrix} \lambda & 1 \\ 0 & \lambda \end{pmatrix}$ の場合、行列の指数関数の性質（可換な行列の和の指数法則）を用いると、
+\begin{align*}
+  (x-\xi)^A &= \exp\left( \begin{pmatrix} \lambda & 1 \\ 0 & \lambda \end{pmatrix} \log(x-\xi) \right) \\
+  &= \exp\left( \begin{pmatrix} \lambda \log(x-\xi) & 0 \\ 0 & \lambda \log(x-\xi) \end{pmatrix} + \begin{pmatrix} 0 & \log(x-\xi) \\ 0 & 0 \end{pmatrix} \right) \\
+  &= (x-\xi)^\lambda I \cdot \exp\left( \begin{pmatrix} 0 & \log(x-\xi) \\ 0 & 0 \end{pmatrix} \right)
+\end{align*}
+ここで、右側の行列は2乗すると零行列になる（べき零行列である）ため、指数関数の級数展開は $m=1$ の項で打ち切られ、
+\begin{align*}
+  (x-\xi)^A &= (x-\xi)^\lambda \left( I + \begin{pmatrix} 0 & \log(x-\xi) \\ 0 & 0 \end{pmatrix} \right) \\
+  &= (x-\xi)^\lambda \begin{pmatrix} 1 & \log(x-\xi) \\ 0 & 1 \end{pmatrix}
+\end{align*}
+となる。このように、一般の行列に対するべき乗の定義そのものが、解に $\log(x-\xi)$ という対数項を発生させる代数的なからくりとなっている。
+\end{Q}
+
+\textbf{ステップ4：一般の基本解行列 $Y(x,t)$ への移行}
+ステップ3までで、微分方程式を満たすある特定の基本解行列 $\tilde{Y}(x,t) = \Phi(x,t)(x-\xi)^A$ が得られた。
+線形常微分方程式の理論より、任意の基本解行列 $Y(x,t)$ は、$\tilde{Y}(x,t)$ に $x$ に依存しない可逆な定数行列 $G(t)$ を右から掛けたものとして一意に表される。
+したがって、
+\[
+  Y(x,t) = \tilde{Y}(x,t)G(t) = \Phi(x,t)(x-\xi)^A G(t)
+\]
+となり、求める局所表示\eqref{eq:3.4_matrix_solution_representation_Phi_G}が完全に導出された。
+\end{Q}
+
+\eqref{eq:3.4_matrix_solution_representation_Phi_G}を\eqref{eq:3.1_deformation_system_matrix}の第2式（$\partial_{t_l} Y = A^{(l)}Y$）に代入すると
+
+\begin{align}\label{eq:3.4_matrix_representation_A_Phi_G}
+  A^{(l)}(x,t) &= \frac{\partial Y}{\partial t_l}Y^{-1}\\
+  &= \frac{\partial \Phi}{\partial t_l}\Phi^{-1} - \frac{1}{x-\xi}\frac{\partial \xi}{\partial t_l}\Phi A \Phi^{-1} + \Phi(x-\xi)^A \frac{\partial G}{\partial t_l}G^{-1}(x-\xi)^{-A}\Phi^{-1}\nonumber
+\end{align}
+となる．
+
+\begin{Q}[なぜ特異点 $x=\xi$ の周りで局所表示\eqref{eq:3.4_matrix_solution_representation_Phi_G}を考え、複雑な\eqref{eq:3.4_matrix_representation_A_Phi_G}の計算を行う必要があるのか？ また、\eqref{eq:3.4_matrix_representation_A_Phi_G}は具体的にどのように導出されるか？]
+\textbf{A.} \textbf{【目的】} $A^{(l)}(x,t)$ が $x$ の有理関数行列であることを利用し、各特異点での「極の位数」と「主要部（留数）」を決定するため。これらを足し合わせることで $A^{(l)}$ の全体像（大域的な形）を決定でき、それがシュレジンガー系の具体的な方程式となる。
+
+\textbf{【導出】} 積の微分法則を用いる。$Y = \Phi (x-\xi)^A G$ と $Y^{-1} = G^{-1} (x-\xi)^{-A} \Phi^{-1}$ を $\frac{\partial Y}{\partial t_l}Y^{-1}$ に代入する。
+$\frac{\partial Y}{\partial t_l}$ は3つの項の和になる。\\
+1. $\Phi$ の微分: $\frac{\partial \Phi}{\partial t_l} (x-\xi)^A G$\\
+2. $(x-\xi)^A$ の微分: チェインルールより $\Phi \left( - \frac{\partial \xi}{\partial t_l} A (x-\xi)^{A-I} \right) G = - \frac{1}{x-\xi} \frac{\partial \xi}{\partial t_l} \Phi A (x-\xi)^A G$\\
+3. $G$ の微分: $\Phi (x-\xi)^A \frac{\partial G}{\partial t_l}$
+これら各項の右から $Y^{-1}$ を掛けると、右側の $(x-\xi)^A G$ 等が相殺・変形され、それぞれ\eqref{eq:3.4_matrix_representation_A_Phi_G}の第1項、第2項（極を持つ主要部）、第3項に一致する。
+\end{Q}
+
+この表示から，次の結果が得られる．詳しい説明は省略する．
+
+\begin{proposition}\label{prop:3.4_matrix_ODE_monodoromy_deformation_property}
+(1) 行列 $A^{(l)}(x,t)$ は，微分方程式\eqref{eq:3.1_x_ODE_matrix}の正則点，すなわち $P(x,t)$ の正則点，では正則となる．\\
+(2) \eqref{eq:3.1_x_ODE_matrix}の確定特異点 $x=\xi$ においては，もし $\xi$ が $t_l$ に依存しなければ，$x=\xi$ で $A^{(l)}(x,t)$ は正則となる．\\
+(3) 確定特異点の位置 $\xi$ が $t_l$ に依存すれば，$x=\xi$ は $A^{(l)}(x,t)$ の1位の極である。
+\end{proposition}
+
+\begin{Q}[命題\ref{prop:3.4_matrix_ODE_monodoromy_deformation_property}の証明について：(1)正則点での振る舞いは式\eqref{eq:3.4_matrix_representation_A_Phi_G}に $P(x,t)$ が出てこないのにどう証明するのか？ また、(2)(3)において、式\eqref{eq:3.4_matrix_representation_A_Phi_G}の第1項や第3項が極を持ったり、第2項と打ち消し合ったりしないとどうして言い切れるのか？]
+\textbf{A.} (1)は式\eqref{eq:3.4_matrix_representation_A_Phi_G}を使わず「常微分方程式の基本定理」から直接導かれ、(2)(3)は「行列の可換性」によって第3項の特異性が完全に消滅することで証明される。
+
+\textbf{【(1) 正則点での正則性の証明】}
+式\eqref{eq:3.4_matrix_representation_A_Phi_G}は特異点 $x=\xi$ の近傍でのみ作られた局所表示であるため、正則点では使えない。正則点 $x=x_0$ においては、定義 $A^{(l)} = \frac{\partial Y}{\partial t_l}Y^{-1}$ に立ち返る。
+$x_0$ が $P(x,t)$ の正則点であれば、常微分方程式の基本定理（初期値問題の解の解析性）により、基本解行列 $Y(x,t)$ は $x=x_0$ の近傍で $x$ および $t$ について正則（解析的）であり、かつ可逆である。
+したがって、その $t_l$ 微分 $\frac{\partial Y}{\partial t_l}$ も正則であり、正則な行列と正則な逆行列の積である $A^{(l)}$ もまた $x=x_0$ において正則となる。
+
+\textbf{【(2)(3) 確定特異点での極の評価】}
+確定特異点 $x=\xi$ の近傍では式\eqref{eq:3.4_matrix_representation_A_Phi_G}を用いる。各項の特異性（極の有無）を個別に評価する。
+\[
+  A^{(l)} = \underbrace{\frac{\partial \Phi}{\partial t_l}\Phi^{-1}}_{\text{第1項}} - \underbrace{\frac{1}{x-\xi}\frac{\partial \xi}{\partial t_l}\Phi A \Phi^{-1}}_{\text{第2項}} + \underbrace{\Phi(x-\xi)^A \frac{\partial G}{\partial t_l}G^{-1}(x-\xi)^{-A}\Phi^{-1}}_{\text{第3項}}
+\]
+
+\begin{itemize}
+    \item \textbf{第1項の評価：} $\Phi(x,t)$ は $x=\xi$ で正則かつ可逆であるため、その微分も正則。よって第1項は完全に正則である。
+    
+    \item \textbf{第3項の評価（最大のポイント）：} 
+    一見すると $(x-\xi)^{\pm A}$ があるため極や分岐を持ちそうに見えるが、実は相殺される。
+    ゲージ行列 $G(t)$ はモノドロミーを不変に保つため、特異点におけるモノドロミー行列 $\exp(2\pi i A)$ と可換でなければならない。特性指数の差が整数でない（条件P2）ため、これは $G(t)$ が $A$ 自身と可換であることを意味する。
+    $G(t)$ が $A$ と可換なら、$\frac{\partial G}{\partial t_l}G^{-1}$ も $A$ と可換になる。行列の指数関数の性質から、可換な行列は $(x-\xi)^A$ と順序を交換できる。
+    
+    \begin{Q}[前項の証明において、「モノドロミーを不変に保つこと」からなぜ可換性が生じるのか？ また、「特性指数の差が整数でない（条件P2）」ことが、なぜ $\exp(2\pi i A)$ との可換性を $A$ 自身との可換性にすり替えることを正当化するのか？]
+\textbf{A.} 厳密には、$G(t)$ 自身ではなくその対数微分 $U = \frac{\partial G}{\partial t_l}G^{-1}$ が可換になる。これは「モノドロミー行列の $t$ 微分がゼロであること」と「行列成分の比較」から以下のように鮮やかに証明される。
+
+\textbf{1. モノドロミー不変性から生じる可換性} \\
+基本解行列 $Y = \Phi (x-\xi)^A G(t)$ が特異点 $x=\xi$ の周りを1周したとき、$(x-\xi)^A$ は $(x-\xi)^A \exp(2\pi i A)$ となる。したがって解析接続後の解は
+\[
+  Y^\gamma = \Phi (x-\xi)^A \exp(2\pi i A) G(t) = Y \cdot G(t)^{-1} \exp(2\pi i A) G(t)
+\]
+となる。すなわち、大域的なモノドロミー行列は $\Gamma = G(t)^{-1} \exp(2\pi i A) G(t)$ である。
+仮定よりモノドロミーは $t$ に依存しない（不変である）ため、$\frac{\partial \Gamma}{\partial t_l} = 0$ である。
+$\Gamma$ を $t_l$ で微分すると（$\frac{\partial G^{-1}}{\partial t_l} = -G^{-1}\frac{\partial G}{\partial t_l}G^{-1}$ に注意して）、
+\[
+  0 = -G^{-1}\frac{\partial G}{\partial t_l}G^{-1} \exp(2\pi i A) G + G^{-1} \exp(2\pi i A) \frac{\partial G}{\partial t_l}
+\]
+両辺の左から $G$、右から $G^{-1}$ を掛け、$U = \frac{\partial G}{\partial t_l}G^{-1}$ とおくと、
+\[
+  0 = -U \exp(2\pi i A) + \exp(2\pi i A) U \quad \implies \quad [U, \exp(2\pi i A)] = 0
+\]
+となり、「$U = \frac{\partial G}{\partial t_l}G^{-1}$ は局所モノドロミー $\exp(2\pi i A)$ と可換である」ことが厳密に導かれる。
+
+\textbf{2. 条件(P2)が引き起こす奇跡（$A$ との可換性）} \\
+次に、$\exp(2\pi i A)$ と可換な行列 $U$ が、なぜ $A$ 自身とも可換になるのかを示す。
+$A$ は対角行列 $A = \mathrm{diag}(\lambda_1, \dots, \lambda_n)$ としてよい。すると $\exp(2\pi i A)$ も対角行列 $\mathrm{diag}(e^{2\pi i \lambda_1}, \dots, e^{2\pi i \lambda_n})$ となる。
+可換性の式 $\exp(2\pi i A) U = U \exp(2\pi i A)$ の $(j, k)$ 成分を比較すると、
+\[
+  e^{2\pi i \lambda_j} U_{jk} = U_{jk} e^{2\pi i \lambda_k} \quad \implies \quad U_{jk} \left( e^{2\pi i \lambda_j} - e^{2\pi i \lambda_k} \right) = 0
+\]
+ここで\textbf{条件(P2)}が火を噴く。(P2)は「任意の $j \neq k$ に対して $\lambda_j - \lambda_k$ が整数ではない」という条件である。オイラーの公式から、差が整数でなければ $e^{2\pi i \lambda_j} \neq e^{2\pi i \lambda_k}$ である。
+したがって、$j \neq k$ のときは括弧の中身が絶対に $0$ にならないため、\textbf{$U_{jk} = 0$ でなければならない}。
+これは「行列 $U$ が対角行列である」ことを意味する。
+$A$ も対角行列、$U$ も対角行列であるため、対角行列同士は必ず可換である。よって
+\[
+  [U, A] = 0 \quad \implies \quad \left[ \frac{\partial G}{\partial t_l}G^{-1}, A \right] = 0
+\]
+が結論づけられる。この可換性のおかげで、前項の第3項における $\frac{\partial G}{\partial t_l}G^{-1}$ と $(x-\xi)^A$ の順序交換が完全に正当化され、特異性の見事な相殺が起こるのである。
+\end{Q}
+
+    したがって、
+    \begin{align*}
+      \text{第3項} &= \Phi \cdot (x-\xi)^A \left( \frac{\partial G}{\partial t_l}G^{-1} \right) (x-\xi)^{-A} \cdot \Phi^{-1} \\
+      &= \Phi \cdot \left( \frac{\partial G}{\partial t_l}G^{-1} \right) (x-\xi)^A (x-\xi)^{-A} \cdot \Phi^{-1} \\
+      &= \Phi \left( \frac{\partial G}{\partial t_l}G^{-1} \right) \Phi^{-1}
+    \end{align*}
+    となり、なんと $x-\xi$ の依存性が完全に消滅する！ $\Phi$ も $G$ も正則であるため、第3項も完全に正則であることが厳密に保証される。
+    
+    \item \textbf{第2項の評価と結論：}
+    以上より、極を生み出す可能性のある項は第2項のみに絞られた。
+    もし $\xi$ が $t_l$ に依存しなければ $\frac{\partial \xi}{\partial t_l} = 0$ となり、第2項は消滅する。すべて正則な項のみとなるため、$A^{(l)}$ は正則である（(2)の証明）。
+    もし $\xi$ が $t_l$ に依存すれば $\frac{\partial \xi}{\partial t_l} \neq 0$ であり、第2項は $\frac{1}{x-\xi}$ を持つ。$\Phi A \Phi^{-1}$ は正則かつ非零であるため、他の項と打ち消し合うことはなく、$A^{(l)}$ は $x=\xi$ に「ちょうど1位の極」を持つことが結論づけられる（(3)の証明）。
+\end{itemize}
+\end{Q}
+
+以下、第2章第5節の結果を使って、行列型のシュレジンガー型微分方程式
+\begin{equation}\label{eq:3.4_Schleginger}
+  \frac{dY}{dx} = \left( \sum_{l=1}^L \frac{A_l}{x-t_l} \right) Y
+\end{equation}
+のモノドロミー保存変形について調べてみよう．計算の細部に立ち入ることはせず，筋道を紹介する．
+
+変形のパラメータ $t_l$ としては，確定特異点の位置をとる．すなわち
+\[
+  t = (t_1, t_2, \cdots, t_L)
+\]
+とする．$t=(t_1, \cdots, t_L)$ の変域 $U \subset \mathbb{C}^L$ は必要に応じて小さくとっておく．また
+\[
+  A_\infty = - \sum_{l=1}^L A_l
+\]
+は，対角化可能であるとし，あらかじめ対角行列にとっておく．$Y=Y(x,t)$ を\eqref{eq:3.4_Schleginger}の基本解行列で，そのモノドロミー群は $t$ に依存しないとする．
+
+\eqref{eq:3.4_matrix_representation_A_Phi_G}により $A^{(l)}(x,t)$ を定めれば、命題\ref{prop:3.4_matrix_ODE_monodoromy_deformation_property}により，$A^{(l)}(x,t)$ は $x=t_l$ のみで1位の極をもち、それ以外の $\mathbb{P}^1(\mathbb{C})$ 上の各点で正則である．我々は，ここで L. Schlesinger にならって，$x=\infty$ の近傍において
+\[
+  Y(x,t) = \left( \sum_{j=0}^\infty \Phi_j(t) x^{-j} \right) x^{-A_\infty}, \quad \Phi_0 = I_n
+\]
+と表されている，と仮定する．すると，\eqref{eq:3.4_matrix_representation_A_Phi_G}から
+\[
+  A^{(l)}(\infty, t) = 0
+\]
+である．
+
+\begin{Q}[無限遠 $x=\infty$ における展開の仮定から、なぜ $A_\infty$ の固有値に依存することなく、直ちに $A^{(l)}(\infty,t) = 0$ が導かれるのか？]
+\textbf{A.} 変形行列の定義 $A^{(l)} = \frac{\partial Y}{\partial t_l}Y^{-1}$ を計算する際、$Y$ と $Y^{-1}$ に含まれる $x^{\pm A_\infty}$ が「微分されることなく完璧に相殺される」からである。
+
+具体的には以下の通りである。
+前提として、無限遠における留数行列 $A_\infty = -\sum A_l$ は、モノドロミー保存の仮定によりその固有値（特性指数）が $t$ に依存しない。テキストの仮定によりあらかじめ定数対角行列として取ってあるため、$\frac{\partial A_\infty}{\partial t_l} = 0$ である。
+
+$Y(x,t) = \Phi(x,t)x^{-A_\infty}$ とおく。ここで $\Phi(x,t) = I_n + \Phi_1(t)x^{-1} + \Phi_2(t)x^{-2} + \dots$ である。
+これを $t_l$ で偏微分すると、$A_\infty$ が定数であるため、微分作用素は $\Phi$ にしかかからない。
+\[
+  \frac{\partial Y}{\partial t_l} = \frac{\partial \Phi}{\partial t_l} x^{-A_\infty} + \Phi \frac{\partial}{\partial t_l}(x^{-A_\infty}) = \frac{\partial \Phi}{\partial t_l} x^{-A_\infty}
+\]
+一方、基本解行列の逆行列は
+\[
+  Y^{-1} = (x^{-A_\infty})^{-1} \Phi^{-1} = x^{A_\infty} \Phi^{-1}
+\]
+である。これらを $A^{(l)}$ の定義式に代入すると、中央で $x^{-A_\infty}$ と $x^{A_\infty}$ が隣り合い、完全に単位行列となって消滅する。
+\begin{align*}
+  A^{(l)} &= \left( \frac{\partial \Phi}{\partial t_l} x^{-A_\infty} \right) \left( x^{A_\infty} \Phi^{-1} \right) \\
+  &= \frac{\partial \Phi}{\partial t_l} \Phi^{-1}
+\end{align*}
+ここで、$\Phi_0 = I_n$ は定数であるため $\frac{\partial \Phi}{\partial t_l}$ は $O(x^{-1})$ の項から始まる。また $\Phi^{-1} = I_n + O(x^{-1})$ である。
+したがって、
+\[
+  A^{(l)} = O(x^{-1}) \cdot (I_n + O(x^{-1})) = O(x^{-1})
+\]
+となり、$A_\infty$ の固有値のいかんにかかわらず全体のオーダーは厳密に $O(x^{-1})$ となる。よって $x \to \infty$ で $A^{(l)}(\infty, t) = 0$ となる。
+\end{Q}
+
+一方，$x=t_l$ における解の表示\eqref{eq:3.4_matrix_solution_representation_Phi_G}を\eqref{eq:3.4_Schleginger}に代入すると
+\[
+  \Phi(t_l, t) A \Phi(t_l, t)^{-1} = A_l
+\]
+が得られる。
+
+\begin{Q}[$x=t_l$ における局所表示 $Y(x,t) = \Phi(x,t)(x-t_l)^A G(t)$ をシュレジンガー系に代入すると、なぜ $\Phi(t_l, t) A \Phi(t_l, t)^{-1} = A_l$ が得られるのか？]
+\textbf{A.} 代入後、右から $G(t)^{-1}$ および $(x-t_l)^{-A}$ を掛けて整理し、$x=t_l$ における留数（$(x-t_l)^{-1}$ の係数）を比較することで直ちに導かれる。
+
+具体的な計算プロセスは以下の通りである。
+基本解行列 $Y = \Phi (x-t_l)^A G(t)$ を微分方程式 $\frac{\partial Y}{\partial x} = \left( \sum_{h=1}^L \frac{A_h}{x-t_h} \right) Y$ に代入する。
+左辺は積の微分法則と行列のべき乗の微分 $\frac{\partial}{\partial x}(x-t_l)^A = A(x-t_l)^{A-I} = A(x-t_l)^{-1}(x-t_l)^A$ より、
+\[
+  \text{左辺} = \frac{\partial \Phi}{\partial x}(x-t_l)^A G(t) + \Phi A \frac{1}{x-t_l} (x-t_l)^A G(t)
+\]
+となる。右辺は、
+\[
+  \text{右辺} = \left( \sum_{h=1}^L \frac{A_h}{x-t_h} \right) \Phi (x-t_l)^A G(t)
+\]
+である。ここで、両辺の右側から $G(t)^{-1} (x-t_l)^{-A}$ を掛けて特異性を持つ因子を相殺すると、
+\[
+  \frac{\partial \Phi}{\partial x} + \Phi A \frac{1}{x-t_l} = \left( \sum_{h=1}^L \frac{A_h}{x-t_h} \right) \Phi
+\]
+を得る。
+この等式の両辺について、$x \to t_l$ としたときの最も特異性の高い項（$(x-t_l)^{-1}$ の項、すなわち特異点における留数）を比較する。
+\begin{itemize}
+    \item 左辺：$\frac{\partial \Phi}{\partial x}$ は正則であるため、極を持つのは第2項のみであり、その留数は $\Phi(t_l, t) A$ である。
+    \item 右辺：総和のうち $h=l$ の項 $\frac{A_l}{x-t_l}\Phi$ のみが $x=t_l$ で極を持ち、その他の $h \neq l$ の項は正則である。したがって留数は $A_l \Phi(t_l, t)$ である。
+\end{itemize}
+これらを等置すると、
+\[
+  \Phi(t_l, t) A = A_l \Phi(t_l, t)
+\]
+となる。$\Phi(t_l, t)$ は可逆行列であるから、右から $\Phi(t_l, t)^{-1}$ を掛けることで
+\[
+  \Phi(t_l, t) A \Phi(t_l, t)^{-1} = A_l
+\]
+が厳密に導出される。
+\end{Q}
+
+上の2つの式から、結局
+\begin{equation*}
+  A^{(l)}(x,t) = - \frac{A_l}{x-t_l}
+\end{equation*}
+
+\begin{Q}[テキストの「上の2つの式から、結局…」の部分にはどのような論理の飛躍があり、どうやって $A^{(l)}(x,t)$ の大域的な形を決定しているのか？]
+\textbf{A.} 複素解析における強力な定理である「リウヴィルの定理（拡張版）」を暗黙に適用している。
+有理関数行列 $A^{(l)}(x,t)$ について、以下の3つの局所的な情報が揃っている。
+\begin{enumerate}
+    \item \textbf{極の位置:} 命題3.11より、$x=t_l$ にのみ1位の極を持つ。よって $A^{(l)}(x,t) = \frac{C_l}{x-t_l} + P(x)$ （$P(x)$は多項式）と書ける。
+    \item \textbf{無限遠での振る舞い:} $A^{(l)}(\infty,t) = 0$ であるため、多項式部分 $P(x)$ は恒等的に $0$ でなければならない。すなわち $A^{(l)}(x,t) = \frac{C_l}{x-t_l}$ に確定する。
+    \item \textbf{留数の値 $C_l$:} 前ページの(3.56)式において $\xi = t_l$ とすると、主要部（極を持つ項）は第2項の $- \frac{\partial t_l}{\partial t_l} \Phi A \Phi^{-1} = -\Phi A \Phi^{-1}$ となる。直前の式 $\Phi A \Phi^{-1} = A_l$ を代入すれば、留数は $C_l = -A_l$ となる。
+\end{enumerate}
+これらをつなぎ合わせることで、大域的な形が $A^{(l)}(x,t) = - \frac{A_l}{x-t_l}$ に一意に定まるのである。
+\end{Q}
+
+となることがわかる．詳しい説明は省略したが，上で述べたような考察により次の命題が得られる．
+
+\begin{proposition}\label{prop:3.4_Schleginger_deformation_system}
+シュレジンガー型微分方程式\eqref{eq:3.4_Schleginger}の変形微分方程式は以下で与えられる．
+\begin{equation*}
+  \begin{cases}
+    \displaystyle \frac{\partial Y}{\partial x} = \left( \sum_{l=1}^L \frac{A_l}{x-t_l} \right) Y \\[5mm]
+    \displaystyle \frac{\partial Y}{\partial t_l} = \left( - \frac{A_l}{x-t_l} \right) Y
+  \end{cases}
+\end{equation*}
+\end{proposition}
+
+次に、命題\ref{prop:3.4_Schleginger_deformation_system}の変形微分方程式系の完全積分可能条件\eqref{eq:3.1_compatibility_PA}を具体的に計算する．まず
+\[
+  \sum_{h=1}^L \frac{1}{x-t_h} \frac{\partial A_h}{\partial t_l} = \left[ -\frac{A_l}{x-t_l}, \sum_{h=1}^L \frac{A_h}{x-t_h} \right]
+\]
+となるが，右辺を丁寧に変形すると
+\[
+  \sum_{h=1(h \neq l)}^L \frac{[A_h, A_l]}{t_h - t_l} \left( \frac{1}{x-t_h} - \frac{1}{x-t_l} \right)
+\]
+を得る．
+
+\begin{Q}[「右辺を丁寧に変形すると」とあるが、交換子の計算と部分分数分解の具体的なプロセスはどうなっているか？]
+\textbf{A.} 右辺の交換子は双線形性により和の外に出せる。各項は
+$\left[ -\frac{A_l}{x-t_l}, \frac{A_h}{x-t_h} \right] = -\frac{1}{(x-t_l)(x-t_h)} [A_l, A_h] = \frac{1}{(x-t_l)(x-t_h)} [A_h, A_l]$ 
+となる。ここで $h=l$ の項は自己交換子 $[A_l, A_l] = 0$ となり消滅するため、和の添字は $h \neq l$ のみとなる。
+さらに、有理関数の部分を部分分数分解すると
+$\frac{1}{(x-t_l)(x-t_h)} = \frac{1}{t_h - t_l} \left( \frac{1}{x-t_h} - \frac{1}{x-t_l} \right)$ 
+となるため、これを代入することでテキストの展開式が厳密に得られる。
+\end{Q}
+
+ここで，$\frac{1}{x-t_h}$ の係数を比較すれば，$A_h$ に関する微分方程式系
+
+\begin{align}
+  \frac{\partial A_h}{\partial t_l} &= \frac{[A_h, A_l]}{t_h - t_l} \quad (h \neq l)\label{eq:3.4_compatibility_hl} \\
+  \frac{\partial A_l}{\partial t_l} &= - \sum_{h=1(h \neq l)}^L \frac{[A_h, A_l]}{t_h - t_l}\label{eq:3.4_compatibility_ll}
+\end{align}
+が成立することがわかる．
+
+\begin{Q}[左辺と右辺の係数比較から、なぜ $h \neq l$ の場合\eqref{eq:eq:3.4_compatibility_hl}と $h=l$ の場合\eqref{eq:3.4_compatibility_ll}の2つの異なる方程式が抽出されるのか？]
+\textbf{A.} 左辺は $\sum_{h=1}^L \frac{\partial A_h / \partial t_l}{x-t_h}$ であり、すべての極 $x=t_k$ $(k=1,\dots,L)$ に独立した係数を持っている。
+これを右辺の展開式と比較する。\\
+1. $h \neq l$ の極 $\frac{1}{x-t_h}$：右辺ではシグマの中の1つの項からしか寄与がない。係数をそのまま比較して $\frac{\partial A_h}{\partial t_l} = \frac{[A_h, A_l]}{t_h - t_l}$ を得る（\eqref{eq:3.4_compatibility_hl}式）。\\
+2. $h = l$ の極 $\frac{1}{x-t_l}$：右辺を見ると、$-\frac{1}{x-t_l}$ という項が「すべての $h \ (\neq l)$」に共通して存在している。つまり、右辺ではこの極に対する寄与が和全体から集中して集まってくる。これらを合算して左辺の係数 $\frac{\partial A_l}{\partial t_l}$ と等置することで、総和記号を含む\eqref{eq:3.4_compatibility_ll}式が得られる。
+\end{Q}
+
+\begin{definition}
+非線型偏微分方程式系\eqref{eq:3.4_compatibility_hl}、\eqref{eq:3.4_compatibility_ll}を\textbf{シュレジンガー系}という．
+\end{definition}
+
+他方，条件\eqref{eq:3.1_compatibility_AA}は $h=l$ のときは自明であり，$h \neq l$ のときは微分方程式系
+\[
+  -\frac{1}{x-t_h} \frac{\partial A_h}{\partial t_l} + \frac{1}{x-t_l} \frac{\partial A_l}{\partial t_h} = \frac{[A_l, A_h]}{t_l - t_h} \left( \frac{1}{x-t_l} - \frac{1}{x-t_h} \right)
+\]
+が従う．この両辺の係数を等しいとおいて得られる微分方程式系は上の(3.58)と同じものである．すなわち，条件\eqref{eq:3.1_compatibility_AA}は\eqref{eq:3.1_compatibility_PA}に含まれている．
+
+\begin{proposition}\label{prop:3.4_schleginger_compatibility}
+シュレジンガー系\eqref{eq:3.4_compatibility_hl}、\eqref{eq:3.4_compatibility_ll}は完全積分可能である．
+\end{proposition}
+
+\begin{proof}
+$df$ を，関数 $f(t)$ の $t=(t_1,\cdots,t_L)$ に関する微分とする．すなわち
+\[
+  dA_l = \sum_{h=1}^L \frac{\partial A_l}{\partial t_h} dt_h
+\]
+である。さらに微分1型式 $\Omega_l$ を
+\[
+  \Omega_l = \sum_{h=1(h \neq l)}^L \frac{[A_h, A_l]}{t_h - t_l} dt_h - \sum_{h=1(h \neq l)}^L \frac{[A_h, A_l]}{t_h - t_l} dt_l
+\]
+により定める．するとシュレジンガー系\eqref{eq:3.4_compatibility_hl}、\eqref{eq:3.4_compatibility_ll}は1種類のパッフ型式
+\[
+  dA_l = \Omega_l \quad (l=1,\cdots,L)
+\]
+で表される．
+
+\begin{Q}[シュレジンガー系の完全積分可能性を示すために、なぜ微分形式 $\Omega_l$ を導入し $d\Omega_l = 0$ を確かめるというアプローチをとるのか？]%TODO ステートメントを確認
+\textbf{A.} 多数の変数 $t_1, \dots, t_L$ に対する複雑な偏微分方程式系を、微分1形式を用いた「パッフ方程式（Pfaffian system） $dA_l = \Omega_l$」として幾何学的に統合するためである。
+フロベニウスの定理（あるいはポアンカレの補題）により、このような方程式系が矛盾なく解を持つ（完全積分可能である）ための必要十分条件は、外微分をとった $d(dA_l) = d\Omega_l$ が $0$ になること（ゼロ曲率条件）である。直接的な微分の順序交換を計算するよりも、外微分の代数的な操作（$d^2 = 0$ や $dt_h \wedge dt_l$ の反対称性）を用いることで、はるかに見通し良く証明を記述できるからである。
+\end{Q}
+
+命題3.13に主張する完全積分可能性を示すには
+\[
+  d\Omega_l = 0 \quad (l=1,\cdots,L)
+\]
+を示せばよい．このことは，それほど簡単ではないにしても，とにかく直接計算で確かめることができる．
+\end{proof}
+
+\vspace{1em}
+\noindent
+\textbf{【補足：$d\Omega_l = 0$ の直接計算による証明】}
+
+微分1型式 $\Omega_l$ を見やすくするため、次のように書き直す。
+\[
+  \Omega_l = \sum_{h=1 (h \neq l)}^L \frac{[A_h, A_l]}{t_h - t_l} (dt_h - dt_l)
+\]
+この外微分 $d\Omega_l$ を計算する。積の微分法則（ライプニッツ則）と $d(dt_h - dt_l) = 0$ より、係数の微分のみを考えればよい。
+\[
+  d\Omega_l = \sum_{h \neq l} d\left( \frac{[A_h, A_l]}{t_h - t_l} \right) \wedge (dt_h - dt_l)
+\]
+係数の微分は以下のようになる。
+\[
+  d\left( \frac{[A_h, A_l]}{t_h - t_l} \right) = \frac{[dA_h, A_l] + [A_h, dA_l]}{t_h - t_l} - \frac{[A_h, A_l]}{(t_h - t_l)^2}(dt_h - dt_l)
+\]
+これを $d\Omega_l$ の式に代入するが、第2項は $(dt_h - dt_l) \wedge (dt_h - dt_l) = 0$ となるため消滅する。したがって、調べるべき式は以下の2つの項の和に帰着する。
+\begin{align*}
+  d\Omega_l &= \underbrace{ \sum_{h \neq l} \frac{[dA_h, A_l]}{t_h - t_l} \wedge (dt_h - dt_l) }_{I_1} + \underbrace{ \sum_{h \neq l} \frac{[A_h, dA_l]}{t_h - t_l} \wedge (dt_h - dt_l) }_{I_2}
+\end{align*}
+
+\textbf{1. 第2項 $I_2$ の計算} \\
+$I_2$ に $dA_l = \sum_{k \neq l} \frac{[A_k, A_l]}{t_k - t_l}(dt_k - dt_l)$ を代入する。
+\[
+  I_2 = \sum_{h \neq l} \sum_{k \neq l} \frac{[A_h, [A_k, A_l]]}{(t_h - t_l)(t_k - t_l)} (dt_k - dt_l) \wedge (dt_h - dt_l)
+\]
+$h=k$ の項はウェッジ積がゼロになるため消える。残る $h \neq k$ の項について、添字 $h$ と $k$ を対称化してまとめる。$(dt_k - dt_l) \wedge (dt_h - dt_l)$ をくくり出すと、係数は
+\[
+  \frac{1}{2} \left( \frac{[A_h, [A_k, A_l]]}{(t_h - t_l)(t_k - t_l)} - \frac{[A_k, [A_h, A_l]]}{(t_k - t_l)(t_h - t_l)} \right) = \frac{ [A_h, [A_k, A_l]] + [A_k, [A_l, A_h]] }{2(t_h - t_l)(t_k - t_l)}
+\]
+となる（交換子の反対称性 $[A_h, A_l] = -[A_l, A_h]$ を用いた）。ここで\textbf{ヤコビの恒等式}より
+\[
+  [A_h, [A_k, A_l]] + [A_k, [A_l, A_h]] = -[A_l, [A_h, A_k]] = [[A_h, A_k], A_l]
+\]
+となるため、
+\begin{equation}
+  I_2 = \frac{1}{2} \sum_{h, k \neq l (h \neq k)} \frac{[[A_h, A_k], A_l]}{(t_h - t_l)(t_k - t_l)} (dt_k - dt_l) \wedge (dt_h - dt_l)
+  \label{eq:3.4_I2_result}
+\end{equation}
+を得る。
+
+\textbf{2. 第1項 $I_1$ の計算} \\
+次に $I_1$ に $dA_h = \sum_{k \neq h} \frac{[A_k, A_h]}{t_k - t_h}(dt_k - dt_h)$ を代入する。
+\[
+  I_1 = \sum_{h \neq l} \sum_{k \neq h} \frac{[[A_k, A_h], A_l]}{(t_h - t_l)(t_k - t_h)} (dt_k - dt_h) \wedge (dt_h - dt_l)
+\]
+関係式 $dt_k - dt_h = (dt_k - dt_l) - (dt_h - dt_l)$ を用いると、
+\[
+  (dt_k - dt_h) \wedge (dt_h - dt_l) = (dt_k - dt_l) \wedge (dt_h - dt_l)
+\]
+となる（$dt_h \wedge dt_h = 0$ のため）。また $k=l$ の項もウェッジ積がゼロになるため除外できる。
+$I_2$ と同様に $h$ と $k$ で対称化する。入れ替えにより、ウェッジ積と内側の交換子 $[A_k, A_h]$ からそれぞれ $-1$ が出て打ち消し合い、係数の分母の差から次のような構造が現れる。
+\begin{align*}
+  \frac{1}{2} & [[A_k, A_h], A_l] \left( \frac{1}{(t_h - t_l)(t_k - t_h)} - \frac{1}{(t_k - t_l)(t_h - t_k)} \right) \\
+  &= \frac{1}{2} [[A_k, A_h], A_l] \frac{1}{t_k - t_h} \left( \frac{1}{t_h - t_l} - \frac{1}{t_k - t_l} \right) \\
+  &= \frac{1}{2} [[A_k, A_h], A_l] \frac{1}{t_k - t_h} \frac{t_k - t_h}{(t_h - t_l)(t_k - t_l)} \\
+  &= \frac{1}{2} \frac{[[A_k, A_h], A_l]}{(t_h - t_l)(t_k - t_l)}
+\end{align*}
+したがって、
+\begin{equation}
+  I_1 = \frac{1}{2} \sum_{h, k \neq l (h \neq k)} \frac{[[A_k, A_h], A_l]}{(t_h - t_l)(t_k - t_l)} (dt_k - dt_l) \wedge (dt_h - dt_l)
+  \label{eq:3.4_I1_result}
+\end{equation}
+となる。
+
+\textbf{3. 結論（奇跡の相殺）} \\
+式(\eqref{eq:3.4_I2_result})と式(\eqref{eq:3.4_I1_result})を足し合わせる。
+\begin{align*}
+  d\Omega_l &= I_1 + I_2 \\
+  &= \frac{1}{2} \sum_{h, k \neq l (h \neq k)} \frac{ [[A_k, A_h], A_l] + [[A_h, A_k], A_l] }{(t_h - t_l)(t_k - t_l)} (dt_k - dt_l) \wedge (dt_h - dt_l)
+\end{align*}
+交換子の反対称性 $[A_k, A_h] = -[A_h, A_k]$ により、分子の括弧の中身は厳密にゼロとなる。
+以上より、$d\Omega_l = 0$ が示された。 \hfill $\blacksquare$
+
+与えられたモノドロミーを実現する線型フックス型微分方程式として，常にシュレジンガー型微分方程式(3.57)がとれるか，という問題の考察はまだ終わっていない．行列のサイズが $2 \times 2$ の場合にはこの問題の答えは肯定的である．必ずしもシュレジンガー型微分方程式で実現できるとは限らないモノドロミーはどのようなものであろうか．一般の場合には，モノドロミーを勝手に与えると，連立微分方程式系でも見かけの特異点が必要であり，確かにそのような例も知られている．この反例で与えたモノドロミーは可約である．
+
+では既約なモノドロミーを実現する線型フックス型微分方程式に限ったら，そのモノドロミーはシュレジンガー型微分方程式で実現できるだろうか．このことが証明されるならば，単独高階微分方程式のモノドロミー保存変形の結果得られる微分方程式はシュレジンガー系に含まれることになる．
+
+\begin{Q}[テキスト後半で語られている「与えられたモノドロミーを実現する微分方程式が常にシュレジンガー型にとれるか」という問題意識は、数学的に何を意味しているか？ また「見かけの特異点」の役割は何か？]
+\textbf{A.} これは「ヒルベルトの第21問題（リーマン・ヒルベルト問題）」の核心部分である。
+任意のモノドロミー表現を、見かけの特異点を持たないフックス型方程式（シュレジンガー系）だけで実現することは、一般には不可能であることが知られている（1989年のBolibrukhによる反例など）。
+単独高階微分方程式を連立系に直す際などに必然的に生じる「見かけの特異点」は、モノドロミー（大域的な構造）を崩さずに、微分方程式の係数の局所的な自由度を調整する不可欠な役割を担う。可積分系の理論において、この見かけの特異点のダイナミクスこそがパンルヴェ方程式の解の挙動（$\tau$ 関数の零点）を支配するという、極めて重要な事実を示唆する記述である。
+\end{Q}
+
+少なくともわかることは，モノドロミー保存変形を許すということから，シュレジンガー型微分方程式は十分広いクラスのフックス型微分方程式である，ということである．
+
+シュレジンガー系にはいくつかの第一積分が存在する．たとえば
+\[
+  \mathrm{Trace} A_l, \quad \sum_{h=1}^L A_h
+\]
+等である．これらは，モノドロミー保存変形の不変量であり，実際\eqref{eq:3.4_compatibility_hl}、\eqref{eq:3.4_compatibility_ll}の形からも直接見てとれることである．しかし，シュレジンガー系から種々の積分を用いて変数を減らしていく操作を実行することは得策とは言えない．何か見通しがない限り微分方程式の形は複雑になるばかりである．
+
+\begin{Q}[保存量（第一積分）が存在するにもかかわらず、それを用いてシュレジンガー系の変数を消去し、直接解こうとしないのはなぜか？]
+\textbf{A.} シュレジンガー系は行列を成分とする巨大な非線形偏微分方程式系であるため、見通しのないまま代数的な関係式で変数を消去すると、残された方程式の形が絶望的に複雑化・巨大化し、解析が不可能になってしまうからである。
+そのため、一般論を深追いするのではなく、「単独高階方程式への帰着」という別の指導原理（特に有理関数 $a_n^{(l)}$ のラックス方程式に着目するルート）をとる方が、パンルヴェ方程式などの具体的な可積分系を抽出する上で理論上も実際上もはるかに有効なアプローチとなる。
+\end{Q}
+
+したがって，単独高階フックス型微分方程式のモノドロミー保存変形は別の指導原理を求めて，別個に考察するのが理論上も実際上も良い方法である．
+
+単独高階フックス型微分方程式のモノドロミー保存変形において，重要な役割を果たすのは，$x$ の有理関数 $a_n^{(l)}(x,t)$ である．これらはラックスの方程式\eqref{eq:3.1_lax_equation_pa}を満たす、我々の対象である。パンルヴェ方程式は2階微分方程式のモノドロミー保存変形に関係している。第3章第2節で調べたように、$a_2^{(l)}(x,t)$ のラックスの方程式は3階の非斉次線型微分方程式(3.29)であった．また，単独高階微分方程式のモノドロミー保存変形は，変換(3.43)によりSL型の場合に帰着するのであった。また、与えられた微分方程式の2つの解の基本形 $\vec{\varphi}(x,t), \vec{\psi}(x,t)$ で，そのモノドロミー群が $t$ に依存しないものが存在すれば，それらは\eqref{eq:3.3_linear_transform_G}、\eqref{eq:3.3_scalar_matrix_gG}という簡単な変換で移りあう。したがって、変形微分方程式系は本質的に1つである。
+
+以降の節において、具体的に2階フックス型微分方程式のモノドロミー保存変形を調べる。次節では、パンルヴェVI型方程式の多変数化である、ガルニエ系を説明する。2次のシュレジンガー型微分方程式のモノドロミー保存変形との関係、$n=2$ のシュレジンガー系とガルニエ系の関係等についても述べる．
+
+パンルヴェVI型方程式と結びついたフックス型微分方程式は第2.8節で既に触れた．重複を恐れずもう一度書く．
+
+\begin{equation}\label{eq:3.4_2-PDE_x,t}
+  \frac{d^2 y}{dx^2} + p_1(x,t)\frac{dy}{dx} + p_2(x,t)y = 0
+\end{equation}
+\begin{equation}\label{eq:3.4_PVI_coefficient_p1}
+  p_1(x,t) = \frac{1-\kappa_0}{x} + \frac{1-\kappa_1}{x-1} + \frac{1-\theta}{x-t} - \frac{1}{x-\lambda}
+\end{equation}
+
+\begin{Q}[\eqref{eq:3.4_PVI_coefficient_p1}式における係数 $p_1(x,t)$ の極（特異点） $x = 0, 1, t, \lambda$ は、モノドロミー保存変形の理論においてそれぞれどのような幾何学的・解析的な役割を担っているか？]
+\textbf{A.} これらは方程式の特異点であるが、その性質は大きく3つに分類される。
+\begin{itemize}
+    \item \textbf{$x = 0, 1, \infty$（固定特異点）}: 位置が動かない確定特異点。方程式の土台となる空間（$\mathbb{P}^1 \setminus \{0, 1, \infty\}$）を定める。
+    \item \textbf{$x = t$（動く特異点／変形パラメータ）}: 時間発展に相当する独立変数であり、この特異点の位置を動かしてもモノドロミーが不変となるように系を変形させる。
+    \item \textbf{$x = \lambda$（見かけの特異点）}: 解が多価性を持たない（モノドロミーを持たない）特殊な特異点。パラメータ $t$ を動かすと、この $\lambda$ は $x$ 平面上を $t$ の関数 $\lambda(t)$ として複雑に動き回る。実は、この \textbf{$\lambda(t)$ が満たす非線形微分方程式こそが「パンルヴェVI型方程式」そのもの}である。
+\end{itemize}
+\end{Q}
+
+\begin{equation}\label{eq:3.4_PVI_coefficient_p2}
+  p_2(x,t) = \frac{\kappa}{x(x-1)} + \frac{\lambda(\lambda-1)\mu}{x(x-1)(x-\lambda)} - \frac{t(t-1)H}{x(x-1)(x-t)}
+\end{equation}
+\[
+  \kappa = \chi(\chi+\kappa_\infty) = \frac{1}{4}(\kappa_0+\kappa_1+\theta-1)^2 - \frac{1}{4}\kappa_\infty^2
+\]
+
+ここで，$H$ は $\lambda, \mu, t$ の関数として次式で与えられた．
+\begin{align}\label{eq:3.4_PVI_H_representation}
+  t(t-1)H &= \lambda(\lambda-1)(\lambda-t)\mu^2 \nonumber \\
+  &\quad - \{\kappa_0(\lambda-1)(\lambda-t) + \kappa_1\lambda(\lambda-t) + (\theta-1)\lambda(\lambda-1)\} \mu \nonumber \\
+  &\quad + \kappa(\lambda-t)
+\end{align}
+
+\begin{Q}[$p_2(x,t)$ の表示式\eqref{eq:3.4_PVI_coefficient_p2}に現れるパラメータ $\mu$ と関数 $H$ は、幾何学的・力学系的にどのような意味を持っているか？]
+\textbf{A.} $\lambda$ が「見かけの特異点の位置」という空間的な「座標（$q$）」に相当するのに対し、$\mu$ はそれに付随して決まる留数に関する「アクセサリー・パラメータ」であり、力学系における「正準運動量（$p$）」の役割を果たす。そして $H$ はまさにこの力学系の「ハミルトニアン（エネルギー関数）」である。
+すなわち\eqref{eq:3.4_PVI_coefficient_p2}は、方程式の係数という静的な対象の中に、既に背後で躍動する力学系の変数たちが完全に埋め込まれていることを示している。
+\end{Q}
+
+我々は，フックス型微分方程式\eqref{eq:3.4_2-PDE_x,t}、\eqref{eq:3.4_PVI_coefficient_p1}、\eqref{eq:3.4_PVI_coefficient_p2}に関するフックスの問題を再考察する．目標となるのは次の定理である．
+
+\begin{theorem}
+\eqref{eq:3.4_2-PDE_x,t}、\eqref{eq:3.4_PVI_coefficient_p1}、\eqref{eq:3.4_PVI_coefficient_p2}のモノドロミー保存変形は，ハミルトン系
+\begin{equation}\label{eq:3.4_PVI_Hamilton_system}
+  \frac{d\lambda}{dt} = \frac{\partial H}{\partial \mu}, \quad \frac{d\mu}{dt} = -\frac{\partial H}{\partial \lambda}
+\end{equation}
+で与えられる．ここで，$H=H(t;\lambda,\mu)$ は\eqref{eq:3.4_PVI_H_representation}で定められる。
+\end{theorem}
+
+すなわち，\eqref{eq:3.4_2-PDE_x,t}、\eqref{eq:3.4_PVI_coefficient_p1}、\eqref{eq:3.4_PVI_coefficient_p2}の解の基本形で，そのモノドロミー群が $t$ に依存しないものが存在するための必要十分条件は、2つのアクセサリー・パラメータ $\lambda, \mu$ が非線型常微分方程式系\eqref{eq:3.4_PVI_Hamilton_system}を満足すること，である．
+
+\eqref{eq:3.4_PVI_Hamilton_system}を\eqref{eq:3.4_PVI_H_representation}により表し，連立微分方程式から $\mu$ を消去すると，パンルヴェ方程式 $\mathrm{P}_{\mathrm{VI}}$ が得られる．ハミルトン系からパンルヴェ方程式を導く計算は初等的ではあるが筆算で確かめるのは簡単ではない．
+
+\begin{Q}[パンルヴェVI型方程式（2階の非線形常微分方程式）を直接導出せず、なぜ定理3.1のように $\lambda$ と $\mu$ のハミルトン系\eqref{eq:3.4_PVI_Hamilton_system}を経由して定式化するアプローチをとるのか？]
+\textbf{A.} 主に以下の3つの圧倒的な利点があるためである。
+\begin{enumerate}
+    \item \textbf{計算量の劇的な削減:} 直接 $\mu$ を消去して複雑極まりない $\mathrm{P}_{\mathrm{VI}}$ を導出・証明する古典的な手法（R. Fuchs や R. Garnier の手法）に比べ、ハミルトン系をベースにすることで証明の見通しが圧倒的に良くなる。
+    \item \textbf{力学系理論の応用:} 微分方程式を「ハミルトン系」の枠組みに乗せることで、シンプレクティック幾何学や正準変換といった、古典力学で培われた強力な数学的ツールをそのまま可積分系の解析に流用できる。
+    \item \textbf{対称性の可視化:} $\mathrm{P}_{\mathrm{VI}}$ が持つベックルント変換などの隠れた対称性（アフィン・ワイル群の作用など）は、$\lambda$ だけの式よりも、$\lambda$ と $\mu$ が対等に現れるハミルトニアン $H$ の多項式の形を見る方が遥かに発見・証明しやすい。
+\end{enumerate}
+\end{Q}
+
+一方，この定理の主張するハミルトン系を導入することで，古典的な R. Fuchs や R. Garnier の結果は，その見通しがよくなり計算量も少なくなる．さらに非線型微分方程式自体を扱うときにも，ハミルトン系に書かれるということは，力学系の考え方が使えるなど，なかなか便利である．上の定理に述べた事実を指導原理として，ガルニエ系の計算を実行する．

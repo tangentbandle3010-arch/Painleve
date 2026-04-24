@@ -1,4 +1,4 @@
-This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.6.21)  22 APR 2026 20:47
+This is LuaHBTeX, Version 1.16.0 (TeX Live 2023)  (format=lualatex 2023.6.21)  24 APR 2026 22:49
  restricted system commands enabled.
  file:line:error style messages enabled.
 **/Users/matsuurahikariyuu/Desktop/VS_Code/Painleve/Painleve/main
@@ -1072,15 +1072,6 @@ File: pgflibraryarrows.meta.code.tex 2023-01-15 v3.1.10 (3.1.10)
 
 LaTeX Warning: Label `eq:3.33' multiply defined.
 
-
-LaTeX Warning: Label `eq:3.73' multiply defined.
-
-
-LaTeX Warning: Label `eq:3.33' multiply defined.
-
-
-LaTeX Warning: Label `eq:3.25' multiply defined.
-
 )
 \openout1 = main.aux
 
@@ -1328,122 +1319,115 @@ LaTeX Warning: Reference `eq:deformation_system' on page 60 undefined on input l
 
 LaTeX Warning: Reference `eq:deformation_system' on page 60 undefined on input line 2505.
 
-[60]) (./sections/03_painleve.tex [61] [62] [63] [64] [65] [66] [67] [68] [69]
+[60]) (./sections/03_パンルヴェ方程式の基礎/0301_変形微分方程式系.tex [61] [62] [63] [64] [65] [66] [67] [68] [69]) (./sections/03_パンルヴェ方程式の基礎/0302_2階フックス型微分方程式のラックス方程式.tex
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 412.
+(mdframed)              on input line 13.
  [70] [71]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 461.
+(mdframed)              on input line 62.
  [72]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 511.
+(mdframed)              on input line 112.
 Package mdframed Info: Box was splittet wrong
  starting loop to iterate the splitting point
-(mdframed)              on input line 541.
+(mdframed)              on input line 142.
  [73]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 555.
+(mdframed)              on input line 156.
 Package mdframed Info: Box was splittet wrong
  starting loop to iterate the splitting point
-(mdframed)              on input line 584.
- [74] [75] [76] [77] [78] [79] [80] [81] [82] [83] [84] [85] [86] [87] [88] [89] [90] [91] [92]
-
-LaTeX Warning: Reference `eq:eq:3.4_compatibility_hl' on page 93 undefined on input line 1357.
-
-[93] [94] [95] [96] [97] [98]
+(mdframed)              on input line 312.
+ [74] [75] [76] [77]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1573.
+(mdframed)              on input line 333.
+ [78]) (./sections/03_パンルヴェ方程式の基礎/0303_変形微分方程式系の解.tex [79] [80] [81] [82] [83] [84] [85]) (./sections/03_パンルヴェ方程式の基礎/0304_シュレージンガー系.tex [86] [87] [88] [89] [90] [91] [92] [93] [94] [95] [96]
+
+LaTeX Warning: Reference `eq:eq:3.4_compatibility_hl' on page 97 undefined on input line 446.
+
+[97] [98] [99] [100] [101]) (./sections/03_パンルヴェ方程式の基礎/0305_ガルニエ系.tex
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 4.
+ [102]
+Package mdframed Info: Not enough space on this page on input line 35.
+ [103]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 61.
 Package mdframed Info: Box was splittet wrong
  starting loop to iterate the splitting point
-(mdframed)              on input line 1604.
- [99] [100]
+(mdframed)              on input line 95.
+ [104] [105] [106] [107] [108] [109]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1630.
- [101] [102] [103] [104] [105]
+(mdframed)              on input line 308.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1877.
-
-
-Package mdframed Warning: You got a bad break
-(mdframed)                because the last box will be empty
-(mdframed)                you have to change it manually
-(mdframed)                by changing the text, the space
-(mdframed)                or something else on input line 1887.
-
-Package mdframed Info: Box was splittet wrong
- starting loop to iterate the splitting point
-(mdframed)              on input line 1887.
-[106]
+(mdframed)              on input line 337.
+ [110]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1906.
- [107]
+(mdframed)              on input line 372.
+ [111]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1941.
- [108]
+(mdframed)              on input line 406.
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1975.
+(mdframed)              on input line 410.
+ [112] [113]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 1979.
-Package mdframed Info: Box was splittet wrong
- starting loop to iterate the splitting point
-(mdframed)              on input line 2015.
- [109] [110]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 2081.
- [111] [112]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 2120.
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 2139.
-
-warning  (pdf backend): ignoring duplicate destination with the name 'equation.3.116'
-
-warning  (pdf backend): ignoring duplicate destination with the name 'equation.3.116'
-
-warning  (pdf backend): ignoring duplicate destination with the name 'equation.3.116'
-
-warning  (pdf backend): ignoring duplicate destination with the name 'equation.3.116'
-[113]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 2175.
+(mdframed)              on input line 512.
  [114]
+Package mdframed Info: Not enough space on this page on input line 517.
+ [115]) (./sections/03_パンルヴェ方程式の基礎/0306_ガルニエ系のハミルトン表示.tex
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 2199.
+(mdframed)              on input line 3.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 22.
+
+warning  (pdf backend): ignoring duplicate destination with the name 'equation.3.117'
+
+warning  (pdf backend): ignoring duplicate destination with the name 'equation.3.117'
+
+warning  (pdf backend): ignoring duplicate destination with the name 'equation.3.117'
+
+warning  (pdf backend): ignoring duplicate destination with the name 'equation.3.117'
+[116]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 58.
+ [117]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 82.
+ [118] [119] [120]
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 226.
+Package mdframed Info: Not enough space on this page on input line 253.
+ [121]
+Package mdframed Info: Not enough space on this page on input line 253.
+Package mdframed Info: mdframed detected package amsthm 
+ changed the theorem header of amsthm
+(mdframed)              on input line 261.
+ [122]
 Package mdframed Info: Box was splittet wrong
  starting loop to iterate the splitting point
-(mdframed)              on input line 2255.
- [115] [116] [117]
+(mdframed)              on input line 319.
+ [123]
 Package mdframed Info: mdframed detected package amsthm 
  changed the theorem header of amsthm
-(mdframed)              on input line 2343.
- [118]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 2378.
-Package mdframed Info: Box was splittet wrong
- starting loop to iterate the splitting point
-(mdframed)              on input line 2436.
- [119] [120]
-Package mdframed Info: mdframed detected package amsthm 
- changed the theorem header of amsthm
-(mdframed)              on input line 2456.
- [121]) (./sections/99_appendix.tex [122] [123] [124] [125] [126] [127] [128] [129] [130] [131] [132] [133]) [134] (./main.aux)
+(mdframed)              on input line 339.
+ [124]) (./sections/99_appendix.tex [125] [126] [127] [128] [129] [130] [131] [132] [133] [134] [135] [136]) [137] (./main.aux)
 
 LaTeX Warning: There were undefined references.
 
@@ -1455,19 +1439,19 @@ Package rerunfilecheck Info: File `main.out' has not changed.
 )
 
 Here is how much of LuaTeX's memory you used:
- 30053 strings out of 478285
- 305866,1977958 words of node,token memory allocated
- 18454 words of node memory still in use:
-   12 hlist, 2 vlist, 6 rule, 2 glue, 4 kern, 20 penalty, 4 sub_mlist, 2 glyph, 8035 attribute, 94 glue_spec, 741 attribute_list, 2 write, 15 user_defined nodes
-   avail lists: 1:41,2:66601,3:1043,4:668,5:1062,6:103,7:7848,8:94,9:3844,10:46,11:24
- 48503 multiletter control sequences out of 65536+600000
+ 30113 strings out of 478285
+ 597482,1977958 words of node,token memory allocated
+ 18209 words of node memory still in use:
+   12 hlist, 2 vlist, 6 rule, 2 glue, 4 kern, 19 penalty, 4 sub_mlist, 2 glyph, 7924 attribute, 94 glue_spec, 731 attribute_list, 2 write, 15 user_defined nodes
+   avail lists: 1:41,2:110869,3:2139,4:981,5:2262,6:123,7:18090,8:94,9:8607,10:46,11:24
+ 48514 multiletter control sequences out of 65536+600000
  135 fonts using 98503479 bytes
- 106i,16n,102p,1784b,663s stack positions out of 10000i,1000n,20000p,200000b,200000s
+ 106i,16n,102p,1784b,662s stack positions out of 10000i,1000n,20000p,200000b,200000s
 {/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathit.enc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-rm.enc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathsy.enc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-ec.enc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-ts1.enc}{/usr/local/texlive/2023/texmf-dist/fonts/enc/dvips/lm/lm-mathex.enc}</usr/local/texlive/2023/texmf-dist/fonts/opentype/public/haranoaji/HaranoAjiGothic-Medium.otf></usr/local/texlive/2023/texmf-dist/fonts/opentype/public/haranoaji/HaranoAjiMincho-Regular.otf></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmbx12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmex10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmi8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmmib10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr12.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmr8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmssbx10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy6.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmsy8.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/lm/lmtt10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msam10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm10.pfb></usr/local/texlive/2023/texmf-dist/fonts/type1/public/amsfonts/symbols/msbm7.pfb>
-Output written on main.pdf (134 pages, 1300375 bytes).
+Output written on main.pdf (137 pages, 1317648 bytes).
 
-PDF statistics: 1659 PDF objects out of 1728 (max. 8388607)
- 1484 compressed objects within 15 object streams
- 454 named destinations out of 1000 (max. 131072)
+PDF statistics: 1673 PDF objects out of 1728 (max. 8388607)
+ 1495 compressed objects within 15 object streams
+ 458 named destinations out of 1000 (max. 131072)
  160 words of extra memory for PDF output out of 10000 (max. 100000000)
 

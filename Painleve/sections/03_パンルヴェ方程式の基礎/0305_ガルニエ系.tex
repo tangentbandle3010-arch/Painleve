@@ -1,0 +1,547 @@
+% !TEX root = ../main.tex
+
+%#region
+\begin{story}
+\begin{definition}[ガルニエ系を導くフックス型常微分方程式とリーマン図式]
+この節以下で考察する2階フックス型線型常微分方程式の形を以下のように定める。
+\begin{equation}
+\frac{d^2 y}{dx^2} + p_1(x, t) \frac{dy}{dx} + p_2(x, t) y = 0 \label{eq:3.33}
+\end{equation}
+ここで対象となる微分方程式 \eqref{eq:3.33} のリーマン図式は、次のように与えられる。
+\begin{equation}
+\left\{
+\begin{array}{ccccc}
+x=0 & x=1 & x=t_l & x=\lambda_k & x=\infty \\
+0 & 0 & 0 & 0 & \varepsilon \\
+\kappa_0 & \kappa_1 & \theta_l & 2 & \varepsilon+\kappa_\infty
+\end{array}
+\right\} \label{eq:3.65}
+\end{equation}
+ただし、$k, l = 1, 2, \cdots, g$ とする。
+\end{definition}
+
+前節では、モノドロミー保存変形（ホロノミック変形）のパラメータを $t = (t_1, t_2, \cdots, t_L)$ としていた。ここでは、$L=g$ の場合を考察する。すなわち、変形のパラメータとしては確定特異点の位置 $x=t_l$ をとり、さらに、変形パラメータの次元 $g$ は、見かけの特異点の個数と一致している場合を考えるのである。当面 $t=(t_1, \cdots, t_g)$ の変域 $U \subset \mathbb{C}^g$ は必要に応じて小さくとっておく。
+
+リーマン図式からわかるように、微分方程式 \eqref{eq:3.33}-\eqref{eq:3.65} は $\mathbf{P}^1(\mathbb{C})$ 上に $2g+3$ 個の確定特異点をもつ。
+特異点の集合は
+\begin{equation*}
+\Xi(t) = \{0, 1, \infty, t_1, \cdots, t_g\}, \quad \Lambda(t) = \{\lambda_1(t), \cdots, \lambda_g(t)\}
+\end{equation*}
+の和集合 $\Xi(t) \cup \Lambda(t)$ である。我々は、確定特異点の位置
+\begin{equation*}
+t = (t_1, t_2, \cdots, t_g)
+\end{equation*}
+をパラメータとして、\eqref{eq:3.33} のモノドロミー保存変形を考察する。結局これからの考察は、見かけの特異点の位置 $\lambda_k$ が変形パラメータにどのように依存するか、ということに帰着するので、先走って $\Lambda(t)$ と書いている。
+\end{story}
+
+\begin{Q}[【核心】リーマン図式 \eqref{eq:3.65} において、$x=\lambda_k$ の特性指数が $(0, 2)$ となっているのは、解析的にどのような要請によるものか？]
+\textbf{A.} $x=\lambda_k$ が「見かけの特異点（apparent singularity）」であることを保証するためである。
+
+\begin{proof}
+一般に、特性指数の差が整数（この場合は $2 - 0 = 2$）となる確定特異点では、フロベニウスの定理により局所解の片方に「対数項（$\log(x-\lambda_k)$）」が現れることが知られている。対数項が存在すると、その点の周りを一周した際に解が元の値に戻らず、非自明なモノドロミー（分岐）が生じてしまう。
+
+しかし、係数関数 $p_1(x,t), p_2(x,t)$ に対して極の留数などに特定の条件（後に現れるハミルトニアンの制約式）を課すことで、この対数項の係数を意図的に $0$ にすることができる。
+対数項が消滅すると、解はその点の近傍で単なる有理型関数（分岐を持たない解）として振る舞い、モノドロミーは完全に自明な単位行列となる。
+方程式の係数としては特異点（極）を持つように見えるが、解の空間のトポロジー（モノドロミー）には何の影響も与えないため、これを「見かけの特異点」と呼ぶ。図式の特性指数 $(0, 2)$ は、まさにこの条件を準備するためのセットアップなのである。
+\end{proof}
+\end{Q}
+
+\begin{Q}[【大局観】なぜ「見かけの特異点の個数」と「変形パラメータの次元」を同じ $g$ に揃える（$L=g$ とする）必然性があるのか？]
+\textbf{A.} ガルニエ系が「パンルヴェ第VI方程式（$\mathrm{P_{VI}}$）の多変数化」であることを強く反映しているからである。
+
+\begin{proof}
+パラメータの数 $g=1$ の場合を考えてみる。
+このとき、真の特異点は $\{0, 1, \infty, t_1\}$ の4つであり、変形パラメータは $t_1$ の1つだけである。そして見かけの特異点は $\lambda_1$ の1つとなる。
+この「4つの確定特異点と1つの見かけの特異点」を持つ2階フックス型方程式のモノドロミー保存変形から導出される非線形常微分方程式こそが、パンルヴェ第VI方程式（$\mathrm{P_{VI}}$）に他ならない。
+
+これを一般の $g$ 変数に拡張しようとしたとき、確定特異点の数 $t_1, \dots, t_g$ を増やす（変形の自由度を $g$ にする）ならば、モノドロミーを一定に保つための「調整弁（ダイナミクスの従属変数）」として、同数の見かけの特異点 $\lambda_1, \dots, \lambda_g$ を動的な変数として用意しなければならない。これが次元を一致させる物理的・幾何学的な理由であり、この多変数化された力学系全体を指して「ガルニエ系」と呼ぶのである。
+\end{proof}
+\end{Q}
+
+\begin{story}
+
+各確定特異点における特性指数 $\kappa_0, \kappa_1, \theta_l, \varepsilon, \varepsilon+\kappa_\infty$ の間には，フックスの関係式
+\begin{equation}
+\kappa_0 + \kappa_1 + \sum_{l=1}^g \theta_l + \kappa_\infty + 2\varepsilon = 1 \label{eq:3.66}
+\end{equation}
+が成り立っている．
+
+微分方程式 \eqref{eq:3.33} に対する条件 (P1), (P2), (P3) は常に仮定する．念のために繰り返しておく．
+\begin{itemize}
+    \item[(P1)] $\Xi$ の各点を確定特異点，$\Lambda$ の各点を見かけの特異点としてもつ．
+    \item[(P2)] 各 $x = \xi_l \in \Xi(t)$ における特性指数のどの2つも，差が整数ではない．
+    \item[(P3)] モノドロミー $\hat{\rho}(t)$ は既約である．
+\end{itemize}
+
+(P2) により，どの $\kappa_0, \kappa_1, \theta_l, \kappa_\infty$ も整数ではない．また，(P3) は，微分方程式 \eqref{eq:3.33} が既約である，すなわち
+\begin{equation*}
+\left( \frac{d}{dx} + r_1(x,t) \right) \left( \frac{d}{dx} + r_2(x,t) \right) y = 0
+\end{equation*}
+という形には表せない，という仮定と同等である．ここで，$r_1(x,t), r_2(x,t)$ は $x$ の有理関数である．
+
+以上の仮定の下で，\eqref{eq:3.33} の係数は次のように書かれる．
+\begin{align}
+p_1(x,t) &= \frac{1-\kappa_0}{x} + \frac{1-\kappa_1}{x-1} + \sum_{l=1}^g \frac{1-\theta_l}{x-t_l} - \sum_{k=1}^g \frac{1}{x-\lambda_k} \label{eq:3.67} \\
+p_2(x,t) &= \frac{\kappa}{x(x-1)} + \sum_{k=1}^g \frac{\lambda_k(\lambda_k-1)\mu_k}{x(x-1)(x-\lambda_k)} - \sum_{l=1}^g \frac{t_l(t_l-1)H_l}{x(x-1)(x-t_l)} \label{eq:3.68}
+\end{align}
+\begin{equation*}
+\kappa = \varepsilon(\varepsilon+\kappa_\infty) = \frac{1}{4} \left( \kappa_0 + \kappa_1 + \sum_{l=1}^g \theta_l - 1 \right)^2 - \frac{1}{4}\kappa_\infty^2
+\end{equation*}
+
+$g=1$ とすると，\eqref{eq:3.33}, \eqref{eq:3.67}, \eqref{eq:3.68} は前出の (3.60), (3.61), (3.62) になる．これは R.Fuchs の考察した，パンルヴェ方程式 $\mathrm{P_{VI}}$ に対応する場合である．
+
+$\mathrm{P_{VI}}$ の拡張である，$t=(t_1, \cdots, t_g)$ の関数 $\lambda=(\lambda_1, \cdots, \lambda_g)$ が満たす2階非線型偏微分方程式系は，R.Garnier により1912年に求められた．これを書くために，少し記号を準備する．
+
+\end{story}
+
+\begin{Q}[【確認】フックスの関係式 \eqref{eq:3.66} の右辺は「2」ではなく、テキスト通り「1」で正しいのか？]
+\textbf{A.} テキストの通り「1」で厳密に正しい。方程式の階数と特異点の個数を正確にカウントすると一致する。
+
+\begin{proof}
+2階のフックス型微分方程式において、$n$ 個の特異点 $x_i$ を持つ場合、すべての特性指数 $\rho_{i, 1}, \rho_{i, 2}$ の総和は「$n-2$」になるという定理がある。
+今回のリーマン図式における特異点の総数 $n$ は、$0, 1, \infty$ の3個に加えて、$t_l$ が $g$ 個、$\lambda_k$ が $g$ 個の、計 $n = 2g + 3$ 個である。したがって、特性指数の総和は $(2g+3) - 2 = 2g+1$ とならなければならない。
+
+有限の特異点での指数の和を計算する。
+\begin{itemize}
+    \item $x=0, 1, t_l$ の和： $\kappa_0 + \kappa_1 + \sum_{l=1}^g \theta_l$
+    \item $x=\lambda_k$ の和（見かけの特異点）： $g$ 個の点それぞれで指数が $0+2=2$ なので、和は $2g$
+\end{itemize}
+無限遠点 $x=\infty$ での指数の和は $\varepsilon + (\varepsilon+\kappa_\infty) = 2\varepsilon + \kappa_\infty$ である。
+
+これらをすべて足し合わせて $2g+1$ と等号で結ぶと、
+\begin{equation*}
+\left( \kappa_0 + \kappa_1 + \sum_{l=1}^g \theta_l \right) + 2g + \left( 2\varepsilon + \kappa_\infty \right) = 2g + 1
+\end{equation*}
+両辺の $2g$ が見事に相殺され、
+\begin{equation*}
+\kappa_0 + \kappa_1 + \sum_{l=1}^g \theta_l + \kappa_\infty + 2\varepsilon = 1
+\end{equation*}
+となり、テキストの式 \eqref{eq:3.66} が正しく導出される。
+\end{proof}
+\end{Q}
+
+\begin{Q}[【導出】係数 $p_1(x,t)$ の形 \eqref{eq:3.67} はどのように決定されるのか？]
+\textbf{A.} 確定特異点における特性方程式（決定方程式）の「解の和」から直接逆算される。
+
+\begin{proof}
+フックス型方程式の一般論として、点 $x=x_i$ が確定特異点であるとき、係数 $p_1(x)$ は $x_i$ において1位の極を持ち、その留数は $1 - (\rho_{i,1} + \rho_{i,2})$ になることが知られている（ここで $\rho$ は特性指数）。
+これを用いて各特異点での項を書き下す。
+\begin{itemize}
+    \item $x=0$: 指数の和は $\kappa_0$。よって $\frac{1-\kappa_0}{x}$。
+    \item $x=1$: 指数の和は $\kappa_1$。よって $\frac{1-\kappa_1}{x-1}$。
+    \item $x=t_l$: 指数の和は $\theta_l$。よって $\frac{1-\theta_l}{x-t_l}$。
+    \item $x=\lambda_k$: 指数の和は $0+2=2$。よって $\frac{1-2}{x-\lambda_k} = -\frac{1}{x-\lambda_k}$。
+\end{itemize}
+これらをすべて足し合わせた部分分数分解こそが、式 \eqref{eq:3.67} に他ならない。無限遠点で正しく振る舞うこと（$x \to \infty$ で $p_1(x) \sim 2/x$ となること）は、前述のフックスの関係式によって自動的に保証される。
+\end{proof}
+\end{Q}
+
+\begin{Q}[【導出と意味】係数 $p_2(x,t)$ の形 \eqref{eq:3.68} はどのように導出されるか？また $\mu_k$ や $H_l$ という未知の関数はどこから来たのか？]
+\textbf{A.} 特性指数の「積」の性質と、方程式が持つ未定の自由度（アクセサリー・パラメータ）を表現論的に整理した結果である。
+
+\begin{proof}
+係数 $p_2(x)$ は各特異点 $x_i$ において高々2位の極を持ち、その係数は特性指数の積 $\rho_{i,1}\rho_{i,2}$ で与えられる。
+ここで最大のポイントは、見かけの特異点 $x=\lambda_k$ における指数の積が $0 \times 2 = \mathbf{0}$ になるという事実である。これにより、$p_2(x)$ は $x=\lambda_k$ において $1/(x-\lambda_k)^2$ という2位の極を持たず、1位の極しか持たないことが確定する。
+
+方程式全体が無限遠点 $\infty$ で正しくフックス型として振る舞うため（$p_2(x) \sim O(1/x^2)$）、全体を $\frac{1}{x(x-1)}$ という共通因子でくくり、残りの部分を各特異点での部分分数に分解するのが定石である。このとき、各1位の極の留数として「未定の関数」が現れる。
+\begin{itemize}
+    \item 見かけの特異点 $\lambda_k$ での留数を（係数込みで） $\mu_k$ と名付ける。これは力学系における「運動量（正準共役量）」となる。
+    \item 真の特異点 $t_l$ での留数を（係数込みで） $-H_l$ と名付ける。これが「ハミルトニアン」となる。
+\end{itemize}
+定数項の $\kappa$ は無限遠点での指数の積 $\varepsilon(\varepsilon+\kappa_\infty)$ から定まる。
+このように、$\mu_k$ や $H_l$ は勝手に湧いてきたのではなく、$p_1(x)$ だけでは決めきれない $p_2(x)$ の「自由度（アクセサリー・パラメータ）」に対して、モノドロミー保存変形をハミルトン系として美しく記述できるように意図的に割り振られた記号なのである。
+\end{proof}
+\end{Q}
+
+\begin{Q}[【鋭い疑問】式 \eqref{eq:3.68} の $p_2(x,t)$ において、たとえば $x=0$ で「2位の極（$1/x^2$）」が出てくるべきではないのか？なぜ分母は1乗の $x$ なのか？]
+\textbf{A.} 結論から言うと、2位の極は出てこない（1位の極しか持たない）。そして、「2位の極が消滅すること」こそが、提示されたリーマン図式から導かれる必然的な帰結なのである。
+
+\begin{proof}
+フックス型微分方程式 $\frac{d^2y}{dx^2} + p_1(x)\frac{dy}{dx} + p_2(x)y = 0$ において、確定特異点 $x=x_i$ まわりの特性指数（決定方程式の解）を $\rho_1, \rho_2$ とする。
+このとき、係数関数が特異点まわりでどう振る舞うべきかは、以下の関係式で完全に決まっている。
+\begin{align*}
+\lim_{x \to x_i} (x-x_i) p_1(x) &= 1 - (\rho_1 + \rho_2) \\
+\lim_{x \to x_i} (x-x_i)^2 p_2(x) &= \rho_1 \rho_2
+\end{align*}
+
+ここで、問題の $x=0$ におけるリーマン図式 \eqref{eq:3.65} を見てみる。特性指数は $0$ と $\kappa_0$ である。
+これを上の関係式に当てはめると、以下のようになる。
+\begin{itemize}
+    \item 指数の和： $0 + \kappa_0 = \kappa_0 \implies p_1(x)$ は $x=0$ で $\frac{1-\kappa_0}{x}$ という1位の極を持つ。（式 \eqref{eq:3.67} の第1項と完全に一致！）
+    \item 指数の積： $0 \times \kappa_0 = \mathbf{0} \implies p_2(x)$ の $1/x^2$ の係数は $0$ になる。
+\end{itemize}
+つまり、「片方の特性指数が $0$ である」という図式の要請により、$p_2(x)$ は $x=0$ において2位の極を持てず、高々1位の極しか持たないことが数学的に確定するのである。
+
+式 \eqref{eq:3.68} の $p_2(x,t)$ の分母をよく見ると、$x, (x-1), (x-t_l), (x-\lambda_k)$ はすべて「1乗」でしか現れていない。
+これはリーマン図式 \eqref{eq:3.65} の「上段の指数がすべて $0$ である」という美しい設定のおかげで、すべての有限の特異点において2位の極が見事に消滅していることを表している。
+
+（※逆に、無限遠点 $x=\infty$ では指数の積が $\varepsilon(\varepsilon+\kappa_\infty) = \kappa \neq 0$ となるため、$x \to \infty$ の極限をとると $p_2(x,t) \sim \frac{\kappa}{x^2}$ となり、無限遠点では正しく2位の極の振る舞いを示すことが確認できる。）
+\end{proof}
+\end{Q}
+
+\begin{Q}[【最大の核心】リーマン図式や特性指数の情報を使って $p_1(x)$ を完全に決定できたように、$p_2(x)$ の1位の極の留数（$\mu_k$ や $H_l$）も代数的な計算で一意に求めることはできないのか？]
+\textbf{A.} 絶対にできない。これらは方程式の「アクセサリー・パラメータ（未定の自由度）」であり、ある固定されたパラメータ $t$ における微分方程式をいくら睨んでも値は決まらない。これらを決定するためには「モノドロミー保存変形」という大域的な要請（ダイナミクス）を考える必要がある。
+
+\begin{proof}
+フックス型微分方程式において、特異点の数が増えると、リーマン図式（特異点の位置と特性指数という「局所的なデータ」）だけでは方程式の係数を一意に決定できなくなる。この決定できない余分なパラメータのことを「アクセサリー・パラメータ」と呼ぶ。
+具体的には、
+\begin{itemize}
+    \item 確定特異点が3個（超幾何微分方程式）のときは、アクセサリー・パラメータは0個であり、係数は完全に一意に決まる。
+    \item 特異点が4個以上（ホイン方程式やパンルヴェ、ガルニエ系の設定）になると、アクセサリー・パラメータが出現する。今回の式 \eqref{eq:3.68} における $\mu_k$ や $H_l$ がまさにそれである。
+\end{itemize}
+では、これらをどうやって決めるのか？
+ここで登場するのが**「モノドロミー保存変形（ホロノミック変形）」**の概念である。
+「確定特異点の位置 $t = (t_1, \dots, t_g)$ を動かしたとしても、微分方程式の大域的な解の接続関係（モノドロミー表現）が一切変化しないようにせよ」という極めて強い条件を課す。
+すると、この条件を満たすために、見かけの特異点の位置 $\lambda_k(t)$ と、そこでの留数 $\mu_k(t)$ が、パラメータ $t_l$ の変化に合わせて「どのように動かなければならないか」を記述する非線形な微分方程式系が導出される。
+これこそが「ガルニエ系」であり、1位の留数 $\mu_k$ や $H_l$ は、単なる代数計算ではなく、このガルニエ系という「微分方程式を解く」ことによって初めて決定される（関数として求まる）のである。
+\end{proof}
+\end{Q}
+
+\begin{Q}[【大局観】モノドロミー保存変形から導かれる「ガルニエ系」において、留数 $\mu_k$ と $H_l$ はそれぞれ物理的（解析力学的）にどのような役割を果たすか？]
+\textbf{A.} 解析力学における「正準変数（運動量）」と「ハミルトニアン」の役割を完璧に果たす。
+
+\begin{proof}
+先述の通り、モノドロミーを保存するように $t_l$ を動かすと、$\lambda_k$ と $\mu_k$ は $t$ の関数として変動する。驚くべきことに、この変動は次のような多変数ハミルトン系（Hamiltonian system）として極めて美しく記述されることが知られている（R. Garnier, 1912）。
+\begin{equation}
+\frac{\partial \lambda_k}{\partial t_l} = \frac{\partial H_l}{\partial \mu_k}, \quad \frac{\partial \mu_k}{\partial t_l} = -\frac{\partial H_l}{\partial \lambda_k} \quad (k, l = 1, \dots, g)
+\end{equation}
+ここで、
+\begin{itemize}
+    \item 見かけの特異点の位置 $\lambda_k$ は、力学系における「一般化座標（位置）」に相当する。
+    \item $\lambda_k$ での留数 $\mu_k$ は、それに正準共役な「運動量」に相当する。
+    \item 確定特異点 $t_l$ は「多次元的な時間」に相当する。
+    \item $t_l$ での留数 $H_l$ は、その時間発展を支配する「ハミルトニアン（エネルギー）」に相当する。
+\end{itemize}
+つまり、式 \eqref{eq:3.68} で $p_2(x,t)$ を部分分数分解した際に現れた未知の留数たちは、単なる未定係数ではなく、「微分方程式の変形理論」を「解析力学（シンプレクティック幾何学）」の言葉で記述するための最も自然で必然的なパーツだったというわけである。
+\end{proof}
+\end{Q}
+\begin{Q}[【核心】前節の議論から $p_2(x)$ が1位の極しか持たないことは分かった。では、未知の留数 $\mu_k, H_l$ 以外の「式の形（骨組み）」や、「$\frac{\kappa}{x(x-1)}$ という項とその係数」は、代数的に完全に導出できるということか？]
+\textbf{A.} 完全に導出できる。あなたの直感通り、$p_2(x)$ の極の条件と「無限遠点での振る舞い」を組み合わせることで、この特定の表示形式が数学的に一意に強制される。
+
+\begin{proof}
+前節で確認した通り、$p_2(x)$ は $x=0, 1, t_l, \lambda_k$ において「1位の極」しか持たない有理関数である。
+一方で、無限遠点 $x=\infty$ では、特性指数の積が $\kappa = \varepsilon(\varepsilon+\kappa_\infty)$ であるため、$x \to \infty$ の極限において
+\begin{equation}
+p_2(x) \sim \frac{\kappa}{x^2} + \mathcal{O}\left(\frac{1}{x^3}\right)
+\end{equation}
+という振る舞いをしなければならない（$1/x$ の項は存在してはならない）。
+
+有理関数を部分分数分解して表現する際、この「無限遠での減衰条件」を最初から満たすような、都合の良い「基底関数」を用意するエレガントな手法がある。それが分母に $x(x-1)$ を持たせる方法である。
+以下の3種類の関数を考える。
+\begin{align*}
+f_0(x) &= \frac{1}{x(x-1)} \quad &\sim \frac{1}{x^2} \quad &(x \to \infty) \\
+f_{\lambda_k}(x) &= \frac{1}{x(x-1)(x-\lambda_k)} \quad &\sim \frac{1}{x^3} \quad &(x \to \infty) \\
+f_{t_l}(x) &= \frac{1}{x(x-1)(x-t_l)} \quad &\sim \frac{1}{x^3} \quad &(x \to \infty)
+\end{align*}
+これらはすべて $x=0, 1$ で1位の極を持ち、下2つはそれぞれ $\lambda_k, t_l$ でも1位の極を持つため、$p_2(x)$ の極の条件をすべて表現できる完全な基底となる。
+
+したがって、$p_2(x)$ は未定係数 $C_0, C_{\lambda_k}, C_{t_l}$ を用いて次のように必ず展開できる。
+\begin{equation*}
+p_2(x) = C_0 f_0(x) + \sum C_{\lambda_k} f_{\lambda_k}(x) + \sum C_{t_l} f_{t_l}(x)
+\end{equation*}
+
+ここで、両辺の $x \to \infty$ の極限をとる。
+$f_{\lambda_k}(x)$ と $f_{t_l}(x)$ は $1/x^3$ のオーダーで急速に減衰するため、無限遠での $1/x^2$ の振る舞いに寄与できるのは **$f_0(x)$ だけ**である。
+すなわち、$x \to \infty$ において
+\begin{equation*}
+p_2(x) \sim C_0 \frac{1}{x^2}
+\end{equation*}
+となる。これが $\frac{\kappa}{x^2}$ に一致しなければならないのだから、未知であった係数 $C_0$ は
+\begin{equation*}
+C_0 = \kappa
+\end{equation*}
+でなければならないことが、逃げ道なく確定する。これで第1項 $\frac{\kappa}{x(x-1)}$ が完全に導出された。
+
+残りの項の係数 $C_{\lambda_k}, C_{t_l}$ は、各特異点での「留数」がシンプルな文字になるように調整されただけのものである。
+例えば $x=\lambda_k$ での留数を計算すると、
+\begin{equation*}
+\lim_{x \to \lambda_k} (x-\lambda_k) p_2(x) = \frac{C_{\lambda_k}}{\lambda_k(\lambda_k-1)}
+\end{equation*}
+となる。この留数自体を「$\mu_k$」と定義したいのであれば、$C_{\lambda_k} = \lambda_k(\lambda_k-1)\mu_k$ と置けばよい。$t_l$ での留数を「$-H_l$」と定義したいのであれば、$C_{t_l} = -t_l(t_l-1)H_l$ と置けばよい。
+
+結論として、式 \eqref{eq:3.68} の形は決して天下り的なものではなく、「局所的な極の条件」と「無限遠での漸近挙動」を繋ぎ合わせた、解析関数論における最も自然で必然的な帰結なのである。
+\end{proof}
+\end{Q}
+
+\begin{Q}[【計算の検証】$x \to \infty$ における $p_2(x) \sim \kappa/x^2$ という振る舞いは、座標変換 $x=1/u$ を経た後の $u=0$ での決定方程式を正しく満たしているか？]
+\textbf{A.} 完全に満たしている。座標変換に伴う $p_1$ のシフトと $p_2$ のスケーリングを正確に追うことで、方程式の解の指数がリーマン図式の通り $\varepsilon$ と $\varepsilon+\kappa_\infty$ になることが代数的に証明される。
+
+\begin{proof}
+$x = 1/u$ と変換すると、微分演算子は以下のように変換される。
+\begin{equation*}
+\frac{d}{dx} = -u^2 \frac{d}{du}, \quad \frac{d^2}{dx^2} = u^4 \frac{d^2}{du^2} + 2u^3 \frac{d}{du}
+\end{equation*}
+これを元の方程式 $y'' + p_1(x)y' + p_2(x)y = 0$ に代入し、全体を $u^4$ で割ると、$u=0$ まわりでの方程式を得る。
+\begin{equation}
+\frac{d^2y}{du^2} + \left( \frac{2}{u} - \frac{p_1(1/u)}{u^2} \right) \frac{dy}{du} + \frac{p_2(1/u)}{u^4} y = 0 \label{eq:u_eq}
+\end{equation}
+
+ここで、各係数の $x \to \infty$ （すなわち $u \to 0$）での漸近挙動を評価する。
+式 \eqref{eq:3.67} より、$p_1(x)$ の無限遠での振る舞いは、各項を $1/x$ で展開して、
+\begin{align*}
+p_1(x) &\sim \frac{(1-\kappa_0) + (1-\kappa_1) + \sum (1-\theta_l) - g}{x} + \mathcal{O}(x^{-2}) \\
+&= \frac{g + 2 - (\kappa_0 + \kappa_1 + \sum \theta_l) - g}{x} = \frac{2 - (\kappa_0 + \kappa_1 + \sum \theta_l)}{x}
+\end{align*}
+となる。これを $u$ の式に直すと $p_1(1/u) \sim \{2 - (\kappa_0 + \kappa_1 + \sum \theta_l)\}u$ である。
+同様に、$p_2(x) \sim \kappa/x^2$ より $p_2(1/u) \sim \kappa u^2$ である。
+
+これらを式 \eqref{eq:u_eq} に代入し、$u=0$ での決定方程式を構成する。
+式 \eqref{eq:u_eq} の $dy/du$ の係数を $P_1(u)$、$y$ の係数を $P_2(u)$ とおくと、
+\begin{itemize}
+    \item $u P_1(0) = 2 - \{2 - (\kappa_0 + \kappa_1 + \sum \theta_l)\} = \kappa_0 + \kappa_1 + \sum \theta_l$
+    \item $u^2 P_2(0) = \frac{\kappa u^2}{u^2} = \kappa$
+\end{itemize}
+となる。フックスの関係式 \eqref{eq:3.66} より、$\kappa_0 + \kappa_1 + \sum \theta_l = 1 - \kappa_\infty - 2\varepsilon$ であるから、
+$u=0$ における決定方程式 $\rho(\rho-1) + uP_1(0)\rho + u^2P_2(0) = 0$ は、
+\begin{equation*}
+\rho^2 + (1 - \kappa_\infty - 2\varepsilon - 1)\rho + \kappa = 0 \quad \Longrightarrow \quad \rho^2 - (\kappa_\infty + 2\varepsilon)\rho + \kappa = 0
+\end{equation*}
+となる。ここで $\kappa = \varepsilon(\varepsilon + \kappa_\infty)$ であったことを思い出すと、この方程式は
+\begin{equation*}
+(\rho - \varepsilon)(\rho - (\varepsilon + \kappa_\infty)) = 0
+\end{equation*}
+と見事に因数分解される。
+解は $\rho = \varepsilon, \varepsilon + \kappa_\infty$ となり、リーマン図式の設定と完全に一致する。したがって、$p_2(x) \sim \kappa/x^2$ という漸近挙動は、無限遠点での決定方程式を数学的に完璧に満たしている。
+\end{proof}
+\end{Q}
+
+\begin{story}
+\begin{align}
+\mathrm{T}(x) &= x(x-1) \prod_{l=1}^g (x-t_l) \label{eq:3.69} \\
+\mathrm{L}(x) &= \prod_{k=1}^g (x-\lambda_k) \label{eq:3.70}
+\end{align}
+とおく．$x$ の多項式 $\mathrm{T}(x), \mathrm{L}(x)$ の導関数を $\mathrm{T}'(x), \mathrm{L}'(x)$，2階導関数を $\mathrm{T}''(x), \mathrm{L}''(x)$ 等と書く．たとえば
+\begin{equation*}
+\mathrm{L}'(\lambda_k) = \prod_{p=1 \, (p \neq k)}^g (\lambda_k - \lambda_p)
+\end{equation*}
+である．次の完全積分可能非線型偏微分方程式系をガルニエ系という．
+\end{story}
+
+\begin{definition}[ガルニエ系 (Garnier system)]
+\begin{align}
+\frac{\partial^2 \lambda_k}{\partial t_l^2} &= \frac{1}{2} \left[ \frac{\mathrm{T}'(\lambda_k)}{\mathrm{T}(\lambda_k)} - \frac{1}{2} \frac{\mathrm{L}''(\lambda_k)}{\mathrm{L}'(\lambda_k)} \right] \left( \frac{\partial \lambda_k}{\partial t_l} \right)^2 - \left[ \frac{1}{2} \frac{\mathrm{T}''(t_l)}{\mathrm{T}'(t_l)} - \frac{\mathrm{L}'(t_l)}{\mathrm{L}(t_l)} \right] \frac{\partial \lambda_k}{\partial t_l} \nonumber \\
+&\quad + \frac{1}{2} \sum_{p=1 \, (p \neq k)}^g \left[ \frac{\mathrm{T}(\lambda_k)\mathrm{L}'(\lambda_p)(\lambda_p - t_l)^2}{\mathrm{T}(\lambda_p)\mathrm{L}'(\lambda_k)(\lambda_k - t_l)^2(\lambda_k - \lambda_p)} \left( \frac{\partial \lambda_p}{\partial t_l} \right)^2 \right] \nonumber \\
+&\quad - \sum_{p=1 \, (p \neq k)}^g \left[ \frac{\lambda_k - t_l}{(\lambda_p - t_l)(\lambda_p - \lambda_k)} \frac{\partial \lambda_k}{\partial t_l} \frac{\partial \lambda_p}{\partial t_l} \right] + \frac{\mathrm{L}(t_l)^2 \mathrm{T}(\lambda_k)}{2\mathrm{T}'(t_l)^2(\lambda_k - t_l)^2 \mathrm{L}'(\lambda_k)} I_{k,l} \label{eq:Garnier1}
+\end{align}
+\begin{equation}
+\frac{\mathrm{T}'(t_l)(t_l - \lambda_k)}{\mathrm{L}(t_l)} \frac{\partial \lambda_k}{\partial t_l} - \frac{\mathrm{T}'(t_h)(t_h - \lambda_k)}{\mathrm{L}(t_h)} \frac{\partial \lambda_k}{\partial t_h} = \frac{(t_l - t_h)\mathrm{T}(\lambda_k)}{(\lambda_k - t_l)(\lambda_k - t_h)\mathrm{L}'(\lambda_k)} \label{eq:Garnier2}
+\end{equation}
+ここで，$h, k, l = 1, 2, \cdots, g$ であり，第1式では
+\begin{align}
+I_{k,l} &= \kappa_\infty^2 + \frac{\mathrm{T}'(0)}{\mathrm{L}(0)}\frac{\kappa_0^2}{\lambda_k} + \frac{\mathrm{T}'(1)}{\mathrm{L}(1)}\frac{\kappa_1^2}{\lambda_k - 1} \nonumber \\
+&\quad + \sum_{h=1 \, (h \neq l)}^g \frac{\mathrm{T}'(t_h)}{\mathrm{L}(t_h)}\frac{\theta_h^2}{\lambda_k - t_h} + \frac{\mathrm{T}'(t_l)}{\mathrm{L}(t_l)}\frac{\theta_l^2}{\lambda_k - t_l} \label{eq:Garnier_I}
+\end{align}
+とおいた．
+\end{definition}
+
+\begin{story}
+これを見ただけで，R.Garnierの計算がどんなに精緻を極めたものであったかがわかるであろう．ガルニエ系はパンルヴェ $\mathrm{VI}$ 型方程式の $g$ 変数への拡張であり，確かに $g=1$ とすると $\mathrm{P_{VI}}$ になる．
+
+我々の目的は，線型常微分方程式(3.33), (3.67), (3.68)のモノドロミー保存変形を再考察し，ガルニエ系をハミルトン系に書き直すことである．これは，パンルヴェ $\mathrm{VI}$ 型方程式のハミルトン系表示を与える定理3.1の拡張である．
+
+まず，考察する微分方程式の含むアクセサリー・パラメータは，$\lambda_k$ と
+\end{story}
+
+\begin{Q}[【核心】「次の完全積分可能非線型偏微分方程式系をガルニエ系という」とあるが、この恐ろしい方程式は最初から「定義（公理）」として天から降ってきたものなのか？]
+\textbf{A.} もちろん違う。これは前節までに構成した「線型常微分方程式のモノドロミー保存変形条件（フロベニウスの積分可能条件）」を、力技で計算し尽くした結果得られる「導出された定理」である。
+
+\begin{proof}
+テキストの記述上は「これをガルニエ系という（定義する）」と書かれているが、数学の歴史的・論理的な立ち位置としては定理（帰結）である。
+どんな天才であっても、何もない空間から \eqref{eq:Garnier1} のような複雑怪奇な非線型偏微分方程式を「定義」として思いつくことは不可能である。
+
+Garnier が1912年に行ったことは以下の通りである。
+1. 前節で定義した、特性指数の積が0になるような見かけの特異点を持つフックス型微分方程式を用意する。
+2. その確定特異点 $t_l$ を動かしたときに、解のモノドロミーが変化しない（モノドロミー保存変形）という条件を課す。
+3. その条件は、線型系の「変形方程式（シュレジンガー方程式）」の積分可能条件（ゼロ曲率条件）として定式化される。
+4. その積分可能条件を、見かけの特異点 $\lambda_k$ の時間発展として愚直に偏微分方程式に書き下す。
+その泥臭く精緻な計算の果てに「結果として出てきた」のが、この巨大な方程式系なのである。
+\end{proof}
+\end{Q}
+
+\begin{Q}[【大局観】なぜ著者は、この巨大な方程式を提示した直後に「我々の目的はハミルトン系に書き直すことである」と宣言したのか？]
+\textbf{A.} この2階の非線型偏微分方程式のままでは、複雑すぎて数学的な構造（対称性や解の性質）が全く見えないためである。
+
+\begin{proof}
+式 \eqref{eq:Garnier1} は $\lambda_k$ に関する2階の微分方程式として書かれている（ニュートン力学における運動方程式 $\ddot{x} = F(x, \dot{x})$ に相当する）。
+しかし、解析力学の教えによれば、複雑な2階の微分方程式は、新たな変数「運動量（$\mu_k$）」を導入して1階の連立方程式（ハミルトン系）に書き直すことで、背後にある幾何学的な構造（シンプレクティック構造や正準変換の対称性）が劇的に見えやすくなる。
+
+著者の岡本和夫氏は、パンルヴェ方程式をハミルトン系として定式化し、その対称性（アフィン・ワイル群）を明らかにした第一人者である。このテキストの真の目的は、「Garnier が残したこの恐ろしい数式群を、ハミルトニアン $H_l$ と正準変数 $(\lambda_k, \mu_k)$ を用いた洗練された幾何学の言葉へと翻訳・浄化すること」にある。そのための壮大な「フリ」として、ここでGarnierの原論文の姿をそのまま提示しているのである。
+\end{proof}
+\end{Q}
+
+\begin{story}
+\begin{align}
+H_l &= -\operatorname{Res}_{x=t_l} p_2(x,t) \quad (l = 1, \cdots, g) \label{eq:3.71} \\
+\mu_k &= \operatorname{Res}_{x=\lambda_k} p_2(x,t) \quad (k = 1, \cdots, g) \label{eq:3.72}
+\end{align}
+の，$3g$ 個である．一方，仮定(P1)により $x=\lambda_k$ は微分方程式の見かけの特異点であり，したがって $3g$ 個のアクセサリー・パラメータの間には $g$ 個の関係式が成り立つ．このことから，\eqref{eq:3.71} の $H_l$ は，$t=(t_1,\cdots,t_g)$, $\lambda=(\lambda_1,\cdots,\lambda_g)$, $\mu=(\mu_1,\cdots,\mu_g)$ の有理関数となることがわかる．以上のことはフロベニウスの方法により確かめることができる．実際，$H_l$ の具体形が次のようになることを次節において示す．
+\begin{equation}
+H_l = M_l \left[ \sum_{k=1}^g M^{k,l} \left\{ \mu_k^2 - A_{k,l}\mu_k + \frac{\kappa}{\lambda_k(\lambda_k-1)} \right\} \right] \label{eq:3.73}
+\end{equation}
+\begin{equation*}
+A_{k,l} = \frac{\kappa_0}{\lambda_k} + \frac{\kappa_1}{\lambda_k-1} + \sum_{h=1}^g \frac{\theta_h - \delta_{hl}}{\lambda_k - t_h}
+\end{equation*}
+ここで，$\delta_{hl}$ はクロネッカーのデルタであり，また
+\begin{align}
+M_l &= - \frac{\mathrm{L}(t_l)}{\mathrm{T}'(t_l)} \label{eq:3.74} \\
+M^{k,l} &= \frac{\mathrm{T}(\lambda_k)}{\mathrm{L}'(\lambda_k)(\lambda_k - t_l)} \label{eq:3.75}
+\end{align}
+とおいた．上の有理式 $M_l, M^{k,l}$ は我々の計算において重要な役割を果たす．
+
+以上の準備のもとで定理を書く．この定理は，2階線型常微分方程式のホロノミックな変形を考察するときの指導原理となる．
+\end{story}
+
+\begin{theorem}[ガルニエ系のハミルトン系表示]
+線型常微分方程式(3.33), (3.67), (3.68)に関するフックスの問題は，完全積分可能な多時間ハミルトン系
+\begin{equation*}
+G_g \quad \frac{\partial \lambda_k}{\partial t_l} = \frac{\partial H_l}{\partial \mu_k}, \quad \frac{\partial \mu_k}{\partial t_l} = - \frac{\partial H_l}{\partial \lambda_k}
+\end{equation*}
+によって解かれる．ここで，$H_l$ は(3.73)の有理式で与えられる．
+\end{theorem}
+
+\begin{definition}[$g$-次ガルニエ系]
+ハミルトニアン(3.73)に関する多時間ハミルトン系 $G_g$ を $g$-次ガルニエ系という．
+\end{definition}
+
+\begin{story}
+定理3.1は，定理3.2で $g=1$ の場合である．とくに $G_g$ は(3.64)に帰着する．
+\end{story}
+
+\begin{story}
+る．多時間ハミルトン系 $G_g$ から $\mu_k$ を消去すれば，ガルニエ系，すなわち上に書いた長い2階偏微分方程式系，が得られることになる．
+
+定理3.2 は，微分方程式(3.33)を同値な SL 型微分方程式
+\begin{equation}
+\frac{d^2 y}{dx^2} = r(x,t)y \label{eq:3.76}
+\end{equation}
+に変換し，方程式(3.76)のモノドロミー保存変形を計算することによって証明される．この微分方程式のリーマン図式は次のようになっている．
+\begin{equation*}
+\left\{
+\begin{array}{ccccc}
+x=0 & x=1 & x=t_l & x=\lambda_k & x=\infty \\
+\frac{1+\kappa_0}{2} & \frac{1+\kappa_1}{2} & \frac{1+\theta_l}{2} & \frac{3}{2} & \frac{1+\kappa_\infty}{2} \\
+\frac{1-\kappa_0}{2} & \frac{1-\kappa_1}{2} & \frac{1-\theta_l}{2} & -\frac{1}{2} & \frac{1-\kappa_\infty}{2}
+\end{array}
+\right\}
+\end{equation*}
+
+節を改めて，変数 $t=(t_1, \cdots, t_g) \in U$ についてのモノドロミー保存変形の考察を続ける．$U$ は $\mathbb{C}^g$ の適当な領域である．
+
+この節の残りの部分では，125ページに引き続いて，トーラス $T$ 上定義された，SL 型2階線型常微分方程式
+\begin{equation}
+\frac{d^2 y}{dx^2} = r(x,t)y \tag{3.76}
+\end{equation}
+のモノドロミー保存変形について簡単に触れておこう．$T$ 上，この微分方程式が $g+1$ 個の確定特異点をもつとする．確定特異点の集合を前のように $\Xi$ と書き，$X = T \setminus \Xi$ とおく．SL 型微分方程式のモノドロミーは，基本群 $\pi(X)$ の $\mathbb{C}^2$ 上の表現類であるが，各回路行列の行列式は1である．このとき，モノドロミーの含む独立なパラメータの個数は
+\begin{equation*}
+\mathrm{M}^{(1)} = 3g+3
+\end{equation*}
+であることがわかる．一方，SL 型微分方程式(3.76)は
+\begin{equation*}
+\mathrm{E}^{(1)} = 2g+2
+\end{equation*}
+個のパラメータに依存する．したがって，微分方程式(3.76)は，$\Xi$ に加えて
+\begin{equation*}
+g+1 = \mathrm{M}^{(1)} - \mathrm{E}^{(1)}
+\end{equation*}
+\end{story}
+
+\begin{Q}[【核心】行列式の制約がなければパラメータは $4g+5$ 個になるという計算と、テキストの $M^{(1)} = 3g+3$ の間にある「次元のギャップ」の正体は何か？]
+\textbf{A.} あなたの $4g+5$ という計算は $GL(2, \mathbb{C})$ の表現空間として「完全に正解」である。ギャップが生じた理由は、ここから $SL(2, \mathbb{C})$（行列式=1）に制限する際に失われる自由度が、$g+1$ 個ではなく「$g+2$ 個」だからである。
+
+\begin{proof}
+まず、このページから考察の舞台が「球面（$\mathbb{P}^1$）」から\textbf{「トーラス（$T$）」}へと移行していることに注意する。
+$g+1$ 個の特異点（穴）を持つトーラスの基本群 $\pi(X)$ は、穴の周りのループ $\gamma_1, \dots, \gamma_{g+1}$ に加えて、トーラス特有の縦横のループ $\alpha, \beta$ の、合計 \textbf{$g+3$ 個の生成元}を持つ。
+これらが満たすべき基本関係式は $[\alpha, \beta]\gamma_1 \cdots \gamma_{g+1} = I$ である。
+
+\textbf{① あなたの計算の検証（$GL(2, \mathbb{C})$ の場合）}
+各生成元を $GL(2, \mathbb{C})$ （自由度4）の行列に対応させると、初期の自由度は $4(g+3) = 4g+12$ である。
+関係式が1つの行列方程式（自由度4の拘束）を与え、さらに全体の基底の取り替え（共役変換）として $PGL(2, \mathbb{C})$ （自由度3）で割るため、独立なパラメータ数は
+\begin{equation*}
+4g+12 - 4 - 3 = \mathbf{4g+5}
+\end{equation*}
+となり、あなたの導き出した数字は幾何学的に完璧である。
+
+\textbf{② $SL(2, \mathbb{C})$ への制限（行列式 $= 1$ の条件）}
+ここから「すべての生成元の行列式を 1 にする」という条件を課す。生成元は $g+3$ 個あるため、$g+3$ 個の制約がつくように思える。
+しかし、基本関係式 $[\alpha, \beta]\gamma_1 \cdots \gamma_{g+1} = I$ の両辺の行列式をとると、交換子 $[\alpha, \beta]$ の行列式は必ず 1 になるため、自動的に $\det(\gamma_1) \cdots \det(\gamma_{g+1}) = 1$ が成り立つ。
+つまり、$g+3$ 個の行列式のうち1つは他の結果から自動的に決まるため、独立な制約（減る自由度）は $(g+3) - 1 = \mathbf{g+2 \textbf{ 個}}$ となる。
+
+したがって、モノドロミーのパラメータ数は
+\begin{equation*}
+(4g+5) - (g+2) = \mathbf{3g+3}
+\end{equation*}
+となり、テキストの $\mathrm{M}^{(1)}$ と見事に一致する。想定した「$g+1$ 個の制限」は、トーラス特有のループ $\alpha, \beta$ に対する行列式の制限を見落としていたために生じたズレであった。
+\end{proof}
+\end{Q}
+
+\begin{Q}[【核心】パラメータのカウント $\mathrm{E}^{(1)} = 2g+2$ を計算した時点では、方程式 (3.76) には「見かけの特異点」が存在していないと仮定しているのか？]
+\textbf{A.} その通りである。そして、モノドロミーの次元 $\mathrm{M}^{(1)}$ との「ギャップ」を埋めるために、まさにこれから見かけの特異点を追加しようとしているのがテキストの切れた直後の文章である。
+
+\begin{proof}
+方程式 (3.76) のパラメータ数 $\mathrm{E}^{(1)} = 2g+2$ は、純粋に「$g+1$ 個の確定特異点 $\Xi$ しか持たない SL 型方程式（見かけの特異点ゼロ）」の自由度を計算したものである。
+しかし前節で確認した通り、任意のモノドロミー表現（自由度 $\mathrm{M}^{(1)} = 3g+3$）を網羅するためには、方程式側の自由度が足りない。
+したがって、テキストの切れた直後の文章は以下のように続く。
+\begin{quote}
+「したがって、微分方程式(3.76)は、$\Xi$ に加えて \textbf{$g+1 = \mathrm{M}^{(1)} - \mathrm{E}^{(1)}$ 個の見かけの特異点をもつ} と仮定しなければならない。」
+\end{quote}
+まさにあなたの読み通り、この次元のギャップ「$g+1$」こそが、トーラス上の SL 型方程式において導入すべき見かけの特異点の個数を数学的に要請しているのである。
+\end{proof}
+\end{Q}
+
+\begin{Q}[【核心】GL型からSL型に変換した際に減る $g+1$ 個のパラメータは、「$g+1$ 個の各特異点における特性指数の和が、すべて一定（1）に固定されるから」と解釈してよいか？]
+\textbf{A.} 完璧な幾何学的解釈である。あなたの直感通り、SL型（$p_1=0$）という条件は、すべての特異点での「指数の和」の自由度を奪い去る操作に他ならない。
+
+\begin{proof}
+一般の GL 型微分方程式 $y'' + p_1(x)y' + p_2(x)y = 0$ において、特異点 $x_i$ での決定方程式を考えると、2つの特性指数 $\rho_1, \rho_2$ の和は以下のようになる。
+\begin{equation*}
+\rho_1 + \rho_2 = 1 - \operatorname{Res}_{x=x_i} p_1(x)
+\end{equation*}
+ここから SL 型の方程式（$p_1(x) = 0$）に変換するということは、特異点における $p_1(x)$ の留数がすべて厳密に $0$ になることを意味する。したがって、あなたの予想通り、\textbf{すべての特異点において特性指数の和は「1」に固定される。}
+
+この制約によって失われるパラメータがなぜ正確に「$g+1$ 個」になるのかは、トーラス上の1次微分形式 $p_1(x)dx$ の構造を見れば明らかになる。
+$p_1(x)dx$ は $g+1$ 個の特異点（単純極）を持つ。
+\begin{itemize}
+    \item \textbf{留数の自由度（$g$ 個）:} $g+1$ 個の極での留数を自由に選べるが、「閉曲面（トーラス）上の留数の総和は必ず $0$ になる」という留数定理の制約があるため、独立に選べる留数は $(g+1) - 1 = \mathbf{g \textbf{ 個}}$ である。これらが指数の和を変動させる自由度である。
+    \item \textbf{正則部分の自由度（1 個）:} 極を持たない正則な1次微分形式（トーラス上の $dx$）の自由度がトーラスの種数と同じ \textbf{1 個} だけ存在する。これはすべての指数の和を「大域的に定数シフト」する自由度に対応する。
+\end{itemize}
+これらを合わせた $g + 1$ 個の自由度こそが $p_1(x)$ が持っていたパラメータのすべてであり、SL 型への変換（$p_1(x) \to 0$）によってこれらが丸ごと消滅する。
+あなたの「指数の和が一定になるから $g+1$ 個減る」という考察は、リーマン面の代数幾何学的な本質を見事に言い当てているのである。
+\end{proof}
+\end{Q}
+
+\begin{story}
+（前ページからの続き）
+$g+1$ 個の見かけの特異点をもつ，と仮定し，この下でモノドロミー保存変形を考えよう．種数 $p \geqq 2$ の一般のコンパクトリーマン面 $R$ の場合と異なり，我々の考察の特徴は，$p=1$ のとき，すなわちトーラス $T$ 上の微分方程式は2重周期関数を用いてすべての量を具体的に書き下すことができる，ということである．微分方程式(3.76)の係数 $r(x, t)$ は周期 $2\omega_1, 2\omega_3$ をもつ2重周期関数とし，$\Omega$ を $2\omega_1$ と $2\omega_3$ で生成される $\mathbf{C}$ 内の周期格子であるとする．$\mathbf{C}$ における離散群 $\Omega$ の基本領域，すなわち周期平行4辺形 $F$ を1つとる．トーラス $T$ は1次元の解析的同型をもつから，$\Omega$ の各点が微分方程式(3.76)の確定特異点である，としてよい．そこで，$0 \in F$ なるように $F$ を選び，また，(3.76)のその他の確定特異点を $t_l \in F \ (l=1, \cdots, g)$ とする(図3.1)．
+
+このようにして，$t=(t_1, \cdots, t_g) \in U$ を変形のパラメータとしてモノドロミー保存変形の変数を考察する．$U$ は $\mathbf{C}^g$ の適当な領域である．また，$\lambda_k \in F \ (k=1, \cdots, g)$ を(3.76)の見かけの特異点である，とすると，モノドロミー保存変形により，$\lambda_k$ が $t$ の関数として与えられる．この関数を定める微分方程式系は楕円関数を用いることによって書き表されるであろう．
+\end{story}
+
+\begin{Q}[【基礎】「トーラス $\boldsymbol{T}$ 上の解析」とは、複素平面 $\mathbf{C}$ の言葉で言うと、結局のところ何をすることなのか？]
+\textbf{A.} 複素平面を「平行四辺形のタイル張り」とみなし、「タイル1枚分（基本領域 $\boldsymbol{F}$）の中だけで関数を考えること」に他ならない。トーラス上の関数とは、複素平面上の「2重周期関数」のことである。
+
+\begin{proof}
+幾何学的なドーナツ型（トーラス）を切り開いて平らに伸ばすと、1枚の四角形になる。逆に言えば、複素平面上に平行四辺形（基本領域 $\boldsymbol{F}$）を描き、その「上の辺と下の辺」「右の辺と左の辺」を同一視して貼り合わせるとトーラスができる。（いわゆる昔のゲームの「パックマン」のように、画面の右端に行くと左端から出てくる世界である）。
+
+この世界において、ある点 $x$ から右に $2\omega_1$ だけ進むか、上に $2\omega_3$ だけ進むと、元の場所に戻ってくる。これを式で書くと、トーラス上で定義された関数 $f(x)$ は
+\begin{equation*}
+f(x + 2\omega_1) = f(x), \quad f(x + 2\omega_3) = f(x)
+\end{equation*}
+を満たさなければならない。このような2つの複素周期を持つ関数を「2重周期関数（または楕円関数）」と呼ぶ。
+つまり、「トーラス上の微分方程式」と言われたら、幾何学的なドーナツを想像するのではなく、\textbf{「係数 $r(x,t)$ が2重周期関数であるような、普通の複素平面上の微分方程式」}と脳内変換すれば、解析学の言葉として完全に等価になるのである。テキストの図3.1は、まさにこの「タイル1枚分」の領土を描いている。
+\end{proof}
+\end{Q}
+
+\begin{Q}[【大局観】著者は「種数 $p \geqq 2$ の場合と異なり、$p=1$（トーラス）のときはすべての量を具体的に書き下すことができる」と強調しているが、なぜ $p=1$ はそんなに特別なのか？]
+\textbf{A.} $p=1$ の場合（楕円関数論）には、ワイエルシュトラスの $\wp$（ペー）関数という「万能のブロック」が存在し、すべての関数を極めて具体的な数式で組み立てることができるからである。
+
+\begin{proof}
+解析学において、特異点（極）を持たない正則な関数が2重周期を持つと、リウヴィルの定理により「単なる定数」になってしまう。したがって、トーラス上で意味のある関数は必ず「極」を持たなければならない。
+19世紀の数学者ワイエルシュトラスは、トーラスの原点 $x=0$ に2位の極を持つ最も基本的で美しい2重周期関数 $\wp(x)$ を具体的に構成した。
+
+驚くべきことに、\textbf{「トーラス上のあらゆる有理型関数（2重周期関数）は、$\wp(x)$ とその導関数 $\wp'(x)$ の有理式として完全に書き下せる」}ことが証明されている。
+種数が $p \geqq 2$ （穴が2つ以上のプレッツェルのような図形）になると、このような「1変数のシンプルな万能関数」は存在せず、テータ関数などの多変数関数を用いた非常に抽象的で計算が困難な表現にならざるを得ない。
+
+著者がここで喜んでいるのは、「舞台をトーラスに設定したことで、これから微分方程式の係数 $r(x,t)$ や、見かけの特異点 $\lambda_k(t)$ の動きを、正体不明の抽象的な関数ではなく、$\wp(x)$ という人類が隅々まで性質を知り尽くした具体的な関数（楕円関数）を使って、ゴリゴリと直接計算できるぞ！」という宣言なのである。
+\end{proof}
+\end{Q}
+%#endregion

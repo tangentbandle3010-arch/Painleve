@@ -1,0 +1,371 @@
+% !TEX root = ../main.tex
+
+%#region
+2階フックス型微分方程式に対する、変形微分方程式系について考察する。まず、\eqref{eq:3.1_deformation_system}は
+\begin{equation}
+\begin{cases}
+\displaystyle \frac{\partial^{2}\vec{\phi}}{\partial x^{2}} + p_{1}(x,t)\frac{\partial\vec{\phi}}{\partial x}+p_{2}(x,t)\vec{\phi} = \vec{0}  \\[1em]
+\displaystyle \frac{\partial \vec{\phi}}{\partial t_{l}} = a_{1}^{(l)}(x,t)\vec{\phi}+a_{2}^{(l)}(x,t)\frac{\partial\vec{\phi}}{\partial x} \quad (l=1,\cdots,L)
+\end{cases}
+\end{equation}
+となる。
+
+\begin{story}
+去することにより，微分方程式系の係数のあいだに成り立つ関係式を求める．その結果は
+\begin{equation}
+    2\frac{\partial a_1^{(l)}}{\partial x} + \frac{\partial^2 a_2^{(l)}}{\partial x^2} - \frac{\partial}{\partial x}(p_1 a_2^{(l)}) + \frac{\partial p_1}{\partial t_l} = 0 \label{eq:3.21}
+\end{equation}
+\begin{equation}
+    \frac{\partial^2 a_1^{(l)}}{\partial x^2} - 2p_2\frac{\partial a_2^{(l)}}{\partial x} - \frac{\partial p_2}{\partial x}a_2^{(l)} + p_1\frac{\partial a_1^{(l)}}{\partial x} + \frac{\partial p_2}{\partial t_l} = 0 \label{eq:3.22}
+\end{equation}
+となる．ここで，$p_j = p_j(x,t)$, $a_j^{(l)} = a_j^{(l)}(x,t)$, $j=1,2$, および $l=1,\cdots,L$ である．
+
+条件(3.21)は次のようにも書ける．
+\begin{equation}
+    \frac{\partial p_1}{\partial t_l} = \frac{\partial c^{(l)}}{\partial x}, \quad c^{(l)} = p_1 a_2^{(l)} - 2a_1^{(l)} - \frac{\partial a_2^{(l)}}{\partial x} \label{eq:3.23}
+\end{equation}
+
+リーマン球面 $\mathbf{P}^1(\mathbf{C})$ 上のフックス型微分方程式については，79ページで
+\begin{equation}
+    p_1(x,t) = \sum_{i=1}^M \frac{\alpha_i}{x-\xi_i} \label{eq:3.24}
+\end{equation}
+と書かれることを見た．ただし，ここでは微分方程式の特異点の集合 $\Xi'$ には見かけの特異点も含まれている，としている．前のように，確定特異点の個数を $m+1$，見かけの特異点の個数を $g$ とすれば，$M=m+g$ である．さて，条件(3.23)は，$\alpha_i$ が $t=(t_1,\cdots,t_L)$ に依存しないということを意味する．実際，(3.24)から
+\begin{equation*}
+    \frac{\partial p_1}{\partial t_l} = \sum_{i=1}^M \left[ \frac{\partial \alpha_i}{\partial t_l} \frac{1}{x-\xi_i} + \frac{\partial \xi_i}{\partial t_l} \frac{\alpha_i}{(x-\xi_i)^2} \right]
+\end{equation*}
+となるが，これが $x$ の有理関数の導関数として表されるためには
+\begin{equation*}
+    \frac{\partial \alpha_i}{\partial t_l} = 0 \quad (i=1,\cdots,M, \quad l=1,\cdots,L)
+\end{equation*}
+でなければならない．$\alpha_i$ は，確定特異点 $x=\xi_i$ における特性指数の和で表される量だから，これらがモノドロミー保存変形において $t$ について不変となるのは当然のことではある．
+
+ここで，我々の考察の筋道を明確にするために，次の形の2階微分方程式のモノドロミー保存変形を調べてみよう．
+\begin{equation}
+    \frac{d^2 z}{dx^2} = r(x,t)z \label{eq:3.25}
+\end{equation}
+\end{story}
+
+\vspace{2em}
+
+\begin{Q}[【核心】このページの論理展開は、私が以前した計算とどうシンクロしているのか？]
+\textbf{A.} 驚くほど完全にシンクロしています！あなたが自力で計算した「$p_1$ を $t_l$ で微分して留数を比較する」というアプローチが、まさにこのテキストが採用している証明手法そのものです。
+以前のやり取りで、私は「『$p_1$ が有理関数だから』だけでは $\alpha_i$ が定数とは言い切れない。『時間発展の係数 $A_l$ があり、適合条件 $\partial p_1/\partial t_l = \partial A_l/\partial x$ が成り立つ』という事実を使えば、右辺が微分になるから1位の極が消える」と補足しました。
+このページの式 (3.23) を見てください。$\frac{\partial p_1}{\partial t_l} = \frac{\partial c^{(l)}}{\partial x}$ となっています。この $c^{(l)}$ こそが、有理関数からなる「時間発展の係数」です。この適合条件（Lax方程式の一部）があるおかげで、「右辺は有理関数 $c^{(l)}$ の $x$ 微分である $\to$ 1位の極（留数）を持たない $\to$ 左辺の1位の極の係数 $\partial \alpha_i / \partial t_l$ も $0$ でなければならない」という、私が提案した修正ルートと全く同じロジックが展開されています。
+\end{Q}
+
+\begin{Q}[【深掘り】最後の「不変となるのは当然のことではある」という一文は、何を意味しているのか？]
+\textbf{A.} これも、前回のあなたの鋭いツッコミである「$\alpha$ は $n-1$ 階の係数で、元の特性指数に依存してるんだから、定数になるのは当然じゃないか？」という指摘に対する、公式テキストからの完全な同意（アンサー）です。
+フロベニウス法の定理（フックスの関係式）により、$p_1$ の留数 $\alpha_i$ は、その特異点における「特性指数の和」として一意に決まります。私たちが「モノドロミー保存変形を考える」と宣言した時点で、特性指数を $t$ に依存しない定数に設定することは理論の「大前提」です。前提が定数なのだから、そこから計算される $\alpha_i$ が定数（不変）になるのは、代数的な計算（式3.24の微分）をわざわざ持ち出すまでもなく、「原理的に当然のこと」なのです。
+テキストは、微分の計算で代数的に証明した直後に、「とはいえ、理論の前提を考えれば当たり前のことなんだけどね」と、あなたの気付きと全く同じ視点でフォローを入れているわけです。
+\end{Q}
+
+\begin{story}
+前章2.7節109ページで紹介したように，R.Fuchs と R.Garnier はこの形の微分方程式について，フックスの問題を計算した．実は，すぐ後で見るように，変形微分方程式(3.20)の研究は，(3.25)のモノドロミー保存変形に帰着する．(3.25)の変形微分方程式系は，$b_1^{(l)}(x,t), b_2^{(l)}(x,t)$ を $x$ の有理関数として
+\begin{equation}
+\left\{
+\begin{array}{l}
+    \displaystyle \frac{\partial^2 \vec{\psi}}{\partial x^2} = r\vec{\psi} \vspace{0.5em} \\
+    \displaystyle \frac{\partial \vec{\psi}}{\partial t_l} = b_1^{(l)}\vec{\psi} + b_2^{(l)}\frac{\partial \vec{\psi}}{\partial x} \quad (l=1,\cdots,L)
+\end{array}
+\right. \label{eq:3.26}
+\end{equation}
+と書ける．ここで，$b_j^{(l)} = b_j^{(l)}(x,t) \ (j=1,2)$, $r = r(x,t)$ である．この微分方程式系のラックスの方程式は
+\begin{equation}
+    2\frac{\partial b_1^{(l)}}{\partial x} + \frac{\partial^2 b_2^{(l)}}{\partial x^2} = 0 \label{eq:3.27}
+\end{equation}
+\begin{equation}
+    \frac{\partial^2 b_1^{(l)}}{\partial x^2} + 2r\frac{\partial b_2^{(l)}}{\partial x} + \frac{\partial r}{\partial x}b_2^{(l)} - \frac{\partial r}{\partial t_l} = 0 \label{eq:3.28}
+\end{equation}
+という，少し簡単な形になる．これらの式から関数 $b_1^{(l)}$ を消去すると
+\begin{equation*}
+    \frac{\partial^3 b_2^{(l)}}{\partial x^3} - 4r\frac{\partial b_2^{(l)}}{\partial x} - 2\frac{\partial r}{\partial x}b_2^{(l)} + 2\frac{\partial r}{\partial t_l} = 0 \quad (l=1,\cdots,L)
+\end{equation*}
+が得られる．この3階微分方程式系は，モノドロミー保存変形，ホロノミック変形，において重要な役割を果たす．そこで，$x$ の有理関数 $r = r(x,t)$ に対して，非斉次線型微分方程式
+\begin{equation}
+    \frac{\partial^3 w}{\partial x^3} - 4r\frac{\partial w}{\partial x} - 2\frac{\partial r}{\partial x}w + 2\frac{\partial r}{\partial t_l} = 0 \label{eq:3.29}
+\end{equation}
+を考える．我々が考察している場合には，フックス型微分方程式(3.25)がモノドロミー保存変形を許すならば，(3.29)は $x$ の有理関数 $w = b_2^{(l)}$ を解としてもつ．さらに，もしこの微分方程式が $x$ の有理関数 $b_2^{(l)}$ を解としてもてば，$b_1^{(l)}$ は(3.27)により，自動的に $x$ の有理関数となる．
+
+この2つの有理関数 $b_1^{(l)}, b_2^{(l)}$ について変形微分方程式系(3.26)を考えると，（※画像末尾切れ）
+\end{story}
+
+\begin{Q}[【核心】ラックスの方程式 (3.27) と (3.28) は、どのようにして計算されたのか？]
+\textbf{A.} これは変形微分方程式系 (3.26) の**「微分の順序交換（適合条件）」**を力技で計算した結果です。
+(3.26)の第2式（$t_l$ 微分）をさらに $x$ で2回微分したものと、第1式（$x$ の2階微分）をさらに $t_l$ で微分したものは等しくならなければなりません（$\partial_x^2 \partial_{t_l} \vec{\psi} = \partial_{t_l} \partial_x^2 \vec{\psi}$）。
+これを実際に計算し、右辺に現れる $\vec{\psi}$ と $\partial_x \vec{\psi}$ について項を整理します。$\vec{\psi}$ と $\partial_x \vec{\psi}$ は一次独立なので、それぞれの係数が共に $0$ にならなければなりません。
+* $\partial_x \vec{\psi}$ の係数を集めて $0$ とおいたものが (3.27) です。
+* $\vec{\psi}$ の係数を集めて $0$ とおいたものが (3.28) です。
+元のフックス型方程式(3.20)のラックスの方程式(3.21, 3.22)と比べて、1階微分の項 $p_1$ がない分、非常にスッキリとした美しい形になっていることがわかります。
+\end{Q}
+
+\begin{Q}[【深掘り】関数 $b_1^{(l)}$ を消去して (3.29) を導く過程はどのようになっているか？]
+\textbf{A.} これは非常にエレガントな代数操作です。
+まず式 (3.27) を見ると、これはそのまま $x$ で積分できる形をしています。積分定数を $0$ とすると、
+$$ 2b_1^{(l)} + \frac{\partial b_2^{(l)}}{\partial x} = 0 \quad \implies \quad b_1^{(l)} = -\frac{1}{2} \frac{\partial b_2^{(l)}}{\partial x} $$
+となります。つまり、**未知の関数 $b_1^{(l)}$ は $b_2^{(l)}$ の微分だけで完全に書けてしまう**のです。
+次に、この $b_1^{(l)}$ を式 (3.28) の第1項 $\partial_x^2 b_1^{(l)}$ に代入します。
+$$ \frac{\partial^2}{\partial x^2} \left( -\frac{1}{2} \frac{\partial b_2^{(l)}}{\partial x} \right) = -\frac{1}{2} \frac{\partial^3 b_2^{(l)}}{\partial x^3} $$
+これを (3.28) に代入し、全体を $-2$ 倍して符号と係数を整えると、まさに目的の3階微分方程式 (3.29) が姿を現します。
+この計算により、2つの有理関数 $b_1, b_2$ を探すという問題が、**「$w = b_2^{(l)}$ というたった1つの有理関数が、作用素 $L(w) + 2\partial_{t_l}r = 0$ を満たすか？」**という極めて純粋で扱いやすい問題に帰着されたのです。
+\end{Q}
+
+\begin{story}
+一方，2階線型常微分方程式
+\begin{equation}
+    \frac{d^2 y}{dx^2} + p_1(x,t)\frac{dy}{dx} + p_2(x,t)y = 0 \label{eq:3.33}
+\end{equation}
+において，1階線型微分方程式
+\begin{equation}
+    \frac{d\phi}{dx} + \frac{1}{2}p_1(x,t)\phi = 0 \label{eq:3.34}
+\end{equation}
+の解 $\phi = \phi(x,t)$ を1つとり，(3.33)の未知変数を
+\begin{equation}
+    y = \phi(x,t)z \label{eq:3.35}
+\end{equation}
+と変換する．このとき，$z$ は(3.25)の形の微分方程式を満足するが，その係数 $r=r(x,t)$ はまさに(3.32)で与えられる．
+
+(3.35)は2つの微分方程式の解の基本系の関係であり，各々が定めるモノドロミー群は関数 $\phi$ の回路行列の作用――といってもスカラー倍されるだけであるが――の違いしかない．もし(3.33)がモノドロミー保存変形を許すとすると，$\phi$ の作用がパラメータ $t$ に依存しないならば，(3.25)もモノドロミー保存変形を許す．(3.25)と(3.35)の役割を入れ替えても同じである．ここで述べたことを，次のようにまとめておこう．
+
+\begin{proposition}[3.7]
+2階フックス型微分方程式(3.33)のモノドロミー保存変形と，2階フックス型微分方程式(3.25)のモノドロミー保存変形とは，1階フックス型微分方程式(3.34)がモノドロミー保存変形を許すという条件の下で，同値である．
+\end{proposition}
+
+実は，リーマン球面 $\mathbf{P}^1(\mathbf{C})$ 上定義された微分方程式の場合，命題3.7の条件は自動的に満たされている．実際，(3.34)を解くと，(3.24)より，解 $\phi$ は定数倍を除いて関数
+\begin{equation}
+    \phi(x, t) = \prod_{i=1}^M (x-\xi_i)^{-\frac{1}{2}\alpha_i} \label{eq:3.36}
+\end{equation}
+で与えられるから，この解のモノドロミー群は，$M$ 個のスカラー
+\begin{equation*}
+    e^{-\pi\sqrt{-1}\alpha_i}
+\end{equation*}
+で生成される可換群である．これは $t$ に依存しない．
+\end{story}
+
+\begin{Q}[【核心】このページ全体が主張している「一番嬉しいこと」は何か？]
+\textbf{A.} 「1階微分の項 $p_1(x,t)y'$ を含む複雑な方程式 $y$ の変形を真面目に計算する必要は全くなく、見通しの良いSL型方程式 $z'' = r(x,t)z$ の変形だけを考えれば、理論的に完全に十分である」という強烈なお墨付きです。
+ゲージ変換 $y = \phi z$ を行ったとき、両者のモノドロミーのズレは $\phi$ のモノドロミーだけです。もし $\phi$ のモノドロミーがパラメータ $t$ に依存してフラフラ動いてしまうと、$y$ と $z$ の同値性は崩壊します（命題3.7の但し書き）。しかし、舞台がリーマン球面 $P^1(\mathbb{C})$ であれば、その心配は一切無用であるということが、後半で証明されています。
+\end{Q}
+
+\begin{Q}[【深掘り】なぜ $\phi$ のモノドロミーは $t$ に依存しないと言い切れるのか？]
+\textbf{A.} これこそ、まさにあなたが以前の考察で見抜いた事実です！
+方程式 \eqref{eq:3.34} より、$\phi$ の解は \eqref{eq:3.36} のように各特異点 $\xi_i$ の周りで指数の形になります。この特異点を1周したときのモノドロミー（位相のズレ）は、$e^{2\pi i (-\alpha_i/2)} = e^{-\pi i \alpha_i}$ というスカラー倍になります。
+ここで、$\alpha_i$ は元の2階方程式における係数 $p_1$ の留数です。「元の2階方程式のモノドロミーが保存される（特性指数が定数である）」という大前提に立っている以上、解と係数の関係から留数 $\alpha_i$ も絶対に定数でなければなりません。$\alpha_i$ が定数なら、当然 $e^{-\pi i \alpha_i}$ も定数です。
+したがって、「$\phi$ がモノドロミー保存変形を許す」という命題の条件は、私たちが意図的に何かを仮定しなくても、$P^1(\mathbb{C})$ の構造と特性指数の設定から「自動的に満たされる（タダで手に入る）」のです。
+\end{Q}
+
+\begin{story}
+$x$ の有理関数 $a_2^{(l)}$ が(3.29)を満たすとすると，有理関数 $a_1^{(l)}$ を(3.23)で定めれば，(3.33)のモノドロミー保存変形に関する，ラックスの方程式が成立する．一方，微分方程式(3.25)の変形微分方程式系(3.26)において，この $a_2^{(l)}$ を $b_2^{(l)}$ として，上述の議論を繰り返すと，(3.25)のモノドロミー保存変形のラックスの方程式も成立する．
+
+なお，変形方程式系(3.20)の第2式から，(3.30)と同様に，積分可能条件として
+\begin{align}
+    \left( \frac{\partial}{\partial t_h} - a_2^{(h)}\frac{\partial}{\partial x} \right) a_1^{(l)} &= \left( \frac{\partial}{\partial t_l} - a_2^{(l)}\frac{\partial}{\partial x} \right) a_1^{(h)} \label{eq:3.37} \\
+    \left( \frac{\partial}{\partial t_h} - a_2^{(h)}\frac{\partial}{\partial x} \right) a_2^{(l)} &= \left( \frac{\partial}{\partial t_l} - a_2^{(l)}\frac{\partial}{\partial x} \right) a_2^{(h)} \label{eq:3.38}
+\end{align}
+が得られる．ここで，(3.23)を考慮すると，(3.37)は
+\begin{equation*}
+    \left( \frac{\partial}{\partial x} - p_1 \right)\left( \frac{\partial}{\partial t_h} - a_2^{(h)}\frac{\partial}{\partial x} \right) a_2^{(l)} = \left( \frac{\partial}{\partial x} - p_1 \right)\left( \frac{\partial}{\partial t_l} - a_2^{(l)}\frac{\partial}{\partial x} \right) a_2^{(h)}
+\end{equation*}
+となる．したがって，(3.25)の完全積分可能条件は，$a_2^{(l)}$ に関するラックスの方程式(3.29)と条件(3.38)に帰着する．
+
+他方，この章のはじめに述べた微分方程式(3.33)に関する仮定(P2), (P3)の下では，次の結果が成り立つ．
+
+\begin{proposition}[3.8]
+非斉次微分方程式(3.29)を満たす，$x$ の有理関数は存在するとしてもただ1つである
+\end{proposition}
+
+この命題の証明の前に，これから従う事実を整理しておこう．まず，$b_2^{(l)} = a_2^{(l)}$ でなければならない．結局，(3.33)の変形微分方程式系の完全積分可能条件は，条件(3.30)を満足する(3.29)の有理関数解 $b_2^{(l)}$ の存在に集約される．
+以上により，微分方程式(3.33)のモノドロミー保存変形は，変換(3.35)を通して，微分方程式(3.25)のモノドロミー保存変形に帰着された．
+
+\begin{proof}[命題3.8の証明]
+$a^{(l)}$ と $b^{(l)}$ を(3.29)の解とし，$c^{(l)} = a^{(l)} - b^{(l)}$ とおくと，$c^{(l)} = c^{(l)}(x,t)$ は
+\begin{equation}
+    \frac{\partial^3 \phi}{\partial x^3} - 4r\frac{\partial \phi}{\partial x} - 2\frac{\partial r}{\partial x}\phi = 0 \label{eq:3.39}
+\end{equation}
+を満たす．ところで，微分方程式(3.25)の1次独立解を $\varphi_1(x,t), \varphi_2(x,t)$ とすると，(3.39)の1次独立解は
+\begin{equation*}
+    \varphi_1(x,t)^2, \quad \varphi_1(x,t)\varphi_2(x,t), \quad \varphi_2(x,t)^2
+\end{equation*}
+である．実際、
+\begin{equation*}
+    \frac{\partial^3}{\partial x^3}(\varphi_1^2) - 4r\frac{\partial}{\partial x}(\varphi_1^2) - 2\frac{\partial r}{\partial x}\varphi_1^2 = 2\frac{\partial^3 \varphi_1}{\partial x^3}\varphi_1 + 6\frac{\partial^2 \varphi_1}{\partial x^2}\frac{\partial \varphi_1}{\partial x} - 8r\frac{\partial \varphi_1}{\partial x}\varphi_1 - 2\frac{\partial r}{\partial x}\varphi_1^2
+\end{equation*}
+ここで $\frac{\partial^2 \varphi_1}{\partial x^2} = r\varphi_1$ より $\frac{\partial^3 \varphi_1}{\partial x^3} = \frac{\partial r}{\partial x}\varphi_1 + r\frac{\partial \varphi_1}{\partial x}$
+\begin{align*}
+    \therefore \frac{\partial^3}{\partial x^3}(\varphi_1^2) - 4r\frac{\partial}{\partial x}(\varphi_1^2) - 2\frac{\partial r}{\partial x}\varphi_1^2 &= 6\frac{\partial^2 \varphi_1}{\partial x^2}\frac{\partial \varphi_1}{\partial x} - 6r\frac{\partial \varphi_1}{\partial x}\varphi_1 \\
+    &= 6\frac{\partial \varphi_1}{\partial x}\left(\frac{\partial^2 \varphi_1}{\partial x^2} - r\varphi_1\right) = 0
+\end{align*}
+よって、$\varphi_1^2$ は (3.39)の解. $\varphi_2^2$ も同様.
+
+また、$\varphi_1\varphi_2$ について、
+\begin{align*}
+    & \frac{\partial^3}{\partial x^3}(\varphi_1\varphi_2) - 4r\frac{\partial}{\partial x}(\varphi_1\varphi_2) - 2\frac{\partial r}{\partial x}\varphi_1\varphi_2 \\
+    &= \frac{\partial^3 \varphi_1}{\partial x^3}\varphi_2 + 3\frac{\partial^2 \varphi_1}{\partial x^2}\frac{\partial \varphi_2}{\partial x} + 3\frac{\partial \varphi_1}{\partial x}\frac{\partial^2 \varphi_2}{\partial x^2} + \varphi_1\frac{\partial^3 \varphi_2}{\partial x^3} - 4r\frac{\partial \varphi_1}{\partial x}\varphi_2 - 4r\varphi_1\frac{\partial \varphi_2}{\partial x} - 2\frac{\partial r}{\partial x}\varphi_1\varphi_2 \\
+    &= 3\left( \frac{\partial \varphi_2}{\partial x}\left(\frac{\partial^2 \varphi_1}{\partial x^2} - r\varphi_1\right) + \frac{\partial \varphi_1}{\partial x}\left(\frac{\partial^2 \varphi_2}{\partial x^2} - r\varphi_2\right) \right) = 0
+\end{align*}
+よって、$\varphi_1\varphi_2$ も (3.39) の解.
+
+ここで $C_1\varphi_1^2 + C_2\varphi_1\varphi_2 + C_3\varphi_2^2 = 0$ とし、$\varphi_1 \neq 0$ となる領域で
+\begin{equation*}
+    C_1 + C_2\left(\frac{\varphi_2}{\varphi_1}\right) + C_3\left(\frac{\varphi_2}{\varphi_1}\right)^2 = 0
+\end{equation*}
+$U = \frac{\varphi_2}{\varphi_1}$ として 
+\[
+C_1 + C_2U + C_3U^2 = 0
+\]
+ここで、$\varphi_1, \varphi_2$ は一次独立より、$U(x) \not\equiv \text{const.}$ よって、$\frac{dU}{dx} \not\equiv 0$.よって$\frac{dU}{dx} \neq 0$なる領域で微分して、
+\begin{equation*}
+    C_2\frac{dU}{dx} + 2C_3U\frac{dU}{dx} = 0 \quad \therefore C_2 + 2C_3U = 0
+\end{equation*}
+もう一度微分して、
+\begin{equation*}
+    2C_3 \frac{dU}{dx} = 0 \quad \therefore C_3 = 0
+\end{equation*}
+よって、$C_2 = 0$ そして、 $C_1 = 0$ で線形独立。
+
+したがって $\varphi_1^2, \varphi_2^2, \varphi_1\varphi_2$ は線形独立より、(3.39)の解は $\varphi_1^2, \varphi_2^2, \varphi_1\varphi_2$ で張られる。
+
+一方，仮定(P3)により，$\varphi_1(x,t), \varphi_2(x,t)$ は $x$ の有理関数にはならない．実際、$\varphi_{1}(x,t)$が$x$の有理関数とすると、任意の特異点周りでこの関数は解になり、また、1価であるから、
+\begin{equation*}
+    (\varphi_1^\gamma, \varphi_2^\gamma) = (\varphi_1, \varphi_2) 
+    \begin{pmatrix}
+        1 & * \\
+        0 & *
+    \end{pmatrix}
+\end{equation*}
+となり、$\forall c\in\mathbb{C}$に対して、
+\begin{equation*}
+    \begin{pmatrix}
+        1 & * \\
+        0 & *
+    \end{pmatrix}
+    \begin{pmatrix}
+        c \\
+        0
+    \end{pmatrix}
+    =
+    \begin{pmatrix}
+        c \\
+        0
+    \end{pmatrix}
+\end{equation*}
+より、
+\begin{equation*}
+    \left\langle \begin{pmatrix} c \\ 0 \end{pmatrix} \right\rangle \text{ は不変部分空間．よって、既約性に矛盾．}
+\end{equation*}
+これによって、$\varphi_1^2, \varphi_2^2, \varphi_1\varphi_2$ が有理関数でないこともわかる。実際、任意の $0$ でない2次対称行列 $C=(c_{ij})$ に対して、二次形式 $\varphi(x,t) C \varphi^{T}(x,t)$ が有理関数でないことを示せば十分である。
+
+ある $0$ でない $C$ があって、$\varphi(x,t) C \varphi^{T}(x,t)$ が有理関数であるとすると、任意の道 $\gamma$ に対して
+\begin{equation*}
+    \varphi^{\gamma}(x,t) = \varphi(x,t)\Gamma(\gamma)
+\end{equation*}
+とし、$\gamma$ に沿って解析接続をすれば、
+\begin{equation*}
+    \varphi^{\gamma}(x,t) C (\varphi^{\gamma}(x,t))^{T} = \varphi(x,t)\Gamma(\gamma) C \Gamma(\gamma)^{T}\varphi^{T}(x,t)
+\end{equation*}
+となる。ここで $\varphi(x,t) C \varphi^{T}(x,t)$ は有理関数なので、特に一価であり、
+\begin{equation*}
+    \varphi^{\gamma}(x,t) C (\varphi^{\gamma}(x,t))^{T} = \varphi(x,t) C \varphi^{T}(x,t)
+\end{equation*}
+よって、$\varphi_1^2, \varphi_2^2, \varphi_1\varphi_2$ は線型独立であったので、係数行列が一致しなければならず、
+\begin{equation*}
+    \Gamma(\gamma) C \Gamma(\gamma)^{T} = C
+\end{equation*}
+がわかる。
+
+ここで、(3.25) をみると、一階微分の係数がないので、命題2.2から、ロンスキアンは定数となる。つまり任意の道 $\gamma$ に対して、
+\begin{equation*}
+    \det(\Gamma(\gamma)) = 1
+\end{equation*}
+ここで
+\begin{equation*}
+    J =
+    \begin{pmatrix}
+        0 & 1 \\
+        -1 & 0
+    \end{pmatrix}
+\end{equation*}
+に対して、簡単な計算により、$\det A = 1$ であれば、
+\begin{align*}
+    A^{T}JA &= J \\
+    A^{T} &= JA^{-1}J^{-1}
+\end{align*}
+となるので、
+\begin{align*}
+    \Gamma(\gamma) C \Gamma(\gamma)^{T} &= C \\
+    \Gamma(\gamma) C (J\Gamma(\gamma)^{-1}J^{-1}) &= C \\
+    \Gamma(\gamma) (CJ) &= (CJ)\Gamma(\gamma)
+\end{align*}
+
+よって、表現の任意の作用 $\Gamma(\gamma)$ と $CJ$ が可換であるので、(P3)の表現の既約性と $CJ$ をかける操作が絡作用素（intertwining operator）であることから、Schurの補題よりある $\lambda\in\mathbb{C}$ を用いて、
+\begin{align*}
+    CJ &= \lambda I \\
+    C &= \lambda J^{-1} = \lambda J^{T}
+\end{align*}
+ここで、$C$ は対称行列であり、$J$ は交代行列であることを用いると、
+\begin{equation*}
+    C = C^{T} = (\lambda J^{T})^{T} = \lambda J = -\lambda J^{T} = -C
+\end{equation*}
+つまり $C=0$ となり、仮定に矛盾する。したがって非自明な有理関数は存在しない。
+
+よって，(3.39) を満足する有理関数解 $c(x,t)$ は $c \equiv 0$ に限る．すなわち，(3.29) の有理関数解は存在しても一意である．
+\end{proof}
+\end{story}
+
+\begin{Q}[【核心】このページが主張する「SL型方程式(3.25)への帰着」の決定打は何か？]
+\textbf{A.} **「有理関数解の一意性（ただ1つしかない）」**という事実です。
+元の複雑な方程式(3.33)の変形を司る有理関数を $a_2^{(l)}$ とし、シンプルなSL型方程式(3.25)の変形を司る有理関数を $b_2^{(l)}$ とします。これらは共に、同じ形をした非斉次の微分方程式（ラックスの方程式）を満たすことが計算からわかります。
+ここで「解は存在すればただ1つ」という命題3.8が威力を発揮します。これにより、「$a_2^{(l)}$ と $b_2^{(l)}$ は別物かもしれない」という疑いが完全に排除され、**$b_2^{(l)} = a_2^{(l)}$ であることが確定**します。両者の変形をつかさどる「心臓部」が全く同一であることが証明されたため、私たちは心置きなく、シンプルなSL型方程式の変形だけを考えればよい（帰着された）と結論づけることができるのです。
+\end{Q}
+
+\begin{Q}[【深掘り】命題3.8の証明に登場した (3.39) 式は、何を意味しているのか？]
+\textbf{A.} これは、非斉次方程式の解の差 $c^{(l)}$ が満たす「斉次（右辺が0）の微分方程式」です。
+そしてこの式の左辺を見てください。$\partial_x^3 - 4r\partial_x - 2r_x$……そう、これはあなたが以前ノートにまとめていた**KdV方程式のLax対の生成子 $M_3$ （あるいは3階の微分作用素 $L$）そのもの**です！
+命題3.8の証明の筋書きはこうです。「もし2つの異なる解があったら、その差 $c^{(l)}$ はこの3階の斉次方程式 (3.39) を満たす有理関数になる。しかし、仮定(P2, P3)のような特異点の配置のもとでは、この $L(\phi)=0$ を満たす有理関数は $\phi=0$ （つまり $c^{(l)}=0$）しか存在し得ない。ゆえに解は1つである」。
+可積分系の奥底に潜む「KdV的な3階の作用素」が、ここで「解の一意性を担保する」という極めて重要な役割を果たして再登場する、非常にドラマチックな展開です。
+\end{Q}
+
+\begin{Q}[【核心】前半の証明のフィニッシュはどういう論理なのか？]
+\textbf{A.} 前ページの式(3.39)は、3階の微分作用素 $L(c) = 0$ という形をしていました。2階の微分方程式 $\psi'' = r\psi$ の解 $\varphi_1, \varphi_2$ があるとき、その解の「積（対称テンソル積）」である $\varphi_1^2, \varphi_1\varphi_2, \varphi_2^2$ は、必ずこの3階の微分方程式 $L(c)=0$ を満たします（これは古典的な微分方程式の美しい事実です）。
+つまり、方程式の解空間はこれら3つの関数で完全に張られます。しかし、元の特異点の仮定（対数項がない等）から、$\varphi$ たちはルートや指数が絡む複雑な関数（多価関数）であり、決して綺麗な「有理関数」にはなりません。それらを掛け合わせたものも有理関数にはなりません。
+したがって、「有理関数解 $c(x,t)$ がある」と仮定しても、それはただの定数 $0$ しかあり得ない。よって、非斉次方程式の解の差は $0$ となり、解の一意性が証明されたのです。
+\end{Q}
+
+\begin{story}
+これまで，リーマン球面 $\mathbf{P}^1(\mathbf{C})$ 上定義された微分方程式について考えてきた．この節の残りの部分で，楕円曲線すなわち1次元複素トーラス $T$ 上定義されたフックス型微分方程式のモノドロミー保存変形について述べる．$T$ の普遍被覆リーマン面は $\mathbf{C}$ であり，微分方程式は楕円関数を使って，具体的に書き下すことができる．さらに，フックスの問題についても具体的な計算を行うことができる．以下，微分方程式(3.33)はフックス型で，係数 $p_1(x,t), p_2(x,t)$ は $2\omega_1$ と $2\omega_3$ を周期とする2重周期有理型関数であるとする．また，$t=(t_1, \cdots, t_L) \in U$ とする．$U$ は $\mathbf{C}^L$ の適当な領域である．
+
+$x=\xi \in T$ が(3.33)の確定特異点であるための条件は，局所的に与えられるから，$\mathbf{P}^1(\mathbf{C})$ の場合と同様である．すなわち，その条件は，$x=\xi$ が $p_1(x,t)$ の高々1位の極，$x=\xi$ が $p_2(x,t)$ の高々2位の極，となることである．そこで，(3.33)がトーラス $T$ 上 $M$ 個の確定特異点，$\xi_m \ (m=1,\cdots,M)$，をもっているとすると
+\begin{equation}
+    p_1(x,t) = \beta + \sum_{m=1}^M \alpha_m \zeta(x-\xi_m), \quad \sum_{m=1}^M \alpha_m = 0 \label{eq:3.40}
+\end{equation}
+と表される．ここで，$\zeta(u)$ はワイエルストラスの $\zeta$-関数で，ワイエルストラスの $\wp$-関数 $\wp(u)$ とは
+\begin{equation*}
+    \wp(u) = -\frac{d}{du}\zeta(u)
+\end{equation*}
+という関係で結ばれている．$\zeta(u)$ はもはや2重周期関数ではない．
+
+さて，条件(3.23)は，$T$ 上の微分方程式のラックスの方程式についても成立しなければならない．そのための条件を調べてみよう．上の式(3.40)を $t_l$ で微分すると（※次ページへ続く）
+
+\end{story}
+
+\begin{Q}[【深掘り】なぜ突然トーラス $T$ の話になり、ワイエルシュトラス $\zeta$ 関数が出てくるのか？]
+\textbf{A.} リーマン球面 $P^1(\mathbb{C})$ の次は、穴が1つ空いたトーラス（種数 $g=1$）を考えるのが幾何学の自然な流れです。
+$P^1(\mathbb{C})$ では、特異点に1位の極を作りたいときは単純に $\frac{\alpha}{x-\xi}$ を足し合わせれば済みました（式 3.24）。これが有理関数です。
+しかしトーラス上では、関数は $x \to x + 2\omega$ で元に戻る「2重周期性（楕円関数）」を持たなければなりません。単なる $1/x$ は周期性を持ちません。
+そこで登場するのが $\zeta(u)$ 関数です。この関数は $u=0$ 付近で $1/u$ と全く同じ振る舞い（1位の極）を持ちます。$\zeta(u)$ 単体では完全な周期関数ではありませんが、**「留数の和が0である（$\sum \alpha_m = 0$）」**という条件を課して足し合わせると、周期のズレが完璧に相殺し合って、立派な2重周期関数（楕円関数）になってくれるのです。
+(3.40)式は、「トーラス上で、指定した場所にだけ1位の極を持つ関数を作るための唯一のレシピ」なのです。
+\end{Q}
+
+ここで、元の2階微分方程式から1階微分の項を消去（正規化）することを考える。未知関数を変換することで、方程式を
+\begin{equation}\label{eq:2-ode-normalized}
+\frac{\partial^{2}z}{\partial x^{2}} = r(x,t)z
+\end{equation}
+という形に帰着させたい。この変換を実現するためには、新たな関数 $\phi(x,t)$ が
+\begin{equation}\label{eq:1-ode-gauge}
+\frac{\partial \phi}{\partial x} + \frac{1}{2}p_{1}(x,t)\phi = 0
+\end{equation}
+を満たせばよいことが知られている。
+
+\begin{proposition}\label{prop:equivalence_2_ode}
+    2階フックス型微分方程式 \eqref{eq:monodromy_deformation} のモノドロミー保存変形と、正規化された2階フックス型微分方程式 \eqref{eq:2-ode-normalized} のモノドロミー保存変形とは、1階微分方程式 \eqref{eq:1-ode-gauge} がモノドロミー保存変形を許すという条件のもとで同値である。
+\end{proposition}
+%#endregion

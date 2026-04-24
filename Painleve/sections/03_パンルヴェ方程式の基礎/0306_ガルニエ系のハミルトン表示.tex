@@ -1,0 +1,362 @@
+% !TEX root = ../main.tex
+
+\begin{story}
+
+以下この節において定理3.2の証明を行う。ただし、細かい計算には立ち入らず、筋道を示すことを第1の目標としよう。記号等は前節のものを踏襲して用いる。
+
+まず，ハミルトニアン $H_l$ の形(3.73)を，フロベニウスの方法により決定する
+\end{story}
+
+\begin{Q}[【核心】「ハミルトニアン $H_l$ の形を、フロベニウスの方法により決定する」とは具体的にどういうことか？]
+\textbf{A.} これは、前節までの「見かけの特異点 $x=\lambda_k$（特性指数 $0, 2$）」における局所的な解の振る舞いから、系全体を統制するエネルギー関数（ハミルトニアン）を逆算して導き出す、という驚くべきプロセスを指しています。
+「フロベニウスの方法」とは、特異点周りで微分方程式の解を冪級数展開して求める標準的な手法です。特性指数の差が整数の場合、通常は解に「対数項（$\log(x-\lambda_k)$）」が現れます。しかし、$x=\lambda_k$ は「見かけの特異点」であるため、この対数項の係数は厳密に $0$ にならなければなりません。
+この「対数項の係数が $0$ になる」という代数的な条件式を書き下すと、そこに変数 $\lambda_k$ と留数 $\mu_k$、そして変形パラメータ $t_l$ が結びついた関係式が浮かび上がります。この関係式を整理して得られる多項式（または有理関数）こそが、ハミルトニアン $H_l$ そのものになるのです。局所的な「対数項回避の条件」が、大域的な「ハミルトン力学系の生成子」を決定するというのが、岡本理論の最も美しいハイライトの一つです。
+\end{Q}
+
+\begin{Q}[【深掘り】そもそも「ガルニエ系 (Garnier system)」とは何か？]
+\textbf{A.} 一言で言えば、「パンルヴェ方程式の多変数化（高次元化）」です。
+パンルヴェ方程式は、独立変数が $t$ の1つだけ（方程式の特異点が例えば $0, 1, t, \infty$ の4つ）である場合のモノドロミー保存変形を記述する非線形常微分方程式でした。
+ガルニエ系は、動かせる特異点（変形パラメータ）を $t_1, t_2, \dots, t_g$ と複数個に増やしたときに現れる、非線形偏微分方程式系です。変数が多次元になっても、見かけの特異点 $(\lambda_k, \mu_k)$ を正準変数とみなすことで、時間発展 $\partial/\partial t_l$ がハミルトニアン $H_l$ によって完全に統制される「多変数ハミルトン系」として綺麗に書き表すことができます。この節では、そのハミルトニアンが実際にどのような数式になるかを導出していくことになります。
+\end{Q}
+
+\begin{story}
+$x=\lambda_k$ を微分方程式 (3.33) の見かけの特異点とし、局所座標 $u = x - \lambda_k$ をとる。$u=0$ の近傍で (3.33) を
+\begin{equation}
+    u^2 \frac{d^2 y}{du^2} + q_1(u,t)u \frac{dy}{du} + q_2(u,t)y = 0 \label{eq:3.77}
+\end{equation}
+と書く。確定特異点 $u=0$ における特性指数は $0, 2$ であり、これが非対数的であるための条件は、ベキ級数解
+\begin{equation}
+    y = 1 + y_1 u + y_2 u^2 + \cdots \label{eq:3.78}
+\end{equation}
+が存在することである。
+
+\begin{proposition}[対数項を持たないための適合条件]
+\eqref{eq:3.77} の係数を次のように展開する。
+\begin{equation*}
+    q_1(u,t) = -1 + a_k u + a'_k u^2 + \cdots, \quad q_2(u,t) = \mu_k u + b_k u^2 + b'_k u^3 + \cdots
+\end{equation*}
+この表示と \eqref{eq:3.78} を \eqref{eq:3.77} に代入し、未定係数法により比較すると、
+\begin{equation*}
+    y_1 = \mu_k, \quad j(j-2)y_j = R_j(y_1, \cdots, y_{j-1}) \quad (j=2, \cdots)
+\end{equation*}
+となるから、ベキ級数解 \eqref{eq:3.78} が存在するための条件は、$j=2$ の場合を考えて
+\begin{equation}
+    R_2(y_1) = \mu_k y_1 + a_k y_1 + b_k = \mu_k^2 + a_k \mu_k + b_k = 0 \label{eq:3.79}
+\end{equation}
+であることがわかる。
+\end{proposition}
+
+\end{story}
+
+\begin{Q}[【核心】なぜ $j(j-2)y_j = R_j$ において $j=2$ のとき、$R_2(y_1) = 0$ が「対数項を持たない条件」になるのか？]
+\textbf{A.} これはフロベニウス法の決定方程式の構造に由来します。特性指数が $\rho = 0, 2$ ということは、微分方程式の左辺に $u^\rho$ を代入したときの最低次数の係数（決定方程式）が $\rho(\rho-2)=0$ になるということです。
+特性指数 $\rho=0$ に対応する級数解を求めようとして係数 $y_j$ を順に決めていくと、漸化式の左辺は $j(j-2)y_j$ となります。$j=1$ のときは $1 \cdot (-1) y_1 = R_1$ なので $y_1$ は一意に決まりますが、$j=2$ のステップに到達した瞬間、左辺は $2(0)y_2 = 0 \cdot y_2 = 0$ となってしまいます。
+もしこのとき右辺の $R_2$ が $0$ でなければ、「$0 = (\text{0でない値})$」という矛盾が生じ、$y_2$ を決定することができません。この矛盾を回避して解を構成するためには、どうしても独立な解として $u^2 \log u$ のような「対数項」を付け加える必要が出てきます。
+逆に言えば、対数項が現れない（見かけの特異点である）ためには、どうしても右辺が $R_2 = 0$ になってくれて、$0 \cdot y_2 = 0$（$y_2$ は任意定数としてよい）となる必要があるのです。この $R_2=0$ こそが、特異点が見かけ上のものであるための強烈な代数的制約（適合条件）です。
+\end{Q}
+
+\begin{story}
+\begin{theorem}[ハミルトニアンを決定する連立1次方程式]
+一方、元の方程式の係数を用いて $a_k, b_k$ を具体的に計算すると、
+\begin{align*}
+    a_k &= \frac{1-\kappa_0}{\lambda_k} + \frac{1-\kappa_1}{\lambda_k-1} + \sum_{l=1}^g \frac{1-\theta_l}{\lambda_k-t_l} - \sum_{p=1(p \neq k)}^g \frac{1}{\lambda_k-\lambda_p} \\
+    b_k &= \frac{\kappa}{\lambda_k(\lambda_k-1)} + \sum_{p=1(p \neq k)}^g \frac{\lambda_p(\lambda_p-1)\mu_p}{\lambda_k(\lambda_k-1)(\lambda_k-\lambda_p)} - \frac{2\lambda_k-1}{\lambda_k(\lambda_k-1)}\mu_k - \sum_{l=1}^g \frac{t_l(t_l-1)H_l}{\lambda_k(\lambda_k-1)(\lambda_k-t_l)}
+\end{align*}
+である。これを \eqref{eq:3.79} に代入して整理した式は、
+\begin{equation}
+    \sum_{l=1}^g E_{kl} H_l = \mu_k^2 + \hat{a}_k \mu_k + \hat{b}_k \label{eq:3.80}
+\end{equation}
+\begin{equation*}
+    E_{kl} = \frac{t_l(t_l-1)}{\lambda_k(\lambda_k-1)(\lambda_k-t_l)}
+\end{equation*}
+という形をしているから、これを $H_l$ に関する連立1次方程式と思って解けばよい。
+\end{theorem}
+\end{story}
+
+\begin{Q}[【深掘り】この連立方程式 \eqref{eq:3.80} が解けることで、理論上どのような「嬉しいこと」があるのか？]
+\textbf{A.} これは「ガルニエ系のハミルトニアン $H_l$ が、正準変数 $(\lambda_k, \mu_k)$ の有理関数として具体的に構成できる」という決定的な事実を示しています。
+左辺の係数行列 $E_{kl}$ はコーシー行列の一種であり、$\lambda_k$ と $t_l$ がすべて相異なるという仮定のもとで正則（逆行列を持つ）になります。したがって、この連立1次方程式は必ず一意な解 $H_l$ を持ちます。
+局所的な「対数項を消去せよ」という解析的な条件 $R_2=0$ を解きほぐしただけで、系全体の時間発展 $\partial/\partial t_l$ を支配する力学系のエネルギー関数 $H_l$ が代数的に完全に決定されてしまうという、モノドロミー保存変形の理論構造の美しさがここに凝縮されています。
+\end{Q}
+
+\begin{story}
+\begin{lemma}[3.4]
+行列 $E = ((E_{kl}))$ の逆行列を $F = ((F_{lk}))$ とすると、
+\begin{equation}
+    F_{lk} = M_l M^{k,l} \label{eq:3.81}
+\end{equation}
+\begin{equation*}
+    M_l = - \frac{L(t_l)}{T'(t_l)}, \quad M^{k,l} = \frac{T(\lambda_k)}{L'(\lambda_k)(\lambda_k - t_l)}
+\end{equation*}
+となる。
+\end{lemma}
+
+補題に出てくる、$t, \lambda, \mu$ の有理関数 $M_l, M^{k,l}$ は、それぞれ (3.74), (3.75) で与えられたものである。(3.81) により、(3.80) を $H_l$ について解けば (3.73) が得られる。そのとき、関係式
+\begin{equation*}
+    \sum_{k=1}^g \frac{M^{k,l}}{\lambda_k(\lambda_k-1)} = 1
+\end{equation*}
+などを用いて計算することになるが、(3.73) を導く計算の詳細は省略する。
+
+\begin{proof}
+線型代数の演習問題であるから、簡単に証明しておこう。
+$x$ の有理関数
+\begin{equation}
+    Z_l(x) = \frac{T(x)}{x(x-1)(x-t_l)L(x)}
+\end{equation}
+を考える。ここで、$T(x), L(x)$ は、(3.69), (3.70) で与えられる $x$ の多項式、すなわち
+\begin{equation*}
+    T(x) = x(x-1)\prod_{m=1}^g (x-t_m), \quad L(x) = \prod_{k=1}^g (x-\lambda_k)
+\end{equation*}
+である。$Z_l(x)$ は $x=\lambda_k \ (k=1, \cdots, g)$ に、1位の極をもつ。さらに、有理関数 $Z_l(x)$ の分母は $g$ 次多項式、分子は $g-1$ 次多項式、であることに注意してこの有理関数を部分分数展開する。実際
+\begin{equation*}
+    \underset{x=\lambda_k}{\mathrm{Res}} Z_l(x) = \frac{T(\lambda_k)}{\lambda_k(\lambda_k-1)(\lambda_k-t_l)L'(\lambda_k)} = \frac{M^{k,l}}{\lambda_k(\lambda_k-1)}
+\end{equation*}
+より、次の式が得られる。
+\begin{equation}
+    Z_l(x) = \sum_{k=1}^g \frac{M^{k,l}}{\lambda_k(\lambda_k-1)} \cdot \frac{1}{x-\lambda_k}
+\end{equation}
+ここで、まず
+\begin{equation*}
+    Z_l(t_h) = \sum_{k=1}^g \frac{M^{k,l}}{\lambda_k(\lambda_k-1)} \cdot \frac{1}{t_h-\lambda_k} = - \sum_{k=1}^g \frac{M^{k,l} E_{kh}}{t_h(t_h-1)}
+\end{equation*}
+となることに気がつく．他方，定義式から
+\begin{equation*}
+    Z_l(t_l) = \frac{T'(t_l)}{t_l(t_l-1)L(t_l)} = \frac{-1}{t_l(t_l-1)M_l}
+\end{equation*}
+\begin{equation*}
+    Z_l(t_h) = 0 \quad (h \neq l)
+\end{equation*}
+であるから，結局
+\begin{align*}
+    1 &= \sum_{k=1}^g E_{kl} M_l M^{k,l} \\
+    0 &= \sum_{k=1}^g E_{kh} M_l M^{k,l} \quad (h \neq l)
+\end{align*}
+が得られる．これは(3.81)を意味している．
+
+(3.80), (3.81)から $H_l$ を求めれば(3.73)が得られる。
+\end{proof}
+\end{story}
+
+\begin{Q}[【核心】なぜ逆行列を求めるために、突然 $Z_l(x)$ という有理関数を考えるのか？]
+\textbf{A.} 行列 $E$ と $F$ が互いに逆行列であること（すなわち $\sum E_{kl}F_{lm} = \delta_{km}$）を直接計算で証明するのは、要素が複雑な分数であるため非常に困難です。
+しかし、$Z_l(x)$ の定義式に $T(x)$ を代入して約分すると、実は
+$$ Z_l(x) = \frac{\prod_{m \neq l}^g (x-t_m)}{L(x)} $$
+となり、これは分子が $g-1$ 次、分母が $g$ 次の有理関数になります。
+複素解析において「分子の次数が分母の次数より2以上小さい有理関数の、すべての極における留数の和はゼロになる」という強力な定理（留数定理）があります。この定理や、部分分数展開に $x=t_m$ などを代入して得られる「ラグランジュ補間の恒等式」を利用することで、行列の積の和 $\sum$ を「留数の和」にすり替えることができ、複雑な代数計算を一瞬でクロネッカーのデルタ $\delta_{km}$ に帰着させることができるのです。
+\end{Q}
+
+\begin{Q}[【深掘り】多項式 $T(x)$ と $L(x)$ はそれぞれ何を意味しているのか？]
+\textbf{A.} 多変数（$g$ 変数）のガルニエ系において、多数の特異点を一括して扱うための「母関数（特性多項式）」です。
+* $T(x) = x(x-1)\prod (x-t_m)$ は、微分方程式の「確定特異点（動かない特異点 $0, 1$ と、動くパラメータ $t_m$）」を根に持つ多項式です。
+* $L(x) = \prod (x-\lambda_k)$ は、「見かけの特異点」を根に持つ多項式です。
+このように特異点の位置を多項式の根としてパックすることで、ガルニエ系全体の挙動を「$T(x)$ と $L(x)$ が織りなす1変数の代数関数論」として驚くほど見通し良く記述できるようになります。これは岡本和夫先生の研究の真骨頂とも言える手法です。
+\end{Q}
+
+\begin{Q}[【核心】$Z_l(t_h)$ に $x=t_h$ を代入するだけで、なぜ逆行列の証明が終わるのか？]
+\textbf{A.} これは部分分数分解と「極（分母が0になる点）」の性質を巧みに利用したマジックです。
+有理関数 $Z_l(x)$ の定義式を見ると、分子に $T(x) \propto (x-t_1)\cdots(x-t_g)$ があります。したがって、$h \neq l$ のときは単に $T(t_h) = 0$ となり $Z_l(t_h) = 0$ になります。
+一方、$h = l$ のときは、分母にも $(x-t_l)$ があるため $0/0$ の不定形になります。ロピタルの定理のように約分して極限をとることで、分子は微分された $T'(t_l)$ となり、$0$ ではない値が残ります。
+これを、部分分数展開した側（$\sum$ の形）と比較します。すると、「行列 $E$ と、$M_l M^{k,l}$ からなる行列 $F$ の積」が、「$h=l$ のときは $1$、$h \neq l$ のときは $0$」すなわち単位行列（クロネッカーのデルタ $\delta_{hl}$）になることが、一切の泥臭い連立方程式を解くことなく、極限の評価だけで鮮やかに証明されるのです。
+\end{Q}
+
+前節までの議論により、ハミルトニアン $H_h$ は以下の連立1次方程式を満たすことがわかっている。
+\begin{equation*}
+    \sum_{h=1}^g E_{kh} H_h = \mu_k^2 + \hat{a}_k \mu_k + \hat{b}_k
+\end{equation*}
+ここで $\hat{a}_k, \hat{b}_k$ は $H_h$ を含まない項であり、具体的には次で与えられる。
+\begin{align*}
+    \hat{a}_k &= \frac{1-\kappa_0}{\lambda_k} + \frac{1-\kappa_1}{\lambda_k-1} + \sum_{h=1}^g \frac{1-\theta_h}{\lambda_k-t_h} - \sum_{p=1 (p \neq k)}^g \frac{1}{\lambda_k-\lambda_p} \\
+    \hat{b}_k &= \frac{\kappa}{\lambda_k(\lambda_k-1)} - \frac{2\lambda_k-1}{\lambda_k(\lambda_k-1)}\mu_k + \sum_{p=1 (p \neq k)}^g \frac{\lambda_p(\lambda_p-1)\mu_p}{\lambda_k(\lambda_k-1)(\lambda_k-\lambda_p)}
+\end{align*}
+行列 $E$ の逆行列 $F_{lk} = M_l M^{k,l}$ を左から掛けることで、$H_l$ は次のように表される。
+\begin{equation}
+    H_l = M_l \sum_{k=1}^g M^{k,l} \left( \mu_k^2 + \hat{a}_k \mu_k + \hat{b}_k \right) \label{eq:Hl_base}
+\end{equation}
+
+\begin{theorem}[ハミルトニアンの最終形態]
+式 \eqref{eq:Hl_base} を $\mu_k$ について整理すると、以下の式 (3.73) が得られる。
+\begin{equation}
+    H_l = M_l \left[ \sum_{k=1}^g M^{k,l} \left\{ \mu_k^2 - A_{k,l}\mu_k + \frac{\kappa}{\lambda_k(\lambda_k-1)} \right\} \right]
+\end{equation}
+\begin{equation*}
+    A_{k,l} = \frac{\kappa_0}{\lambda_k} + \frac{\kappa_1}{\lambda_k-1} + \sum_{h=1}^g \frac{\theta_h - \delta_{hl}}{\lambda_k - t_h}
+\end{equation*}
+\end{theorem}
+
+\begin{proof}[証明と係数比較]
+式 \eqref{eq:Hl_base} の括弧内を展開し、$\mu_k^2$ の項、$\mu_k^0$（定数）の項、$\mu_k^1$ の項に分けて比較する。
+\begin{itemize}
+    \item \textbf{2次の項}: そのまま $\mu_k^2$ となり一致する。
+    \item \textbf{定数項}: $\hat{b}_k$ の第1項 $\frac{\kappa}{\lambda_k(\lambda_k-1)}$ がそのまま現れるため一致する。
+    \item \textbf{1次の項}: ここが非自明である。$\hat{b}_k$ の二重和の部分は、添字 $k$ と $p$ を入れ替えることで次のように変形できる。
+    \begin{equation*}
+        \sum_{k=1}^g M^{k,l} \sum_{p \neq k} \frac{\lambda_p(\lambda_p-1)\mu_p}{\lambda_k(\lambda_k-1)(\lambda_k-\lambda_p)} = \sum_{k=1}^g \mu_k \sum_{p \neq k} M^{p,l} \frac{\lambda_k(\lambda_k-1)}{\lambda_p(\lambda_p-1)(\lambda_p-\lambda_k)}
+    \end{equation*}
+    したがって、式 \eqref{eq:Hl_base} における $\mu_k$ の全体の係数（$M^{k,l}$ をくくり出したもの）を $C_k$ とすると、
+    \begin{equation}
+        M^{k,l} C_k = M^{k,l} \left( \hat{a}_k - \frac{2\lambda_k-1}{\lambda_k(\lambda_k-1)} \right) + \sum_{p \neq k} M^{p,l} \frac{\lambda_k(\lambda_k-1)}{\lambda_p(\lambda_p-1)(\lambda_p-\lambda_k)}
+    \end{equation}
+    となる。この $C_k$ がちょうど $-A_{k,l}$ に等しいことを示せばよい。
+\end{itemize}
+代数的な計算により、$\hat{a}_k - \frac{2\lambda_k-1}{\lambda_k(\lambda_k-1)} = - A_{k,l} + \sum_{h \neq l} \frac{1}{\lambda_k-t_h} - \sum_{p \neq k} \frac{1}{\lambda_k-\lambda_p}$ がわかる。これを代入し、$M^{k,l}C_k = M^{k,l}(-A_{k,l})$ を示すことは、以下の等式を示すことと同値である。
+\begin{equation}
+    \sum_{h \neq l} \frac{1}{\lambda_k-t_h} - \sum_{p \neq k} \frac{1}{\lambda_k-\lambda_p} = \sum_{p \neq k} \frac{M^{p,l} \lambda_k(\lambda_k-1)}{M^{k,l} \lambda_p(\lambda_p-1)(\lambda_k-\lambda_p)} \label{eq:identity_target}
+\end{equation}
+多項式 $P(x) = \prod_{m \neq l}(x-t_m)$ および $L(x) = \prod (x-\lambda_q)$ を用いると、$\frac{M^{k,l}}{\lambda_k(\lambda_k-1)} = \frac{P(\lambda_k)}{L'(\lambda_k)}$ と書けるため、式 \eqref{eq:identity_target} の右辺は
+\begin{equation*}
+    \sum_{p \neq k} \frac{P(\lambda_p)L'(\lambda_k)}{P(\lambda_k)L'(\lambda_p)(\lambda_k-\lambda_p)}
+\end{equation*}
+となる。これは、有理関数の部分分数展開（ラグランジュ補間の微分の公式）から得られる恒等式と完全に一致する。よって $C_k = -A_{k,l}$ が証明され、式 (3.73) が導出された。
+\end{proof}
+
+\begin{Q}[【核心】なぜ二重和の計算で「添字 $k$ と $p$ の入れ替え」を行う必要があるのか？]
+\textbf{A.} 行列の積を計算して $H_l = \sum_k F_{lk} (\cdots)$ と書き下した段階では、和の主役は $k$ です。しかし、$\hat{b}_k$ の中にさらに別の和 $\sum_{p \neq k} \mu_p$ が含まれているため、このままでは $\mu_1, \mu_2, \dots$ がそれぞれの項に散らばってしまいます。
+最終目標である式 (3.73) は「各 $k$ について $\mu_k^2$ と $\mu_k^1$ を綺麗にまとめた形」をしています。したがって、散らばった $\mu$ を主役（係数）としてまとめ直すために、和の順番を $\sum_k \sum_p$ から $\sum_p \sum_k$ へと入れ替え、形式的に $p$ を $k$ に読み替えることで、全体の $\mu_k$ の係数を一つに集約させているのです。
+\end{Q}
+
+\begin{Q}[【深掘り】証明の最後に登場した「ラグランジュ補間の微分の公式」とは何か？]
+\textbf{A.} これは代数幾何や可積分系において、複雑な有理関数の和を一瞬で計算するための強力な恒等式です。
+一般に、$g-1$ 次の多項式 $P(x)$ は、ラグランジュ補間により $P(x) = \sum_{p=1}^g \frac{P(\lambda_p)}{L'(\lambda_p)} \frac{L(x)}{x-\lambda_p}$ と展開できます。この両辺を $x$ で微分し、$x = \lambda_k$ を代入して整理すると、
+\begin{equation*}
+    \frac{P'(\lambda_k)}{P(\lambda_k)} - \frac{L''(\lambda_k)}{2L'(\lambda_k)} = \sum_{p \neq k} \frac{P(\lambda_p)L'(\lambda_k)}{P(\lambda_k)L'(\lambda_p)(\lambda_k-\lambda_p)}
+\end{equation*}
+という美しい関係式が自動的に得られます。左辺の対数微分 $\frac{P'}{P}$ や $\frac{L''}{L'}$ を計算すると、まさに式 \eqref{eq:identity_target} の左辺のシグマの差そのものになります。パンルヴェ理論のハミルトニアンがこれほど綺麗にまとまる背後には、こうした代数関数論の深い恒等式が隠れているのです。
+\end{Q}
+
+\begin{story}
+
+以下，前節から考察している2階フックス型線型常微分方程式
+\begin{equation}
+    \frac{d^2 y}{dx^2} + p_1(x,t) \frac{dy}{dx} + p_2(x,t)y = 0
+\end{equation}
+のモノドロミー保存変形の計算に戻ろう．係数は(3.67), (3.68)により与えられていた．我々は，$x=\lambda_k$ が見かけの特異点である，という仮定を使って，$H_l$ を他の変数の有理関数として具体的に求めたところである．
+
+ここで，第3.2節において調べたことを思いだそう．(3.33)に対して
+\begin{equation}
+    r(x,t) = -p_2(x,t) + \frac{1}{4}p_1(x,t)^2 + \frac{1}{2}\frac{\partial}{\partial x}p_1(x,t) \label{eq:3.32}
+\end{equation}
+とし，SL型方程式
+\begin{equation}
+    \frac{d^2 z}{dx^2} = r(x,t)z
+\end{equation}
+を併せて考える．ここで124ページの考察を補題の形にまとめておこう．
+
+\begin{lemma}[3.5]
+(3.33)がモノドロミー保存変形を定めることと，(3.25)がそうなることは同値であり，さらにこれは，以下の偏微分方程式系が $x$ の有理関数を解としてもつことと同値である．
+
+\begin{align}
+    \frac{\partial^3}{\partial x^3}w_l - 4r(x,t)\frac{\partial}{\partial x}w_l - 2\frac{\partial r}{\partial x}(x,t)w_l + 2\frac{\partial r}{\partial t_l}(x,t) = 0 \label{eq:3.82} \\
+    \left( \frac{\partial}{\partial t_h} - w_h \frac{\partial}{\partial x} \right) w_l = \left( \frac{\partial}{\partial t_l} - w_l \frac{\partial}{\partial x} \right) w_h \quad (h,l = 1,\cdots,g) \label{eq:3.83}
+\end{align}
+
+\end{lemma}
+\end{story}
+
+\begin{Q}[【深掘り】なぜわざわざ元の微分方程式 (3.33) を、1階微分の項がないSL型 (3.25) に変換して考える必要があるのか？]
+\textbf{A.} モノドロミー保存変形の条件（Lax方程式などの非線形偏微分方程式系）を導出する際、**1階微分の項 $\frac{dy}{dx}$ が存在すると計算が絶望的に複雑になるから**です。
+実は、未知関数 $y$ に対して $z = y \exp(\frac{1}{2}\int p_1 dx)$ という変換（ゲージ変換）を行うと、1階微分の項が完全に消去され、$z'' = r(x,t)z$ というシンプルな形（Sturm-Liouville型、あるいはシュレディンガー方程式型）に帰着させることができます。
+この変換は、解の「特異点周りでの回り方（モノドロミー表現）」の本質を一切変えません。そのため、「モノドロミーが保存される」という幾何学的な条件を計算するときは、見通しの良いSL型 (3.25) を使って変形方程式を書き下すのが、可積分系理論における絶対的な定石なのです。(3.32) の $r(x,t)$ の式は、まさにそのゲージ変換から生じるポテンシャル項を表しています。
+\end{Q}
+
+\begin{story}
+実際，命題3.8により(3.82), (3.83)の有理関数解 $w_l = a_2^{(l)}(x,t)$ は存在すれば唯一であり，それに対して $a_1^{(l)}(x,t)$ を(3.23)により定めると，変形方程式系
+\begin{equation}
+\left\{
+\begin{array}{l}
+    \displaystyle \frac{\partial^2 \vec{\phi}}{\partial x^2} + p_1(x,t)\frac{\partial \vec{\phi}}{\partial x} + p_2(x,t)\vec{\phi} = 0 \vspace{0.5em} \\
+    \displaystyle \frac{\partial \vec{\phi}}{\partial t_l} = a_1^{(l)}(x,t)\vec{\phi} + a_2^{(l)}(x,t)\frac{\partial \vec{\phi}}{\partial x}
+\end{array}
+\right. \label{eq:3.20}
+\end{equation}
+は完全積分可能である．さらに次の命題も成り立つ．
+
+\begin{proposition}[3.14]
+偏微分方程式系(3.82)の有理関数解 $w_l$ は，(3.83)を満たす．
+\end{proposition}
+
+この命題により，モノドロミー保存変形は(3.82)の考察に帰着される．証明のために
+\begin{equation*}
+    L = \frac{\partial^3}{\partial x^3} - 4r(x,t)\frac{\partial}{\partial x} - 2\frac{\partial r}{\partial x}(x,t)
+\end{equation*}
+とおく．計算によって次の補題の成立を確認することができる．
+
+\begin{lemma}[3.6]
+任意の解析関数 $f,g$ に対して次式が成り立つ．
+\begin{equation*}
+    2\frac{\partial f}{\partial x}L(g) - 2\frac{\partial g}{\partial x}L(f) + f\frac{\partial}{\partial x}L(g) - g\frac{\partial}{\partial x}L(f) = L\left( f\frac{\partial g}{\partial x} - g\frac{\partial f}{\partial x} \right)
+\end{equation*}
+\end{lemma}
+
+\begin{proof}[命題3.14の証明]
+(3.82)に有理関数解 $w_l$ が存在するとして
+\begin{equation*}
+    L(w_l) + 2\frac{\partial r}{\partial t_l}(x,t) = 0
+\end{equation*}
+から，積分可能条件として
+\begin{equation}
+    0 = \frac{\partial}{\partial t_h}L(w_l) - \frac{\partial}{\partial t_l}L(w_h) = L\left( \frac{\partial w_l}{\partial t_h} - \frac{\partial w_h}{\partial t_l} \right) + L_{hl} \label{eq:3.84}
+\end{equation}
+が成り立っている．ここで
+\begin{equation*}
+    L_{hl} = -4\frac{\partial r}{\partial t_h}\frac{\partial w_l}{\partial x} + 4\frac{\partial r}{\partial t_l}\frac{\partial w_h}{\partial x} - 2w_l\frac{\partial^2 r}{\partial x \partial t_h} + 2w_h\frac{\partial^2 r}{\partial x \partial t_l}
+\end{equation*}
+であるが，計算して補題3.6を使うと
+\begin{align*}
+    L_{hl} &= 2\frac{\partial w_l}{\partial x}L(w_h) - 2\frac{\partial w_h}{\partial x}L(w_l) + w_l\frac{\partial}{\partial x}L(w_h) - w_h\frac{\partial}{\partial x}L(w_l) \\
+    &= L\left( w_l\frac{\partial w_h}{\partial x} - w_h\frac{\partial w_l}{\partial x} \right)
+\end{align*}
+したがって(3.84)より
+\begin{equation*}
+    L\left( \frac{\partial w_l}{\partial t_h} - \frac{\partial w_h}{\partial t_l} + w_l\frac{\partial w_h}{\partial x} - w_h\frac{\partial w_l}{\partial x} \right) = 0
+\end{equation*}
+となる．命題3.8の証明で見たように，仮定(P2), (P3)によれば，3階線型常微分方程式 $L(w)=0$ は非自明な有理関数解をもたない．すなわち
+\begin{equation*}
+    \frac{\partial w_l}{\partial t_h} - \frac{\partial w_h}{\partial t_l} + w_l\frac{\partial w_h}{\partial x} - w_h\frac{\partial w_l}{\partial x} = 0
+\end{equation*}
+以上の議論は，(3.83)が(3.82)の積分可能条件に他ならないことを示している．
+\end{proof}
+
+\end{story}
+
+\begin{Q}[【核心】作用素 $L$ と方程式(3.82)は、どこかで見たことがある形をしているが？]
+\textbf{A.} お気付きの通り、以前のノートにあった**KdV方程式のLax対の生成子 $M_3$ と本質的に全く同じもの**です。
+ノートでは $M_3 = -4\partial_x^3 - 6u\partial_x - 3u_x$ でした。これを定数倍でスケール調整し、$u$ をポテンシャル $r(x,t)$ に読み替えると、まさに $L = \partial_x^3 - 4r\partial_x - 2r_x$ になります。
+シュレディンガー作用素 $\partial_x^2 - r(x,t)$ の固有値（あるいはモノドロミー）を保存するような変形を考えると、必ずこの3階の微分作用素 $L$ が現れます。(3.82) は $L(w_l) = -2\partial_{t_l}r$ と書けますが、これはソリトン理論における「Lenard関係式」や「KdV階層」を定義する方程式そのものです。モノドロミー保存変形（ガルニエ系）とは、本質的に「有限自由度のKdV階層」に他ならないことが、この式から明確に読み取れます。
+\end{Q}
+
+\begin{Q}[【深掘り】命題3.14は、なぜそれほどまでに重要なのか？]
+\textbf{A.} モノドロミー保存変形を成立させるためには、本来 **(3.82)（ポテンシャルの時間発展）と (3.83)（異なる時間 $t_l, t_h$ のフローの可換性）の両方を同時に満たす $w_l$** を探さなければなりません。複数の時間を扱う多変数系（ガルニエ系）において、(3.83)のような非線形の連立微分方程式を解くことは通常至難の業です。
+しかし命題3.14は、**「(3.82)の有理関数解を見つけさえすれば、面倒な(3.83)は自動的に満たされる」**という驚くべき事実を保証しています。つまり、問題を解くための労力が半分（あるいはそれ以下）に劇的に減るのです。
+この「奇跡」を代数的に証明するための鍵となるのが、補題3.6の恒等式です。作用素 $L$ が持つ美しい代数的な対称性のおかげで、個別の時間発展(3.82)が保証されれば、系全体の無矛盾性(3.83)も自動的に担保される構造になっています。
+\end{Q}
+
+\begin{Q}[【核心】作用素 $L$ で括った中身が $=0$ になるのはなぜか？積分定数のようなものは出ないのか？]
+\textbf{A.} ここがこの証明の最大の要です。一般の微分方程式 $L(W) = 0$ には当然、非自明な解（積分定数を含む関数の族）が存在します。しかしここで探しているのは「有理関数解」です。
+パンルヴェ理論の枠組みでは、特異点の配置に関する一般的な仮定（P2, P3など）を置くことで、「$L(w)=0$ を満たす有理関数は $w=0$ しか存在しない（核が自明である）」という事実が代数幾何的に保証されています。
+非線形偏微分方程式の可換性条件 (3.83) という極めて複雑な等式を、「線形作用素 $L$ の核が自明である」という代数的な性質に帰着させて証明し切ってしまう、極めて美しい論法です。
+\end{Q}
+
+\begin{story}
+そこで，(3.32)を用いて $r(x,t)$ を計算しよう．実際，$r(x,t)$ は $x=0, x=1, x=t$ で高々2位の極をもつ有理関数である．特性指数を考慮すれば，$r(x,t)$ は
+
+\begin{align}
+    r(x,t) &= \frac{\alpha_0}{x^2} + \frac{\alpha_1}{(x-1)^2} + \frac{\alpha_\infty}{x(x-1)} \nonumber \\
+    &\quad + \sum_{l=1}^g \left[ \frac{\beta_l}{(x-t_l)^2} + \frac{t_l(t_l-1)K_l}{x(x-1)(x-t_l)} \right] \label{eq:3.85} \\
+    &\quad + \sum_{k=1}^g \left[ \frac{3}{4(x-\lambda_k)^2} - \frac{\lambda_k(\lambda_k-1)\nu_k}{x(x-1)(x-\lambda_k)} \right] \nonumber
+\end{align}
+
+という形をしている．他方，(3.32)に(3.67)と(3.68)を代入して，係数の関係を調べる．すると
+\begin{equation*}
+    \alpha_0 = \frac{1}{4}(\kappa_0^2 - 1), \quad \alpha_1 = \frac{1}{4}(\kappa_1^2 - 1), \quad \beta_l = \frac{1}{4}(\theta_l^2 - 1)
+\end{equation*}
+\end{story}
+
+\begin{Q}[【深掘り】式(3.85)の見かけの特異点 $x=\lambda_k$ の項にある「$3/4$」という数字はどこから来たのか？]
+\textbf{A.} これはSL型方程式（シュレディンガー方程式型）における**見かけの特異点の絶対的な刻印**です。
+フックス型微分方程式をSL型にゲージ変換（$z = y \exp(\frac{1}{2}\int p_1 dx)$）すると、変換後のポテンシャル $r(x,t)$ の各特異点での2位の極の留数は、特性指数の差 $\Delta \rho$ を用いて $\frac{1}{4}((\Delta \rho)^2 - 1)$ という普遍的な形で書けることが知られています（シュワルツ微分の性質）。
+確定特異点 $x=0, 1, t_l$ では特性指数の差がそれぞれ $\kappa_0, \kappa_1, \theta_l$ なので、$\alpha_0, \alpha_1, \beta_l$ はまさにこの公式通りになっています。
+そして、見かけの特異点 $x=\lambda_k$ では、以前確認したように「特性指数は $0, 2$」です。したがってその差は $\Delta \rho = 2 - 0 = 2$ となります。これを公式に代入すると、
+$$ \frac{1}{4}(2^2 - 1) = \frac{3}{4} $$
+となります。つまりこの $\frac{3}{4}$ は、そこが「特性指数の差が $2$ である見かけの特異点である」という幾何学的な事実から代数的に必然として導かれる定数なのです。
+\end{Q}
+

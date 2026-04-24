@@ -1,0 +1,295 @@
+% !TEX root = ../main.tex
+
+%#region
+前節の2階の場合の議論は、一般の $n$ 階フックス型微分方程式にも自然に拡張できる。
+
+\begin{Q}[【核心】なぜわざわざ $n$ 階の変形微分方程式系に拡張して一般論を展開するのか？]
+\textbf{A.} $n=2$ という特定の階数に縛られずに論理を展開する方が、背後にある線型代数的な構造（ロンスキアンの不変性や、モノドロミー行列の行列式が $1$ になる仕組み）が透けて見え、見通しが圧倒的に良くなるからである。この線型方程式の一般的な変形理論を通ることで、結果としてパンルヴェ方程式のような美しい「非線形な関係」が必然的に浮かび上がってくる。
+\end{Q}
+
+一般の $n$ 階フックス型微分方程式 \eqref{eq:monodromy_deformation} を考える。
+方程式から $(n-1)$ 階微分の項を消去するため、
+\begin{equation}\label{eq:auxiliary-phi}
+\frac{\partial \phi}{\partial x} + \frac{1}{n}p_{1}(x,t)\phi = 0
+\end{equation}
+で定まる関数 $\phi(x,t)$ を用いて、未知関数を
+\[
+y = \phi(x,t)z
+\]
+と変換する。これを \eqref{eq:monodromy_deformation} に代入して整理すると、$z$ についての微分方程式は
+\begin{equation}\label{eq:reduced-fuchsian}
+\frac{\partial^{n}z}{\partial x^{n}} + \sum_{j=2}^{n} q_{j}(x,t)\frac{\partial^{n-j}z}{\partial x^{n-j}} = 0
+\end{equation}
+となる。ここで、$q_{j}(x,t)$ は $\phi$ の各階微分 $\frac{\partial^i \phi}{\partial x^i} \ (i=0,1,\cdots,j)$ と $p_{i}(x,t) \ (i=1,\cdots,j)$ の多項式として表される。この \eqref{eq:reduced-fuchsian} のリーマンデータを $(\mathbb{P}^{1}(\mathbb{C}), \Xi'(t), \hat{\rho}')$ とする。
+
+\begin{Q}[【基礎】\eqref{eq:auxiliary-phi} を満たす関数 $\phi(x,t)$ は常に存在するのか？また、その解が多価関数になったり発散したりして元の問題を壊す心配はないか？]
+\textbf{A.} 常に存在し、元の問題を壊すことはない。
+\eqref{eq:auxiliary-phi} は変数分離形の1階線形微分方程式であるため、単に積分を実行するだけで
+\[
+\phi(x,t) = \exp\left( -\frac{1}{n} \int p_1(x,t) dx \right)
+\]
+と具体的に求まる。$p_1(x,t)$ は有理関数であるから、その積分は有理関数と対数関数の線形結合となる。したがって、$\phi(x,t)$ は特異点以外の全域で解析的であり、（多価にはなり得るが）その分岐の規則（モノドロミー）は完全にコントロール可能である。
+\end{Q}
+
+ここで、方程式 \eqref{eq:reduced-fuchsian} の解の基本系を $\vec{\varphi}_z(x,t)$ とする。この基本系に沿って閉曲線 $\gamma$ に沿って解析接続を行うと、モノドロミー行列 $\Gamma_z(\gamma)$ が右から掛かり、
+\[
+W(\vec{\varphi}_z^{\gamma}) = W(\vec{\varphi}_z) \det(\Gamma_z(\gamma))
+\]
+となる（$W$ はロンスキアン）。
+一方で、\eqref{eq:reduced-fuchsian} は $(n-1)$ 階微分の項を持たない（係数が $0$ である）ため、命題\ref{prop:2.1_wronskian-ode}のアーベルの公式より、ロンスキアンの微分は
+\[
+\frac{\partial W}{\partial x} = -0 \cdot W = 0
+\]
+となる。すなわちロンスキアン $W(\vec{\varphi}_z)$ は $x$ に依存しないゼロでない定数である。
+定数は解析接続しても変化しないため $W(\vec{\varphi}_z^{\gamma}) = W(\vec{\varphi}_z)$ となり、これを先ほどの式と比較して
+\[
+\det(\Gamma_z(\gamma)) = 1
+\]
+が得られる。
+よって、\eqref{eq:reduced-fuchsian} のモノドロミー群は一般線形群 $GL(n, \mathbb{C})$ ではなく、特殊線形群 $SL(n, \mathbb{C})$ の部分群となることがわかった。すなわち、表現は
+\[
+\rho' : \pi_1(x_{0}, \mathbb{X}') \to SL(n, \mathbb{C})
+\]
+となる（ただし $\mathbb{X}' = \mathbb{P}^{1}(\mathbb{C}) \setminus (\Xi'(t) \cup \Lambda'(t))$）。
+
+\begin{definition}[SL型の微分方程式]
+    上記のように、$(n-1)$ 階微分の項が存在せず、モノドロミー群が $SL(n, \mathbb{C})$ の部分群となるような微分方程式を \textbf{SL型} という。
+\end{definition}
+
+\begin{proposition}\label{prop:equivalence_n_ode}
+    $n$ 階フックス型微分方程式 \eqref{eq:monodromy_deformation} のモノドロミー保存変形と、SL型に還元された $n$ 階フックス型微分方程式 \eqref{eq:reduced-fuchsian} のモノドロミー保存変形とは、1階フックス型微分方程式 \eqref{eq:auxiliary-phi} がモノドロミー保存変形を許すという条件のもとで同値である。
+\end{proposition}
+
+\begin{proof}
+パラメータ $t$ に依存する任意の閉じた道 $\gamma(t)$ に沿う解析接続を考える（解析接続と $t$ 微分は交換可能であることに注意する）。
+元の方程式 \eqref{eq:monodromy_deformation} の解の基本系を $\vec{\varphi}_y(x,t)$、SL型方程式 \eqref{eq:reduced-fuchsian} の解の基本系を $\vec{\varphi}_z(x,t)$ とし、それぞれのモノドロミー行列を $\Gamma_{y}(\gamma(t))$, $\Gamma_{z}(\gamma(t))$ とする。また、1階方程式 \eqref{eq:auxiliary-phi} の解 $\phi(x,t)$ が $\gamma(t)$ に沿って解析接続されたときにかかるスカラー倍（1次元モノドロミー）を $m(\gamma(t))$ とする。
+
+変換の定義より
+\[
+\vec{\varphi}_y(x,t) = \phi(x,t) \vec{\varphi}_z(x,t)
+\]
+であるから、これを $\gamma(t)$ に沿って解析接続すると、
+\begin{align*}
+\vec{\varphi}_y^{\gamma(t)}(x,t) &= \phi^{\gamma(t)}(x,t) \vec{\varphi}_z^{\gamma(t)}(x,t) \\
+&= \left( \phi(x,t) m(\gamma(t)) \right) \left( \vec{\varphi}_z(x,t) \Gamma_{z}(\gamma(t)) \right) \\
+&= \phi(x,t) \vec{\varphi}_z(x,t) \, m(\gamma(t)) \Gamma_{z}(\gamma(t)) \\
+&= \vec{\varphi}_y(x,t) \, m(\gamma(t)) \Gamma_{z}(\gamma(t))
+\end{align*}
+となる（スカラー $m(\gamma(t))$ は行列と可換であるため前に出せる）。
+一方で、定義より $\vec{\varphi}_y^{\gamma(t)} = \vec{\varphi}_y \Gamma_{y}(\gamma(t))$ であるから、両者を比較して
+\[
+\Gamma_{y}(\gamma(t)) = m(\gamma(t)) \Gamma_{z}(\gamma(t))
+\]
+という関係式が得られる。
+ここで、仮定より1階方程式 \eqref{eq:auxiliary-phi} はモノドロミー保存変形を許すため、スカラー $m(\gamma(t))$ はパラメータ $t$ に依存しない一定値 $m(\gamma)$ である。
+したがって、$\Gamma_{y}$ が $t$ に依存しないことと、$\Gamma_{z}$ が $t$ に依存しないことは完全に同値となる。
+ゆえに、元の方程式のモノドロミー保存変形と、SL型方程式のモノドロミー保存変形は同値である。
+\end{proof}
+%#endregion
+%#region
+\eqref{eq:monodromy_deformation}の変形微分方程式系は\eqref{eq:3.1_deformation_system}で与えられた。これを、\eqref{eq:3.1_matrix_P}、\eqref{eq:3.1_matrix_A}の表示を用いて、連立変形微分方程式系に書き直す。この微分方程式系は、基本解行列 $Y=Y(x,t)$ を用いて
+
+\begin{equation}
+  \begin{cases}
+    \displaystyle \frac{\partial Y}{\partial x} = P(x,t)Y \\
+    \displaystyle \frac{\partial Y}{\partial t_l} = A^{(l)}(x,t)Y \quad (l=1,2,\cdots,L)
+  \end{cases}
+\end{equation}
+
+と表されるのであった。いまの場合、基本解行列としては、\eqref{eq:monodromy_deformation}の解の基本系 $\vec{\varphi}(x,t)$ のロンスキー行列 $Y=W(\vec{\varphi})$ をとればよい。
+
+\begin{Q}[なぜ基本解行列 $Y(x,t)$ の微分方程式系\eqref{eq:3.1_deformation_system_matrix}から、交換子を含む完全積分可能条件が導かれるのか？]
+\textbf{A.} $\frac{\partial^2 Y}{\partial t_l \partial x} = \frac{\partial^2 Y}{\partial x \partial t_l}$ という偏微分の順序交換可能性（系の適合条件）を要求するためである。(3.6)の各々を他方の変数で微分して等置し、$Y$ が可逆（ロンスキアンが非零）であることを用いて右から $Y^{-1}$ を掛けることで、行列 $P, A^{(l)}$ に対する非線形な微分方程式であるゼロ曲率条件（ラックス方程式）が得られる。
+\end{Q}
+
+さて、微分方程式系\eqref{eq:3.1_deformation_system_matrix}の完全積分可能条件は、命題\ref{prop:3.1_compatibility}で与えた。すなわち
+
+\begin{align}
+  \frac{\partial}{\partial t_l}P(x,t) - \frac{\partial}{\partial x}A^{(l)}(x,t) &= [A^{(l)}(x,t), P(x,t)]\\
+  \frac{\partial}{\partial t_l}A^{(h)}(x,t) - \frac{\partial}{\partial t_h}A^{(l)}(x,t) &= [A^{(l)}(x,t), A^{(h)}(x,t)]
+\end{align}
+
+である。
+
+\begin{Q}[完全積分可能条件\eqref{eq:3.1_compatibility_PA}の両辺の行列について、そのトレース（跡）をとる操作は本質的に何を意味しているか？]
+\textbf{A.} 行列の交換子のトレースは常に $0$ であるため（$\mathrm{Trace}[A, P] = 0$）、右辺の複雑な非線形項が消去される。これにより、行列方程式から系全体の「行列式の対数微分」の挙動を支配する簡潔なスカラー方程式を抽出することができる。
+\end{Q}
+
+ここで、\eqref{eq:3.1_compatibility_PA}の両辺の行列についてそのトレースをとり、\eqref{eq:3.1_matrix_P}を用いると
+
+\begin{equation}\label{eq:3.3_trace_compatibility}
+  \frac{\partial}{\partial t_l}p_1(x,t) + n\frac{\partial}{\partial x}c^{(l)}(x,t) = 0
+\end{equation}
+\[
+  c^{(l)}(x,t) = \frac{1}{n}\mathrm{Trace}A^{(l)}(x,t) \quad (l=1,2,\cdots,L)
+\]
+
+を得る。この式は、1階微分方程式系
+
+\begin{equation}\label{eq:3.3_1-deformation_system}
+  \begin{cases}
+    \displaystyle \frac{\partial \phi}{\partial x} + \frac{1}{n}p_1(x,t)\phi = 0 \\[4mm]
+    \displaystyle \frac{\partial \phi}{\partial t_l} - c^{(l)}(x,t)\phi = 0
+  \end{cases}
+\end{equation}
+
+の積分可能条件であり，\eqref{eq:3.3_trace_compatibility}は方程式系\eqref{eq:3.3_1-deformation_system}のラックスの方程式に他ならない．
+
+さて，$\vec{\varphi}=\vec{\varphi}(x,t)$ を\eqref{eq:3.1_n-ODE}の解の基本系で，モノドロミー群が $t$ に依存しないもの，としよう．$\vec{\varphi}(x,t)$ は，変形微分方程式系\eqref{eq:3.1_deformation_system}の解の基本系である．このとき，微分方程式\eqref{eq:3.1_partial_t}の係数 $a_j^{(l)}(x,t)$ は公式\eqref{eq:3.1_cramer_wronskian}で与えられる．
+
+$\vec{\psi}(x,t)$ を，\eqref{eq:3.1_n-ODE}の別の解の基本系であるとすると，$n$ 次可逆行列 $G(t)$ がとれて
+
+\begin{equation}\label{eq:3.3_linear_transform_G}
+  \vec{\psi}(x,t) = \vec{\varphi}(x,t)G(t)
+\end{equation}
+
+となる．我々は $t$ について解析的な解の基本系のみを考えているから，$G(t)$ の各成分は $t$ の解析関数である．さて，$\vec{\varphi}(x,t)$ の，ある閉じた道 $\gamma$ に対する回路行列を $\Gamma(\gamma)$ とすると，$\vec{\psi}(x,t)$ の対応する回路行列は $G(t)^{-1}\Gamma(\gamma)G(t)$ である．
+
+\begin{Q}[なぜ $\vec{\psi}$ の回路行列は $G(t)^{-1}\Gamma(\gamma)G(t)$ となり、$G(t)=g(t)G$ の形であればモノドロミー群は $t$ に依存しなくなるのか？]
+\textbf{A.} $\vec{\varphi}$ を $\gamma$ に沿って解析接続すると $\vec{\varphi}\Gamma(\gamma)$ となる。したがって $\vec{\psi} = \vec{\varphi}G(t)$ を解析接続すると $(\vec{\varphi}\Gamma(\gamma))G(t)$ となるが、これを $\vec{\psi}$ 自身を基底として表し直すために $\vec{\varphi} = \vec{\psi}G(t)^{-1}$ を代入すると、$\vec{\psi} (G(t)^{-1}\Gamma(\gamma)G(t))$ となるからである。
+ここで $G(t) = g(t)G$（$g(t)$ はスカラー関数、$G$ は定数行列）と仮定すると、スカラー $g(t)$ は行列と可換であるため逆行列の $g(t)^{-1}$ とキャンセルし合い、回路行列は $G^{-1}\Gamma(\gamma)G$ となる。これは $t$ を含まない定数行列であるため、モノドロミー群は $t$ に依存しないことが保証される。
+\end{Q}
+
+特に，$g(t)$ を $t$ のスカラー関数，$G$ を $t$ に依存しない定数行列として
+
+\begin{equation}\label{eq:3.3_scalar_matrix_gG}
+  G(t) = g(t)G
+\end{equation}
+
+となっているとしよう．もちろん，考えている領域で $g(t) \neq 0$ である．このとき，\eqref{eq:3.3_linear_transform_G}で定義される解の基本系 $\vec{\psi}(x,t)$ のモノドロミー群も $t$ に依存しない．さらに，$\vec{\psi}(x,t)$ に対して
+
+\[
+  b_j^{(l)}(x,t) = \frac{w_j^{(l)}(\vec{\psi})}{w(\vec{\psi})}
+\]
+
+により，$x$ の有理関数 $b_j^{(l)}(x,t)$ を定めると，$\vec{\psi}(x,t)$ は，$b_j^{(l)}(x,t)$ を係数とする，変形微分方程式系の解である．ここで，$w_j^{(l)}(\vec{\psi})$ は，ロンスキアン $w(\vec{\psi})$ の第 $j$ 列ベクトル $\frac{\partial^{j-1}\vec{\psi}}{\partial x^{j-1}}$ を $\frac{\partial\vec{\psi}}{\partial t_l}$ で置き換えたものであった．上式の右辺に\eqref{eq:3.3_linear_transform_G}と\eqref{eq:3.3_scalar_matrix_gG}を代入すると，$j=2,\cdots,n$ については
+
+\begin{align*}
+  w_j^{(l)}(\vec{\psi}) &= g(t)^n (\det G) \cdot w_j^{(l)}(\vec{\varphi}) \quad (l=1,\cdots,L) \\
+  w(\vec{\psi}) &= g(t)^n (\det G) \cdot w(\vec{\varphi})
+\end{align*}
+
+が成り立ち，$j \geqq 2$ のとき $a_j^{(l)}(x,t) = b_j^{(l)}(x,t)$ である．
+
+\begin{Q}[$w_j^{(l)}(\vec{\psi})$ の計算において、なぜ $j \geqq 2$ のときのみ綺麗な比例関係が成り立ち、係数が不変（$a_j^{(l)} = b_j^{(l)}$）となるのか？]
+\textbf{A.} 行列式（ロンスキアン）の多重線形性と交代性による。
+$\vec{\psi} = g(t)\vec{\varphi}G$ を $t_l$ で偏微分すると、積の微分法により
+$\frac{\partial \vec{\psi}}{\partial t_l} = \frac{\partial g(t)}{\partial t_l}\vec{\varphi}G + g(t)\frac{\partial \vec{\varphi}}{\partial t_l}G$
+となる。これをロンスキアンの第 $j$ 列に代入して展開すると、第1項（$\partial_{t_l}g$ を含む項）は、「第1列（$\vec{\varphi}G$）」に比例するベクトルとなる。
+$j \geqq 2$ の場合、行列式の中には既に第1列として $\vec{\varphi}G$ が存在するため、この比例するベクトルの寄与は行列式の交代性により完全に $0$ になる。結果として第2項のみが残り、$g(t)^n (\det G)$ が綺麗に括り出され、比をとると約分されて元の係数と一致する。
+（逆に言えば、$j=1$ のときは第1列そのものを置き換えるため、この項が消えずに残り、係数が変化することを予見させる）。
+\end{Q}
+
+一方，$j=1$ のときは
+
+\[
+  w_1^{(l)}(\vec{\psi}) = g(t)^{n-1} \frac{\partial g}{\partial t_l}(t)(\det G) \cdot w(\vec{\varphi}) + g(t)^n (\det G) \cdot w_1^{(l)}(\vec{\varphi}) \quad (l=1,\cdots,L)
+\]
+となる．すなわち
+\[
+  b_1^{(l)}(x,t) = \frac{\partial}{\partial t_l} \log g(t) + a_1^{(l)}(x,t)
+\]
+である．
+
+\begin{Q}[$j=1$ のときだけ係数が不変にならず、「対数微分 $\frac{\partial}{\partial t_l} \log g(t)$」のズレが生じることの理論的意義は何か？]
+\textbf{A.} $j \geqq 2$ の係数 $a_j^{(l)}$ がゲージ変換に依存しない「真の不変量」であるのに対し、$a_1^{(l)}$ はゲージ（基本解のスケール因子 $g(t)$）の取り方に依存して変動する量であることを示している。このズレの項 $\partial_{t_l} \log g(t)$ こそが、方程式系の変形に伴う全体のスケール変化を司っており、後にパンルヴェ方程式等において「$\tau$ 関数の対数微分」として見かけの特異点のダイナミクスを記述する極めて重要な役割を果たす。
+\end{Q}
+
+実は，ここで述べたことの逆が成り立つ．
+
+\begin{proposition}\label{prop:3.3_transform_G_implies_scalar_gG}
+関係\eqref{eq:3.3_linear_transform_G}で結ばれている2つの解の基本系 $\vec{\varphi}(x,t), \vec{\psi}(x,t)$ のモノドロミー群がともに $t$ に依存しないならば，\eqref{eq:3.3_scalar_matrix_gG}（すなわち $G(t)=g(t)G$）が成立する．
+\end{proposition}
+
+この命題により，変形微分方程式系の係数
+\[
+  a_j^{(l)}(x,t) \quad (j=2,\cdots,n, \quad l=1,\cdots,L)
+\]
+は，微分方程式\eqref{eq:3.1_n-ODE}だけで決まり、モノドロミー群が $t$ に依存しない解の基本系の選び方には依らない．我々は $n=2$ の場合にこの事実を，ラックスの方程式を用いて確かめたのであった．
+
+この節の残りを使って、命題\ref{prop:3.3_transform_G_implies_scalar_gG}を証明しよう。そのために3つの命題を準備する。まず、単独高階微分方程式\eqref{eq:3.1_n-ODE}を，\eqref{eq:3.1_matrix_P}、\eqref{eq:3.1_matrix_A}により連立微分方程式系に書き直し，変形微分方程式系\eqref{eq:3.1_deformation_system_matrix}を考えよう．$\vec{\varphi}(x,t)$ と $\vec{\psi}(x,t)$ を、命題\ref{prop:3.3_transform_G_implies_scalar_gG}の条件を満たす，\eqref{eq:3.1_n-ODE}の解の基本系とする．このとき，$\vec{\varphi}(x,t)$ に対し，$Y=W(\vec{\varphi})$ の満足する変形微分方程式系の係数を $A_1^{(l)}(x,t)$，同様に $\vec{\psi}(x,t)$ から決まる変形微分方程式系の係数を $A_2^{(l)}(x,t)$ とする。この2種類の行列 $A_1^{(l)}, A_2^{(l)}$ について，\eqref{eq:3.1_compatibility_PA}と\eqref{eq:3.1_compatibility_AA}が成立する．
+
+\[
+  B^{(l)}(x,t) = A_1^{(l)}(x,t) - A_2^{(l)}(x,t)
+\]
+とおくと，\eqref{eq:3.1_compatibility_PA}よりこれは行列微分方程式
+
+\begin{equation}\label{eq:3.3_ODE_matrix_B}
+  \frac{\partial}{\partial x} B^{(l)}(x,t) + \left[ B^{(l)}(x,t), P(x,t) \right] = 0
+\end{equation}
+を満たす．
+
+\begin{Q}[なぜ2つの係数行列の差 $B^{(l)} = A_1^{(l)} - A_2^{(l)}$ を考え、方程式(3.49)を導出したのか？]
+\textbf{A.} 非線形な完全積分可能条件（ラックス方程式）から、解析しやすい「線形な同次方程式」を抽出するためである。
+$A_1^{(l)}, A_2^{(l)}$ は共に $\partial_{t_l} P - \partial_x A = [A, P]$ を満たす。これらを辺々引くと、左辺の $\partial_{t_l} P$ が完全に相殺されて消去され、$- \partial_x (A_1^{(l)} - A_2^{(l)}) = [A_1^{(l)} - A_2^{(l)}, P]$ となる。これにより、$B^{(l)}$ は $t$ 微分を含まない、$x$ 方向の線形な交換子方程式(3.49)を満たすことがわかり、その代数的な構造（ランクや成分の性質）を決定しやすくなる。
+\end{Q}
+
+ここで一般に，$Z$ を未知行列とし，行列微分方程式
+\begin{equation}\label{eq:3.3_ODE_matrix_Z}
+  \frac{dZ}{dx} + [Z, P(x)] = 0
+\end{equation}
+
+を考えよう．いま，$Y(x)$ を微分方程式
+\begin{equation}\label{eq:3.3_ODE_matrix_Y}
+  \frac{dY}{dx} = P(x)Y
+\end{equation}
+の基本解行列，$B_0$ を $x$ には依存しない可逆行列としたとき，\eqref{eq:3.3_ODE_matrix_Z}の一般解は
+\[
+  Z(x) = Y(x)B_0 Y(x)^{-1}
+\]
+で与えられる．これは計算で簡単に確かめることができるから，詳細は省略する．
+
+\begin{Q}[「詳細は省略する」とあるが、一般解 $Z(x) = Y(x)B_0 Y(x)^{-1}$ が行列微分方程式 $\frac{dZ}{dx} + {[}Z, P{]} = 0$ を満たすことは、具体的にどう計算すれば確かめられるか？]
+\textbf{A.} 基本解行列 $Y$ が $\frac{dY}{dx} = PY$ を満たすことと、逆行列の微分の公式 $\frac{d}{dx}(Y^{-1}) = -Y^{-1}\frac{dY}{dx}Y^{-1} = -Y^{-1}P$ を用いる。積の微分法則より、
+\begin{align*}
+  \frac{dZ}{dx} &= \frac{dY}{dx}B_0 Y^{-1} + Y B_0 \frac{d(Y^{-1})}{dx} \\[2mm]
+  &= (PY)B_0 Y^{-1} + Y B_0 (-Y^{-1}P) \\[2mm]
+  &= P(Y B_0 Y^{-1}) - (Y B_0 Y^{-1})P \\[2mm]
+  &= PZ - ZP = -[Z, P]
+\end{align*}
+となり、移項すれば $\frac{dZ}{dx} + [Z, P] = 0$ を満たすことがわかる。
+\end{Q}
+
+この結果をいま考えている場合に適用すると，次のことがわかる．
+
+\begin{lemma}\label{lem:3.3_solution_ODE}
+行列微分方程式\eqref{eq:3.3_ODE_matrix_B}の一般解は，\eqref{eq:3.3_ODE_matrix_Y}の基本解行列 $Y=Y(x,t)$ により
+\[
+  B^{(l)}(x,t) = Y(x,t)B_0^{(l)}(t)Y(x,t)^{-1}
+\]
+で与えられる．ここで $B_0^{(l)}(t)$ は，成分が $t$ の解析関数である可逆行列である．
+\end{lemma}
+
+さらに，微分方程式\eqref{eq:3.1_n-ODE}に対する仮定(P3)の下で，次のことが成り立つ．
+
+\begin{lemma}\label{lem:3.3_scalar_matrix_B}
+$B_0^{(l)}(t)$ ($l=1,\cdots,L$) はスカラー行列である．
+\end{lemma}
+
+\begin{Q}[補題3.2において、なぜ仮定(P3)を置くだけで $B_0^{(l)}(t)$ が「スカラー行列」であると強力に結論づけられるのか？]
+\textbf{A.} 表現論における「シューアの補題（Schur's lemma）」が本質的な役割を果たしている。
+$B^{(l)}(x,t)$ は $x$ の有理関数行列（1価）であるため、特異点の周りを回る解析接続（モノドロミー変換 $Y \mapsto Y\Gamma$）に対して不変でなければならない。これを $B^{(l)} = Y B_0^{(l)} Y^{-1}$ に代入すると、$(Y\Gamma) B_0^{(l)} (Y\Gamma)^{-1} = Y B_0^{(l)} Y^{-1}$ となり、整理すると $\Gamma B_0^{(l)} = B_0^{(l)} \Gamma$ を得る。つまり $B_0^{(l)}$ はすべてのモノドロミー行列 $\Gamma$ と可換である。
+ここで仮定(P3)によりモノドロミー表現が既約であるとすれば、シューアの補題より、「すべての表現行列と可換な行列はスカラー行列に限られる」ため、$B_0^{(l)}(t)$ はスカラー行列となる。
+\end{Q}
+
+したがって，スカラー関数 $f_0^{(l)}(t)$ により，$B_0^{(l)}(t) = f_0^{(l)}(t)I_n$ と表すことができる．$I_n$ は $n$ 次単位行列である．このとき，\eqref{eq:3.3_linear_transform_G}の行列 $G(t)$ について次のことが成り立つ．
+
+\begin{lemma}\label{lem:3.3_t_PDE_matrix_G}
+行列 $G(t)$ は微分方程式系
+\begin{equation}\label{eq:3.3_t_PDE_matrix_G}
+  \frac{\partial}{\partial t_l}G(t) = -f_0^{(l)}(t)G(t) \quad (l=1,\cdots,L)
+\end{equation}
+を満たす．この方程式系は完全積分可能である．
+\end{lemma}
+
+補題\ref{lem:3.3_scalar_matrix_B}、補題\ref{lem:3.3_t_PDE_matrix_G}を仮定すれば、命題\ref{prop:3.3_transform_G_implies_scalar_gG}の証明は簡単である．
+
+\begin{proof}[命題\ref{prop:3.3_transform_G_implies_scalar_gG}の証明]
+微分方程式\eqref{eq:3.3_t_PDE_matrix_G}の完全積分可能条件から
+\begin{equation}\label{eq:3.3_t-ODE_scalar_g}
+  \frac{\partial}{\partial t_l}g(t) = -f_0^{(l)}(t)g(t) \quad (l=1,\cdots,L)
+\end{equation}
+というスカラー関数 $g(t)$ が存在する．この関数を用いて，\eqref{eq:3.3_t_PDE_matrix_G}の一般解は……
+
+\end{proof}
+%#endregion

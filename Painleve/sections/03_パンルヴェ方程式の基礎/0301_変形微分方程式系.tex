@@ -1,0 +1,395 @@
+% !TEX root = ../main.tex
+
+%#region
+係数 $p_{j}(x,t)$ は $x$ の有理関数であり、微分方程式 
+\begin{equation}\label{eq:3.1_n-ODE}
+\frac{d^{n}y}{dx^{n}}+\sum_{i=1}^{n}p_{j}(x,t)\frac{d^{n-j}y}{dx^{n-j}}=0
+\end{equation}
+が領域 $U$ 上のパラメータ $t$ について解析的であると仮定する。また、この章を通じて (P1)--(P3) が常に成り立つと仮定する。
+
+\begin{proposition}\label{prop:3.1_time_evolution_equation}
+解の基本系 $\vec{\varphi}(x,t)$ のモノドロミー群が $t$ に依存しない（すなわち条件(H): $\hat{\rho}(t) = \hat{\rho}$ を満たす）と仮定する。このとき、ある $x$ の有理関数
+\[
+a_{1}^{(l)}(x,t), a_{2}^{(l)}(x,t), \cdots, a_{n}^{(l)}(x,t) \quad (l=1,2,\cdots,L)
+\]
+が存在して、解の基本系 $\vec{\phi} = \vec{\varphi}(x,t)$ は元の $x$ に関する微分方程式 \eqref{eq:monodromy_deformation} の他に、次の $t_l$ に関する微分方程式系をも満たす。
+\begin{equation}\label{eq:3.1_partial_t}
+\frac{\partial \vec{\phi}}{\partial t_{l}} = \sum_{j=1}^{n}a_{j}^{(l)}(x,t)\frac{\partial^{j-1}\vec{\phi}}{\partial x^{j-1}} \quad (l=1,2,\cdots,L)
+\end{equation}
+\end{proposition}
+
+\begin{Q}[【核心】なぜ「モノドロミーが $t$ に依存しない」というだけで、時間微分 $\partial \vec{\phi} / \partial t_{l}$ が「空間微分の線形結合」という綺麗な形で書けるのか？]
+\textbf{A.} 微分方程式の「解空間が $n$ 次元であること」と「解析接続と時間微分が交換すること」の必然的な帰結である。
+解の基本系 $\vec{\varphi}(x,t)$ を経路 $\gamma$ に沿って解析接続すると $\vec{\varphi}^\gamma = \vec{\varphi} \Gamma(\gamma)$ となる。この両辺を $t_l$ で偏微分すると、仮定より回路行列 $\Gamma(\gamma)$ は $t$ に依存しない（定数行列）ため、
+\[
+\left(\frac{\partial \vec{\varphi}}{\partial t_l}\right)^\gamma = \frac{\partial \vec{\varphi}}{\partial t_l} \Gamma(\gamma)
+\]
+となる。これは、時間微分 $\partial \vec{\varphi} / \partial t_l$ もまた、元の $\vec{\varphi}$ と\textbf{全く同じモノドロミー（分岐の規則）}を持つことを意味する。
+同じモノドロミーを持つ多価関数は互いに関係づけられ、元の微分方程式から作られる「$\vec{\varphi}$ とその $x$ に関する $(n-1)$ 階までの導関数（これらは解空間の完全な基底をなす）」の線形結合として、一意に表すことができるのである。
+\end{Q}
+
+したがって、$\vec{\phi}=\vec{\varphi}(x,t)$ は $x$ と $t$ に関する以下の連立微分方程式系（$\vec{\phi}$ の各成分が第1式を満たす）の解となる。
+\begin{equation}\label{eq:3.1_deformation_system}
+\begin{cases}
+\displaystyle \frac{\partial^{n}\vec{\phi}}{\partial x^{n}} + \sum_{j=1}^{n} p_{j}(x,t)\frac{\partial^{n-j}\vec{\phi}}{\partial x^{n-j}} = \vec{0}  \\[1em]
+\displaystyle \frac{\partial \vec{\phi}}{\partial t_{l}} = \sum_{j=1}^{n}a_{j}^{(l)}(x,t)\frac{\partial^{j-1}\vec{\phi}}{\partial x^{j-1}} \quad (l=1,\cdots,L)
+\end{cases}
+\end{equation}
+
+\begin{Q}[【核心】この「空間方向の微分方程式（$x$-系）」と「時間方向の微分方程式（$t$-系）」の連立方程式 \eqref{eq:3.1_deformation_system} は、幾何学やソリトン理論などで現れる何と同等の構造か？]
+\textbf{A.} \textbf{「ラックス対（Lax pair）」}あるいは\textbf{「線形補助問題」}と呼ばれる構造そのものである。
+この2つの線形微分方程式が「同時に同じ解 $\vec{\phi}$ を持つ」ためには、微分の順序交換 $\frac{\partial}{\partial t_l} \frac{\partial^n}{\partial x^n} = \frac{\partial^n}{\partial x^n} \frac{\partial}{\partial t_l}$ が恒等的に成り立つ必要がある（両立条件／完全積分可能条件）。この両立条件を係数 $p_j(x,t)$ と $a_j^{(l)}(x,t)$ の関係式として書き下すと、それらが満たすべき「非線形偏微分方程式」が得られる。これがパンルヴェ方程式などの非線形方程式を導出する最強のメカニズム（等モノドロミー変形法）である。
+\end{Q}
+
+\begin{definition}[変形微分方程式系]
+    $a_{1}^{(l)}(x,t), a_{2}^{(l)}(x,t), \cdots, a_{n}^{(l)}(x,t) \quad (l=1,2,\cdots,L)$ が $x$ の有理関数であるとき、連立系 \eqref{eq:3.1_deformation_system} を \eqref{eq:monodromy_deformation} のモノドロミー保存変形の\textbf{変形微分方程式系（system of deformation equations）}という。
+    また、\eqref{eq:3.1_deformation_system} の解 $\vec{\phi}=\vec{\varphi}(x,t)$ で、各時刻 $t$ において \eqref{eq:monodromy_deformation} の解の基本系となっているものを、\eqref{eq:3.1_deformation_system} の\textbf{解の基本系}という。
+\end{definition}
+
+また、逆の命題も成り立つ。
+\begin{proposition}\label{prop:3.1_fundamental_system_preserves_monodromy}
+連立微分方程式系 \eqref{eq:3.1_deformation_system} に解の基本系 $\vec{\phi}=\vec{\varphi}(x,t)$ が存在すれば、その $\vec{\varphi}(x,t)$ が持つ元の微分方程式に関するモノドロミー群は、パラメータ $t$ に依存しない。
+\end{proposition}
+
+\begin{Q}[【核心】なぜ「$t$-方向の微分方程式も同時に満たす解が存在する」だけで、大域的な性質であるモノドロミーが不変になると断言できるのか？]
+\textbf{A.} $t$-方向の微分方程式の係数 $a_j^{(l)}(x,t)$ が「$x$ の有理関数（一価関数）」であることが決定的に効いているからである。
+
+解 $\vec{\varphi}$ が特異点の周りを回って $\vec{\varphi}\Gamma$ に解析接続されたとする。このとき $t$-方向の方程式 $\partial_t \vec{\varphi} = A(x,t)\vec{\varphi}$ （※右辺は空間微分の線形結合を略記）も一緒に解析接続されるが、係数 $A(x,t)$ は一価の有理関数なので特異点を回っても全く変化しない。したがって、解析接続された先でも $\partial_t (\vec{\varphi}\Gamma) = A(x,t)(\vec{\varphi}\Gamma)$ がそのまま成り立つ。
+積の微分法則を展開すると、これが成り立つためには $\Gamma$ の時間微分がゼロ、すなわち $\partial_t \Gamma = 0$ でなければならない。有理関数係数の微分方程式で時間発展を縛ること自体が、モノドロミーを固定する強力な楔（くさび）となっているのである。
+\end{Q}
+
+\begin{definition}[ホロノミックな変形]
+一般に、$x$ の有理関数 $p_{1}(x,t), \cdots, p_{n}(x,t)$ および $a_{1}^{(l)}(x,t), \cdots, a_{n}^{(l)}(x,t) \quad (l=1,\cdots,L)$ を係数とする連立系 \eqref{eq:3.1_deformation_system} を考える。この \eqref{eq:3.1_deformation_system} に解の基本系 $\vec{\phi}=\vec{\varphi}(x,t)$ が存在するとき、この連立微分方程式系は、空間方向の微分方程式 \eqref{eq:monodromy_deformation} の\textbf{ホロノミックな変形（holonomic deformation）}を定めるという。
+\end{definition}
+
+\begin{Q}[【補足】「モノドロミー保存変形」と「ホロノミック変形」という2つの言葉は、どのように使い分けるべきか？]
+\textbf{A.} 
+\begin{itemize}
+    \item \textbf{モノドロミー保存変形:} 「大域的な解析接続の規則（モノドロミー）が変わらない」という\textbf{解析的・幾何学的な現象（目的）}を指す言葉。
+    \item \textbf{ホロノミック変形:} 「変数が複数あるのに、解空間が有限次元に定まるような過剰決定系（ラックス対）が存在する」という\textbf{代数的な構造（手段）}を指す言葉。
+\end{itemize}
+一般の微分方程式においてはこの2つは必ずしも一致しないが、今回のように元の微分方程式 \eqref{eq:monodromy_deformation} が\textbf{フックス型微分方程式}である場合に限り、特異点の確定性という強力な性質のおかげで、両者は完全に同値な概念となる。
+\end{Q}
+
+したがって、\eqref{eq:monodromy_deformation} がフックス型微分方程式の際には、ホロノミックな変形はそのままモノドロミー保存変形を意味する。
+%#endregion
+%region
+単独高階微分方程式の時と同様に連立微分方程式系
+\begin{equation}\label{eq:3.1_x_ODE_matrix}
+\frac{d \vec{\phi}}{dx} = P(x,t)\vec{\phi}
+\end{equation}
+のフックスの問題、モノドロミー保存変形を考えることができる。\eqref{eq:3.1_x_ODE_matrix}の解の基本系を$Y(x,t)$とおくと、上の命題に対する次の命題が得られる。
+\begin{proposition}\label{prop:3.1_monodromy_preservation_condition}
+基本解行列 $Y(x,t)$ のモノドロミー群が $t$ によらないための必要十分条件は、$x$ の有理関数を成分とする行列 $A^{(l)}(x,t) \quad (l=1,\cdots,L)$ が存在して、$Y(x,t)$ は元の微分方程式 $\frac{\partial Y}{\partial x} = P(x,t)Y$ に加えて、
+\begin{equation}
+\frac{\partial Y}{\partial t_l} = A^{(l)}(x,t)Y(x,t) \quad (l=1,\cdots,L)
+\label{eq:3.1_t_ODE_matrix}
+\end{equation}
+を満足することである。
+\end{proposition}
+
+命題\ref{prop:3.1_monodromy_preservation_condition}の証明は、命題\ref{prop:3.1_time_evolution_equation}、\ref{prop:3.1_fundamental_system_preserves_monodromy}の証明とほとんど同様であるから、省略する。連立微分方程式系\eqref{eq:3.1_x_ODE_matrix}に対しても
+
+\begin{equation}\label{eq:3.1_deformation_system_matrix}
+  \begin{cases}
+    \displaystyle \frac{\partial Y}{\partial x} = P(x,t)Y \\[4mm]
+    \displaystyle \frac{\partial Y}{\partial t_l} = A^{(l)}(x,t)Y \quad (l=1,2,\cdots,L)
+  \end{cases}
+\end{equation}
+
+を，\textbf{変形微分方程式系}という．また，\eqref{eq:3.1_deformation_system_matrix}が可逆行列解 $Y(x,t)$ をもつときには，\eqref{eq:3.1_deformation_system_matrix}は\eqref{eq:3.1_x_ODE_matrix}の\textbf{ホロノミックな変形}を定める，という．
+
+\begin{Q}[「\eqref{eq:3.1_deformation_system_matrix}が可逆行列解をもつ」ことが、なぜ「モノドロミー保存変形（ホロノミックな変形）」と呼ばれる性質を保証するのか？]
+\textbf{A.} 可逆な基本解行列 $Y(x,t)$ が大域的に存在するということは、変数 $x$ に関する特異点の周りを回る解析接続（モノドロミー表現）が、パラメータ $t$ の変動に対して滑らかに追従し、位相的な不変量として一定に保たれることを意味する。つまり、「方程式の係数 $P(x,t)$ は $t$ によって変形されるが、その解の大域的な多価性の構造（特異点の性質など）は変化しない」という強い制約（ホロノミック性）を満たしているからである。
+\end{Q}
+
+フックス型微分方程式系\eqref{eq:3.1_x_ODE_matrix}のモノドロミー保存変形を決定するためには，変形微分方程式系\eqref{eq:3.1_deformation_system_matrix}を調べればよいことがわかった.まず命題3.3を使いやすい形に書き直そう。ここでは、2つの行列 $A, B$ の交換子を $[A, B] = AB - BA$ と書く．
+
+\begin{proposition}\label{prop:3.1_compatibility}
+変形微分方程式系\eqref{eq:3.1_deformation_system_matrix}が可逆行列解 $Y(x,t)$ をもつための必要十分条件は，$P(x,t)$ と $A^{(1)}(x,t), \cdots, A^{(L)}(x,t)$ について微分方程式系
+
+\begin{align}
+  \frac{\partial}{\partial t_l}P(x,t) - \frac{\partial}{\partial x}A^{(l)}(x,t) &= \left[ A^{(l)}(x,t), P(x,t) \right] \label{eq:3.1_compatibility_PA}\\
+  \frac{\partial}{\partial t_l}A^{(h)}(x,t) - \frac{\partial}{\partial t_h}A^{(l)}(x,t) &= \left[ A^{(l)}(x,t), A^{(h)}(x,t) \right] \label{eq:3.1_compatibility_AA}
+\end{align}
+
+が成立することである．ただし，$l,h=1,\cdots,L$ である．
+\end{proposition}
+
+\begin{proof}
+\eqref{eq:3.1_deformation_system_matrix}が可逆行列解 $Y(x,t)$ をもてば、\eqref{eq:3.1_compatibility_PA}、\eqref{eq:3.1_compatibility_AA}は\eqref{eq:3.1_deformation_system_matrix}の完全積分条件として直ちに従う．実際，\eqref{eq:3.1_deformation_system_matrix}の第1式を $t_l$ で微分し、第2式を $x$ で微分して
+\[
+  \frac{\partial}{\partial x}\frac{\partial}{\partial t_l}Y(x,t) = \frac{\partial}{\partial t_l}\frac{\partial}{\partial x}Y(x,t)
+\]
+を使えば\eqref{eq:3.1_compatibility_PA}は直ちに出る。\eqref{eq:3.1_compatibility_AA}も同様である．
+
+偏微分の順序交換 $\frac{\partial^2 Y}{\partial t_l \partial x} = \frac{\partial^2 Y}{\partial x \partial t_l}$ （ゼロ曲率条件）を用いる。
+
+\eqref{eq:3.1_deformation_system_matrix}の第1式を $t_l$ で微分し、第2式を代入すると：
+\[
+  \frac{\partial}{\partial t_l}\left(\frac{\partial Y}{\partial x}\right) 
+  = \frac{\partial P}{\partial t_l}Y + P\frac{\partial Y}{\partial t_l} 
+  = \frac{\partial P}{\partial t_l}Y + P A^{(l)}Y
+\]
+同様に、\eqref{eq:3.1_deformation_system_matrix}の第2式を $x$ で微分し、第1式を代入すると：
+\[
+  \frac{\partial}{\partial x}\left(\frac{\partial Y}{\partial t_l}\right) 
+  = \frac{\partial A^{(l)}}{\partial x}Y + A^{(l)}\frac{\partial Y}{\partial x} 
+  = \frac{\partial A^{(l)}}{\partial x}Y + A^{(l)} P Y
+\]
+これらが等しいとおき、共通する $Y$ で括って整理すると：
+\[
+  \left( \frac{\partial P}{\partial t_l} - \frac{\partial A^{(l)}}{\partial x} \right) Y 
+  = \left( A^{(l)} P - P A^{(l)} \right) Y
+\]
+仮定より $Y$ は可逆（逆行列 $Y^{-1}$ が存在）であるから、右から $Y^{-1}$ を掛けることでただちに\eqref{eq:3.1_compatibility_PA}が得られる。
+
+\eqref{eq:3.1_compatibility_AA}についても全く同様に、\eqref{eq:3.1_deformation_system_matrix}の第2式同士（$t_l$ による微分と $t_h$ による微分）の順序交換から導出される。
+
+そこで今度は，\eqref{eq:3.1_compatibility_PA}と\eqref{eq:3.1_compatibility_AA}を仮定して\eqref{eq:3.1_deformation_system_matrix}の可逆行列解 $Y(x,t)$ を構成しよう．この $Y(x,t)$ は\eqref{eq:3.1_x_ODE_matrix}の基本解行列であり，そのモノドロミーは $t$ に依らない．$x_0$ を $P(x,t)$ の正則点とし，\eqref{eq:3.1_x_ODE_matrix}の行列解 $\tilde{Y}(x,t)$ を初期条件
+\[
+  \tilde{Y}(x_0,t) = I
+\]
+により定める．$I=I_n$ は $n$ 次の単位行列である．
+
+\begin{Q}[なぜここで $\tilde{Y}(x,t)$ という新たな解を導入し、さらに次式で $W^{(l)}(x,t)$ を定義するのか？]
+\textbf{A.} 最終的に欲しいのは、$x$ 方向と $t$ 方向の両方の微分方程式を満たす $Y(x,t)$ である。まず $x$ 方向の方程式を満たす $\tilde{Y}$ を作ったが、これが $t$ 方向の方程式（$\partial_t \tilde{Y} = A\tilde{Y}$）をも満たすとは限らない。そこで、その「ズレ（誤差）」を測る行列 $W^{(l)}$ を定義し、完全積分可能条件\eqref{eq:3.1_compatibility_PA}を用いれば「このズレ自体がコントロール可能である」ことを示すためである。
+\end{Q}
+
+さて
+\begin{equation}\label{eq:W_def}
+  W^{(l)}(x,t) = A^{(l)}(x,t)\tilde{Y}(x,t) - \frac{\partial}{\partial t_l}\tilde{Y}(x,t)
+\end{equation}
+\[
+  E^{(l)}(t) = A^{(l)}(x_0,t)
+\]
+とおくと，$l=1,2,\cdots,L$ について次式が成り立つ．
+\begin{equation}\label{eq:W_rel}
+  W^{(l)}(x,t) = \tilde{Y}(x,t)E^{(l)}(t)
+\end{equation}
+
+なぜならば，\eqref{eq:3.1_compatibility_PA}（すなわち $\frac{\partial A^{(l)}}{\partial x} + A^{(l)}P - \frac{\partial P}{\partial t_l} = PA^{(l)}$）より
+\begin{align*}
+  \frac{\partial}{\partial x}W^{(l)} 
+  &= \left( \frac{\partial}{\partial x}A^{(l)} \right)\tilde{Y} + A^{(l)}\frac{\partial}{\partial x}\tilde{Y} - \frac{\partial}{\partial t_l}\frac{\partial}{\partial x}\tilde{Y} \\[2mm]
+  &= \left( \frac{\partial}{\partial x}A^{(l)} + A^{(l)}P - \frac{\partial}{\partial t_l}P \right)\tilde{Y} - P\frac{\partial}{\partial t_l}\tilde{Y} \\[2mm]
+  &= P \left( A^{(l)}\tilde{Y} - \frac{\partial}{\partial t_l}\tilde{Y} \right) \\[2mm]
+  &= P W^{(l)}
+\end{align*}
+すなわち，$W^{(l)} = W^{(l)}(x,t)$ も\eqref{eq:3.1_x_ODE_matrix}の行列解である。
+
+\begin{Q}[$W^{(l)}$ が\eqref{eq:3.1_x_ODE_matrix}の行列解であることから、なぜ直ちに\eqref{eq:W_rel}が導かれるのか？]
+\textbf{A.} 線形常微分方程式 $\frac{\partial Z}{\partial x} = P(x,t)Z$ の任意の解は、基本解行列 $\tilde{Y}(x,t)$ に $x$ に依存しない定数行列 $C(t)$ を右から掛けた $Z(x,t) = \tilde{Y}(x,t)C(t)$ の形で一意に表される。ここで $x=x_0$ を代入すると、$\tilde{Y}(x_0,t) = I$ より $C(t) = Z(x_0,t)$ となる。
+いま $Z = W^{(l)}$ とすれば、\eqref{eq:W_def}より
+$W^{(l)}(x_0,t) = A^{(l)}(x_0,t)I - \frac{\partial I}{\partial t_l} = E^{(l)}(t) - 0 = E^{(l)}(t)$ 
+となるため、$W^{(l)}(x,t) = \tilde{Y}(x,t)E^{(l)}(t)$ が従う。
+\end{Q}
+
+次に\eqref{eq:3.1_compatibility_AA}で $x=x_0$ とおいた式は、$U$ 上の微分方程式系
+\[
+  \frac{\partial}{\partial t_l}G(t) = E^{(l)}(t)G(t)
+\]
+の、積分可能条件を与える。そこで、この微分方程式系の $G(t_0)=I$ となる、$t=t_0$ の近傍で定義された解 $G(t)$ をとり
+\[
+  Y(x,t) = \tilde{Y}(x,t)G(t)
+\]
+とおく．
+
+\begin{Q}[$Y(x,t) = \tilde{Y}(x,t)G(t)$ とおくことで、なぜ所望の可逆行列解が構成できたと言えるのか？]
+\textbf{A.} $\tilde{Y}(x,t)$ は $x$ 方向の微分方程式を満たすが、$t$ 方向のそれは満たさなかった。しかし、直前で構成した $G(t)$ は $x$ に依存しないため、$Y$ にしても $x$ 方向の解であるという性質は壊れない。その上で、懸案だった $t$ 方向の微分を計算すると、$G(t)$ が見事に「$\tilde{Y}$ の $t$ 方向のズレ」を相殺し、$\partial_{t_l}Y = A^{(l)}Y$ が成立するからである。
+\end{Q}
+
+この $Y(x,t)$ はもちろん\eqref{eq:3.1_x_ODE_matrix}の基本解行列であるが同時に
+\begin{align*}
+  \frac{\partial}{\partial t_l}Y 
+  &= \left( \frac{\partial}{\partial t_l}\tilde{Y} \right)G + \tilde{Y}\frac{\partial}{\partial t_l}G \\[2mm]
+  &= \left( A^{(l)}\tilde{Y} - \tilde{Y}E^{(l)} \right)G + \tilde{Y}E^{(l)}G \\[2mm]
+  &= A^{(l)}\tilde{Y}G \\[2mm]
+  &= A^{(l)}Y
+\end{align*}
+より，\eqref{eq:3.1_t_ODE_matrix}も満足する。この計算では、\eqref{eq:W_def}と\eqref{eq:W_rel}から得られる関係式 $\frac{\partial \tilde{Y}}{\partial t_l} = A^{(l)}\tilde{Y} - \tilde{Y}E^{(l)}$ を用いた。以上により命題\ref{prop:3.1_compatibility}が示された。
+\end{proof}
+
+%#endregion
+%#region
+上で与えた証明は、L. Schlesinger によるもので，$Y(x,t)$ の構成法を与えている．条件\eqref{eq:3.1_compatibility_PA}は、微分作用素
+\[
+  \mathcal{L} = \frac{\partial}{\partial x} - P(x,t)
+\]
+を用いると，次のソリトン理論で見慣れた形に表される．
+
+\begin{equation}\label{eq:3.1_lax_equation}
+  \frac{\partial}{\partial t_l}\mathcal{L} = [A^{(l)}, \mathcal{L}]
+\end{equation}
+
+\begin{Q}[微分作用素 $\mathcal{L}$ を用いて完全積分可能条件を $\frac{\partial \mathcal{L}}{\partial t_l} = {[}A^{(l)}, \mathcal{L}{]}$ と書くことの本質的な意義は何か？]
+\textbf{A.} これは「ラックス方程式（Lax equation）」と呼ばれる普遍的な形である。この表示は、「作用素 $\mathcal{L}$ のスペクトル（固有値などの構造）が、時間パラメータ $t_l$ の発展に対して不変に保たれる（等スペクトル変形）」ことを端的に表しており、対象の微分方程式系が無限個の保存量を持つような「可積分系」としての強い対称性を備えていることを意味している。
+\end{Q}
+
+これは，モノドロミー保存変形の変形微分方程式系の\textbf{ラックス表示}である．
+
+さて，単独高階微分方程式\eqref{eq:monodromy_deformation}を
+\[
+  \vec{y} = \begin{pmatrix} y_1 \\ \vdots \\ y_n \end{pmatrix}, \quad
+  y_1 = y, \ y_2 = \frac{dy}{dx}, \ y_3 = \frac{d^2 y}{dx^2}, \ \cdots, \ y_n = \frac{d^{n-1}y}{dx^{n-1}}
+\]
+として連立化すると，変形微分方程式系\eqref{eq:3.1_deformation_system}は\eqref{eq:3.1_deformation_system_matrix}の形になる。後のために、$P(x,t)$ と $A^{(l)}(x,t)$ の具体形を与えておこう。まず
+\begin{equation}\label{eq:3.1_matrix_P}
+  P(x,t) =
+  \begin{pmatrix}
+    0 & 1 & 0 & \cdots & 0 & 0 & 0 \\
+    0 & 0 & 1 & \cdots & 0 & 0 & 0 \\
+      & \cdots &   &        & \cdots &   &   \\
+    0 & 0 & 0 & \cdots & 0 & 1 & 0 \\
+    0 & 0 & 0 & \cdots & 0 & 0 & 1 \\
+    -p_n & -p_{n-1} & -p_{n-2} & \cdots & -p_3 & -p_2 & -p_1
+  \end{pmatrix}
+\end{equation}
+となることはよい．ここで，$p_j=p_j(x,t)$ である．
+
+一方，$a_j^{(l)}(x,t)$ を成分とする横ベクトル
+\[
+  \left( a_1^{(l)}(x,t), a_2^{(l)}(x,t), \cdots, a_n^{(l)}(x,t) \right) \quad (l=1, 2, \cdots, L)
+\]
+を考え，これを $\vec{a}^{(l)} = \vec{a}^{(l)}(x,t)$ とおく．さて，一般に $n$ 次ベクトル $\vec{a}$ に対し，作用素 $\nabla$ を
+
+\begin{equation}\label{eq:3.1_nabla}
+  \nabla \vec{a} = \frac{\partial}{\partial x}\vec{a} + \vec{a}P(x,t)
+\end{equation}
+
+により定義し，帰納的に $\nabla^j \vec{a} = \nabla(\nabla^{j-1}\vec{a})$ ($j \geqq 2$) により定める．
+
+\begin{Q}[なぜ作用素 $\nabla$ を \eqref{eq:3.1_nabla} のように定義すると、変形方程式系の係数行列が生成できるのか？]
+\textbf{A.} 単独高階方程式を連立系に直した際、解ベクトルの第 $k$ 成分 $y_k$ の $x$ 微分は、単に次の成分 $y_{k+1}$ にシフトする（最後の成分のみ $P$ の最下行による線形結合を受ける）。これに伴い、$y$ の $t_l$ 微分（変形）を基本解の線形結合で表した際の「係数ベクトル $\vec{a}^{(l)}$」を $x$ で微分すると、積の微分法則により $\frac{\partial \vec{a}}{\partial x}$ が生じるとともに、解ベクトル自身の $x$ 微分から係数行列 $P$ の寄与が右から掛かる。この連鎖的な構造を正確に記述する演算子が $\nabla$ である。
+\end{Q}
+
+さて、\eqref{eq:3.1_partial_t}を $x$ について逐次微分し、\eqref{eq:3.1_n-ODE}を用いると，変形方程式系\eqref{eq:3.1_deformation_system_matrix}の係数 $A^{(l)}(x,t)$ は
+
+\begin{equation}\label{eq:3.1_matrix_A}
+  A^{(l)}(x,t) =
+  \begin{pmatrix}
+    \vec{a}^{(l)}(x,t) \\[2mm]
+    \nabla \vec{a}^{(l)}(x,t) \\
+    \vdots \\
+    \nabla^{n-1} \vec{a}^{(l)}(x,t)
+  \end{pmatrix}
+  \quad (l=1,2,\cdots,L)
+\end{equation}
+
+で与えられることがわかる．さらに，$U$ 上の微分型式 $\Omega(x,t)$ を
+\[
+  \Omega(x,t) = \sum_{l=1}^L A^{(l)}(x,t)dt_l
+\]
+と定義すると，$d$ を $U$ 上の外微分として，\eqref{eq:3.1_t_ODE_matrix}は次の1つの外微分方程式で表される。
+
+\[
+  dY(x,t) = \Omega(x,t)Y(x,t)
+\]
+
+\begin{Q}[複数の変形方程式を微分形式 $\Omega(x,t)$ を用いて $dY = \Omega Y$ と1つにまとめる幾何学的なメリットは何か？]
+\textbf{A.} パラメータ $t_1, \dots, t_L$ の各方向への変形を、パラメータ空間上の「接続（connection）」として統一的に扱うためである。これにより、これまでに導出した完全積分可能条件（各方向の微分の順序交換可能性）が、$d\Omega = \Omega \wedge \Omega$ という極めて簡潔な「ゼロ曲率条件（Maurer-Cartan方程式）」として表現できるようになる。
+\end{Q}
+
+\eqref{eq:3.1_matrix_P}、\eqref{eq:3.1_matrix_A}、\eqref{eq:3.1_nabla}で定義される行列を $P(x,t), A^{(l)}(x,t)$ とする。命題\ref{prop:3.1_compatibility}を，単独高階微分方程式\eqref{eq:3.1_n-ODE}の変形微分方程式系\eqref{eq:3.1_deformation_system}に適用しよう．もちろん，変形微分方程式系\eqref{eq:3.1_deformation_system}が解の基本系 $\vec{\phi}=\vec{\varphi}(x,t)$ をもつための条件は，$P(x,t)$ と $A^{(l)}(x,t)$ に対して\eqref{eq:3.1_compatibility_PA}、\eqref{eq:3.1_compatibility_AA}が成立することである．
+
+ここで
+
+\begin{equation}\label{eq:3.1_p_vector}
+  \vec{p}(x,t) = (p_n(x,t), \cdots, p_1(x,t))
+\end{equation}
+
+とおき，\eqref{eq:3.1_compatibility_PA}すなわち，ラックス表示\eqref{eq:3.1_lax_equation}を別の形に書き直しておこう．
+
+\begin{proposition}
+ラックス表示\eqref{eq:3.1_lax_equation}は，$n$ 階連立微分方程式系
+
+\begin{equation}\label{eq:3.1_lax_equation_pa}
+  \nabla^n \vec{a}^{(l)} + p_1(x,t)\nabla^{n-1}\vec{a}^{(l)} + \cdots + p_n(x,t)\vec{a}^{(l)} + \frac{\partial}{\partial t_l}\vec{p}(x,t) = 0
+\end{equation}
+
+で表される．ここで，$l=1,\cdots,L$ である．\hfill $\square$
+\end{proposition}
+
+\begin{Q}[命題3.5の式\eqref{eq:3.1_lax_equation_pa}が、元の単独高階微分方程式と酷似した形になるのはなぜか？]
+\textbf{A.} 作用素 $\nabla$ は、解ベクトルの成分を「1つ高階の微分へシフトさせる」働き（コンパニオン行列の上の行の作用）を抽象化したものである。ゼロ曲率条件（ラックス方程式）を行列の各成分について書き下したとき、最下行以外は単なる $\nabla$ の定義式に帰着し、非自明な条件は最下行（係数 $p_j$ が存在する行）のみから生じる。この最下行の条件を $\vec{a}^{(l)}$ について整理すると、元の微分作用素 $D^n + p_1 D^{n-1} + \dots + p_n$ の $D$ を $\nabla$ に置き換えた構造が自然に抽出されるからである。
+\end{Q}
+
+この命題で与えた微分方程式系\eqref{eq:3.1_lax_equation_pa}を，ラックスの方程式という．フックス型単独高階微分方程式のモノドロミー保存変形，一般にホロノミック変形の存在は，ラックスの方程式\eqref{eq:3.1_lax_equation_pa}を満足する，$x$ の有理関数の $n$ 次ベクトル $\vec{a}^{(l)}$ の存在の問題にひとまず帰着した．
+
+\begin{proof}[命題\ref{prop:3.1_compatibility}の証明]
+微分方程式の確定特異点の集合を $\Xi'(t)$、$X(t) = \mathbb{P}^1(\mathbb{C}) \setminus \Xi'$ とする．ここでは，微分方程式の見かけの特異点は $\Xi'$ に含まれている，とする．モノドロミーが $t$ に依らないというのは局所的な条件だから，$t$ の変域 $U$ はある $t_0$ の適当な近傍であるとしてよい．
+
+点 $x_0$ をすべての $t \in U$ に対し $x_0 \in X(t)$ となるようにとる．$x_0$ から出発し $x_0$ に終わる $\mathbb{P}^1(\mathbb{C})$ 内の閉じた道 $\gamma$ は
+
+\[
+  \gamma \times U \subset X = \bigcup_{t \in U} X(t)
+\]
+
+が成り立つとき，$X$ 内の閉じた道ということにする．これはこの証明だけで使う用語である．$U$ を十分小さくとっておけば，$\pi_1(x_0; X(t))$ の元 $[\gamma_t]$ に対して，$[\gamma] = [\gamma_t]$ となるような $X$ 内の閉じた道 $\gamma$ を選ぶことができることは明らかであろう．
+
+\begin{Q}[証明の冒頭で、$t$ の変域 $U$ を十分小さく取り、直積空間 $\gamma \times U \subset X$ を考える幾何学的な理由は何か？]
+\textbf{A.} 特異点 $\Xi'(t)$ がパラメータ $t$ に応じて動くためである。もし $U$ が広すぎると、特異点が積分路 $\gamma$ を横切ってしまい、解析接続の結果（モノドロミー）が不連続にジャンプしてしまう。$U$ を十分小さく制限することで、空間 $X$ は局所的に直積バンドルのように振る舞い（トポロジカルに自明となり）、「特異点にぶつからない共通の積分路 $\gamma$」をすべての $t \in U$ に対して一斉に固定できることが保証される。
+\end{Q}
+
+さて，\eqref{eq:3.1_partial_t}を $a_j^{(l)}(x,t)$ について解く．クラメールの公式により、
+
+\begin{equation}\label{eq:3.1_cramer_wronskian}
+  a_j^{(l)}(x,t) = \frac{w_j^{(l)}(\vec{\varphi})}{w(\vec{\varphi})}
+\end{equation}
+
+となる．ここで，分子の $w_j^{(l)}(\vec{\varphi})$ は，ロンスキアン $w(\vec{\varphi})$ の第 $j$ ベクトル
+\[
+  \left. \frac{\partial^{j-1}\vec{\phi}}{\partial x^{j-1}} \right|_{\vec{\phi}=\vec{\varphi}(x,t)}
+\]
+を\eqref{eq:3.1_partial_t}の右辺 $\left. \frac{\partial \vec{\phi}}{\partial t_l} \right|_{\vec{\phi}=\vec{\varphi}(x,t)}$ で置き換えたものである．
+
+\begin{Q}[変形方程式の係数 $a_j^{(l)}(x,t)$ が、なぜ\eqref{eq:3.1_cramer_wronskian}のようにロンスキアンの比で表されるのか？]
+\textbf{A.} 変形方程式 $\frac{\partial \vec{\varphi}}{\partial t_l} = \sum_{k=1}^n a_k^{(l)} \frac{\partial^{k-1}\vec{\varphi}}{\partial x^{k-1}}$ を、未知数 $a_k^{(l)}$ に関する連立一次方程式と見なす。この連立方程式の係数行列はまさに解の基本系のロンスキ行列（Wronskian matrix）である。ロンスキアン $w(\vec{\varphi})$ は非零であるためクラメールの公式が適用でき、第 $j$ 成分 $a_j^{(l)}$ は「分母が全体の行列式 $w(\vec{\varphi})$、分子が第 $j$ 列を定数項ベクトル（左辺の $\partial_{t_l} \vec{\varphi}$）で置き換えた行列式 $w_j^{(l)}(\vec{\varphi})$」として直ちに得られる。
+\end{Q}
+
+まず，$\vec{\phi}=\vec{\varphi}(x,t)$ のモノドロミー群が $t$ に依らないとしよう．すると，$X$ 内の閉じた道 $\gamma$ に対し，$\Gamma(\gamma)$ を $\gamma$ に対する回路行列とすると，$\vec{\varphi}$ の $\gamma$ に沿っての解析接続 $\vec{\varphi}^{\gamma}$ は
+
+\[
+  \vec{\varphi}^{\gamma}(x,t) = \vec{\varphi}(x,t)\Gamma(\gamma)
+\]
+
+という関係式を満たす．この式の両辺を $t_l$ で微分して
+
+\begin{equation}\label{eq:3.1_monodoromy_partial_t}
+  \frac{\partial}{\partial t_l}\vec{\varphi}^{\gamma}(x,t) = \frac{\partial}{\partial t_l}\vec{\varphi}(x,t)\Gamma(\gamma) + \vec{\varphi}(x,t)\frac{\partial \Gamma(\gamma)}{\partial t_l}
+\end{equation}
+
+を得るが，仮定から $\Gamma(\gamma)$ は $t$ に依らないから
+
+\[
+  \frac{\partial}{\partial t_l}\vec{\varphi}^{\gamma}(x,t) = \frac{\partial}{\partial t_l}\vec{\varphi}(x,t)\Gamma(\gamma)
+\]
+
+である．一方，同じ式を $x$ で繰り返し微分すると
+
+\begin{equation}\label{eq:3.1_monodromy_j-1_partial_t}
+  \frac{\partial^{j-1}}{\partial x^{j-1}}\vec{\varphi}^{\gamma}(x,t) = \frac{\partial^{j-1}}{\partial x^{j-1}}\vec{\varphi}(x,t)\Gamma(\gamma)
+\end{equation}
+
+となり、したがって、2つの行列式 $w(\vec{\varphi})$, $w_j^{(l)}(\vec{\varphi})$ に対し
+
+\[
+  w(\vec{\varphi}^{\gamma}) = |\Gamma(\gamma)| w(\vec{\varphi}), \quad w_j^{(l)}(\vec{\varphi}^{\gamma}) = |\Gamma(\gamma)| w_j^{(l)}(\vec{\varphi})
+\]
+
+が成り立つ．すなわち，$a_j^{(l)}(x,t)$ は $x$ の関数として1価である。
+
+\begin{Q}[$|\Gamma(\gamma)|$ が相殺されて $a_j^{(l)}(x,t)$ が1価関数となることの、理論的な意義は何か？]
+\textbf{A.} 解析接続によって生じる大域的な多価性の情報は、定数行列 $\Gamma(\gamma)$ として右から掛かる。ロンスキ行列の各列が同じ $\Gamma(\gamma)$ 倍を受けるため、行列式の性質から分子・分母ともに $\det \Gamma(\gamma)$（すなわち $|\Gamma(\gamma)|$）倍となり、比をとると完全に相殺される。
+これにより、「変形を記述する係数 $a_j^{(l)}(x,t)$ 自身は特異点の周りを回っても値が変わらない」ことが保証される。1価性が示されたことで、特異点における局所的な極の振る舞いさえ調べれば、$a_j^{(l)}(x,t)$ が「$x$ の有理関数」であることが確定し、シュレジンガー系やラックス方程式として代数的に扱えるようになるという極めて重要なステップである。
+\end{Q}
+
+\eqref{eq:3.1_cramer_wronskian}から明らかなように，$a_j^{(l)}(x,t)$ の特異点は微分方程式の特異点の集合 $\Xi'$ に含まれる．各 $\xi \in \Xi'$ に対し $u$ を $x=\xi$ のまわりの局所座標とする．$u = x - \xi$ あるいは $u = \frac{1}{x}$ である。命題\ref{prop:2.1_wronskian-ode}と\eqref{eq:2.4_p1_coefficient_1-ord_pole}とにより，$x=\xi$ の近傍においてロンスキアン $w(\vec{\varphi})$ は，ある複素数 $s$ があって
+
+\[
+  u^s \sum_{i=1}^{\infty} c_i u^i
+\]
+
+\end{proof}
+
+%#endregion
